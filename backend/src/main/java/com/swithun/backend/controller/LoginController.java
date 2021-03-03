@@ -1,8 +1,7 @@
 package com.swithun.backend.controller;
 
-import com.swithun.backend.dao.LoginRepository;
+import com.swithun.backend.entity.LoginEntity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,12 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class LoginController {
 
-    @Autowired
-    private LoginRepository loginRepository;
-
     @PostMapping(value = "/login")
-    public String login() {
-        return "login-return";
+    public LoginEntity login() {
+        LoginEntity le = new LoginEntity();
+        le.setPass_word("password");
+        le.setUser_id(111);
+        le.setUser_name("user_name");
+        return le;
     }
-    LoginRepository a=loginRepository;
+
+    @PostMapping(value = "/string")
+    public String for_string() {
+        return "dsfsd";
+    }
 }

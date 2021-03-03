@@ -1,27 +1,18 @@
 <template>
   <div class="login_container">
-    <a-form
-      layout="inline"
-      :model="formInline"
-      @submit="handleSubmit"
-      @submit.native.prevent
-    >
+    <a-form layout="inline" :model="formInline" @submit="handleSubmit" @submit.native.prevent>
       <a-form-item>
         <a-input v-model="formInline.user" placeholder="Username">
-          <template #prefix
-            ><UserOutlined style="color: rgba(0, 0, 0, 0.25)"
-          /></template>
+          <template #prefix>
+            <UserOutlined style="color: rgba(0, 0, 0, 0.25)" />
+          </template>
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-input
-          v-model="formInline.password"
-          type="password"
-          placeholder="Password"
-        >
-          <template #prefix
-            ><LockOutlined style="color: rgba(0, 0, 0, 0.25)"
-          /></template>
+        <a-input v-model="formInline.password" type="password" placeholder="Password">
+          <template #prefix>
+            <LockOutlined style="color: rgba(0, 0, 0, 0.25)" />
+          </template>
         </a-input>
       </a-form-item>
       <a-form-item>
@@ -29,9 +20,7 @@
           type="primary"
           html-type="submit"
           :disabled="formInline.user === '' || formInline.password === ''"
-        >
-          Log in
-        </a-button>
+        >Log in</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -47,6 +36,7 @@ export default {
   },
   data() {
     return {
+      // the data binding object fro login
       formInline: {
         user: "",
         password: "",
@@ -54,6 +44,7 @@ export default {
     };
   },
   methods: {
+    // for login
     handleSubmit(e) {
       console.log(this.formInline);
       this.$http
