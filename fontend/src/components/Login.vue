@@ -28,6 +28,7 @@
 
 <script>
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
+// import { notification } from "ant-design-vue";
 
 export default {
   components: {
@@ -47,10 +48,27 @@ export default {
     // for login
     handleSubmit(e) {
       console.log(this.formInline);
+      var _this = this;
       this.$http
         .post("http://localhost:8088/login", this.formInline)
         .then((response) => {
           console.log(response);
+          if (response.data.succ) {
+            _this.$notify.success({
+              message: "登陆成功",
+            });
+            window.sessionStorage.setItem(
+              "token",
+              response.data.data.pass_word
+            );
+            if (response.data.data.user_type === 0) {
+              this.$router.push("/student_home");
+            }
+          } else {
+            _this.$notify.error({
+              message: "登陆失败",
+            });
+          }
         });
     },
   },
