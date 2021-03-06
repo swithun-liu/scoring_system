@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @PostMapping(value = "/login")
-    public LoginEntity for_string() {
+    public LoginEntity login() {
         LoginEntity le = new LoginEntity();
         le.setUser_id(111);
         le.setUser_name("");
@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/string")
-    public String login() {
+    public String for_string() {
         return "temp_token (登陆验证暂时缺失 = 成功)";
     }
 }
