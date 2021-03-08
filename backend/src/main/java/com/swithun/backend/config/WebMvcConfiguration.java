@@ -1,4 +1,4 @@
-package com.swithun.backend.config.configuration;
+package com.swithun.backend.config;
 
 import java.util.List;
 

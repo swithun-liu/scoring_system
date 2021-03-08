@@ -1,7 +1,9 @@
 package com.swithun.backend.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,48 +12,49 @@ import javax.persistence.Table;
 public class LoginEntity {
 
     @Id
-    @GeneratedValue
-    private long user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userid;
 
-    private String user_name;
+    @Column(unique = true)
+    private String username;
     
-    private String pass_word;
+    private String password;
 
-    private Integer user_type;
+    private Integer usertype;
 
     public LoginEntity() {
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserid() {
+        return userid;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPass_word() {
-        return pass_word;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass_word(String pass_word) {
-        this.pass_word = pass_word;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Integer getUser_type() {
-        return user_type;
+    public Integer getUsertype() {
+        return usertype;
     }
 
-    public void setUser_type(Integer user_type) {
-        this.user_type = user_type;
+    public void setUsertype(Integer usertype) {
+        this.usertype = usertype;
     }
 
 }
