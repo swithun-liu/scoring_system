@@ -11,18 +11,19 @@
     <el-form-item label="账户" prop="username">
       <el-input type="username" v-model="LoginForm.username" autocomplete="off"></el-input>
     </el-form-item>
-    <el-form-item label="确认密码" prop="password">
+    <el-form-item label="密码" prop="password">
       <el-input type="password" v-model="LoginForm.password" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('LoginForm')">提交</el-button>
+      <!-- <el-button type="primary" @click="submitForm('LoginForm')">提交</el-button> -->
+      <el-button type="primary" @click="login()">提交</el-button>
       <el-button @click="resetForm('LoginForm')">重置</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -34,20 +35,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('auth',{
-      getterLoginStatus:'getLoginStatus'
-    })
+    ...mapGetters("auth", {
+      getterLoginStatus: "getLoginStatus",
+    }),
   },
   methods: {
-    ...mapActions('auth',{
-      actionLogin:'login'
+    ...mapActions("auth", {
+      actionLogin: "login",
     }),
-    async login(){
-      await this.actionLogin({username:this.username,password:this.password});
-      if(this.getterLoginStatus == 'success'){
-        this.$router.push('/student_home');
-      }else{
-        alert('failed to login');
+    async login() {
+      await this.actionLogin({
+        username: this.LoginForm.username,
+        password: this.LoginForm.password,
+      });
+      if (this.getterLoginStatus === "success") {
+        this.$router.push("/student_home");
+      } else {
+        alert("failed to login");
       }
     },
     submitForm(formName) {

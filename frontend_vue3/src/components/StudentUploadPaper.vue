@@ -14,19 +14,29 @@
     >
       <el-button size="small" type="primary">点击上传</el-button>
       <template #tip>
-        <div class="el-upload__tip"> warning </div>
+        <div class="el-upload__tip">fff--{{gettersAuthData.userName}}</div>
+        <div>fff--{{getterLoginStatus}}</div>
       </template>
     </el-upload>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      fileList: [
-      ],
+      fileList: [],
     };
+  },
+  computed: {
+    ...mapGetters("auth", {
+      gettersAuthData: "getAuthData",
+    }),
+    ...mapGetters("auth", {
+      getterLoginStatus: "getLoginStatus",
+    }),
   },
   methods: {
     handleRemove(file, fileList) {

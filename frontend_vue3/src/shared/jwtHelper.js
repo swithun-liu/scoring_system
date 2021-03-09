@@ -4,11 +4,18 @@ export function jwtDecrypt(token) {
   var jsonPayload = decodeURIComponent(
     atob(base64)
       .split("")
-      .map(function(c) {
+      .map(function (c) {
         return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
       })
       .join("")
   );
- 
+  console.log("jwtDecrypt: :" + jsonPayload);
+  console.log("jwtDecrypt: :" + JSON.parse(jsonPayload).username);
   return JSON.parse(jsonPayload);
+}
+export function tokenAlive(exp) {
+  if (Date.now() >= exp * 1000) {
+    return false;
+  }
+  return true;
 }
