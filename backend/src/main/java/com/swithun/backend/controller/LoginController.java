@@ -18,11 +18,6 @@ public class LoginController {
 
     @PostMapping(value = "/login")
     public LoginEntity login() {
-        // LoginEntity le = new LoginEntity();
-        // le.setUserid(111);
-        // le.setUsername("");
-        // le.setUsertype(0);
-        // le.setPassword("temp_token (登陆验证暂时缺失 = 成功)");
         LoginEntity le = l.findByUsername("javainuse");
         return le;
     }

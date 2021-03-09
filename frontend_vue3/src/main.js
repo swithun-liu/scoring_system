@@ -6,8 +6,10 @@ import './assets/css/global.css'// 导入全局样式表
 // axios in vue
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+// import vuex store
+import store from './store/index'
 
-const app = createApp(App)
+const app = createApp(App).use(store)
 installElementPlus(app)
 app.use(router).mount('#app')
 app.use(VueAxios, axios)

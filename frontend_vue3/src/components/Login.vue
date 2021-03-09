@@ -22,17 +22,34 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
       LoginForm: {
         username: "",
         password: "",
-        age: "",
       },
     };
   },
+  computed: {
+    ...mapGetters('auth',{
+      getterLoginStatus:'getLoginStatus'
+    })
+  },
   methods: {
+    ...mapActions('auth',{
+      actionLogin:'login'
+    }),
+    async login(){
+      await this.actionLogin({username:this.username,password:this.password});
+      if(this.getterLoginStatus == 'success'){
+        this.$router.push('/student_home');
+      }else{
+        alert('failed to login');
+      }
+    },
     submitForm(formName) {
       console.log(this.LoginForm);
       var _this = this;
