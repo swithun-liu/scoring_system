@@ -19,7 +19,7 @@ public class StudentController {
     @Autowired
     private FileService fileService;
 
-    @PostMapping("/student_upload_paper")
+    @PostMapping("/studentuploadpaper")
     public String student_upload_paper(@RequestParam("file") MultipartFile file) {
         try {
             fileService.store(file);

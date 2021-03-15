@@ -48,7 +48,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         logger.warn("request end ###################################");
 
-        String requestTokenHeader = request.getHeader("Authorization");
+        String requestTokenHeader = request.getHeader("authorization");
 
         String username = null;
         String jwtToken = null;
