@@ -54,13 +54,15 @@ const mutations = {
     localStorage.setItem("refresh_token", data.refresh_token);
 
     const jwtDecodedValue = jwtDecrypt(data.access_token);
-    console.log("username: " + jwtDecodedValue)
+    console.log("username: ")
+    console.log(jwtDecodedValue)
     const newTokenData = {
       token: data.access_token,
       refreshToken: data.refresh_token,
       tokenExp: jwtDecodedValue.exp,
       userId: jwtDecodedValue.sub,
-      userName: jwtDecodedValue.username,
+      //   userName: jwtDecodedValue.username,
+      userName: jwtDecodedValue.sub
     };
     state.authData = newTokenData;
   },

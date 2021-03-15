@@ -1,5 +1,6 @@
 package com.swithun.backend.controller;
 
+import java.util.Map;
 
 import com.swithun.backend.dao.LoginRepository;
 import com.swithun.backend.entity.LoginEntity;
@@ -7,6 +8,7 @@ import com.swithun.backend.entity.LoginEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -17,7 +19,10 @@ public class LoginController {
     private LoginRepository l;
 
     @PostMapping(value = "/login")
-    public LoginEntity login() {
+    public LoginEntity login(@RequestHeader Map<String, String> headers) {
+        headers.forEach((key, value) -> {
+            System.out.println(String.format("Header '%s' = %s", key, value));
+        });
         LoginEntity le = l.findByUsername("javainuse");
         return le;
     }

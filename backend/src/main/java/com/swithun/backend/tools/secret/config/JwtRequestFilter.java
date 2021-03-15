@@ -1,6 +1,7 @@
 package com.swithun.backend.tools.secret.config;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -34,12 +35,31 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        final String requestTokenHeader = request.getHeader("Authorization");
+        if (request == null) logger.warn("request is null");
+        else logger.warn("request is not null");
+
+        logger.warn("request begin ######################################");
+        Enumeration<String> es =request.getHeaderNames();
+        if(es != null) {
+            while(es.hasMoreElements()){
+                String a = es.nextElement();
+                logger.warn(a + "  " + request.getHeader(a));
+            }
+        }
+        logger.warn("request end ###################################");
+
+        String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
+        if (requestTokenHeader == null) {
+            logger.warn("requestTokenHeader is null");
+            requestTokenHeader = request.getHeader("access-control-request-headers");
+            logger.warn("new requestTokenHeader : " + requestTokenHeader);
+        }
+        else logger.warn(requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {

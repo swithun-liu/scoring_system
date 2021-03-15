@@ -9,8 +9,6 @@ export function jwtDecrypt(token) {
       })
       .join("")
   );
-  console.log("jwtDecrypt: :" + jsonPayload);
-  console.log("jwtDecrypt: :" + JSON.parse(jsonPayload).username);
   return JSON.parse(jsonPayload);
 }
 export function tokenAlive(exp) {

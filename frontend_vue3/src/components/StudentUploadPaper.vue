@@ -11,11 +11,12 @@
       :limit="3"
       :on-exceed="handleExceed"
       :file-list="fileList"
+      :data="userName"
+      :headers="myHeaders"
     >
       <el-button size="small" type="primary">点击上传</el-button>
       <template #tip>
         <div class="el-upload__tip">fff--{{gettersAuthData.userName}}</div>
-        <div>fff--{{getterLoginStatus}}</div>
       </template>
     </el-upload>
   </div>
@@ -28,6 +29,11 @@ export default {
   data() {
     return {
       fileList: [],
+      userName: "username0001",
+      myHeaders: {
+        Authoriztion:
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTAwMDEiLCJleHAiOjE2MTUzODY3NjgsImlhdCI6MTYxNTM2ODc2OH0.GViaYzVLDCcGTYFOrH25x7LhmOeXXbJ6T5TrLyhdIERr4vmwg5BWLkL6X8V-PoYD55xMIvUFdqVMzZIr5GXIZw",
+      },
     };
   },
   computed: {
@@ -57,6 +63,15 @@ export default {
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    beforeupload(file) {
+      const fd = new FormData();
+      this.$http.post("http://localhost:8088/student_upload_paper", fd, {
+        headers: {
+          test: "test",
+        },
+      });
+      return false; // false就是不自动上传，我后来试了发现都一样，都不会自动上传
     },
   },
 };
