@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
@@ -35,32 +34,35 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        if (request == null) logger.warn("request is null");
-        else logger.warn("request is not null");
+        // 检查request是否是null
+        logger.warn("request is" + (request == null ? "null" : "not null"));
 
-        logger.warn("request begin ######################################");
-        Enumeration<String> es =request.getHeaderNames();
-        if(es != null) {
-            while(es.hasMoreElements()){
+        /**
+         * 打印请求中的所有header
+         */
+        logger.warn("### begin to print header int request ###");
+        Enumeration<String> es = request.getHeaderNames();
+        boolean isPreReqeust = false;
+        if (es != null) {
+            while (es.hasMoreElements()) {
                 String a = es.nextElement();
+                if (a.equals("access-control-request-headers")) {
+                    isPreReqeust = true;
+                }
                 logger.warn(a + "  " + request.getHeader(a));
             }
         }
-        logger.warn("request end ###################################");
+        logger.warn("### print completely ###");
+
+        logger.warn("request is" + (isPreReqeust ? " " : " not ") + "a preRequest");
 
         String requestTokenHeader = request.getHeader("authorization");
+        logger.warn("requestTokenHeader" + requestTokenHeader);
 
         String username = null;
         String jwtToken = null;
-        // JWT Token is in the form "Bearer token". Remove Bearer word and get
-        // only the Token
-        if (requestTokenHeader == null) {
-            logger.warn("requestTokenHeader is null");
-            requestTokenHeader = request.getHeader("access-control-request-headers");
-            logger.warn("new requestTokenHeader : " + requestTokenHeader);
-        }
-        else logger.warn(requestTokenHeader);
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+
+        if (requestTokenHeader != null && requestTokenHeader.startsWith("bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
@@ -70,7 +72,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            logger.warn("JWT Token does not begin with bearer String");
         }
 
         // Once we get the token validate it.

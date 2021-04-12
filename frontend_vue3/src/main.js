@@ -12,7 +12,7 @@ import VueAxios from 'vue-axios'
 import store from './store/index'
 
 axios.interceptors.request.use((config) => {
-  const authData = store.getters["auth/getAuthData"];
+  const authData = store.getters['auth/getAuthData'];
   config.headers.common.Authorization = `bearer ${authData.token}`;
   return config;
 });

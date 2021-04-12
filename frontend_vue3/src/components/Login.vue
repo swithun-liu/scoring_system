@@ -1,3 +1,12 @@
+<!--
+ * @Descripttion:
+ * @version:
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-03-06 17:40:49
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-12 19:11:58
+-->
 
 <template>
   <el-form
@@ -15,7 +24,6 @@
       <el-input type="password" v-model="LoginForm.password" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item>
-      <!-- <el-button type="primary" @click="submitForm('LoginForm')">提交</el-button> -->
       <el-button type="primary" @click="login()">提交</el-button>
       <el-button @click="resetForm('LoginForm')">重置</el-button>
     </el-form-item>
@@ -23,61 +31,38 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       LoginForm: {
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       },
     };
   },
+  /** 将 auth 中的 getLoginStatus 映射为 getterLoginStatus */
   computed: {
-    ...mapGetters("auth", {
-      getterLoginStatus: "getLoginStatus",
+    ...mapGetters('auth', {
+      getterLoginStatus: 'getLoginStatus',
     }),
   },
+  /** 将 auth 中的 login 映射为 actionLogin */
   methods: {
-    ...mapActions("auth", {
-      actionLogin: "login",
+    ...mapActions('auth', {
+      actionLogin: 'login',
     }),
     async login() {
       await this.actionLogin({
         username: this.LoginForm.username,
         password: this.LoginForm.password,
       });
-      if (this.getterLoginStatus === "success") {
-        this.$router.push("/student_home");
+      if (this.getterLoginStatus === 'success') {
+        this.$router.push('/student_home');
       } else {
-        alert("failed to login");
+        alert('failed to login');
       }
-    },
-    submitForm(formName) {
-      console.log(this.LoginForm);
-      var _this = this;
-      this.$http
-        .post("http://localhost:8088/login", this.LoginForm)
-        .then((response) => {
-          console.log(response);
-          if (response.data.succ) {
-            _this.$notify.success({
-              message: "登陆成功",
-            });
-            window.sessionStorage.setItem(
-              "token",
-              response.data.data.pass_word
-            );
-            if (response.data.data.user_type === 0) {
-              this.$router.push("/student_home");
-            }
-          } else {
-            _this.$notify.error({
-              message: "登陆失败",
-            });
-          }
-        });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-03-07 16:26:44
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-12 21:33:49
+ */
 package com.swithun.backend.tools.secret.services;
 
 import java.util.ArrayList;
@@ -50,6 +59,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         LoginEntity newUser = new LoginEntity();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUser.setUsertype(user.getUsertype());
         return userDao.save(newUser);
     }
 }

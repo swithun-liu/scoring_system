@@ -18,6 +18,9 @@
           <el-menu-item-group>
             <el-menu-item index="student_upload_paper">上传论文</el-menu-item>
           </el-menu-item-group>
+          <el-menu-item-group>
+            <el-menu-item index="professor_students_paper">学生论文</el-menu-item>
+          </el-menu-item-group>
         </el-submenu>
       </el-menu>
       <el-container>
@@ -40,11 +43,11 @@ export default {
   },
   methods: {
     handleOpen(key, keyPath) {
-      console.log("handleOpen");
+      console.log('handleOpen');
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log("handleColse");
+      console.log('handleColse');
       console.log(key, keyPath);
     },
   },

@@ -1,8 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-03-06 17:40:49
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-12 19:49:23
+ */
 package com.swithun.backend.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -13,7 +23,7 @@ import javax.persistence.Table;
 @Table
 public class FileEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -33,14 +43,6 @@ public class FileEntity {
         this.name = name;
         this.type = type;
         this.data = data;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -65,6 +67,22 @@ public class FileEntity {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LoginEntity getLoginEntity() {
+        return loginEntity;
+    }
+
+    public void setLoginEntity(LoginEntity loginEntity) {
+        this.loginEntity = loginEntity;
     }
 
 }

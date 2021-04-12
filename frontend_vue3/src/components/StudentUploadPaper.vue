@@ -1,63 +1,77 @@
+<!--
+ * @Descripttion:
+ * @version:
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-03-06 17:40:49
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-12 21:02:37
+-->
 <template>
-  <div class="student_upload_paper_container0 container0">
+  <div class='student_upload_paper_container0 container0'>
     <el-upload
-      class="upload-demo"
-      action="http://localhost:8088/studentuploadpaper/"
-      :on-success="handleSuccess"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-upload="beforeUpload"
-      :before-remove="beforeRemove"
+      class='upload-demo'
+      action='http://localhost:8088/studentuploadpaper/'
+      :on-success='handleSuccess'
+      :on-preview='handlePreview'
+      :on-remove='handleRemove'
+      :before-remove='beforeRemove'
       multiple
-      :limit="3"
-      :on-exceed="handleExceed"
-      :file-list="fileList"
-      :data="userName"
-      :headers="myHeaders"
-      :auto-upload="true"
+      :on-exceed='handleExceed'
+      :file-list='fileList'
+      :data='{userName}'
+      :headers='myHeaders'
+      :auto-upload='true'
     >
-      <el-button size="small" type="primary" class="test">点击上传</el-button>
+      <el-button size='small' type='primary' class='test'>点击上传</el-button>
       <template #tip>
-        <div class="el-upload__tip">fff--{{gettersAuthData.userName}}</div>
+        <div class='el-upload__tip'>fff--{{gettersAuthData.userName}}</div>
       </template>
     </el-upload>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  computed: {
+    ...mapGetters('auth', {
+      gettersAuthData: 'getAuthData',
+    }),
+    ...mapGetters('auth', {
+      getterLoginStatus: 'getLoginStatus',
+    }),
+  },
   data() {
     return {
-      fileList: [],
-      userName: "username0001",
+      fileList: [
+      ],
+      fileList2: [
+        {
+          name: 'paper3',
+        },
+        {
+          name: 'paper4',
+        },
+      ],
+      userName: 'username0001',
       myHeaders: {
-        Authoriztion:
-          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZTAwMDEiLCJleHAiOjE2MTUzODY3NjgsImlhdCI6MTYxNTM2ODc2OH0.GViaYzVLDCcGTYFOrH25x7LhmOeXXbJ6T5TrLyhdIERr4vmwg5BWLkL6X8V-PoYD55xMIvUFdqVMzZIr5GXIZw",
+        authorization: 1,
       },
     };
   },
-  computed: {
-    ...mapGetters("auth", {
-      gettersAuthData: "getAuthData",
-    }),
-    ...mapGetters("auth", {
-      getterLoginStatus: "getLoginStatus",
-    }),
+  mounted() {
+    this.myHeaders.authorization = 'bearer ' + this.gettersAuthData.token;
+    console.log(this.myHeaders.Authoriztion);
+    var _this = this;
+    this.getMyPaper().then((res) => {
+      console.log(res.data.data);
+      _this.fileList = res.data.data;
+    });
   },
   methods: {
-    beforeUpload(file) {
-      console.log("before upload");
-      const fd = new FormData();
-      fd.append("file", file);
-      this.$http.post("http://localhost:8088/studentuploadpaper", fd, {
-        headers: {
-          test: "test",
-        },
-      });
-      return false; // false就是不自动上传，我后来试了发现都一样，都不会自动上传
-    },
+    ...mapActions('auth', ['getMyPaper']),
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
@@ -65,7 +79,7 @@ export default {
       console.log(file);
     },
     handleExceed(files, fileList) {
-      console.log("handleExceed");
+      console.log('handleExceed');
       this.$message.warning(
         `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
           files.length + fileList.length
@@ -73,7 +87,7 @@ export default {
       );
     },
     handleSuccess(response, file, fileList) {
-      console.log("handle success");
+      console.log('handle success');
       console.log(response);
     },
     beforeRemove(file, fileList) {
@@ -89,7 +103,7 @@ export default {
 }
 .test {
   color: rgb(51, 51, 51) !important;
-  background: rgba(255, 255, 255, 0.25)  !important;
+  background: rgba(255, 255, 255, 0.25) !important;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
   backdrop-filter: blur(4px) !important;
   -webkit-backdrop-filter: blur(4px) !important;
