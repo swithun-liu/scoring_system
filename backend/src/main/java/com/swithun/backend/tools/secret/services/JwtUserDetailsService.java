@@ -5,14 +5,14 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:26:44
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-12 21:33:49
+ * @LastEditTime: 2021-04-15 18:43:01
  */
 package com.swithun.backend.tools.secret.services;
 
 import java.util.ArrayList;
 
 import com.swithun.backend.dao.LoginRepository;
-import com.swithun.backend.entity.LoginEntity;
+import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.tools.secret.model.UserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +27,15 @@ import org.springframework.stereotype.Service;
 public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private LoginRepository userDao;
+    private LoginRepository loginRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // if ("javainuse".equals(username)) {
-        //     return new User("javainuse", "$2a$10$slYQmyNdGzTn7ZLBXBChFOC9f6kFjAqPhccnP6DxlWXx2lPk1C3G6",
-        //             new ArrayList<>());
-        // } else {
-        //     throw new UsernameNotFoundException("User not found with username: " + username);
-        // }
 
-        LoginEntity user = userDao.findByUsername(username);
+        StudentEntity user = loginRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
@@ -55,11 +49,11 @@ public class JwtUserDetailsService implements UserDetailsService {
      * @param user
      * @return
      */
-    public LoginEntity save(UserDTO user) {
-        LoginEntity newUser = new LoginEntity();
+    public StudentEntity save(UserDTO user) {
+        StudentEntity newUser = new StudentEntity();
         newUser.setUsername(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         newUser.setUsertype(user.getUsertype());
-        return userDao.save(newUser);
+        return loginRepository.save(newUser);
     }
 }

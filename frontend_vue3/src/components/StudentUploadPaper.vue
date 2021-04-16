@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-12 21:02:37
+ * @LastEditTime: 2021-04-12 21:54:04
 -->
 <template>
   <div class='student_upload_paper_container0 container0'>
@@ -46,14 +46,6 @@ export default {
   data() {
     return {
       fileList: [
-      ],
-      fileList2: [
-        {
-          name: 'paper3',
-        },
-        {
-          name: 'paper4',
-        },
       ],
       userName: 'username0001',
       myHeaders: {

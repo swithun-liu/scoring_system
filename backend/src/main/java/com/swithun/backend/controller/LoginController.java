@@ -1,9 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-12 21:42:41
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-15 18:44:40
+ */
 package com.swithun.backend.controller;
 
 import java.util.Map;
 
 import com.swithun.backend.dao.LoginRepository;
-import com.swithun.backend.entity.LoginEntity;
+import com.swithun.backend.entity.StudentEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,17 +28,12 @@ public class LoginController {
     private LoginRepository l;
 
     @PostMapping(value = "/login")
-    public LoginEntity login(@RequestHeader Map<String, String> headers) {
+    public StudentEntity login(@RequestHeader Map<String, String> headers) {
         headers.forEach((key, value) -> {
             System.out.println(String.format("Header '%s' = %s", key, value));
         });
-        LoginEntity le = l.findByUsername("javainuse");
+        StudentEntity le = l.findByUsername("javainuse");
         return le;
-    }
-
-    @PostMapping(value = "/string")
-    public String for_string() {
-        return "temp_token (登陆验证暂时缺失 = 成功)";
     }
 
     @PostMapping(value = "/test_jwt")

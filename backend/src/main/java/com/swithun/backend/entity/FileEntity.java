@@ -31,7 +31,7 @@ public class FileEntity {
     private String type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private LoginEntity loginEntity;
+    private StudentEntity loginEntity;
 
     @Lob
     private byte[] data;
@@ -77,11 +77,11 @@ public class FileEntity {
         this.id = id;
     }
 
-    public LoginEntity getLoginEntity() {
+    public StudentEntity getLoginEntity() {
         return loginEntity;
     }
 
-    public void setLoginEntity(LoginEntity loginEntity) {
+    public void setLoginEntity(StudentEntity loginEntity) {
         this.loginEntity = loginEntity;
     }
 

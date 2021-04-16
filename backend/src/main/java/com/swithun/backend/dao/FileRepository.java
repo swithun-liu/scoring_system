@@ -12,12 +12,12 @@ package com.swithun.backend.dao;
 import java.util.List;
 
 import com.swithun.backend.entity.FileEntity;
-import com.swithun.backend.entity.LoginEntity;
+import com.swithun.backend.entity.StudentEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, String>{
-    List<FileEntity> findByLoginEntity(LoginEntity loginEntity);
+    List<FileEntity> findByLoginEntity(StudentEntity loginEntity);
 }
