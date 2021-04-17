@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-16 15:34:19
+ * @LastEditTime: 2021-04-17 14:08:56
  */
 package com.swithun.backend.service;
 
@@ -15,8 +15,8 @@ import java.util.stream.Stream;
 
 import com.swithun.backend.dao.FileRepository;
 import com.swithun.backend.dao.LoginRepository;
-import com.swithun.backend.entity.FileEntity;
 import com.swithun.backend.entity.StudentEntity;
+import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +40,9 @@ public class FileService {
      * @param {String} token
      * @return {*}
      */    
-    public FileEntity store(MultipartFile file, String token) throws IOException{
+    public StudentFileEntity store(MultipartFile file, String token) throws IOException{
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        FileEntity fileEntity = new FileEntity(filename,file.getContentType(),file.getBytes());
+        StudentFileEntity fileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
         String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         fileEntity.setLoginEntity(loginRepository.findByUsername(username));
         return fileRepository.save(fileEntity);

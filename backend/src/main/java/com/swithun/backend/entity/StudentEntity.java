@@ -1,55 +1,40 @@
-/*
- * @Descripttion: 
- * @version: 
- * @@Company: None
- * @Author: Swithun Liu
- * @Date: 2021-04-12 21:42:41
- * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-16 16:23:37
- */
 package com.swithun.backend.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
 @Entity
-@Table(name = "student")
+@Table(name = "student", schema = "scoring_system", catalog = "")
 public class StudentEntity {
+    private Integer id;
+    private String name;
+    private String password;
+    private TeacherEntity teacherByTeacherId;
+    private Collection<StudentFileEntity> studentFilesById;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(unique = true)
-    private String username;
-    
-    private String password;
-
-    private Integer usertype; // 0 学生 1 导师 2 管理员
-
-    public StudentEntity() {
-    }
-
-    public long getId() {
+    @Column(name = "id")
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long userid) {
-        this.id = userid;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    @Basic
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    @Basic
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -58,12 +43,35 @@ public class StudentEntity {
         this.password = password;
     }
 
-    public Integer getUsertype() {
-        return usertype;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StudentEntity that = (StudentEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(password, that.password);
     }
 
-    public void setUsertype(Integer usertype) {
-        this.usertype = usertype;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, password);
     }
 
+    @ManyToOne
+    @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    public TeacherEntity getTeacherByTeacherId() {
+        return teacherByTeacherId;
+    }
+
+    public void setTeacherByTeacherId(TeacherEntity teacherByTeacherId) {
+        this.teacherByTeacherId = teacherByTeacherId;
+    }
+
+    @OneToMany(mappedBy = "studentByStudentId")
+    public Collection<StudentFileEntity> getStudentFilesById() {
+        return studentFilesById;
+    }
+
+    public void setStudentFilesById(Collection<StudentFileEntity> studentFilesById) {
+        this.studentFilesById = studentFilesById;
+    }
 }

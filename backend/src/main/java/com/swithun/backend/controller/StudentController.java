@@ -5,15 +5,14 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-16 15:29:00
+ * @LastEditTime: 2021-04-17 14:07:05
  */
 package com.swithun.backend.controller;
 
+import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.service.FileService;
 
 import java.util.List;
-
-import com.swithun.backend.entity.FileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,7 +56,7 @@ public class StudentController {
      * @return {*}
      */
     @GetMapping(value="/studentgetmypaper")
-    public List<FileEntity> studentGetMyPaper(@RequestHeader(value = "authorization") String token) {
+    public List<StudentFileEntity> studentGetMyPaper(@RequestHeader(value = "authorization") String token) {
         return fileService.studentGetMyPaper(token);
     }
     
