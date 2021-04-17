@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 14:08:56
+ * @LastEditTime: 2021-04-17 14:17:52
  */
 package com.swithun.backend.service;
 
@@ -42,7 +42,10 @@ public class FileService {
      */    
     public StudentFileEntity store(MultipartFile file, String token) throws IOException{
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        StudentFileEntity fileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
+        // StudentFileEntity fileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
+        StudentFileEntity studentFileEntity = new StudentFileEntity();
+
+
         String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         fileEntity.setLoginEntity(loginRepository.findByUsername(username));
         return fileRepository.save(fileEntity);
