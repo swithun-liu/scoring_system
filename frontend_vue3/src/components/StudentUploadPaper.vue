@@ -5,13 +5,13 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-12 21:54:04
+ * @LastEditTime: 2021-04-18 14:59:17
 -->
 <template>
   <div class='student_upload_paper_container0 container0'>
     <el-upload
       class='upload-demo'
-      action='http://localhost:8088/studentuploadpaper/'
+      action='http://localhost:8088/student/studentuploadpaper/'
       :on-success='handleSuccess'
       :on-preview='handlePreview'
       :on-remove='handleRemove'

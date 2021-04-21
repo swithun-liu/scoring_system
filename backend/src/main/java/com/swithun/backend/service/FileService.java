@@ -1,3 +1,4 @@
+
 /*
  * @Descripttion: 
  * @version: 
@@ -5,7 +6,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 14:17:52
+ * @LastEditTime: 2021-04-17 16:29:03
  */
 package com.swithun.backend.service;
 
@@ -13,8 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.swithun.backend.dao.FileRepository;
-import com.swithun.backend.dao.LoginRepository;
+import com.swithun.backend.dao.StudentFileRepository;
+import com.swithun.backend.dao.StudentRepository;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
@@ -28,9 +29,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileService {
     
     @Autowired
-    private FileRepository fileRepository;
+    private StudentFileRepository studentFileRepository;
     @Autowired
-    private LoginRepository loginRepository;
+    private StudentRepository studentRepository;
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
@@ -42,33 +43,29 @@ public class FileService {
      */    
     public StudentFileEntity store(MultipartFile file, String token) throws IOException{
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        // StudentFileEntity fileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
-        StudentFileEntity studentFileEntity = new StudentFileEntity();
-
+        StudentFileEntity studentFileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
 
         String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
-        fileEntity.setLoginEntity(loginRepository.findByUsername(username));
-        return fileRepository.save(fileEntity);
+
+        studentFileEntity.setStudentByStudentId(studentRepository.findByName(username));
+        return studentFileRepository.save(studentFileEntity);
     }
 
-    public FileEntity getFile(String id){
-        return fileRepository.findById(id).get();
+    public StudentFileEntity getFile(Integer id){
+        return studentFileRepository.findById(id).get();
     }
 
-    public Stream<FileEntity> getAllFiles() {
-        return fileRepository.findAll().stream();
+    public Stream<StudentFileEntity> getAllFiles() {
+        return studentFileRepository.findAll().stream();
     }
     /**
      * @description: 通过学生姓名寻找他上传的文件
      * @param {String} token
      * @return {*}
      */
-    public List<FileEntity> studentGetMyPaper(String token) {
+    public List<StudentFileEntity> studentGetMyPaper(String token) {
         String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
-        StudentEntity loginEntity = loginRepository.findByUsername(username);
-        if (loginEntity.getUsertype() != 0) {
-            return null;
-        }
-        return fileRepository.findByLoginEntity(loginEntity);
+        StudentEntity studentEntity = studentRepository.findByName(username);
+        return studentFileRepository.findByStudentByStudentId(studentEntity);
     }
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 14:07:45
+ * @LastEditTime: 2021-04-17 16:29:19
  */
 package com.swithun.backend.dao;
 
@@ -18,6 +18,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FileRepository extends JpaRepository<StudentFileEntity, String>{
-    List<StudentFileEntity> findByLoginEntity(StudentEntity loginEntity);
+public interface StudentFileRepository extends JpaRepository<StudentFileEntity, Integer>{
+    List<StudentFileEntity> findByStudentByStudentId(StudentEntity studentEntity);
 }

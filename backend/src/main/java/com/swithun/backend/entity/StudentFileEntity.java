@@ -1,19 +1,44 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:26:03
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-17 16:48:57
+ */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
 @Table(name = "studentFile", schema = "scoring_system", catalog = "")
 public class StudentFileEntity {
+
     private Integer id;
     private String name;
+    private String type;
     private byte[] data;
+    @JsonBackReference
     private StudentEntity studentByStudentId;
+
+    public StudentFileEntity() {
+    }
+
+    public StudentFileEntity(String name, String type, byte[] data) {
+        this.name = name;
+        this.type = type;
+        this.data = data;
+    }
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -21,6 +46,17 @@ public class StudentFileEntity {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Basic
+    @Column(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     @Basic
     @Column(name = "name")

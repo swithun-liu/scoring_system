@@ -1,14 +1,25 @@
+/*
+ * @Descripttion: check if request has token
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:25:47
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-21 09:50:53
+ */
+
 package com.swithun.backend.tools.secret.config;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.swithun.backend.tools.secret.services.JwtUserDetailsService;
+import com.swithun.backend.tools.secret.services.JwtStudentUserDetailsService;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +36,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+    private JwtStudentUserDetailsService jwtUserDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -62,7 +73,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("bearer ")) {
+        if (requestTokenHeader != null
+                && (requestTokenHeader.startsWith("bearer ") || requestTokenHeader.startsWith("Bearer "))) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
@@ -76,12 +88,18 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         // Once we get the token validate it.
+        System.out.println("Once we get the token validate it.");
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
-
-            // if token is valid configure Spring Security to manually set
-            // authentication
+            List<String> userRoles = jwtTokenUtil.getUserTypeFromToken(jwtToken);
+            UserDetails userDetails = null;
+            if (userRoles.contains("student")) {
+                userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+            }
+            else {
+                System.out.println("dont userRoles.contains(teacher)");
+            }
+            // if token is valid configure Spring Security to manually set authentication
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(

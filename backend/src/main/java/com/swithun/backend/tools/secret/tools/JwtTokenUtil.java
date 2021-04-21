@@ -1,12 +1,25 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:25:47
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-21 09:37:18
+ */
 package com.swithun.backend.tools.secret.tools;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +47,12 @@ public class JwtTokenUtil implements Serializable {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
+    public List<String> getUserTypeFromToken(String token) {
+        final Claims claims = getAllClaimsFromToken(token);
+        List<String> userRoles = (List<String>)claims.get("userType");
+        return userRoles;
+    }
+
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
@@ -53,6 +72,18 @@ public class JwtTokenUtil implements Serializable {
     // generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        // claims.put("usertype", userDetails.getAuthorities())
+        Collection<? extends GrantedAuthority> it = userDetails.getAuthorities();
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+        List<String> roles = new ArrayList<String>();
+        for (GrantedAuthority grantedAuthority : it) {
+            System.out.println(grantedAuthority.toString());
+            if (grantedAuthority.toString().startsWith("ROLE_")) {
+                roles.add(grantedAuthority.toString().substring(5));
+            }
+        }
+        claims.put("userType", roles);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

@@ -3,19 +3,18 @@
  * @version: 
  * @@Company: None
  * @Author: Swithun Liu
- * @Date: 2021-03-07 16:26:44
+ * @Date: 2021-04-21 09:53:55
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-15 18:43:01
+ * @LastEditTime: 2021-04-21 10:30:13
  */
 package com.swithun.backend.tools.secret.services;
 
-import java.util.ArrayList;
-
-import com.swithun.backend.dao.LoginRepository;
-import com.swithun.backend.entity.StudentEntity;
+import com.swithun.backend.dao.TeacherRepository;
+import com.swithun.backend.entity.TeacherEntity;
 import com.swithun.backend.tools.secret.model.UserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,36 +23,27 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class JwtTeacherUserDetailsService implements UserDetailsService{
 
     @Autowired
-    private LoginRepository loginRepository;
+    private TeacherRepository teacherRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        StudentEntity user = loginRepository.findByUsername(username);
+        TeacherEntity user = teacherRepository.findByName(username);
         if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
+            throw new UsernameNotFoundException("Teacher not fount with username: " + username);
         }
-        return new User(user.getUsername(), user.getPassword(),
-                new ArrayList<>());
+        return new User(username, user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("teacher,ROLE_teacher"));
     }
-
-    /**
-     * inserting user details
-     * 
-     * @param user
-     * @return
-     */
-    public StudentEntity save(UserDTO user) {
-        StudentEntity newUser = new StudentEntity();
-        newUser.setUsername(user.getUsername());
+    
+    public TeacherEntity save(UserDTO user) {
+        TeacherEntity newUser = new TeacherEntity();
+        newUser.setName(user.getUsername());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        newUser.setUsertype(user.getUsertype());
-        return loginRepository.save(newUser);
+        return teacherRepository.save(newUser);
     }
 }

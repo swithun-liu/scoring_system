@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 14:07:05
+ * @LastEditTime: 2021-04-18 14:52:49
  */
 package com.swithun.backend.controller;
 
@@ -40,7 +40,7 @@ public class StudentController {
      * @param {*}
      * @return {*}
      */
-    @PostMapping("/studentuploadpaper")
+    @PostMapping("/student/studentuploadpaper")
     public String student_upload_paper(@RequestParam("file") MultipartFile file, @RequestHeader(value = "authorization") String token) {
         try {
             fileService.store(file, token);
@@ -55,7 +55,7 @@ public class StudentController {
      * @param {*}
      * @return {*}
      */
-    @GetMapping(value="/studentgetmypaper")
+    @GetMapping(value="/student/studentgetmypaper")
     public List<StudentFileEntity> studentGetMyPaper(@RequestHeader(value = "authorization") String token) {
         return fileService.studentGetMyPaper(token);
     }

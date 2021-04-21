@@ -1,6 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:26:03
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-17 16:49:31
+ */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -10,10 +22,12 @@ public class TeacherEntity {
     private Integer id;
     private String name;
     private String password;
+    @JsonManagedReference
     private Collection<StudentEntity> studentsById;
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }

@@ -5,14 +5,15 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:59:30
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-12 21:36:02
+ * @LastEditTime: 2021-04-21 10:16:17
  */
 package com.swithun.backend.tools.secret.Controller;
 
 import com.swithun.backend.tools.secret.model.JwtRequest;
 import com.swithun.backend.tools.secret.model.JwtResponse;
 import com.swithun.backend.tools.secret.model.UserDTO;
-import com.swithun.backend.tools.secret.services.JwtUserDetailsService;
+import com.swithun.backend.tools.secret.services.JwtStudentUserDetailsService;
+import com.swithun.backend.tools.secret.services.JwtTeacherUserDetailsService;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,17 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private JwtStudentUserDetailsService studentUserDetailsService;
+
+    @Autowired
+    private JwtTeacherUserDetailsService teacherUserDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = studentUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
@@ -55,7 +59,12 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-        return ResponseEntity.ok(userDetailsService.save(user));
+        if (user.getUsertype() == 0) {
+            return ResponseEntity.ok(studentUserDetailsService.save(user));
+        }
+        else {
+            return ResponseEntity.ok(teacherUserDetailsService.save(user));
+        }
     }
 
     private void authenticate(String username, String password) throws Exception {

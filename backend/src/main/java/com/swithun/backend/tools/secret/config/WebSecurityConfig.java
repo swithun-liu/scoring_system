@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 17:16:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-11 17:19:28
+ * @LastEditTime: 2021-04-18 15:26:44
  */
 package com.swithun.backend.tools.secret.config;
 
@@ -36,64 +36,85 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+  @Autowired
+  private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Autowired
-    private UserDetailsService jwtUserDetailsService;
+  @Autowired
+  private UserDetailsService jwtUserDetailsService;
 
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+  @Autowired
+  private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // configure AuthenticationManager so that it knows from where to load
-        // user for matching credentials
-        // Use BCryptPasswordEncoder
-        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-    }
+  @Autowired
+  private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+  // @Autowired
+  // private SecurityHandler myAuthenticationSuccessHandler;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    // configure AuthenticationManager so that it knows from where to load
+    // user for matching credentials
+    // Use BCryptPasswordEncoder
+    auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+  }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+  // PasswordEncode选择使用官方推荐的 BCryptPasswordEncoder
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // We don't need CSRF for this example
-        httpSecurity.csrf().disable().cors(Customizer.withDefaults())
-                // dont authenticate this particular request
-                .authorizeRequests()
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
 
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // 放行
+  @Override
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity.formLogin().usernameParameter("username") // 自定义登陆用户名参数名
+        .passwordParameter("password") // 自定义登陆密码参数名
+        .successHandler(myAuthenticationSuccessHandler)
+    ;
 
-                .antMatchers("/authenticate", "/register", "/login").permitAll().
-                // all other requests need to be authenticated
-                anyRequest().authenticated().and().
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
-                exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+    httpSecurity.csrf().disable() // 关掉CSRS
+        .cors(Customizer.withDefaults())
 
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        .authorizeRequests() // 授权配置
 
-        // Add a filter to validate the tokens with every request
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
+        // 先写那些应该被放行
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); // 应设置为前端服务器域名前缀 ， 暂时设置为 *
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
-        configuration.addAllowedHeader("*");// 这里很重要，起码需要允许 Access-Control-Allow-Origin
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+        .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // PreFlightRequest(预请求) need not to be
+                                                                    // authenticated
+
+        .antMatchers("/authenticate", "/register", "/login").permitAll()// these requests need not to be authenticated
+
+        // 然后写（其他）所有的都应该被认证
+        .antMatchers("/student/*").hasRole("student")// only students access /student/*
+
+        .anyRequest().authenticated()
+        
+        .and() // all other requests need to be authenticated
+
+        // make sure we use stateless session; session won't be used tostore user's
+        // state.
+        .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+    // Add a filter to validate the tokens with every request
+    httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    // UsernamePasswordAnthenticationFileter 过滤器链
+    // 把自己定义的jwtRequestFilter放到最前面
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.addAllowedOrigin("*"); // 应设置为前端服务器域名前缀 ， 暂时设置为 *
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+    configuration.addAllowedHeader("*");// 这里很重要，起码需要允许 Access-Control-Allow-Origin
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
 }

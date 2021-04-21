@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-09 13:23:57
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-12 21:02:13
+ * @LastEditTime: 2021-04-19 19:24:45
  */
 import {
   jwtDecrypt,
@@ -58,10 +58,10 @@ const actions = {
     commit('setLoginStatu', 'success');
   },
   async getMyPaper() {
-    const response = await axios.get('http://localhost:8088/studentgetmypaper');
+    const response = await axios.get('http://localhost:8088/student/studentgetmypaper');
     // console.log(response);
     return response;
-  }
+  /*  */}
 };
 
 const mutations = {
