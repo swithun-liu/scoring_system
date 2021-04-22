@@ -5,10 +5,12 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:59:30
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-21 10:16:17
+ * @LastEditTime: 2021-04-22 21:51:09
  */
 package com.swithun.backend.tools.secret.Controller;
 
+import com.swithun.backend.tools.secret.config.UsernamePasswordAuthenticationToken.StudentUsernamePasswordAuthenticationToken;
+import com.swithun.backend.tools.secret.config.UsernamePasswordAuthenticationToken.TeacherUsernamePasswordAutenticationToken;
 import com.swithun.backend.tools.secret.model.JwtRequest;
 import com.swithun.backend.tools.secret.model.JwtResponse;
 import com.swithun.backend.tools.secret.model.UserDTO;
@@ -21,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,9 +49,18 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        UserDetails userDetails;
 
-        final UserDetails userDetails = studentUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        if (authenticationRequest.getUsertype() == 0) { // 如果是学生
+            userDetails = studentUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        } else {
+            userDetails = teacherUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        }
+
+        System.out.println("before authenticate");
+        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword(),
+                authenticationRequest.getUsertype());
+        System.out.println("after authenticate");
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
@@ -61,15 +71,21 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         if (user.getUsertype() == 0) {
             return ResponseEntity.ok(studentUserDetailsService.save(user));
-        }
-        else {
+        } else {
             return ResponseEntity.ok(teacherUserDetailsService.save(user));
         }
     }
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password, Integer usertype) throws Exception {
+        System.out.println("jwtAuthenticationController # autenticate");
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            if (usertype == 0) {
+                System.out.println("usertype == 0");
+                authenticationManager.authenticate(new StudentUsernamePasswordAuthenticationToken(username, password));
+            } else {
+                System.out.println("usertype == 1");
+                authenticationManager.authenticate(new TeacherUsernamePasswordAutenticationToken(username, password));
+            }
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {

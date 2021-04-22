@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-09 13:23:57
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-19 19:24:45
+ * @LastEditTime: 2021-04-21 14:17:00
  */
 import {
   jwtDecrypt,
@@ -48,7 +48,7 @@ const actions = {
   }, payload) {
     console.log('payload: {' + payload.username + ', ' + payload.password + '}');
     const response = await axios
-      .post('http://localhost:8088/authenticate', payload);
+      .post('http://localhost:8089/authenticate', payload);
     console.log(response.data.data.token);
     /** 调用 mutations # 保存 token */
     commit('saveTokenData', {
@@ -58,10 +58,10 @@ const actions = {
     commit('setLoginStatu', 'success');
   },
   async getMyPaper() {
-    const response = await axios.get('http://localhost:8088/student/studentgetmypaper');
+    const response = await axios.get('http://localhost:8089/student/studentgetmypaper');
     // console.log(response);
     return response;
-  /*  */}
+  }
 };
 
 const mutations = {

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 16:34:59
+ * @LastEditTime: 2021-04-21 15:30:15
 -->
 
 <template>
@@ -23,6 +23,9 @@
     <el-form-item label="密码" prop="password">
       <el-input type="password" v-model="LoginForm.password" autocomplete="off"></el-input>
     </el-form-item>
+    <el-form-item label="用户类型" prop="usertype">
+      <el-input v-model="LoginForm.usertype" autocomplete="off"></el-input>
+    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="login()">提交</el-button>
       <el-button @click="resetForm('LoginForm')">重置</el-button>
@@ -39,6 +42,7 @@ export default {
       LoginForm: {
         username: '',
         password: '',
+        usertype: 0,
       },
     };
   },
@@ -57,6 +61,7 @@ export default {
       await this.actionLogin({
         username: this.LoginForm.username,
         password: this.LoginForm.password,
+        usertype: this.LoginForm.usertype
       });
       if (this.getterLoginStatus === 'success') {
         this.$router.push('/student_home');

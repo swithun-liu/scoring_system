@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:26:44
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-21 10:24:43
+ * @LastEditTime: 2021-04-22 21:32:27
  */
 package com.swithun.backend.tools.secret.services;
 
@@ -14,32 +14,34 @@ import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.tools.secret.model.UserDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
-@Primary
+@Service("JwtStudentUserDetailsService")
 public class JwtStudentUserDetailsService implements UserDetailsService {
 
     @Autowired
     private StudentRepository studentRepository;
 
-    @Autowired
-    private PasswordEncoder bcryptEncoder;
+    // @Autowired
+    // private PasswordEncoder bcryptEncoder;
 
     /**
      * @description: 通过用户名 在数据库查询是否有该用户
      * @param {*}
      * @return {*}
+     * @Autowired
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        System.out.println("StudentUserDetailsService根据username查询数据库");
 
         // 1. 根据username查询数据库
         StudentEntity user = studentRepository.findByName(username);
@@ -49,8 +51,10 @@ public class JwtStudentUserDetailsService implements UserDetailsService {
         }
         // 2.2 如果查询到，返回User(userdetials的实现类) (姓名，加密后的密码，权限&角色)
         // return new User(user.getName(), user.getPassword(), new ArrayList<>());
-        // return new User(user.getName(), user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin,student"));
-        return new User(user.getName(), user.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("student,ROLE_student"));
+        // return new User(user.getName(), user.getPassword(),
+        // AuthorityUtils.commaSeparatedStringToAuthorityList("admin,student"));
+        return new User(user.getName(), user.getPassword(),
+                AuthorityUtils.commaSeparatedStringToAuthorityList("student,ROLE_student"));
 
     }
 
@@ -63,6 +67,7 @@ public class JwtStudentUserDetailsService implements UserDetailsService {
     public StudentEntity save(UserDTO user) {
         StudentEntity newUser = new StudentEntity();
         newUser.setName(user.getUsername());
+        PasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         return studentRepository.save(newUser);
     }

@@ -5,16 +5,18 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 17:16:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-18 15:26:44
+ * @LastEditTime: 2021-04-22 21:51:16
  */
 package com.swithun.backend.tools.secret.config;
 
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -31,6 +33,10 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.swithun.backend.tools.secret.config.DaoAutenticationProvider.StudentDaoAutenticationProvider;
+import com.swithun.backend.tools.secret.config.DaoAutenticationProvider.TeacherDaoAutenticationProvider;
+
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -39,30 +45,55 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+  // 两个 UserDetailsService
+
   @Autowired
-  private UserDetailsService jwtUserDetailsService;
+  @Qualifier("JwtStudentUserDetailsService")
+  private UserDetailsService JwtStudentUserDetailsService;
+
+  @Autowired
+  @Qualifier("JwtTeacherUserDetailsService")
+  private UserDetailsService jwtTeacherUserDetailsService;
+
+  // 注入两个 DaoAutenticationProvider
+
+  @Bean("StudentDaoAutenticationProvider ")
+  DaoAuthenticationProvider daoStudentDaoAutenticationProvider() {
+    return new StudentDaoAutenticationProvider(passwordEncoderHH(), JwtStudentUserDetailsService);
+  }
+
+  @Bean("TeacherDaoAutenticationProvider")
+  DaoAuthenticationProvider daoTeacherDaoAutenticationProvider() {
+    return new TeacherDaoAutenticationProvider(passwordEncoderHH(), jwtTeacherUserDetailsService);
+  }
 
   @Autowired
   private JwtRequestFilter jwtRequestFilter;
 
-  @Autowired
-  private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-  // @Autowired
-  // private SecurityHandler myAuthenticationSuccessHandler;
+  // PasswordEncode选择使用官方推荐的 BCryptPasswordEncoder
+  @Bean
+  public PasswordEncoder passwordEncoderHH() {
+    return new BCryptPasswordEncoder();
+  }
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
     // configure AuthenticationManager so that it knows from where to load
     // user for matching credentials
+
+
     // Use BCryptPasswordEncoder
-    auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+    // auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+    // auth.userDetailsService(jwtTeacherUserDetailsService).passwordEncoder(passwordEncoder());
+    // auth.userDetailsService(JwtStudentUserDetailsService).passwordEncoder(passwordEncoder2());
+
+    // 向AuthenticationManager添加Provider
+    auth.authenticationProvider(daoStudentDaoAutenticationProvider());
+    auth.authenticationProvider(daoTeacherDaoAutenticationProvider());
+
+
   }
 
-  // PasswordEncode选择使用官方推荐的 BCryptPasswordEncoder
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
 
   @Bean
   @Override
@@ -74,7 +105,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.formLogin().usernameParameter("username") // 自定义登陆用户名参数名
         .passwordParameter("password") // 自定义登陆密码参数名
-        .successHandler(myAuthenticationSuccessHandler)
+        // .successHandler(myAuthenticationSuccessHandler)
     ;
 
     httpSecurity.csrf().disable() // 关掉CSRS
@@ -91,6 +122,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 然后写（其他）所有的都应该被认证
         .antMatchers("/student/*").hasRole("student")// only students access /student/*
+
+        .antMatchers("/teacher/*").hasRole("teacher")// only teachers access /teacher/*
 
         .anyRequest().authenticated()
         
