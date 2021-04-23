@@ -6,7 +6,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 16:29:03
+ * @LastEditTime: 2021-04-23 09:01:33
  */
 package com.swithun.backend.service;
 
@@ -41,11 +41,9 @@ public class FileService {
      * @param {String} token
      * @return {*}
      */    
-    public StudentFileEntity store(MultipartFile file, String token) throws IOException{
+    public StudentFileEntity store(MultipartFile file, String username) throws IOException{
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         StudentFileEntity studentFileEntity = new StudentFileEntity(filename,file.getContentType(),file.getBytes());
-
-        String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
 
         studentFileEntity.setStudentByStudentId(studentRepository.findByName(username));
         return studentFileRepository.save(studentFileEntity);
@@ -63,8 +61,8 @@ public class FileService {
      * @param {String} token
      * @return {*}
      */
-    public List<StudentFileEntity> studentGetMyPaper(String token) {
-        String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
+    public List<StudentFileEntity> studentGetMyPaper(String username) {
+        // String username = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         StudentEntity studentEntity = studentRepository.findByName(username);
         return studentFileRepository.findByStudentByStudentId(studentEntity);
     }

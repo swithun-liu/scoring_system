@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-17 16:49:39
+ * @LastEditTime: 2021-04-23 09:35:38
  */
 package com.swithun.backend.entity;
 
@@ -40,7 +40,7 @@ public class StudentEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     public String getName() {
         return name;
     }
