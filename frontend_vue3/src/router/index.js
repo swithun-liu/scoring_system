@@ -7,6 +7,7 @@ import Login from '../components/Login.vue'
 import StudentHome from '../components/StudentHome.vue'
 import StudentUploadPaper from '../components/StudentUploadPaper.vue';
 import ProfessorStudentsPaper from '../components/professorStudentsPaper.vue';
+import FilePreview from '../components/FilePreview.vue';
 import store from '../store/index';
 
 const routes = [{
@@ -57,6 +58,14 @@ const routes = [{
     }
   }
   ],
+  meta: {
+    requiredAuth: true
+  }
+},
+{
+  path: '/teacher/FilePreview',
+  name: 'TeacherFilePreview',
+  component: FilePreview,
   meta: {
     requiredAuth: true
   }

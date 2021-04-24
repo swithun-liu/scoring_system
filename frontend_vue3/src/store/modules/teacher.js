@@ -1,4 +1,3 @@
-
 /*
  * @Descripttion:
  * @version:
@@ -6,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 10:15:56
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 14:29:25
+ * @LastEditTime: 2021-04-24 21:33:58
  */
 
 import axios from 'axios';
@@ -14,8 +13,11 @@ import axios from 'axios';
 const actions = {
   async getAllFileOfMyStudents() {
     const response = await axios.get('http://localhost:8089/teacher/getAllFileOfstudentsOfMine');
-    console.log('getAllFileOfMyStudents')
     return response;
+  },
+  async teacherGetThisFile({ commit }, payload) {
+    const response = await axios.get('http://localhost:8089/teacher/teacherGetThisFile', { params: payload, responseType: 'arraybuffer' });
+    return response
   }
 }
 

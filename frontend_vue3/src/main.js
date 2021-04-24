@@ -10,6 +10,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import vuex store
 import store from './store/index'
+import vueFilePreview from 'gxd-file-preview';
 
 axios.interceptors.request.use((config) => {
   const authData = store.getters['auth/getAuthData'];
@@ -21,3 +22,4 @@ const app = createApp(App).use(store)
 installElementPlus(app)
 app.use(router).mount('#app')
 app.use(VueAxios, axios)
+app.use(vueFilePreview)
