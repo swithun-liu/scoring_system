@@ -5,12 +5,13 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 08:46:39
+ * @LastEditTime: 2021-04-25 20:24:27
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;
@@ -24,6 +25,8 @@ public class TeacherEntity {
     private String password;
     @JsonManagedReference
     private Collection<StudentEntity> studentsById;
+    @JsonIgnore
+    private Collection<TeacherCommentForFileEntity> teacherCommentForFilesById;
 
     @Id
     @Column(name = "id")
@@ -58,10 +61,13 @@ public class TeacherEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         TeacherEntity that = (TeacherEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(password, that.password);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name)
+                && Objects.equals(password, that.password);
     }
 
     @Override
@@ -76,5 +82,14 @@ public class TeacherEntity {
 
     public void setStudentsById(Collection<StudentEntity> studentsById) {
         this.studentsById = studentsById;
+    }
+
+    @OneToMany(mappedBy = "teacherByTeacherId")
+    public Collection<TeacherCommentForFileEntity> getTeacherCommentForFilesById() {
+        return teacherCommentForFilesById;
+    }
+
+    public void setTeacherCommentForFilesById(Collection<TeacherCommentForFileEntity> teacherCommentForFilesById) {
+        this.teacherCommentForFilesById = teacherCommentForFilesById;
     }
 }

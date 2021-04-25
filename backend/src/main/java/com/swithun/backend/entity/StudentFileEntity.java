@@ -5,15 +5,17 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-24 22:03:08
+ * @LastEditTime: 2021-04-25 20:17:42
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +29,8 @@ public class StudentFileEntity {
     private Integer score;
     @JsonBackReference
     private StudentEntity studentByStudentId;
+    @JsonIgnore
+    private Collection<TeacherCommentForFileEntity> teacherCommentForFilesById;
 
     public StudentFileEntity() {
     }
@@ -57,7 +61,6 @@ public class StudentFileEntity {
     public void setType(String type) {
         this.type = type;
     }
-
 
     @Basic
     @Column(name = "name")
@@ -92,8 +95,10 @@ public class StudentFileEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         StudentFileEntity that = (StudentFileEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Arrays.equals(data, that.data);
     }
@@ -113,5 +118,14 @@ public class StudentFileEntity {
 
     public void setStudentByStudentId(StudentEntity studentByStudentId) {
         this.studentByStudentId = studentByStudentId;
+    }
+
+    @OneToMany(mappedBy = "studentFileByStudentFileId")
+    public Collection<TeacherCommentForFileEntity> getTeacherCommentForFilesById() {
+        return teacherCommentForFilesById;
+    }
+
+    public void setTeacherCommentForFilesById(Collection<TeacherCommentForFileEntity> teacherCommentForFilesById) {
+        this.teacherCommentForFilesById = teacherCommentForFilesById;
     }
 }
