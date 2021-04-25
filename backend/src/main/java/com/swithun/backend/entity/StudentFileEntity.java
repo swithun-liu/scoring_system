@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 17:18:16
+ * @LastEditTime: 2021-04-24 22:03:08
  */
 package com.swithun.backend.entity;
 
@@ -24,6 +24,7 @@ public class StudentFileEntity {
     private String name;
     private String type;
     private byte[] data;
+    private Integer score;
     @JsonBackReference
     private StudentEntity studentByStudentId;
 
@@ -66,6 +67,16 @@ public class StudentFileEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "score")
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     @Basic

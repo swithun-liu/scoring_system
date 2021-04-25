@@ -1,3 +1,12 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:25:47
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-04-24 19:50:57
+ */
 package com.swithun.backend.config.uniform_response;
 
 import org.springframework.core.MethodParameter;
@@ -23,7 +32,10 @@ public class CustomResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             return UnifiedResponsor.ofFail(CommonStatusCodeEnum.SUCCESS_COMMON);
         } else if (arg0 instanceof UnifiedResponsor) {
             return arg0;
-        } else {
+        } else if (arg0 instanceof byte[]) {
+            return arg0;
+        }
+        else {
             return UnifiedResponsor.ofSuccess(CommonStatusCodeEnum.SUCCESS_COMMON, arg0);
         }
     }

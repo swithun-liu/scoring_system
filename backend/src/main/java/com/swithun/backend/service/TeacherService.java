@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:48:58
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 10:05:44
+ * @LastEditTime: 2021-04-25 15:19:56
  */
 package com.swithun.backend.service;
 
@@ -62,11 +62,22 @@ public class TeacherService {
         );
         List<studentFileDTO> studentFileDTOs = new ArrayList<studentFileDTO> ();
         for (var var : studentFileEntities) {
-            studentFileDTOs.add(new studentFileDTO(var.getId(), var.getName(), var.getStudentByStudentId().getId(), var.getStudentByStudentId().getName()));
+            studentFileDTOs.add(new studentFileDTO(var.getId(), var.getName(), var.getStudentByStudentId().getId(), var.getStudentByStudentId().getName(), var.getScore()));
         }
 
         return studentFileDTOs;
+    }
 
+    public String scoreThisPaper(Integer id, Integer score) {
+        StudentFileEntity file = studentFileRepository.findOneById(id);
+        if (file != null) {
+            file.setScore(score);
+            studentFileRepository.save(file);
+            return "修改成功";
+        }
+        else{
+            return "修改失败";
+        }
     }
 
 }
