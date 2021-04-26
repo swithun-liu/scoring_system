@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 10:15:56
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 15:14:12
+ * @LastEditTime: 2021-04-26 15:07:21
  */
 
 import axios from 'axios';
@@ -23,6 +23,14 @@ const actions = {
     console.log(payload)
     const reponse = await axios.post('http://localhost:8089/teacher/teacherScoreThisFile', payload);
     return reponse
+  },
+  async teacherGetAllCommentsOfThisFile({ commit }, payload) {
+    const response = await axios.post('http://localhost:8089/teacher/getAllCommentsOfThisFileOfMine', payload);
+    return response
+  },
+  async teacherAddCommentThisFile({ commit }, payload) {
+    const response = await axios.post('http://localhost:8089/teacher/AddCommentForThisFile', payload);
+    return response
   }
 }
 
