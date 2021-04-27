@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-09 13:23:57
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 13:49:52
+ * @LastEditTime: 2021-04-26 17:31:06
  */
 import {
   jwtDecrypt,
@@ -21,6 +21,7 @@ const state = () => ({
     tokenExp: '',
     userId: '',
     userName: '',
+    userType: 0
   },
   loginStatus: '',
 });
@@ -78,7 +79,6 @@ const mutations = {
       refreshToken: data.refresh_token,
       tokenExp: jwtDecodedValue.exp,
       userId: jwtDecodedValue.sub,
-      //   userName: jwtDecodedValue.username,
       userName: jwtDecodedValue.sub
     };
     state.authData = newTokenData;

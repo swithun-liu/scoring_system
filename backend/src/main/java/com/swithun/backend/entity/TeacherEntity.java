@@ -20,6 +20,17 @@ import java.util.Objects;
 @Entity
 @Table(name = "teacher", schema = "scoring_system", catalog = "")
 public class TeacherEntity {
+    public TeacherEntity(String name) {
+        this.name = name;
+    }
+
+    public TeacherEntity(Integer id) {
+        this.id = id;
+    }
+
+    public TeacherEntity() {
+    }
+
     private Integer id;
     private String name;
     private String password;

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:48:58
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 15:19:56
+ * @LastEditTime: 2021-04-26 09:41:59
  */
 package com.swithun.backend.service;
 
@@ -20,9 +20,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.swithun.backend.dao.StudentFileRepository;
+import com.swithun.backend.dao.TeacherCommentForFileRepository;
 import com.swithun.backend.dao.TeacherRepository;
 import com.swithun.backend.dto.studentFileDTO;
 import com.swithun.backend.entity.StudentFileEntity;
+import com.swithun.backend.entity.TeacherCommentForFileEntity;
 import com.swithun.backend.entity.TeacherEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+
+    @Autowired
+    private TeacherCommentForFileRepository teacherCommentForFileRepository;
 
     public List<studentFileDTO> findStudentFileOfThisTeacher(String teacherName) {
 
@@ -80,19 +85,17 @@ public class TeacherService {
         }
     }
 
+    public List<TeacherCommentForFileEntity> findAllCommnetsOfThisFileOfThisTeacher(Integer fileId, String teacherName) {
+        StudentFileEntity studentFileEntity = new StudentFileEntity(fileId);
+        TeacherEntity teacherEntity = teacherRepository.findByName(teacherName);
+        return teacherCommentForFileRepository.findAllByStudentFileByStudentFileIdAndTeacherByTeacherId(studentFileEntity, teacherEntity);
+    }
+
+    public void addComment(Integer fileId, String comments, String teacherName) {
+        TeacherEntity teacher = teacherRepository.findByName(teacherName);
+        StudentFileEntity file = studentFileRepository.findOneById(fileId);
+        TeacherCommentForFileEntity comment = new TeacherCommentForFileEntity(comments, file, teacher);
+        teacherCommentForFileRepository.save(comment);
+    }
+
 }
-/*
- * @Descripttion:
- * 
- * @version:
- * 
- * @@Company: None
- * 
- * @Author: Swithun Liu
- * 
- * @Date: 2021-04-23 08:48:58
- * 
- * @LastEditors: Swithun Liu
- * 
- * @LastEditTime: 2021-04-23 08:49:00
- */

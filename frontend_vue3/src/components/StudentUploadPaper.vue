@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 16:56:08
+ * @LastEditTime: 2021-04-26 19:27:43
 -->
 <template>
   <div class='student_upload_paper_container0 container0'>
@@ -22,10 +22,11 @@
       :data='{userName}'
       :headers='myHeaders'
       :auto-upload='true'
+      list-type="text"
     >
       <el-button size='small' type='primary' class='test'>点击上传</el-button>
       <template #tip>
-        <div class='el-upload__tip'>fff--{{gettersAuthData.userName}}</div>
+        <div class='el-upload__tip'></div>
       </template>
     </el-upload>
   </div>

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 20:17:42
+ * @LastEditTime: 2021-04-26 08:50:52
  */
 package com.swithun.backend.entity;
 
@@ -21,6 +21,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "studentFile", schema = "scoring_system", catalog = "")
 public class StudentFileEntity {
+
+    public StudentFileEntity(Integer id) {
+        this.id = id;
+    }
 
     private Integer id;
     private String name;

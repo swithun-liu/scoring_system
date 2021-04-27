@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-25 20:15:46
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 20:16:17
+ * @LastEditTime: 2021-04-26 09:35:54
  */
 package com.swithun.backend.entity;
 
@@ -15,6 +15,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "teacherCommentForFile", schema = "scoring_system", catalog = "")
 public class TeacherCommentForFileEntity {
+    public TeacherCommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
+            TeacherEntity teacherByTeacherId) {
+        this.comments = comments;
+        this.studentFileByStudentFileId = studentFileByStudentFileId;
+        this.teacherByTeacherId = teacherByTeacherId;
+    }
+
+    public TeacherCommentForFileEntity() {
+    }
+
     private Integer id;
     private String comments;
     private StudentFileEntity studentFileByStudentFileId;
