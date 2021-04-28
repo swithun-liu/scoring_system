@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 09:35:38
+ * @LastEditTime: 2021-04-27 15:55:34
  */
 package com.swithun.backend.entity;
 
@@ -20,7 +20,14 @@ import java.util.Objects;
 @Entity
 @Table(name = "student", schema = "scoring_system", catalog = "")
 public class StudentEntity {
-    private Integer id;
+    public StudentEntity(Integer id) {
+		this.id = id;
+	}
+
+	public StudentEntity() {
+	}
+
+	private Integer id;
     private String name;
     private String password;
     @JsonBackReference

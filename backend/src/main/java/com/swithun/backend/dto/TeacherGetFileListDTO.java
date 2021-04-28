@@ -9,7 +9,7 @@
  */
 package com.swithun.backend.dto;
 
-public class studentFileDTO {
+public class TeacherGetFileListDTO {
 
     private Integer id;
     private String name;
@@ -17,7 +17,7 @@ public class studentFileDTO {
     private String studentName;
     private Integer score;
 
-    public studentFileDTO(Integer id, String name, Integer studentId, String studentName, Integer score) {
+    public TeacherGetFileListDTO(Integer id, String name, Integer studentId, String studentName, Integer score) {
         this.id = id;
         this.name = name;
         this.studentId = studentId;

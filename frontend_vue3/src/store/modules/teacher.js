@@ -17,20 +17,20 @@ const actions = {
   },
   async teacherGetThisFile({ commit }, payload) {
     const response = await axios.get('http://localhost:8089/teacher/teacherGetThisFile', { params: payload, responseType: 'arraybuffer' });
-    return response
+    return response;
   },
   async teacherScoreThisFile({ commit }, payload) {
     console.log(payload)
     const reponse = await axios.post('http://localhost:8089/teacher/teacherScoreThisFile', payload);
-    return reponse
+    return reponse;
   },
   async teacherGetAllCommentsOfThisFile({ commit }, payload) {
     const response = await axios.post('http://localhost:8089/teacher/getAllCommentsOfThisFileOfMine', payload);
-    return response
+    return response;
   },
   async teacherAddCommentThisFile({ commit }, payload) {
     const response = await axios.post('http://localhost:8089/teacher/AddCommentForThisFile', payload);
-    return response
+    return response;
   }
 }
 

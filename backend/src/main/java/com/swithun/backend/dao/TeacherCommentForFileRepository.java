@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-25 21:01:32
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 08:50:07
+ * @LastEditTime: 2021-04-27 16:11:40
  */
 package com.swithun.backend.dao;
 
@@ -21,4 +21,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TeacherCommentForFileRepository extends JpaRepository<TeacherCommentForFileEntity, Integer> {
     List<TeacherCommentForFileEntity> findAllByStudentFileByStudentFileIdAndTeacherByTeacherId(StudentFileEntity studentFileEntity, TeacherEntity teacherEntity);
+    List<TeacherCommentForFileEntity> findAllByStudentFileByStudentFileId(StudentFileEntity studentFileEntity);
 }

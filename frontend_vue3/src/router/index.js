@@ -8,6 +8,7 @@ import StudentHome from '../components/StudentHome.vue'
 import StudentUploadPaper from '../components/StudentUploadPaper.vue';
 import ProfessorStudentsPaper from '../components/professorStudentsPaper.vue';
 import FilePreview from '../components/FilePreview.vue';
+import StudentMyPapers from '../components/StudentMyPapers.vue';
 import store from '../store/index';
 
 const routes = [{
@@ -53,6 +54,14 @@ const routes = [{
     path: '/professor_students_paper',
     name: 'ProfessorStudentsPaper',
     component: ProfessorStudentsPaper,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/student_my_papers',
+    name: 'StudentMyPapers',
+    component: StudentMyPapers,
     meta: {
       requiredAuth: true
     }

@@ -6,7 +6,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-24 21:59:55
+ * @LastEditTime: 2021-04-27 16:09:28
  */
 package com.swithun.backend.service;
 
@@ -65,7 +65,7 @@ public class FileService {
         return studentFileRepository.findByStudentByStudentId(studentEntity);
     }
 
-    public StudentFileEntity teacherGetThisFile(Integer fileId) {
+    public StudentFileEntity downloadThisFile(Integer fileId) {
         return studentFileRepository.findById(fileId).get();
     }
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 19:27:43
+ * @LastEditTime: 2021-04-28 14:51:43
 -->
 <template>
   <div class='student_upload_paper_container0 container0'>
@@ -22,9 +22,9 @@
       :data='{userName}'
       :headers='myHeaders'
       :auto-upload='true'
-      list-type="text"
+      list-type='text'
     >
-      <el-button size='small' type='primary' class='test'>点击上传</el-button>
+      <button class='custom-btn btn-12 uploadButton'><span>Click!</span><span>UPLOAD</span></button>
       <template #tip>
         <div class='el-upload__tip'></div>
       </template>
@@ -47,6 +47,11 @@ export default {
   data() {
     return {
       fileList: [
+        {
+          name: 'food.jpeg',
+          url:
+            'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        },
       ],
       userName: 'username0001',
       myHeaders: {
@@ -92,15 +97,19 @@ export default {
 
 <style>
 .student_upload_paper_container0 {
-  background-color: rgb(201, 253, 223);
+  /* background-color: rgba(201, 253, 223, 0); */
 }
-.test {
-  color: rgb(51, 51, 51) !important;
-  background: rgba(255, 255, 255, 0.25) !important;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-  border-radius: 10px !important;
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+.uploadButton {
+  font-family: fantasy !important;
+  font-size: 25px !important;
+  width: 200px;
+  height: 50px;
+  margin: 0px !important;
+}
+.el-upload__tip {
+  margin: 50px;
+}
+.el-upload-list {
+  height: 60px !important;
 }
 </style>

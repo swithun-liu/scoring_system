@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:44:19
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 15:17:22
+ * @LastEditTime: 2021-04-27 16:09:06
  */
 package com.swithun.backend.controller;
 
@@ -18,7 +18,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.swithun.backend.dto.TeacherCommentDTO;
-import com.swithun.backend.dto.studentFileDTO;
+import com.swithun.backend.dto.TeacherGetFileListDTO;
 import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.entity.TeacherCommentForFileEntity;
 import com.swithun.backend.service.FileService;
@@ -54,13 +54,18 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/teacher/getAllFileOfstudentsOfMine")
-    public List<studentFileDTO> getMethodName(Principal principal) {
+    public List<TeacherGetFileListDTO> getMethodName(Principal principal) {
         return teacherService.findStudentFileOfThisTeacher(principal.getName());
     }
 
+    /**
+     * @description: 老师下载选中文件
+     * @param {*}
+     * @return {*}
+     */
     @GetMapping(value = "/teacher/teacherGetThisFile", produces = "application/pdf")
     public byte[] teacherGetThisFile(@RequestParam Integer fileId, HttpServletResponse response) throws IOException {
-        StudentFileEntity studentFileEntity = fileservice.teacherGetThisFile(fileId);
+        StudentFileEntity studentFileEntity = fileservice.downloadThisFile(fileId);
         return studentFileEntity.getData();
     }
 
@@ -74,22 +79,27 @@ public class TeacherController {
     }
 
     @PostMapping(value = "/teacher/getAllCommentsOfThisFileOfMine")
-    public List<TeacherCommentDTO> getAllCommentsOfThisFileOfMine(@RequestBody Map<String, Object> mp, Principal principal) {
-        String teacherName = principal.getName();
-        System.out.println("teacherController getAllCommentsOfThisFileOfMine" + (Integer) mp.get("fileId") + " " + teacherName);
+    public List<TeacherCommentDTO> getAllCommentsOfThisFileOfMine(@RequestBody Map<String, Object> mp,
+            Principal principal) {
+
+        Integer fileId = (Integer) mp.get("chosedFileId"); // 文件Id
+        String teacherName = principal.getName(); // 教师姓名
+
+        System.out.println("teacherController getAllCommentsOfThisFileOfMine" + fileId + " " + teacherName);
+
         List<TeacherCommentDTO> comments = new ArrayList<>();
         List<TeacherCommentForFileEntity> teacherComments = teacherService
-                .findAllCommnetsOfThisFileOfThisTeacher((Integer) mp.get("chosedFileId"), teacherName);
-        for (TeacherCommentForFileEntity teacherCommentForFileEntity : teacherComments) {
-            comments.add(new TeacherCommentDTO(teacherCommentForFileEntity.getComments()));
+                .findAllCommnetsOfThisFileOfThisTeacher(fileId, teacherName);
+        for (TeacherCommentForFileEntity comment : teacherComments) {
+            comments.add(new TeacherCommentDTO(comment.getComments()));
         }
         return comments;
     }
 
-    @PostMapping(value="/teacher/AddCommentForThisFile")
+    @PostMapping(value = "/teacher/AddCommentForThisFile")
     public String teacherAddCommentsForThisFile(@RequestBody Map<String, Object> mp, Principal principal) {
-        Integer fileId = (Integer)mp.get("chosedFileId");
-        String comment = (String)mp.get("comment");
+        Integer fileId = (Integer) mp.get("chosedFileId");
+        String comment = (String) mp.get("comment");
         System.out.println("teacherController AddCommentForThisFile" + fileId + " " + comment);
         teacherService.addComment(fileId, comment, principal.getName());
         return "评论成功";

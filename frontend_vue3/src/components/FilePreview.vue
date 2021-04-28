@@ -5,15 +5,32 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 18:17:53
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-24 10:40:59
+ * @LastEditTime: 2021-04-28 11:04:28
 -->
 <template>
   <div id="app" style="height: 100%">
     test
+    <div class='radio-checked'>
+      <div class='radio-checked_highlight'></div>
+      <div class='radio-checked_container'>
+        <input
+          checked='checked'
+          class='radio-checked_input'
+          id='on'
+          name='status'
+          type='radio'
+          value='on'
+        />
+        <label class='radio-checked_label radio-checked_label--on' for='on'>On</label>
+        <input class='radio-checked_input' id='off' name='status' type='radio' value='off' />
+        <label class='radio-checked_label radio-checked_label--off' for='off'>Off</label>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+// import '../assets/js/openMenuButtonScript.js';
 export default {
   name: 'demo',
 }

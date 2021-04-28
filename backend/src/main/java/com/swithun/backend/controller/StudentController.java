@@ -5,12 +5,15 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 16:56:36
+ * @LastEditTime: 2021-04-27 15:52:31
  */
 package com.swithun.backend.controller;
 
-import com.swithun.backend.entity.StudentFileEntity;
+import com.swithun.backend.dto.AddFileFileListDTO;
+import com.swithun.backend.dto.StudentGetFileListDTO;
+import com.swithun.backend.dto.TeacherCommentDTO;
 import com.swithun.backend.service.FileService;
+import com.swithun.backend.service.StudentService;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
+
 /**
  * StudentController
  */
@@ -34,6 +38,9 @@ public class StudentController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private StudentService studentS;
+
     /**
      * @description: 学生端上传论文
      * @param {*}
@@ -41,7 +48,6 @@ public class StudentController {
      */
     @PostMapping("/student/studentuploadpaper")
     public String studentUploadPaper(@RequestParam("file") MultipartFile file, Principal principal) {
-        System.out.println("+++++++++++++++++++++++++++++++++ 进入 studentUploadPaper");
         try {
             System.out.println("StudentController 学生姓名: " + principal.getName());
             fileService.store(file, principal.getName());
@@ -52,14 +58,48 @@ public class StudentController {
     }
 
     /**
-     * @description: 学生端请求自己的论文
+     * @description: 学生端获取所有论文 -- 添加论文
      * @param {*}
      * @return {*}
      */
     @GetMapping(value = "/student/studentgetmypaper")
-    public List<StudentFileEntity> studentGetMyPaper(Principal principal) {
+    public List<AddFileFileListDTO> getFileListForAddFile(Principal principal) {
         System.out.println("StudentController studetnGetMyPaper 学生姓名: " + principal.getName());
-        return fileService.studentGetMyPaper(principal.getName());
+        return studentS.getFileListForAddFile(principal.getName());
     }
+
+    /**
+     * @description: 学生获取所有论文 -- 我的论文
+     * @param {*}
+     * @return {*}
+     */
+    @GetMapping(value = "/student/studentGetMyPaperForMyPaper")
+    public List<StudentGetFileListDTO> getFileListForMyFiles(Principal principal) {
+        System.out.println("StudentController studetnGetMyPaper 学生姓名: " + principal.getName());
+        return studentS.getFileListForMyFiles(principal.getName());
+    }
+
+    /**
+     * @description: 学生获取选中文件所有评论
+     * @param {文件id}
+     * @return {[{评论, 老师姓名}]}
+     */
+    @GetMapping(value="/student/studentGetTeacherCommentOfMyFile")
+    public List<TeacherCommentDTO> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
+        System.out.println("文件Id : " + chosedFileId);
+        return studentS.getTeacherCommentOfMyFIle(chosedFileId);
+    }
+
+    /**
+     * @description: 学生下载选中文件
+     * @param {*}
+     * @return {*}
+     */
+    @GetMapping(value="/student/downloadThisFile", produces = "application/pdf")
+    public byte[] getMethodName(@RequestParam Integer fileId) {
+        return fileService.downloadThisFile(fileId).getData();
+    }
+    
+    
 
 }

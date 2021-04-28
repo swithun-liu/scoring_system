@@ -3,29 +3,25 @@
  * @version:
  * @@Company: None
  * @Author: Swithun Liu
- * @Date: 2021-04-17 14:26:03
+ * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-28 14:16:41
+ * @LastEditTime: 2021-04-27 16:28:00
 -->
 
 <template>
   <div>
     <el-table :data='tableData' style='width: 100%'>
-      <el-table-column prop='id' label='文件id' width='90'></el-table-column>
+      <el-table-column prop='id' label='文件id'></el-table-column>
       <el-table-column prop='name' label='文件名'></el-table-column>
-      <el-table-column prop='studentId' label='学生id' width='90'></el-table-column>
-      <el-table-column prop='studentName' label='学生名' width='120'></el-table-column>
-      <el-table-column prop='score' label='分数' width='90'></el-table-column>
-      <el-table-column lable='操作' width='340'>
+      <el-table-column prop='score' label='分数'></el-table-column>
+      <el-table-column lable='操作'>
         <template #default='scope'>
-          <button
+          <el-button
             size='small'
             @click='handleDownload(scope.row.id, scope.row.name)'
-            class="custom-btn btn-13"
-          >下载 {{scope.row.id}}</button>
-          <button size='small' class="btn-6 custom-btn">更新</button>
-          <button size='small' @click='openCommentDialog(scope.row.id)' class="btn-11 custom-btn">回复</button>
-          <button size='small' @click='openScoreDialog(scope.row.id)' class="btn-14 custom-btn">评分</button>
+          >下载 {{scope.row.id}}</el-button>
+          <el-button size='small'>更新</el-button>
+          <el-button size='small' @click='openCommentDialog(scope.row.id)'>回复</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -57,7 +53,6 @@
         </span>
       </template>
     </el-dialog>
-    <button class="custom-btn btn-13"><span>Read More</span></button>
   </div>
 </template>
 
@@ -68,29 +63,28 @@ import fileDownload from 'js-file-download';
 export default {
   data() {
     return {
-      tableData: [],
+      tableData: [
+      ],
       dialogVisible: false,
       commentDialogVisible: false,
       chosedFileId: 0,
       fileScore: 0,
       commentData: ['temp coment', 'temp coment2'],
-      commentWatiForPush: '',
+      commentWatiForPush: ''
     };
   },
   mounted() {
     this.flashAllFileOfMyStudents();
   },
   methods: {
-    ...mapActions('teacher', [
-      'getAllFileOfMyStudents',
-      'teacherGetThisFile',
-      'teacherScoreThisFile',
-      'teacherGetAllCommentsOfThisFile',
-      'teacherAddCommentThisFile',
+    ...mapActions('student', [
+      'studentGetAllMyFileForMyFilePage',
+      'studentGetAllComment',
+      'studentDownloadThisFile'
     ]),
     flashAllFileOfMyStudents() {
       var _this = this;
-      this.getAllFileOfMyStudents().then((result) => {
+      this.studentGetAllMyFileForMyFilePage().then((result) => {
         console.log(result.data.data);
         _this.tableData = result.data.data;
         _this.$forceUpdate();
@@ -99,7 +93,7 @@ export default {
     flashComments() {
       const _this = this;
       var chosedFileId = _this.chosedFileId;
-      this.teacherGetAllCommentsOfThisFile({ chosedFileId }).then((res) => {
+      this.studentGetAllComment({ chosedFileId }).then((res) => {
         console.log(res.data);
         _this.commentData = res.data.data;
         _this.$forceUpdate();
@@ -107,10 +101,10 @@ export default {
     },
     handleDownload(id, name) {
       console.log('获取文件 id: ' + id);
-      this.teacherGetThisFile({
+      this.studentDownloadThisFile({
         fileId: id,
       }).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         fileDownload(res.data, name);
       });
     },
@@ -134,12 +128,13 @@ export default {
         _this.flashAllFileOfMyStudents();
       });
     },
-    handleComment() {},
+    handleComment() {
+    },
     handleClose() {
       console.log('Dialog closed');
     },
     handleAddComment() {
-      console.log(this.chosedFileId + ' ' + this.commentWatiForPush);
+      console.log(this.chosedFileId + ' ' + this.commentWatiForPush)
       var comment = this.commentWatiForPush;
       var chosedFileId = this.chosedFileId;
       var _this = this;
@@ -147,25 +142,11 @@ export default {
         console.log(res);
         _this.commentWatiForPush = '';
         _this.flashComments();
-      });
-    },
+      })
+    }
   },
 };
 </script>
 
 <style>
-.el-table__row {
-  background-color: var(--color-gray0) !important;
-}
-.el-table {
-  background-color: var(--color-gray0) !important;
-}
-.el-table__header-wrapper {
-  border: 0px !important;
-  border-radius: 20px !important;
-}
-.el-table__header {
-  border-radius: 20px;
-}
-
 </style>
