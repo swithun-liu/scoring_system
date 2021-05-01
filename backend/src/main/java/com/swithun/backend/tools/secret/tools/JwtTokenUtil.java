@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 09:50:12
+ * @LastEditTime: 2021-05-01 14:35:43
  */
 package com.swithun.backend.tools.secret.tools;
 
@@ -72,7 +72,6 @@ public class JwtTokenUtil implements Serializable {
     // generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        // claims.put("usertype", userDetails.getAuthorities())
         Collection<? extends GrantedAuthority> it = userDetails.getAuthorities();
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
         List<String> roles = new ArrayList<String>();

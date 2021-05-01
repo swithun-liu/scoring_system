@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import '../assets/js/openMenuButtonScript.js';
 export default {
   name: 'demo',
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:59:30
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-22 21:51:09
+ * @LastEditTime: 2021-05-01 15:14:23
  */
 package com.swithun.backend.tools.secret.Controller;
 
@@ -51,19 +51,20 @@ public class JwtAuthenticationController {
 
         UserDetails userDetails;
 
+        // 1. 通过名字 UserDetailService 加载 userDetail
         if (authenticationRequest.getUsertype() == 0) { // 如果是学生
             userDetails = studentUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         } else {
             userDetails = teacherUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         }
-
-        System.out.println("before authenticate");
+        // 2. 验证 前端传来的 名字 和 密码
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword(),
                 authenticationRequest.getUsertype());
-        System.out.println("after authenticate");
 
+        // 3. 通过验证后 使用 userDetials 生成token
         final String token = jwtTokenUtil.generateToken(userDetails);
 
+        // 4. 返回附带 token 的 response
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
@@ -80,10 +81,10 @@ public class JwtAuthenticationController {
         System.out.println("jwtAuthenticationController # autenticate");
         try {
             if (usertype == 0) {
-                System.out.println("usertype == 0");
+                // 1.1 如果是学生: 生成 Student的 UsernamePasswordAutenticationToken-> 会由 StudentDaoAutenticationProvider 处理
                 authenticationManager.authenticate(new StudentUsernamePasswordAuthenticationToken(username, password));
             } else {
-                System.out.println("usertype == 1");
+                // 1.2 如果是老师: 生成 Teacher的 UsernamePasswordAutenticationToken-> 会由 TeacherDaoAutenticationProvider 处理
                 authenticationManager.authenticate(new TeacherUsernamePasswordAutenticationToken(username, password));
             }
         } catch (DisabledException e) {
