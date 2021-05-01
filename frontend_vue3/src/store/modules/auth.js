@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-09 13:23:57
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 17:31:06
+ * @LastEditTime: 2021-05-01 17:17:35
  */
 import {
   jwtDecrypt,
@@ -21,7 +21,7 @@ const state = () => ({
     tokenExp: '',
     userId: '',
     userName: '',
-    userType: 0
+    userType: []
   },
   loginStatus: '',
 });
@@ -72,14 +72,15 @@ const mutations = {
     localStorage.setItem('refresh_token', data.refresh_token);
 
     const jwtDecodedValue = jwtDecrypt(data.access_token);
-    console.log('username: ')
+    console.log('jwtDecodedValue')
     console.log(jwtDecodedValue)
     const newTokenData = {
       token: data.access_token,
       refreshToken: data.refresh_token,
       tokenExp: jwtDecodedValue.exp,
       userId: jwtDecodedValue.sub,
-      userName: jwtDecodedValue.sub
+      userName: jwtDecodedValue.sub,
+      userType: jwtDecodedValue.userType
     };
     state.authData = newTokenData;
   },

@@ -16,14 +16,14 @@
             <i class='el-icon-location'></i>
             <span>论文管理</span>
           </template>
-          <el-menu-item-group>
-            <el-menu-item index='student_upload_paper' v-if="type == 'student'">上传论文</el-menu-item>
+          <el-menu-item-group v-if ="type[0] === 'student'">
+            <el-menu-item index='student_upload_paper'>上传论文</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group>
-            <el-menu-item index='student_my_papers' v-if="type == 'student'">我的论文</el-menu-item>
+          <el-menu-item-group v-if ="type[0] === 'student'">
+            <el-menu-item index='student_my_papers'>我的论文</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group>
-            <el-menu-item index='professor_students_paper' v-if="type == 'teacher'">学生论文</el-menu-item>
+          <el-menu-item-group v-if ="type[0] === 'teacher'">
+            <el-menu-item index='professor_students_paper'>学生论文</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -39,12 +39,34 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
       isCollapse: true,
-      type: 'student'
+      type: [
+        'student'
+      ]
     };
+  },
+  mounted() {
+    this.type = this.getAuthData.userType
+    console.log('test usertype')
+    console.log(this.getAuthData);
+    console.log(this.type[0])
+    console.log(typeof this.type);
+    console.log(typeof this.type[0])
+    var origin_type = this.type[0];
+    console.log(typeof origin_type)
+    console.log(typeof 'student')
+    console.log(origin_type === 'student')
+    console.log('end usertype')
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'getAuthData',
+    ])
   },
   methods: {
     handleOpen(key, keyPath) {

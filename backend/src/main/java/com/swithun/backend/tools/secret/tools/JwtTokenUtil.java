@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-01 14:35:43
+ * @LastEditTime: 2021-05-01 17:28:14
  */
 package com.swithun.backend.tools.secret.tools;
 
@@ -81,7 +81,7 @@ public class JwtTokenUtil implements Serializable {
                 roles.add(grantedAuthority.toString().substring(5));
             }
         }
-        claims.put("userType", roles);
+        claims.put("userType", roles); // 在 JWT payload 中放入 自定义的角色信息
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
         return doGenerateToken(claims, userDetails.getUsername());
     }

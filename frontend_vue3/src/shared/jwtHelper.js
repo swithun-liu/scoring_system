@@ -1,3 +1,12 @@
+/*
+ * @Descripttion:
+ * @version:
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-04-17 14:25:47
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-05-01 17:16:26
+ */
 export function jwtDecrypt(token) {
   var base64Url = token.split('.')[1];
   var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
