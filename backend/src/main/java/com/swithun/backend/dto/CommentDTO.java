@@ -5,12 +5,12 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-26 15:09:11
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 15:09:42
+ * @LastEditTime: 2021-05-01 21:07:09
  */
 package com.swithun.backend.dto;
 
-public class TeacherCommentDTO {
-    public TeacherCommentDTO(String comment, String teacherName) {
+public class CommentDTO {
+    public CommentDTO(String comment, String teacherName) {
 		this.comment = comment;
 		this.teacherName = teacherName;
 	}
@@ -23,11 +23,11 @@ public class TeacherCommentDTO {
 		this.teacherName = teacherName;
 	}
 
-	public TeacherCommentDTO(String comment) {
+	public CommentDTO(String comment) {
         this.comment = comment;
     }
 
-    public TeacherCommentDTO() {
+    public CommentDTO() {
     }
 
     public String getComment() {

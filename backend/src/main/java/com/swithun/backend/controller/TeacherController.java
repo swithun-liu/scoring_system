@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.swithun.backend.dto.TeacherCommentDTO;
 import com.swithun.backend.dto.TeacherGetFileListDTO;
 import com.swithun.backend.entity.StudentFileEntity;
-import com.swithun.backend.entity.TeacherCommentForFileEntity;
+import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.TeacherService;
 
@@ -88,9 +88,9 @@ public class TeacherController {
         System.out.println("teacherController getAllCommentsOfThisFileOfMine" + fileId + " " + teacherName);
 
         List<TeacherCommentDTO> comments = new ArrayList<>();
-        List<TeacherCommentForFileEntity> teacherComments = teacherService
+        List<CommentForFileEntity> teacherComments = teacherService
                 .findAllCommnetsOfThisFileOfThisTeacher(fileId, teacherName);
-        for (TeacherCommentForFileEntity comment : teacherComments) {
+        for (CommentForFileEntity comment : teacherComments) {
             comments.add(new TeacherCommentDTO(comment.getComments()));
         }
         return comments;

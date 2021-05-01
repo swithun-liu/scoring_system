@@ -1,34 +1,33 @@
-/*
- * @Descripttion: 
- * @version: 
- * @@Company: None
- * @Author: Swithun Liu
- * @Date: 2021-04-25 20:15:46
- * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 09:35:54
- */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "teacherCommentForFile", schema = "scoring_system", catalog = "")
-public class TeacherCommentForFileEntity {
-    public TeacherCommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
+@Table(name = "CommentForFile", schema = "scoring_system", catalog = "")
+public class CommentForFileEntity {
+    public CommentForFileEntity() {
+    }
+
+    public CommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
             TeacherEntity teacherByTeacherId) {
         this.comments = comments;
         this.studentFileByStudentFileId = studentFileByStudentFileId;
         this.teacherByTeacherId = teacherByTeacherId;
     }
 
-    public TeacherCommentForFileEntity() {
-    }
-
     private Integer id;
     private String comments;
     private StudentFileEntity studentFileByStudentFileId;
+    private StudentEntity studentByStudentId;
     private TeacherEntity teacherByTeacherId;
+    @JsonIgnore
+    private CommentForFileEntity commentForFileByParentCommentId;
+    private Collection<CommentForFileEntity> commentForFilesById;
 
     @Id
     @Column(name = "id")
@@ -55,7 +54,7 @@ public class TeacherCommentForFileEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TeacherCommentForFileEntity that = (TeacherCommentForFileEntity) o;
+        CommentForFileEntity that = (CommentForFileEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(comments, that.comments);
     }
 
@@ -75,6 +74,16 @@ public class TeacherCommentForFileEntity {
     }
 
     @ManyToOne
+    @JoinColumn(name = "student_id", referencedColumnName = "id")
+    public StudentEntity getStudentByStudentId() {
+        return studentByStudentId;
+    }
+
+    public void setStudentByStudentId(StudentEntity studentByStudentId) {
+        this.studentByStudentId = studentByStudentId;
+    }
+
+    @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     public TeacherEntity getTeacherByTeacherId() {
         return teacherByTeacherId;
@@ -82,5 +91,24 @@ public class TeacherCommentForFileEntity {
 
     public void setTeacherByTeacherId(TeacherEntity teacherByTeacherId) {
         this.teacherByTeacherId = teacherByTeacherId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "parent_comment_id", referencedColumnName = "id")
+    public CommentForFileEntity getCommentForFileByParentCommentId() {
+        return commentForFileByParentCommentId;
+    }
+
+    public void setCommentForFileByParentCommentId(CommentForFileEntity commentForFileByParentCommentId) {
+        this.commentForFileByParentCommentId = commentForFileByParentCommentId;
+    }
+
+    @OneToMany(mappedBy = "commentForFileByParentCommentId")
+    public Collection<CommentForFileEntity> getCommentForFilesById() {
+        return commentForFilesById;
+    }
+
+    public void setCommentForFilesById(Collection<CommentForFileEntity> commentForFilesById) {
+        this.commentForFilesById = commentForFilesById;
     }
 }

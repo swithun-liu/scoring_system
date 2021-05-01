@@ -20,11 +20,11 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.swithun.backend.dao.StudentFileRepository;
-import com.swithun.backend.dao.TeacherCommentForFileRepository;
+import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dao.TeacherRepository;
 import com.swithun.backend.dto.TeacherGetFileListDTO;
 import com.swithun.backend.entity.StudentFileEntity;
-import com.swithun.backend.entity.TeacherCommentForFileEntity;
+import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.entity.TeacherEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class TeacherService {
     private TeacherRepository teacherRepository;
 
     @Autowired
-    private TeacherCommentForFileRepository teacherCommentForFileRepository;
+    private CommentForFileRepository teacherCommentForFileRepository;
 
     /**
      * @description: 查找所有这名老师的学生的文章
@@ -98,7 +98,7 @@ public class TeacherService {
      * @param {String}  teacherName
      * @return {*}
      */
-    public List<TeacherCommentForFileEntity> findAllCommnetsOfThisFileOfThisTeacher(Integer fileId,
+    public List<CommentForFileEntity> findAllCommnetsOfThisFileOfThisTeacher(Integer fileId,
             String teacherName) {
         StudentFileEntity file = new StudentFileEntity(fileId);
         TeacherEntity teacher = teacherRepository.findByName(teacherName);
@@ -115,7 +115,7 @@ public class TeacherService {
     public void addComment(Integer fileId, String comments, String teacherName) {
         TeacherEntity teacher = teacherRepository.findByName(teacherName);
         StudentFileEntity file = studentFileRepository.findOneById(fileId);
-        TeacherCommentForFileEntity comment = new TeacherCommentForFileEntity(comments, file, teacher);
+        CommentForFileEntity comment = new CommentForFileEntity(comments, file, teacher);
         teacherCommentForFileRepository.save(comment);
     }
 

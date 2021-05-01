@@ -52,16 +52,6 @@ export default {
   },
   mounted() {
     this.type = this.getAuthData.userType
-    console.log('test usertype')
-    console.log(this.getAuthData);
-    console.log(this.type[0])
-    console.log(typeof this.type);
-    console.log(typeof this.type[0])
-    var origin_type = this.type[0];
-    console.log(typeof origin_type)
-    console.log(typeof 'student')
-    console.log(origin_type === 'student')
-    console.log('end usertype')
   },
   computed: {
     ...mapGetters('auth', [

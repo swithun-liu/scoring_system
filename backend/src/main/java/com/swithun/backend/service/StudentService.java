@@ -14,13 +14,13 @@ import java.util.List;
 
 import com.swithun.backend.dao.StudentFileRepository;
 import com.swithun.backend.dao.StudentRepository;
-import com.swithun.backend.dao.TeacherCommentForFileRepository;
+import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.dto.StudentGetFileListDTO;
 import com.swithun.backend.dto.TeacherCommentDTO;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
-import com.swithun.backend.entity.TeacherCommentForFileEntity;
+import com.swithun.backend.entity.CommentForFileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class StudentService {
     @Autowired
     private StudentFileRepository fileR;
     @Autowired
-    private TeacherCommentForFileRepository commentR;
+    private CommentForFileRepository commentR;
     
     /**
      * @description: 为 添加论文 页面 获取 文件列表
@@ -71,9 +71,9 @@ public class StudentService {
      * @return {*}
      */
     public List<TeacherCommentDTO> getTeacherCommentOfMyFIle(Integer fileId) {
-        List<TeacherCommentForFileEntity> origin_comments = commentR.findAllByStudentFileByStudentFileId(new StudentFileEntity(fileId));
+        List<CommentForFileEntity> origin_comments = commentR.findAllByStudentFileByStudentFileId(new StudentFileEntity(fileId));
         List<TeacherCommentDTO> comments = new ArrayList<>();
-        for (TeacherCommentForFileEntity origin : origin_comments) {
+        for (CommentForFileEntity origin : origin_comments) {
             comments.add(new TeacherCommentDTO(origin.getComments(), origin.getTeacherByTeacherId().getName()));
         }
         return comments;

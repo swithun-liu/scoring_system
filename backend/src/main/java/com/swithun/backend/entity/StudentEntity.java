@@ -5,13 +5,14 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-27 15:55:34
+ * @LastEditTime: 2021-05-01 20:49:13
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;
@@ -21,19 +22,21 @@ import java.util.Objects;
 @Table(name = "student", schema = "scoring_system", catalog = "")
 public class StudentEntity {
     public StudentEntity(Integer id) {
-		this.id = id;
-	}
+        this.id = id;
+    }
 
-	public StudentEntity() {
-	}
+    public StudentEntity() {
+    }
 
-	private Integer id;
+    private Integer id;
     private String name;
     private String password;
     @JsonBackReference
     private TeacherEntity teacherByTeacherId;
     @JsonManagedReference
     private Collection<StudentFileEntity> studentFilesById;
+    @JsonIgnore
+    private Collection<CommentForFileEntity> commentForFilesById;
 
     @Id
     @Column(name = "id")
@@ -68,10 +71,13 @@ public class StudentEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         StudentEntity that = (StudentEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(password, that.password);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name)
+                && Objects.equals(password, that.password);
     }
 
     @Override
@@ -96,5 +102,14 @@ public class StudentEntity {
 
     public void setStudentFilesById(Collection<StudentFileEntity> studentFilesById) {
         this.studentFilesById = studentFilesById;
+    }
+
+    @OneToMany(mappedBy = "studentByStudentId")
+    public Collection<CommentForFileEntity> getCommentForFilesById() {
+        return commentForFilesById;
+    }
+
+    public void setCommentForFilesById(Collection<CommentForFileEntity> commentForFilesById) {
+        this.commentForFilesById = commentForFilesById;
     }
 }

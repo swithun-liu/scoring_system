@@ -34,7 +34,7 @@ public class StudentFileEntity {
     @JsonBackReference
     private StudentEntity studentByStudentId;
     @JsonIgnore
-    private Collection<TeacherCommentForFileEntity> teacherCommentForFilesById;
+    private Collection<CommentForFileEntity> teacherCommentForFilesById;
 
     public StudentFileEntity() {
     }
@@ -125,11 +125,11 @@ public class StudentFileEntity {
     }
 
     @OneToMany(mappedBy = "studentFileByStudentFileId")
-    public Collection<TeacherCommentForFileEntity> getTeacherCommentForFilesById() {
+    public Collection<CommentForFileEntity> getTeacherCommentForFilesById() {
         return teacherCommentForFilesById;
     }
 
-    public void setTeacherCommentForFilesById(Collection<TeacherCommentForFileEntity> teacherCommentForFilesById) {
+    public void setTeacherCommentForFilesById(Collection<CommentForFileEntity> teacherCommentForFilesById) {
         this.teacherCommentForFilesById = teacherCommentForFilesById;
     }
 }

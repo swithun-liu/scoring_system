@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-25 20:24:27
+ * @LastEditTime: 2021-05-01 20:51:21
  */
 package com.swithun.backend.entity;
 
@@ -37,7 +37,7 @@ public class TeacherEntity {
     @JsonManagedReference
     private Collection<StudentEntity> studentsById;
     @JsonIgnore
-    private Collection<TeacherCommentForFileEntity> teacherCommentForFilesById;
+    private Collection<CommentForFileEntity> teacherCommentForFilesById;
 
     @Id
     @Column(name = "id")
@@ -96,11 +96,11 @@ public class TeacherEntity {
     }
 
     @OneToMany(mappedBy = "teacherByTeacherId")
-    public Collection<TeacherCommentForFileEntity> getTeacherCommentForFilesById() {
+    public Collection<CommentForFileEntity> getTeacherCommentForFilesById() {
         return teacherCommentForFilesById;
     }
 
-    public void setTeacherCommentForFilesById(Collection<TeacherCommentForFileEntity> teacherCommentForFilesById) {
+    public void setTeacherCommentForFilesById(Collection<CommentForFileEntity> teacherCommentForFilesById) {
         this.teacherCommentForFilesById = teacherCommentForFilesById;
     }
 }
