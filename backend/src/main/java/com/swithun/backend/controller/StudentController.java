@@ -5,12 +5,13 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-27 15:52:31
+ * @LastEditTime: 2021-05-04 12:30:06
  */
 package com.swithun.backend.controller;
 
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.dto.StudentGetFileListDTO;
+import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.StudentService;
@@ -85,7 +86,7 @@ public class StudentController {
      * @return {[{评论, 老师姓名}]}
      */
     @GetMapping(value="/student/studentGetTeacherCommentOfMyFile")
-    public List<CommentDTO> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
+    public List<CommentForFileEntity> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
         System.out.println("文件Id : " + chosedFileId);
         return studentS.getTeacherCommentOfMyFIle(chosedFileId);
     }

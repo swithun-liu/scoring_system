@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:58:43
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-01 21:30:57
+ * @LastEditTime: 2021-05-04 12:29:50
  */
 package com.swithun.backend.service;
 
@@ -69,17 +69,13 @@ public class StudentService {
     }
 
     /**
-     * @description: 为 我的论文 页面 获取 选取文件的所有评论
+     * @description: 获取选中文件的所有评论
      * @param {Integer} fileId
      * @return {*}
      */
-    public List<CommentDTO> getTeacherCommentOfMyFIle(Integer fileId) {
-        List<CommentForFileEntity> origin_comments = commentR.findAllByStudentFileByStudentFileId(new StudentFileEntity(fileId));
-        List<CommentDTO> comments = new ArrayList<>();
-        for (CommentForFileEntity origin : origin_comments) {
-            comments.add(converter.CommentForFileEntity2DTO(origin));
-        }
-        return comments;
+    public List<CommentForFileEntity> getTeacherCommentOfMyFIle(Integer fileId) {
+        List<CommentForFileEntity> origin_comments = commentR.findAllByStudentFileByStudentFileIdAndCommentForFileByParentCommentId(new StudentFileEntity(fileId), new CommentForFileEntity(-1));
+        return origin_comments;
     }
 
 }

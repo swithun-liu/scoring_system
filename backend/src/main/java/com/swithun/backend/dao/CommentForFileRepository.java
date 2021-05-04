@@ -24,4 +24,6 @@ public interface CommentForFileRepository extends JpaRepository<CommentForFileEn
     List<CommentForFileEntity> findAllByStudentFileByStudentFileId(StudentFileEntity studentFileEntity);
 	List<CommentForFileEntity> findAllByStudentFileByStudentFileIdAndTeacherByTeacherIdAndCommentForFileByParentCommentId(
 			StudentFileEntity file, TeacherEntity teacher, CommentForFileEntity parent);
+	List<CommentForFileEntity> findAllByStudentFileByStudentFileIdAndCommentForFileByParentCommentId(
+			StudentFileEntity studentFileEntity, CommentForFileEntity commentForFileEntity);
 }
