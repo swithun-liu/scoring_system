@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-04 09:41:14
+ * @LastEditTime: 2021-05-04 11:48:16
 -->
 
 <template>
@@ -30,7 +30,11 @@
         <template #default="scope">
           <el-button size="small" icon="el-icon-refresh"></el-button>
           <el-button size="small" icon="el-icon-s-comment" @click="openCommentDialog(scope.row.id)"></el-button>
-          <el-button size="small" icon="el-icon-edit-outline" @click="openScoreDialog(scope.row.id)"></el-button>
+          <el-button
+            size="small"
+            icon="el-icon-edit-outline"
+            @click="openScoreDialog(scope.row.id)"
+          ></el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -55,27 +59,7 @@
       custom-class="replay-dialog"
     >
       <template #footer>
-        <el-tree
-          :data="commentData"
-          :props="defaultProps"
-          node-key="id"
-          default-expand-all
-          :expand-on-click-node="false"
-        >
-          <template #default="{ node, data }">
-            <span class="custom-tree-node">
-              <span
-                :class="node.data.studentByStudentId == null ? 'teacher-tag' : 'student-tag'"
-              >{{ node.data.studentByStudentId == null ? node.data.teacherByTeacherId.name : node.data.studentByStudentId.name }}</span>
-              <br />
-              <span>{{ node.label }}</span>
-              <br />
-              <span>
-                <a @click="handleReplay(data, node)" class="replay-button">Replay</a>
-              </span>
-            </span>
-          </template>
-        </el-tree>
+        <comment :data="commentData" @handleReplay="handleReplay($event)"></comment>
         <el-form>
           <el-form-item>
             <span>{{ replayWhichComment }}</span>
@@ -98,9 +82,11 @@
 <script>
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
+import comment from './comment.vue'
 let id = 1000
 
 export default {
+  components: { comment },
   data() {
     return {
       tableData: [],
@@ -179,7 +165,7 @@ export default {
       })
     },
     // 评论回复
-    handleReplay(data, node) {
+    handleReplay(node) {
       var student = node.data.studentByStudentId
       var teacher = node.data.teacherByTeacherId
       var username = null
