@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:44:19
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-27 16:09:06
+ * @LastEditTime: 2021-05-03 16:37:04
  */
 package com.swithun.backend.controller;
 
@@ -17,12 +17,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.swithun.backend.dto.TeacherCommentDTO;
+import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.dto.TeacherGetFileListDTO;
 import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.TeacherService;
+import com.swithun.backend.tools.convert.Entity2DTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,6 +43,9 @@ public class TeacherController {
 
     @Autowired
     private FileService fileservice;
+
+    @Autowired
+    private Entity2DTO converter;
 
     @GetMapping(value = "/testprincipal")
     public String testPrincipal(Principal principal) {
@@ -79,7 +83,7 @@ public class TeacherController {
     }
 
     @PostMapping(value = "/teacher/getAllCommentsOfThisFileOfMine")
-    public List<TeacherCommentDTO> getAllCommentsOfThisFileOfMine(@RequestBody Map<String, Object> mp,
+    public List<CommentForFileEntity> getAllCommentsOfThisFileOfMine(@RequestBody Map<String, Object> mp,
             Principal principal) {
 
         Integer fileId = (Integer) mp.get("chosedFileId"); // 文件Id
@@ -87,21 +91,18 @@ public class TeacherController {
 
         System.out.println("teacherController getAllCommentsOfThisFileOfMine" + fileId + " " + teacherName);
 
-        List<TeacherCommentDTO> comments = new ArrayList<>();
         List<CommentForFileEntity> teacherComments = teacherService
                 .findAllCommnetsOfThisFileOfThisTeacher(fileId, teacherName);
-        for (CommentForFileEntity comment : teacherComments) {
-            comments.add(new TeacherCommentDTO(comment.getComments()));
-        }
-        return comments;
+        return teacherComments;
     }
 
     @PostMapping(value = "/teacher/AddCommentForThisFile")
     public String teacherAddCommentsForThisFile(@RequestBody Map<String, Object> mp, Principal principal) {
         Integer fileId = (Integer) mp.get("chosedFileId");
         String comment = (String) mp.get("comment");
+        Integer parent_comment_id = (Integer)mp.get("chosedCommentId");
         System.out.println("teacherController AddCommentForThisFile" + fileId + " " + comment);
-        teacherService.addComment(fileId, comment, principal.getName());
+        teacherService.addComment(fileId, comment, parent_comment_id ,principal.getName());
         return "评论成功";
     }
 

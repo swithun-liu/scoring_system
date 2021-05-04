@@ -5,65 +5,100 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-28 14:16:41
+ * @LastEditTime: 2021-05-04 09:41:14
 -->
 
 <template>
   <div>
-    <el-table :data='tableData' style='width: 100%'>
-      <el-table-column prop='id' label='文件id' width='90'></el-table-column>
-      <el-table-column prop='name' label='文件名'></el-table-column>
-      <el-table-column prop='studentId' label='学生id' width='90'></el-table-column>
-      <el-table-column prop='studentName' label='学生名' width='120'></el-table-column>
-      <el-table-column prop='score' label='分数' width='90'></el-table-column>
-      <el-table-column lable='操作' width='340'>
-        <template #default='scope'>
-          <button
-            size='small'
-            @click='handleDownload(scope.row.id, scope.row.name)'
-            class="custom-btn btn-13"
-          >下载 {{scope.row.id}}</button>
-          <button size='small' class="btn-6 custom-btn">更新</button>
-          <button size='small' @click='openCommentDialog(scope.row.id)' class="btn-11 custom-btn">回复</button>
-          <button size='small' @click='openScoreDialog(scope.row.id)' class="btn-14 custom-btn">评分</button>
+    <!-- 文件列表 begin -->
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column prop="id" label="文件id" width="90"></el-table-column>
+      <el-table-column prop="name" label="文件名">
+        <template #default="scope">
+          <el-button
+            icon="el-icon-download"
+            size="small"
+            @click="handleDownload(scope.row.id, scope.row.name)"
+          ></el-button>
+          {{scope.row.name}}
+        </template>
+      </el-table-column>
+      <el-table-column prop="studentId" label="学生id" width="90"></el-table-column>
+      <el-table-column prop="studentName" label="学生名" width="120"></el-table-column>
+      <el-table-column prop="score" label="分数" width="90"></el-table-column>
+      <el-table-column lable="操作" width="200">
+        <template #default="scope">
+          <el-button size="small" icon="el-icon-refresh"></el-button>
+          <el-button size="small" icon="el-icon-s-comment" @click="openCommentDialog(scope.row.id)"></el-button>
+          <el-button size="small" icon="el-icon-edit-outline" @click="openScoreDialog(scope.row.id)"></el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title='评分' v-model='dialogVisible' width='30%' :before-close='handleClose'>
+    <!-- 评分 Dialog begin -->
+    <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
       <template #footer>
-        <el-slider v-model='fileScore' show-input></el-slider>
-        <span class='dialog-footer'>
-          <el-button @click='dialogVisible = false'>取 消</el-button>
-          <el-button type='primary' @click='handleScore()'>确 定</el-button>
+        <el-slider v-model="fileScore" show-input></el-slider>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleScore()">确 定</el-button>
         </span>
       </template>
     </el-dialog>
-    <el-dialog title='回复' v-model='commentDialogVisible' width='80%' :before-close='handleClose'>
+    <!-- 评分 Dialog end -->
+    <!-- 文件列表 end-->
+    <!-- 回复 Dialog begin -->
+    <el-dialog
+      title="回复"
+      v-model="commentDialogVisible"
+      width="80%"
+      :before-close="handleClose"
+      custom-class="replay-dialog"
+    >
       <template #footer>
-        <el-table :data='commentData' style='width: 100%'>
-          <el-table-column prop='comment' label='评论'></el-table-column>
-        </el-table>
+        <el-tree
+          :data="commentData"
+          :props="defaultProps"
+          node-key="id"
+          default-expand-all
+          :expand-on-click-node="false"
+        >
+          <template #default="{ node, data }">
+            <span class="custom-tree-node">
+              <span
+                :class="node.data.studentByStudentId == null ? 'teacher-tag' : 'student-tag'"
+              >{{ node.data.studentByStudentId == null ? node.data.teacherByTeacherId.name : node.data.studentByStudentId.name }}</span>
+              <br />
+              <span>{{ node.label }}</span>
+              <br />
+              <span>
+                <a @click="handleReplay(data, node)" class="replay-button">Replay</a>
+              </span>
+            </span>
+          </template>
+        </el-tree>
         <el-form>
           <el-form-item>
-            <el-input v-model='commentWatiForPush'></el-input>
+            <span>{{ replayWhichComment }}</span>
+            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
+            <el-input v-model="commentWatiForPush"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button @click='handleAddComment()'>添加</el-button>
+            <el-button @click="handleAddComment()">添加</el-button>
           </el-form-item>
         </el-form>
-        <span class='dialog-footer'>
-          <el-button @click='commentDialogVisible = false'>取 消</el-button>
-          <el-button type='primary' @click='handleComment()'>确 定</el-button>
-        </span>
       </template>
     </el-dialog>
-    <button class="custom-btn btn-13"><span>Read More</span></button>
+    <!-- 回复 Dialog end-->
+    <button class="custom-btn btn-13">
+      <span>Read More</span>
+    </button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import fileDownload from 'js-file-download';
+import { mapActions } from 'vuex'
+import fileDownload from 'js-file-download'
+let id = 1000
 
 export default {
   data() {
@@ -72,13 +107,20 @@ export default {
       dialogVisible: false,
       commentDialogVisible: false,
       chosedFileId: 0,
+      chosedCommentId: -1,
+      replayWhichComment: '新建评论',
       fileScore: 0,
-      commentData: ['temp coment', 'temp coment2'],
+      commentData: [],
+      commentOriginData: [],
+      defaultProps: {
+        children: 'commentForFilesById',
+        label: 'comments',
+      },
       commentWatiForPush: '',
-    };
+    }
   },
   mounted() {
-    this.flashAllFileOfMyStudents();
+    this.flashAllFileOfMyStudents()
   },
   methods: {
     ...mapActions('teacher', [
@@ -88,72 +130,147 @@ export default {
       'teacherGetAllCommentsOfThisFile',
       'teacherAddCommentThisFile',
     ]),
+    // 刷新所有 文件
     flashAllFileOfMyStudents() {
-      var _this = this;
+      var _this = this
       this.getAllFileOfMyStudents().then((result) => {
-        console.log(result.data.data);
-        _this.tableData = result.data.data;
-        _this.$forceUpdate();
-      });
+        console.log(result.data.data)
+        _this.tableData = result.data.data
+        _this.$forceUpdate()
+      })
     },
+    // 刷新当权选中文件 的 评论
     flashComments() {
-      const _this = this;
-      var chosedFileId = _this.chosedFileId;
+      const _this = this
+      var chosedFileId = _this.chosedFileId
       this.teacherGetAllCommentsOfThisFile({ chosedFileId }).then((res) => {
-        console.log(res.data);
-        _this.commentData = res.data.data;
-        _this.$forceUpdate();
-      });
+        _this.commentData = res.data.data
+        console.log('flashComments')
+        console.log(_this.commentData)
+        console.log(_this.testData)
+        _this.$forceUpdate()
+      })
     },
+    // 下载文件
     handleDownload(id, name) {
-      console.log('获取文件 id: ' + id);
       this.teacherGetThisFile({
         fileId: id,
       }).then((res) => {
-        console.log(res.data);
-        fileDownload(res.data, name);
-      });
+        console.log(res.data)
+        fileDownload(res.data, name)
+      })
     },
     openScoreDialog(id) {
-      console.log(id);
-      this.chosedFileId = id;
-      this.dialogVisible = true;
+      this.chosedFileId = id
+      this.dialogVisible = true
     },
     openCommentDialog(id) {
-      console.log(id);
-      this.chosedFileId = id;
-      this.commentDialogVisible = true;
-      this.flashComments();
+      this.chosedCommentId = -1
+      this.chosedFileId = id
+      this.commentDialogVisible = true
+      this.flashComments()
     },
     handleScore() {
-      const _this = this;
-      const chosedFileId = this.chosedFileId;
-      const fileScore = this.fileScore;
-      console.log('handleScore');
+      const _this = this
+      const chosedFileId = this.chosedFileId
+      const fileScore = this.fileScore
       this.teacherScoreThisFile({ chosedFileId, fileScore }).then(() => {
-        _this.flashAllFileOfMyStudents();
-      });
+        _this.flashAllFileOfMyStudents()
+      })
     },
-    handleComment() {},
+    // 评论回复
+    handleReplay(data, node) {
+      var student = node.data.studentByStudentId
+      var teacher = node.data.teacherByTeacherId
+      var username = null
+      if (student != null) {
+        username = student.name
+      }
+      if (teacher != null) {
+        username = teacher.name
+      }
+      this.replayWhichComment = 'replay ' + username
+      this.chosedCommentId = node.data.id
+    },
     handleClose() {
-      console.log('Dialog closed');
+      this.commentDialogVisible = false
     },
     handleAddComment() {
-      console.log(this.chosedFileId + ' ' + this.commentWatiForPush);
-      var comment = this.commentWatiForPush;
-      var chosedFileId = this.chosedFileId;
-      var _this = this;
-      this.teacherAddCommentThisFile({ chosedFileId, comment }).then((res) => {
-        console.log(res);
-        _this.commentWatiForPush = '';
-        _this.flashComments();
-      });
+      var comment = this.commentWatiForPush
+      var chosedFileId = this.chosedFileId
+      var chosedCommentId = this.chosedCommentId
+      var _this = this
+      this.teacherAddCommentThisFile({
+        chosedFileId,
+        comment,
+        chosedCommentId,
+      }).then((res) => {
+        console.log(res)
+        _this.commentWatiForPush = ''
+        _this.flashComments()
+      })
+    },
+    append(data) {
+      const newChild = {
+        id: id++,
+        label: 'testtest',
+        commentForFilesById: [],
+        comments: 'new Comments',
+      }
+      console.log('append')
+      console.log(data)
+      if (!data.commentForFilesById) {
+        data.commentForFilesById = []
+      }
+      data.commentForFilesById.push(newChild)
+      this.testData = [...this.testData]
+    },
+
+    remove(node, data) {
+      const parent = node.parent
+      const children = parent.data.children || parent.data
+      const index = children.findIndex((d) => d.id === data.id)
+      children.splice(index, 1)
+      this.data = [...this.data]
+    },
+
+    renderContent(h, { node, data, store }) {
+      return h(
+        'span',
+        {
+          class: 'custom-tree-node',
+        },
+        h('span', null, node.label),
+        h(
+          'span',
+          null,
+          h(
+            'a',
+            {
+              onClick: () => this.append(data),
+            },
+            'Append '
+          ),
+          h(
+            'a',
+            {
+              onClick: () => this.remove(node, data),
+            },
+            'Delete'
+          )
+        )
+      )
+    },
+    cancleChooseComment() {
+      this.chosedCommentId = -1
+      this.replayWhichComment = '新建评论'
     },
   },
-};
+}
 </script>
 
 <style>
+@import '../assets/css/comment.css';
 .el-table__row {
   background-color: var(--color-gray0) !important;
 }
@@ -167,5 +284,16 @@ export default {
 .el-table__header {
   border-radius: 20px;
 }
-
+.el-tree-node__content {
+  height: auto !important;
+  text-align: left;
+}
+.replay-dialog,
+.el-dialog__footer,
+.el-tree {
+  height: 75% !important;
+}
+.el-tree {
+  overflow: auto;
+}
 </style>

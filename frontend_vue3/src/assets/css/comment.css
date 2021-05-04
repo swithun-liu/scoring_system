@@ -1,0 +1,19 @@
+.student-tag, .teacher-tag, .replay-button {
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px;
+    font-size: 2px;
+}
+.teacher-tag {
+    color: aquamarine;
+    background-color: blueviolet;
+}
+.student-tag {
+    color: aquamarine;
+    background-color: blueviolet;
+}
+.replay-button {
+    color: darkcyan;
+    background-color: antiquewhite;
+    text-align: right !important;
+}

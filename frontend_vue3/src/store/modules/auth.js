@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-09 13:23:57
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-01 17:17:35
+ * @LastEditTime: 2021-05-03 20:36:27
  */
 import {
   jwtDecrypt,
@@ -62,7 +62,11 @@ const actions = {
     const response = await axios.get('http://localhost:8089/student/studentgetmypaper');
     return response;
   },
-
+  async signOut({
+    commit
+  }) {
+    commit('signOut')
+  }
 };
 
 const mutations = {
@@ -86,6 +90,11 @@ const mutations = {
   },
   setLoginStatu(state, value) {
     state.loginStatus = value;
+  },
+  signOut(state) {
+    localStorage.removeItem('access_token')
+    console.log('token exp = null')
+    state.tokenExp = null
   }
 };
 

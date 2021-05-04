@@ -11,7 +11,7 @@ package com.swithun.backend.controller;
 
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.dto.StudentGetFileListDTO;
-import com.swithun.backend.dto.TeacherCommentDTO;
+import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.StudentService;
 
@@ -85,7 +85,7 @@ public class StudentController {
      * @return {[{评论, 老师姓名}]}
      */
     @GetMapping(value="/student/studentGetTeacherCommentOfMyFile")
-    public List<TeacherCommentDTO> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
+    public List<CommentDTO> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
         System.out.println("文件Id : " + chosedFileId);
         return studentS.getTeacherCommentOfMyFIle(chosedFileId);
     }

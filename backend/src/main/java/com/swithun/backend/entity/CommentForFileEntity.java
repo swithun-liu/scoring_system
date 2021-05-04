@@ -10,6 +10,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "CommentForFile", schema = "scoring_system", catalog = "")
 public class CommentForFileEntity {
+    public CommentForFileEntity(Integer id) {
+        this.id = id;
+    }
+
+    public CommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
+            TeacherEntity teacherByTeacherId, CommentForFileEntity commentForFileByParentCommentId) {
+        this.comments = comments;
+        this.studentFileByStudentFileId = studentFileByStudentFileId;
+        this.teacherByTeacherId = teacherByTeacherId;
+        this.commentForFileByParentCommentId = commentForFileByParentCommentId;
+    }
+
     public CommentForFileEntity() {
     }
 

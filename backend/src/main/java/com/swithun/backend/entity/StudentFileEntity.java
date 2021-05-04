@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-26 08:50:52
+ * @LastEditTime: 2021-05-02 18:35:44
  */
 package com.swithun.backend.entity;
 
@@ -89,6 +89,7 @@ public class StudentFileEntity {
     @Basic
     @Lob
     @Column(name = "data")
+    @JsonIgnore
     public byte[] getData() {
         return data;
     }

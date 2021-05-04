@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:48:58
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-27 10:50:23
+ * @LastEditTime: 2021-05-03 18:33:06
  */
 package com.swithun.backend.service;
 
@@ -102,7 +102,7 @@ public class TeacherService {
             String teacherName) {
         StudentFileEntity file = new StudentFileEntity(fileId);
         TeacherEntity teacher = teacherRepository.findByName(teacherName);
-        return teacherCommentForFileRepository.findAllByStudentFileByStudentFileIdAndTeacherByTeacherId(file, teacher);
+        return teacherCommentForFileRepository.findAllByStudentFileByStudentFileIdAndTeacherByTeacherIdAndCommentForFileByParentCommentId(file, teacher, new CommentForFileEntity(-1));
     }
 
     /**
@@ -112,10 +112,11 @@ public class TeacherService {
      * @param {String} teacherName
      * @return {*}
      */
-    public void addComment(Integer fileId, String comments, String teacherName) {
+    public void addComment(Integer fileId, String comments, Integer parent_comment_id, String teacherName) {
         TeacherEntity teacher = teacherRepository.findByName(teacherName);
         StudentFileEntity file = studentFileRepository.findOneById(fileId);
-        CommentForFileEntity comment = new CommentForFileEntity(comments, file, teacher);
+        CommentForFileEntity parent = new CommentForFileEntity(parent_comment_id);
+        CommentForFileEntity comment = new CommentForFileEntity(comments, file, teacher, parent);
         teacherCommentForFileRepository.save(comment);
     }
 

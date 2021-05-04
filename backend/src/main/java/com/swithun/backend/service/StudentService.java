@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:58:43
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-27 16:03:49
+ * @LastEditTime: 2021-05-01 21:30:57
  */
 package com.swithun.backend.service;
 
@@ -17,9 +17,10 @@ import com.swithun.backend.dao.StudentRepository;
 import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.dto.StudentGetFileListDTO;
-import com.swithun.backend.dto.TeacherCommentDTO;
+import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
+import com.swithun.backend.tools.convert.Entity2DTO;
 import com.swithun.backend.entity.CommentForFileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class StudentService {
     private StudentFileRepository fileR;
     @Autowired
     private CommentForFileRepository commentR;
+    @Autowired
+    private Entity2DTO converter;
     
     /**
      * @description: 为 添加论文 页面 获取 文件列表
@@ -70,11 +73,11 @@ public class StudentService {
      * @param {Integer} fileId
      * @return {*}
      */
-    public List<TeacherCommentDTO> getTeacherCommentOfMyFIle(Integer fileId) {
+    public List<CommentDTO> getTeacherCommentOfMyFIle(Integer fileId) {
         List<CommentForFileEntity> origin_comments = commentR.findAllByStudentFileByStudentFileId(new StudentFileEntity(fileId));
-        List<TeacherCommentDTO> comments = new ArrayList<>();
+        List<CommentDTO> comments = new ArrayList<>();
         for (CommentForFileEntity origin : origin_comments) {
-            comments.add(new TeacherCommentDTO(origin.getComments(), origin.getTeacherByTeacherId().getName()));
+            comments.add(converter.CommentForFileEntity2DTO(origin));
         }
         return comments;
     }

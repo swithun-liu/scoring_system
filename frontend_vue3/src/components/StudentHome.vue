@@ -28,7 +28,11 @@
         </el-submenu>
       </el-menu>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <div class="header-rapper">
+            <button @click="handleSignOut()">退出</button>
+          </div>
+        </el-header>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -39,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -59,6 +63,9 @@ export default {
     ])
   },
   methods: {
+    ...mapActions('auth', [
+      'signOut'
+    ]),
     handleOpen(key, keyPath) {
       console.log('handleOpen');
       console.log(key, keyPath);
@@ -67,11 +74,17 @@ export default {
       console.log('handleColse');
       console.log(key, keyPath);
     },
+    handleSignOut() {
+      this.signOut().then(() => {
+        location.reload();
+      })
+    }
   },
 };
 </script>
 
 <style>
+@import "../assets/css/header.css";
 /* layout */
 .container1 {
   height: 100%;
