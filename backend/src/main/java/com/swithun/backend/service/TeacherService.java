@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:48:58
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-03 18:33:06
+ * @LastEditTime: 2021-05-04 14:18:06
  */
 package com.swithun.backend.service;
 
@@ -35,13 +35,13 @@ import org.springframework.stereotype.Service;
 public class TeacherService {
 
     @Autowired
-    private StudentFileRepository studentFileRepository;
+    private StudentFileRepository fileR;
 
     @Autowired
-    private TeacherRepository teacherRepository;
+    private TeacherRepository teacherR;
 
     @Autowired
-    private CommentForFileRepository teacherCommentForFileRepository;
+    private CommentForFileRepository commentR;
 
     /**
      * @description: 查找所有这名老师的学生的文章
@@ -50,12 +50,12 @@ public class TeacherService {
      */
     public List<TeacherGetFileListDTO> findStudentFileOfThisTeacher(String teacherName) {
 
-        TeacherEntity teacherEntity = teacherRepository.findByName(teacherName);
+        TeacherEntity teacherEntity = teacherR.findByName(teacherName);
         Integer teacherId = teacherEntity.getId();
 
         System.out.println("teacher id : " + teacherId);
 
-        List<StudentFileEntity> studentFileEntities = studentFileRepository
+        List<StudentFileEntity> studentFileEntities = fileR
                 .findAll(new Specification<StudentFileEntity>() {
                     @Override
                     public Predicate toPredicate(Root<StudentFileEntity> root, CriteriaQuery<?> query,
@@ -82,10 +82,10 @@ public class TeacherService {
      * @return {*}
      */
     public String scoreThisPaper(Integer id, Integer score) {
-        StudentFileEntity file = studentFileRepository.findOneById(id);
+        StudentFileEntity file = fileR.findOneById(id);
         if (file != null) {
             file.setScore(score);
-            studentFileRepository.save(file);
+            fileR.save(file);
             return "修改成功";
         } else {
             return "修改失败";
@@ -101,8 +101,8 @@ public class TeacherService {
     public List<CommentForFileEntity> findAllCommnetsOfThisFileOfThisTeacher(Integer fileId,
             String teacherName) {
         StudentFileEntity file = new StudentFileEntity(fileId);
-        TeacherEntity teacher = teacherRepository.findByName(teacherName);
-        return teacherCommentForFileRepository.findAllByStudentFileByStudentFileIdAndTeacherByTeacherIdAndCommentForFileByParentCommentId(file, teacher, new CommentForFileEntity(-1));
+        TeacherEntity teacher = teacherR.findByName(teacherName);
+        return commentR.findAllByStudentFileByStudentFileIdAndTeacherByTeacherIdAndCommentForFileByParentCommentId(file, teacher, new CommentForFileEntity(-1));
     }
 
     /**
@@ -112,12 +112,13 @@ public class TeacherService {
      * @param {String} teacherName
      * @return {*}
      */
-    public void addComment(Integer fileId, String comments, Integer parent_comment_id, String teacherName) {
-        TeacherEntity teacher = teacherRepository.findByName(teacherName);
-        StudentFileEntity file = studentFileRepository.findOneById(fileId);
+    public void addComment(Integer fileId, String str_comment, Integer parent_comment_id, String teacherName) {
+        TeacherEntity teacher = teacherR.findByName(teacherName);
+        // StudentFileEntity file = studentFileRepository.findOneById(fileId);
+        StudentFileEntity file = new StudentFileEntity(fileId);
         CommentForFileEntity parent = new CommentForFileEntity(parent_comment_id);
-        CommentForFileEntity comment = new CommentForFileEntity(comments, file, teacher, parent);
-        teacherCommentForFileRepository.save(comment);
+        CommentForFileEntity comment = new CommentForFileEntity(str_comment, file, teacher, parent);
+        commentR.save(comment);
     }
 
 }

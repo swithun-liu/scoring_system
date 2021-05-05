@@ -4,16 +4,47 @@
     margin: 2px;
     font-size: 2px;
 }
+
 .teacher-tag {
-    color: aquamarine;
-    background-color: blueviolet;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    background-color: rgb(182, 182, 182);
 }
+
 .student-tag {
-    color: aquamarine;
-    background-color: blueviolet;
+    color: rgb(1, 116, 161);
+    font-weight: bolder;
+    background-color: rgb(180, 180, 180);
 }
+
 .replay-button {
     color: darkcyan;
     background-color: antiquewhite;
-    text-align: right !important;
+}
+
+.replay-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.el-tree-node {
+    margin-left: 30px;
+    border-left: 4px solid #ddd;
+    border-image: linear-gradient(rgb(56, 56, 56), rgb(141, 141, 141)) 20 20;
+    white-space: normal !important;
+}
+
+.custom-tree-node {
+    width: 100%;
+}
+
+.el-tree-node__content {
+    height: auto !important;
+    text-align: left;
+    padding-left: 0 !important;
+}
+
+.el-tree {
+    height: 500px;
+    overflow-y: scroll;
 }

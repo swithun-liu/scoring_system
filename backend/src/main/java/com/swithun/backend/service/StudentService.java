@@ -78,6 +78,14 @@ public class StudentService {
         return origin_comments;
     }
 
+    public void addComment(Integer fileId, String str_comment, Integer parent_comment_id, String studentName) {
+        StudentEntity student = studentR.findByName(studentName);
+        StudentFileEntity file = new StudentFileEntity(fileId);
+        CommentForFileEntity parent = new CommentForFileEntity(parent_comment_id);
+        CommentForFileEntity comment = new CommentForFileEntity(str_comment, file ,student, parent);
+        commentR.save(comment);
+    }
+
 }
 /*
  * @Descripttion: 

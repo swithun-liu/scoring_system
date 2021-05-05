@@ -106,7 +106,7 @@ export default {
 
 .el-main {
   background-color: var(--color-gray0);
-  background-image: linear-gradient(315deg, #d6fffa 0%, var(--color-gray0) 18%);
+  background-image: linear-gradient(315deg, rgba(51, 51, 51, 0.178) 0%, var(--color-gray0) 18%);
   color: #333;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.18);

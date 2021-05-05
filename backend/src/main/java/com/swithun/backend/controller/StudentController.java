@@ -18,6 +18,7 @@ import com.swithun.backend.service.StudentService;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 /**
@@ -59,7 +61,7 @@ public class StudentController {
     }
 
     /**
-     * @description: 学生端获取所有论文 -- 添加论文
+     * @description: 学生端获取所有文件 -- for 添加论文页面
      * @param {*}
      * @return {*}
      */
@@ -70,7 +72,7 @@ public class StudentController {
     }
 
     /**
-     * @description: 学生获取所有论文 -- 我的论文
+     * @description: 学生获取所有文件 -- for 我的论文页面
      * @param {*}
      * @return {*}
      */
@@ -81,26 +83,35 @@ public class StudentController {
     }
 
     /**
+     * @description: 学生下载选中文件
+     * @param {*}
+     * @return {*}
+     */
+    @GetMapping(value = "/student/downloadThisFile", produces = "application/pdf")
+    public byte[] getMethodName(@RequestParam Integer fileId) {
+        return fileService.downloadThisFile(fileId).getData();
+    }
+
+    /**
      * @description: 学生获取选中文件所有评论
      * @param {文件id}
      * @return {[{评论, 老师姓名}]}
      */
-    @GetMapping(value="/student/studentGetTeacherCommentOfMyFile")
+    @GetMapping(value = "/student/studentGetTeacherCommentOfMyFile")
     public List<CommentForFileEntity> studentGetTeacherCommentOfMyFile(@RequestParam Integer chosedFileId) {
         System.out.println("文件Id : " + chosedFileId);
         return studentS.getTeacherCommentOfMyFIle(chosedFileId);
     }
 
-    /**
-     * @description: 学生下载选中文件
-     * @param {*}
-     * @return {*}
-     */
-    @GetMapping(value="/student/downloadThisFile", produces = "application/pdf")
-    public byte[] getMethodName(@RequestParam Integer fileId) {
-        return fileService.downloadThisFile(fileId).getData();
+    @PostMapping(value="/student/addCommentForThisFile")
+    public String addCommentForThisFile(@RequestBody Map<String, Object> mp, Principal principal) {
+        Integer fileId = (Integer) mp.get("chosedFileId");
+        String comment = (String) mp.get("comment");
+        Integer parent_comment_id = (Integer) mp.get("chosedCommentId");
+        System.out.println("student " + principal.getName() + " add comments [ " + comment + " ]\t for file " + fileId + "\treplay to comment [ " + parent_comment_id + " ]");
+        studentS.addComment(fileId, comment, parent_comment_id, principal.getName());
+        return "添加成功";
     }
-    
     
 
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-04 11:48:16
+ * @LastEditTime: 2021-05-04 21:26:50
 -->
 
 <template>
@@ -83,7 +83,6 @@
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import comment from './comment.vue'
-let id = 1000
 
 export default {
   components: { comment },
@@ -98,10 +97,6 @@ export default {
       fileScore: 0,
       commentData: [],
       commentOriginData: [],
-      defaultProps: {
-        children: 'commentForFilesById',
-        label: 'comments',
-      },
       commentWatiForPush: '',
     }
   },
@@ -116,7 +111,7 @@ export default {
       'teacherGetAllCommentsOfThisFile',
       'teacherAddCommentThisFile',
     ]),
-    // 刷新所有 文件
+    // 刷新
     flashAllFileOfMyStudents() {
       var _this = this
       this.getAllFileOfMyStudents().then((result) => {
@@ -125,27 +120,17 @@ export default {
         _this.$forceUpdate()
       })
     },
-    // 刷新当权选中文件 的 评论
     flashComments() {
       const _this = this
       var chosedFileId = _this.chosedFileId
       this.teacherGetAllCommentsOfThisFile({ chosedFileId }).then((res) => {
         _this.commentData = res.data.data
-        console.log('flashComments')
         console.log(_this.commentData)
         console.log(_this.testData)
         _this.$forceUpdate()
       })
     },
-    // 下载文件
-    handleDownload(id, name) {
-      this.teacherGetThisFile({
-        fileId: id,
-      }).then((res) => {
-        console.log(res.data)
-        fileDownload(res.data, name)
-      })
-    },
+    // 打开对话框
     openScoreDialog(id) {
       this.chosedFileId = id
       this.dialogVisible = true
@@ -156,6 +141,16 @@ export default {
       this.commentDialogVisible = true
       this.flashComments()
     },
+    // 处理操作
+    handleDownload(id, name) {
+      // 下载文件
+      this.teacherGetThisFile({
+        fileId: id,
+      }).then((res) => {
+        console.log(res.data)
+        fileDownload(res.data, name)
+      })
+    },
     handleScore() {
       const _this = this
       const chosedFileId = this.chosedFileId
@@ -164,8 +159,8 @@ export default {
         _this.flashAllFileOfMyStudents()
       })
     },
-    // 评论回复
     handleReplay(node) {
+      // 评论回复
       var student = node.data.studentByStudentId
       var teacher = node.data.teacherByTeacherId
       var username = null
@@ -196,57 +191,6 @@ export default {
         _this.flashComments()
       })
     },
-    append(data) {
-      const newChild = {
-        id: id++,
-        label: 'testtest',
-        commentForFilesById: [],
-        comments: 'new Comments',
-      }
-      console.log('append')
-      console.log(data)
-      if (!data.commentForFilesById) {
-        data.commentForFilesById = []
-      }
-      data.commentForFilesById.push(newChild)
-      this.testData = [...this.testData]
-    },
-
-    remove(node, data) {
-      const parent = node.parent
-      const children = parent.data.children || parent.data
-      const index = children.findIndex((d) => d.id === data.id)
-      children.splice(index, 1)
-      this.data = [...this.data]
-    },
-
-    renderContent(h, { node, data, store }) {
-      return h(
-        'span',
-        {
-          class: 'custom-tree-node',
-        },
-        h('span', null, node.label),
-        h(
-          'span',
-          null,
-          h(
-            'a',
-            {
-              onClick: () => this.append(data),
-            },
-            'Append '
-          ),
-          h(
-            'a',
-            {
-              onClick: () => this.remove(node, data),
-            },
-            'Delete'
-          )
-        )
-      )
-    },
     cancleChooseComment() {
       this.chosedCommentId = -1
       this.replayWhichComment = '新建评论'
@@ -269,17 +213,5 @@ export default {
 }
 .el-table__header {
   border-radius: 20px;
-}
-.el-tree-node__content {
-  height: auto !important;
-  text-align: left;
-}
-.replay-dialog,
-.el-dialog__footer,
-.el-tree {
-  height: 75% !important;
-}
-.el-tree {
-  overflow: auto;
 }
 </style>

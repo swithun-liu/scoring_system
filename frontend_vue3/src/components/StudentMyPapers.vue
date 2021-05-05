@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-04 14:00:17
+ * @LastEditTime: 2021-05-05 10:26:12
 -->
 
 <template>
@@ -44,28 +44,23 @@
     </el-dialog>
     <!-- 评分 Dialog end -->
     <!-- 回复 Dialog begin -->
-    <el-dialog title="回复" v-model="commentDialogVisible" width="80%" :before-close="handleClose">
+    <el-dialog title="回复" v-model="commentDialogVisible" width="50%" :before-close="handleClose">
       <template #footer>
-        <el-table :data="commentData" style="width: 100%">
-          <el-table-column prop="comment" label="评论"></el-table-column>
-        </el-table>
-        <comment :data="commentData"></comment>
+        <comment :data="commentData" @handleReplay="handleReplay($event)"></comment>
         <el-form>
           <el-form-item>
+            <span>{{ replayWhichComment }}</span>
+            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
             <el-input v-model="commentWatiForPush"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button @click="handleAddComment()">添加</el-button>
           </el-form-item>
         </el-form>
-        <span class="dialog-footer">
-          <el-button @click="commentDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="handleComment()">确 定</el-button>
-        </span>
       </template>
     </el-dialog>
     <!-- 回复 Dialog end -->
-    <comment></comment>
+    <!-- <comment></comment> -->
   </div>
 </template>
 
@@ -82,20 +77,26 @@ export default {
       dialogVisible: false,
       commentDialogVisible: false,
       chosedFileId: 0,
+      chosedCommentId: -1,
+      replayWhichComment: '新建评论',
       fileScore: 0,
       commentData: [],
       commentWatiForPush: '',
+      vuexComponentStudent: 'student',
     }
   },
   mounted() {
     this.flashAllFileOfMyStudents()
+    this.getComments()
   },
   methods: {
     ...mapActions('student', [
       'studentGetAllMyFileForMyFilePage',
       'studentGetAllComment',
       'studentDownloadThisFile',
+      'studentAddCommentForThisFile',
     ]),
+    ...mapActions('comment', ['getComments']),
     // 刷新
     flashAllFileOfMyStudents() {
       var _this = this
@@ -109,14 +110,25 @@ export default {
       const _this = this
       var chosedFileId = _this.chosedFileId
       this.studentGetAllComment({ chosedFileId }).then((res) => {
-        console.log(res.data)
         _this.commentData = res.data.data
+        console.log(_this.commentData)
         _this.$forceUpdate()
       })
     },
+    // 打开对话框
+    openScoreDialog(id) {
+      console.log(id)
+      this.chosedFileId = id
+      this.dialogVisible = true
+    },
+    openCommentDialog(id) {
+      this.chosedCommentId = -1
+      this.chosedFileId = id
+      this.commentDialogVisible = true
+      this.flashComments()
+    },
     // 处理操作
     handleDownload(id, name) {
-      console.log('获取文件 id: ' + id)
       this.studentDownloadThisFile({
         fileId: id,
       }).then((res) => {
@@ -132,32 +144,41 @@ export default {
         _this.flashAllFileOfMyStudents()
       })
     },
-    handleComment() {},
+    handleReplay(node) {
+      var student = node.data.studentByStudentId
+      var teacher = node.data.teacherByTeacherId
+      var username = null
+      if (student != null) {
+        username = student.name
+      }
+      if (teacher != null) {
+        username = teacher.name
+      }
+      this.replayWhichComment = 'replay ' + username
+      this.chosedCommentId = node.data.id
+    },
     handleClose() {
       console.log('Dialog closed')
+      this.commentDialogVisible = false
     },
     handleAddComment() {
-      console.log(this.chosedFileId + ' ' + this.commentWatiForPush)
       var comment = this.commentWatiForPush
       var chosedFileId = this.chosedFileId
+      var chosedCommentId = this.chosedCommentId
       var _this = this
-      this.teacherAddCommentThisFile({ chosedFileId, comment }).then((res) => {
+      this.studentAddCommentForThisFile({
+        chosedFileId,
+        comment,
+        chosedCommentId,
+      }).then((res) => {
         console.log(res)
         _this.commentWatiForPush = ''
         _this.flashComments()
       })
     },
-    // 打开对话框
-    openScoreDialog(id) {
-      console.log(id)
-      this.chosedFileId = id
-      this.dialogVisible = true
-    },
-    openCommentDialog(id) {
-      console.log(id)
-      this.chosedFileId = id
-      this.commentDialogVisible = true
-      this.flashComments()
+    cancleChooseComment() {
+      this.chosedCommentId = -1
+      this.replayWhichComment = '新建评论'
     },
   },
 }

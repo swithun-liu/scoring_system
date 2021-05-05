@@ -96,6 +96,12 @@ public class TeacherController {
         return teacherComments;
     }
 
+    /**
+     * 老师为文章添加评论
+     * @param mp
+     * @param principal
+     * @return
+     */
     @PostMapping(value = "/teacher/AddCommentForThisFile")
     public String teacherAddCommentsForThisFile(@RequestBody Map<String, Object> mp, Principal principal) {
         Integer fileId = (Integer) mp.get("chosedFileId");

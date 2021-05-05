@@ -10,10 +10,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "CommentForFile", schema = "scoring_system", catalog = "")
 public class CommentForFileEntity {
-    public CommentForFileEntity(Integer id) {
-        this.id = id;
-    }
-
     public CommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
             TeacherEntity teacherByTeacherId, CommentForFileEntity commentForFileByParentCommentId) {
         this.comments = comments;
@@ -22,14 +18,19 @@ public class CommentForFileEntity {
         this.commentForFileByParentCommentId = commentForFileByParentCommentId;
     }
 
-    public CommentForFileEntity() {
-    }
-
     public CommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
-            TeacherEntity teacherByTeacherId) {
+            StudentEntity studentByStudentId, CommentForFileEntity commentForFileByParentCommentId) {
         this.comments = comments;
         this.studentFileByStudentFileId = studentFileByStudentFileId;
-        this.teacherByTeacherId = teacherByTeacherId;
+        this.studentByStudentId = studentByStudentId;
+        this.commentForFileByParentCommentId = commentForFileByParentCommentId;
+    }
+
+    public CommentForFileEntity(Integer id) {
+        this.id = id;
+    }
+
+    public CommentForFileEntity() {
     }
 
     private Integer id;
