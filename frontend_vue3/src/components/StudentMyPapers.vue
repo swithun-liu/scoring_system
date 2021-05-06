@@ -5,11 +5,11 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-05 10:26:12
+ * @LastEditTime: 2021-05-06 16:52:23
 -->
 
 <template>
-  <div>
+  <div class="main-wrapper">
     <!-- 文件列表 begin -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="文件id" width="90"></el-table-column>
@@ -32,6 +32,15 @@
       </el-table-column>
     </el-table>
     <!-- 文件列表 end -->
+    <!-- 文件卡片 begin -->
+    <!-- <div class="card-wrapper">
+      <div class="card" v-for="(file, index) in tableData" :key="index">
+        <span class="card-title">{{file.name}}</span>
+        <br/>
+        <span class="card-abstract">摘要</span>
+      </div>
+    </div> -->
+    <!-- 文件卡片 end-->
     <!-- 评分 Dialog begin -->
     <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
       <template #footer>
@@ -185,4 +194,5 @@ export default {
 </script>
 
 <style>
+@import '../assets/css/card.css';
 </style>

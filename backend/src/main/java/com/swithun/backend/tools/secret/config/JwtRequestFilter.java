@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-22 21:38:35
+ * @LastEditTime: 2021-05-06 17:14:22
  */
 
 package com.swithun.backend.tools.secret.config;
@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.swithun.backend.tools.secret.services.JwtAdminUserDetailsService;
 import com.swithun.backend.tools.secret.services.JwtStudentUserDetailsService;
 import com.swithun.backend.tools.secret.services.JwtTeacherUserDetailsService;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
@@ -37,10 +38,13 @@ import io.jsonwebtoken.ExpiredJwtException;
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtStudentUserDetailsService jwtStudentUserDetailsService;
+    private JwtStudentUserDetailsService stuUserDetailsS;
 
     @Autowired
-    private JwtTeacherUserDetailsService jwtTeacherUserDetailsService;
+    private JwtTeacherUserDetailsService teaUserDetailsS;
+
+    // @Autowired
+    // private JwtAdminUserDetailsService AdmUserDetailsS;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -98,12 +102,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             System.out.println("JwtRequestFile # 1");
             List<String> userRoles = jwtTokenUtil.getUserTypeFromToken(jwtToken);
             UserDetails userDetails = null;
+
+            // 1. 如果是学生
             if (userRoles.contains("student")) {
-                userDetails = this.jwtStudentUserDetailsService.loadUserByUsername(username);
+                userDetails = this.stuUserDetailsS.loadUserByUsername(username);
             }
-            else {
-                userDetails = this.jwtTeacherUserDetailsService.loadUserByUsername(username);
+            // 1. 如果是学生
+            else if (userRoles.contains("teacher")) {
+                userDetails = this.teaUserDetailsS.loadUserByUsername(username);
             }
+            // 1. 如果是管理员
+            // else if (userRoles.contains("admin")) {
+            //     userDetails = this.AdmUserDetailsS.loadUserByUsername(username);
+            // }
             // if token is valid configure Spring Security to manually set authentication
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
