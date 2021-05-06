@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 17:16:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-23 16:54:06
+ * @LastEditTime: 2021-05-06 19:49:39
  */
 package com.swithun.backend.tools.secret.config;
 
@@ -31,9 +31,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.swithun.backend.tools.secret.config.DaoAutenticationProvider.AdminDaoAuthenticationProvider;
 import com.swithun.backend.tools.secret.config.DaoAutenticationProvider.StudentDaoAutenticationProvider;
 import com.swithun.backend.tools.secret.config.DaoAutenticationProvider.TeacherDaoAutenticationProvider;
-
 
 @Configuration
 @EnableWebSecurity
@@ -43,21 +43,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+  // PasswordEncode选择使用官方推荐的 BCryptPasswordEncoder
+  @Bean
+  public PasswordEncoder passwordEncoderHH() {
+    return new BCryptPasswordEncoder();
+  }
+
   // 两个 UserDetailsService
 
   @Autowired
   @Qualifier("JwtStudentUserDetailsService")
-  private UserDetailsService JwtStudentUserDetailsService;
+  private UserDetailsService jwtStudentUserDetailsService;
 
   @Autowired
   @Qualifier("JwtTeacherUserDetailsService")
   private UserDetailsService jwtTeacherUserDetailsService;
 
+  @Autowired
+  @Qualifier("JwtAdminUserDetailsService")
+  private UserDetailsService jwtAdminUserDetailsService;
+
   // 注入两个 DaoAutenticationProvider
 
-  @Bean("StudentDaoAutenticationProvider ")
+  @Bean("StudentDaoAutenticationProvider")
   DaoAuthenticationProvider daoStudentDaoAutenticationProvider() {
-    return new StudentDaoAutenticationProvider(passwordEncoderHH(), JwtStudentUserDetailsService);
+    return new StudentDaoAutenticationProvider(passwordEncoderHH(), jwtStudentUserDetailsService);
   }
 
   @Bean("TeacherDaoAutenticationProvider")
@@ -65,14 +75,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     return new TeacherDaoAutenticationProvider(passwordEncoderHH(), jwtTeacherUserDetailsService);
   }
 
+  @Bean("AdminDaoAuthenticationProvider")
+  DaoAuthenticationProvider daoAdminDaoAuthenticationProvider() {
+    return new AdminDaoAuthenticationProvider(passwordEncoderHH(), jwtAdminUserDetailsService);
+  }
+
   @Autowired
   private JwtRequestFilter jwtRequestFilter;
-
-  // PasswordEncode选择使用官方推荐的 BCryptPasswordEncoder
-  @Bean
-  public PasswordEncoder passwordEncoderHH() {
-    return new BCryptPasswordEncoder();
-  }
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -80,10 +89,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // 向AuthenticationManager添加Provider
     auth.authenticationProvider(daoStudentDaoAutenticationProvider());
     auth.authenticationProvider(daoTeacherDaoAutenticationProvider());
-
+    auth.authenticationProvider(daoAdminDaoAuthenticationProvider());
 
   }
-
 
   @Bean
   @Override
@@ -95,39 +103,40 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.formLogin().usernameParameter("username") // 自定义登陆用户名参数名
         .passwordParameter("password") // 自定义登陆密码参数名
-        // .successHandler(myAuthenticationSuccessHandler)
     ;
 
     httpSecurity.csrf().disable() // 关掉CSRS
         // .cors(Customizer.withDefaults())
+        // 1. 打开跨域配置
         .cors()
 
         .and()
+        // 2. 配置授权
+        .authorizeRequests()
 
-        .authorizeRequests() // 授权配置
+        // 2.1 先写哪些不需要验证
+        .antMatchers("/authenticate", "/register", "/login").permitAll()// these requests need not to be authenticated
 
-        // 先写那些应该被放行
-
-        .antMatchers("/authenticate", "/register", "/login", "/student/studentuploadpaper").permitAll()// these requests need not to be authenticated
-
+        // 2.2 学生
         .antMatchers("/student/*").hasRole("student")// only students access /student/*
 
+        // 2.3 教师
         .antMatchers("/teacher/*").hasRole("teacher")// only teachers access /teacher/*
 
-        // .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() // PreFlightRequest(预请求) need not to be
-        //                                                             // authenticated
+        // 2.4 管理员
+        .antMatchers("/admin/*").hasRole("admin")
 
-        // 然后写（其他）所有的都应该被认证
+        // 2.5 然后写（其他）所有的都应该被认证
         .anyRequest().authenticated()
-        
-        .and() // all other requests need to be authenticated
+
+        .and()
 
         // make sure we use stateless session; session won't be used tostore user's
         // state.
         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        
-        ;
+
+    ;
 
     // Add a filter to validate the tokens with every request
     httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

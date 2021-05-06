@@ -11,13 +11,11 @@ package com.swithun.backend.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.dto.TeacherGetFileListDTO;
 import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.entity.CommentForFileEntity;

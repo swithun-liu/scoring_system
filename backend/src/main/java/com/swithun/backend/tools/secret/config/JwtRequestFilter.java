@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-06 17:14:22
+ * @LastEditTime: 2021-05-06 19:39:06
  */
 
 package com.swithun.backend.tools.secret.config;
@@ -19,7 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.swithun.backend.tools.secret.services.JwtAdminUserDetailsService;
+import com.swithun.backend.tools.secret.services.JwtAdminUserDetialsService;
 import com.swithun.backend.tools.secret.services.JwtStudentUserDetailsService;
 import com.swithun.backend.tools.secret.services.JwtTeacherUserDetailsService;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
@@ -43,8 +43,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTeacherUserDetailsService teaUserDetailsS;
 
-    // @Autowired
-    // private JwtAdminUserDetailsService AdmUserDetailsS;
+    @Autowired
+    private JwtAdminUserDetialsService admUserDetailsS;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -56,10 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // 检查request是否是null
         logger.warn("request is" + (request == null ? "null" : "not null"));
 
-        /**
-         * 打印请求中的所有header
-         */
-        logger.warn("### begin to print header int request ###");
+        logger.warn("### 打印请求Header begin ###");
         Enumeration<String> es = request.getHeaderNames();
         boolean isPreReqeust = false;
         if (es != null) {
@@ -71,12 +68,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 logger.warn(a + "  " + request.getHeader(a));
             }
         }
-        logger.warn("### print completely ###");
+        logger.warn("### 打印请求Header end ###");
 
         logger.warn("request is" + (isPreReqeust ? " " : " not ") + "a preRequest");
 
         String requestTokenHeader = request.getHeader("authorization");
-        logger.warn("requestTokenHeader" + requestTokenHeader);
+        logger.warn("接收到的Token为: " + requestTokenHeader);
 
         String username = null;
         String jwtToken = null;
@@ -103,18 +100,24 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             List<String> userRoles = jwtTokenUtil.getUserTypeFromToken(jwtToken);
             UserDetails userDetails = null;
 
-            // 1. 如果是学生
+
+            // 1. 对于不同的用户类型 产生不同的 userDetails
+
+            // 1.1 如果是学生
             if (userRoles.contains("student")) {
+                System.out.println("jwtRequestFilter : 是 学生");
                 userDetails = this.stuUserDetailsS.loadUserByUsername(username);
             }
-            // 1. 如果是学生
+            // 1.2 如果是学生
             else if (userRoles.contains("teacher")) {
+                System.out.println("jwtRequestFilter : 是 老师");
                 userDetails = this.teaUserDetailsS.loadUserByUsername(username);
             }
-            // 1. 如果是管理员
-            // else if (userRoles.contains("admin")) {
-            //     userDetails = this.AdmUserDetailsS.loadUserByUsername(username);
-            // }
+            // 1.3 如果是管理员
+            else if (userRoles.contains("admin")) {
+                System.out.println("jwtRequestFilter : 是 管理员");
+                userDetails = this.admUserDetailsS.loadUserByUsername(username);
+            }
             // if token is valid configure Spring Security to manually set authentication
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 

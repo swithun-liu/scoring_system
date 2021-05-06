@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 17:03:21
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-06 17:09:31
+ * @LastEditTime: 2021-05-06 19:26:59
  */
 package com.swithun.backend.entity;
 
@@ -20,8 +20,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "admin", schema = "scoring_system", catalog = "")
 public class AdminEntity {
+
     private Integer id;
-    private Integer name;
+    private String name;
     private String password;
 
     @Id
@@ -37,11 +38,11 @@ public class AdminEntity {
 
     @Basic
     @Column(name = "name")
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 

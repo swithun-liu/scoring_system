@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:26:44
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-22 21:32:27
+ * @LastEditTime: 2021-05-06 19:52:32
  */
 package com.swithun.backend.tools.secret.services;
 
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class JwtStudentUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private StudentRepository studentR;
 
     // @Autowired
     // private PasswordEncoder bcryptEncoder;
@@ -44,15 +44,12 @@ public class JwtStudentUserDetailsService implements UserDetailsService {
         System.out.println("StudentUserDetailsService根据username查询数据库");
 
         // 1. 根据username查询数据库
-        StudentEntity user = studentRepository.findByName(username);
+        StudentEntity user = studentR.findByName(username);
         // 2.1 如果没有查询到，抛出异常
         if (user == null) {
             throw new UsernameNotFoundException("Student not found with username: " + username);
         }
         // 2.2 如果查询到，返回User(userdetials的实现类) (姓名，加密后的密码，权限&角色)
-        // return new User(user.getName(), user.getPassword(), new ArrayList<>());
-        // return new User(user.getName(), user.getPassword(),
-        // AuthorityUtils.commaSeparatedStringToAuthorityList("admin,student"));
         return new User(user.getName(), user.getPassword(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("student,ROLE_student"));
 
@@ -69,6 +66,6 @@ public class JwtStudentUserDetailsService implements UserDetailsService {
         newUser.setName(user.getUsername());
         PasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return studentRepository.save(newUser);
+        return studentR.save(newUser);
     }
 }
