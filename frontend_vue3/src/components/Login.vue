@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-05 10:24:58
+ * @LastEditTime: 2021-05-09 11:21:54
 -->
 
 <template>
@@ -38,6 +38,8 @@
             <label class="tab" for="radio-1">student</label>
             <input type="radio" id="radio-2" name="tabs" v-model="LoginForm.usertype" value="1" />
             <label class="tab" for="radio-2">teacher</label>
+            <input type="radio" id="radio-3" name="tabs" v-model="LoginForm.usertype" value="2" />
+            <label class="tab" for="radio-3">admin</label>
             <span class="glider"></span>
           </div>
         </div>
@@ -47,7 +49,7 @@
         <el-button @click="resetForm('LoginForm')">重置</el-button>
       </el-form-item>
     </el-form>
-    <span>{{usertype}}</span>
+    <span>{{ usertype }}</span>
   </div>
 </template>
 
@@ -60,7 +62,7 @@ export default {
       LoginForm: {
         username: '',
         password: '',
-        usertype: -1,
+        usertype: 0,
       },
     }
   },

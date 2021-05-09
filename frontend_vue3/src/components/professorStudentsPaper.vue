@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-04 21:26:50
+ * @LastEditTime: 2021-05-09 20:23:02
 -->
 
 <template>
@@ -152,6 +152,7 @@ export default {
       })
     },
     handleScore() {
+      // 文章打分
       const _this = this
       const chosedFileId = this.chosedFileId
       const fileScore = this.fileScore
@@ -200,7 +201,7 @@ export default {
 </script>
 
 <style>
-@import '../assets/css/comment.css';
+@import '../assets/css/el-dialog.css';
 .el-table__row {
   background-color: var(--color-gray0) !important;
 }

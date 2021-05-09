@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-06 16:52:23
+ * @LastEditTime: 2021-05-09 17:14:52
 -->
 
 <template>
@@ -53,9 +53,9 @@
     </el-dialog>
     <!-- 评分 Dialog end -->
     <!-- 回复 Dialog begin -->
-    <el-dialog title="回复" v-model="commentDialogVisible" width="50%" :before-close="handleClose">
+    <el-dialog title="回复" v-model="commentDialogVisible" width="50%" :before-close="handleCommentDialogClose">
       <template #footer>
-        <comment :data="commentData" @handleReplay="handleReplay($event)"></comment>
+        <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
         <el-form>
           <el-form-item>
             <span>{{ replayWhichComment }}</span>
@@ -69,7 +69,6 @@
       </template>
     </el-dialog>
     <!-- 回复 Dialog end -->
-    <!-- <comment></comment> -->
   </div>
 </template>
 
@@ -92,6 +91,7 @@ export default {
       commentData: [],
       commentWatiForPush: '',
       vuexComponentStudent: 'student',
+      loading: true
     }
   },
   mounted() {
@@ -122,6 +122,7 @@ export default {
         _this.commentData = res.data.data
         console.log(_this.commentData)
         _this.$forceUpdate()
+        _this.loading = false
       })
     },
     // 打开对话框
@@ -166,9 +167,11 @@ export default {
       this.replayWhichComment = 'replay ' + username
       this.chosedCommentId = node.data.id
     },
-    handleClose() {
+    handleCommentDialogClose() {
       console.log('Dialog closed')
       this.commentDialogVisible = false
+      this.loading = true
+      this.commentData = []
     },
     handleAddComment() {
       var comment = this.commentWatiForPush

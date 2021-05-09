@@ -9,6 +9,10 @@ import StudentUploadPaper from '../components/StudentUploadPaper.vue';
 import ProfessorStudentsPaper from '../components/professorStudentsPaper.vue';
 import FilePreview from '../components/FilePreview.vue';
 import StudentMyPapers from '../components/StudentMyPapers.vue';
+import ScoreStatistic from '../components/admin/statistic/scoreStatistic'
+import TeacherTask from '../components/admin/statistic/teacherTask';
+import Students from '../components/admin/manage/students'
+import Teachers from '../components/admin/manage/teachers'
 import store from '../store/index';
 
 const routes = [{
@@ -62,6 +66,38 @@ const routes = [{
     path: '/student_my_papers',
     name: 'StudentMyPapers',
     component: StudentMyPapers,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/admin/score_statistic',
+    name: 'ScoreStatistic',
+    component: ScoreStatistic,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/admin/teacher_task',
+    name: 'TeacherTask',
+    component: TeacherTask,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/admin/manage/students',
+    name: 'Students',
+    component: Students,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/admin/manage/teachers',
+    name: 'Teachers',
+    component: Teachers,
     meta: {
       requiredAuth: true
     }

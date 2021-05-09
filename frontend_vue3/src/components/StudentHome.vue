@@ -1,29 +1,41 @@
 <template>
-  <div class='container0'>
-    <remote-script src='../assets/js/openMenuButtonScript.js'></remote-script>
-    <el-container class='container1'>
+  <div class="container0">
+    <remote-script src="../assets/js/openMenuButtonScript.js"></remote-script>
+    <el-container class="container1">
       <el-menu
-        default-active='1-4-1'
-        class='el-menu-vertical-demo gray1'
-        @open='handleOpen'
-        @close='handleClose'
-        :collapse='isCollapse'
-        :router='true'
+        default-active="1-4-1"
+        class="el-menu-vertical-demo gray1"
+        @open="handleOpen"
+        @close="handleClose"
+        :collapse="isCollapse"
+        :router="true"
       >
-        <el-button @click='isCollapse = !isCollapse' class="custom-btn btn-16 menu-btn">>>></el-button>
-        <el-submenu index='1'>
+        <el-button @click="isCollapse = !isCollapse" class="custom-btn btn-16 menu-btn">>>></el-button>
+        <el-submenu index="1">
           <template #title>
-            <i class='el-icon-location'></i>
+            <i class="el-icon-location"></i>
             <span>论文管理</span>
           </template>
-          <el-menu-item-group v-if ="type[0] === 'student'">
-            <el-menu-item index='student_upload_paper'>上传论文</el-menu-item>
+          <el-menu-item-group v-if="type[0] === 'student'">
+            <el-menu-item index="student_upload_paper">上传论文</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group v-if ="type[0] === 'student'">
-            <el-menu-item index='student_my_papers'>我的论文</el-menu-item>
+          <el-menu-item-group v-if="type[0] === 'student'">
+            <el-menu-item index="student_my_papers">我的论文</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group v-if ="type[0] === 'teacher'">
-            <el-menu-item index='professor_students_paper'>学生论文</el-menu-item>
+          <el-menu-item-group v-if="type[0] === 'teacher'">
+            <el-menu-item index="professor_students_paper">学生论文</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group v-if="type[0] === 'admin'">
+            <el-menu-item index="/admin/score_statistic">得分总览</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group v-if="type[0] === 'admin'">
+            <el-menu-item index="/admin/teacher_task">教师任务</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group v-if="type[0] === 'admin'">
+            <el-menu-item index="/admin/manage/students">学生管理</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group v-if="type[0] === 'admin'">
+            <el-menu-item index="/admin/manage/teachers">教师管理</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
@@ -43,48 +55,42 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data() {
     return {
       isCollapse: true,
-      type: [
-        'student'
-      ]
-    };
+      type: ['student'],
+    }
   },
   mounted() {
     this.type = this.getAuthData.userType
   },
   computed: {
-    ...mapGetters('auth', [
-      'getAuthData',
-    ])
+    ...mapGetters('auth', ['getAuthData']),
   },
   methods: {
-    ...mapActions('auth', [
-      'signOut'
-    ]),
+    ...mapActions('auth', ['signOut']),
     handleOpen(key, keyPath) {
-      console.log('handleOpen');
-      console.log(key, keyPath);
+      console.log('handleOpen')
+      console.log(key, keyPath)
     },
     handleClose(key, keyPath) {
-      console.log('handleColse');
-      console.log(key, keyPath);
+      console.log('handleColse')
+      console.log(key, keyPath)
     },
     handleSignOut() {
       this.signOut().then(() => {
-        location.reload();
+        location.reload()
       })
-    }
+    },
   },
-};
+}
 </script>
 
 <style>
-@import "../assets/css/header.css";
+@import '../assets/css/header.css';
 /* layout */
 .container1 {
   height: 100%;
@@ -106,7 +112,11 @@ export default {
 
 .el-main {
   background-color: var(--color-gray0);
-  background-image: linear-gradient(315deg, rgba(51, 51, 51, 0.178) 0%, var(--color-gray0) 18%);
+  background-image: linear-gradient(
+    315deg,
+    rgba(51, 51, 51, 0.178) 0%,
+    var(--color-gray0) 18%
+  );
   color: #333;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -138,5 +148,4 @@ body > .el-container {
 .el-menu {
   border-right: 0px !important;
 }
-
 </style>
