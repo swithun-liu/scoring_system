@@ -12,7 +12,6 @@ package com.swithun.backend.controller;
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.dto.StudentGetFileListDTO;
 import com.swithun.backend.entity.CommentForFileEntity;
-import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.StudentService;
 

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-01 20:49:13
+ * @LastEditTime: 2021-05-08 14:28:10
  */
 package com.swithun.backend.entity;
 
@@ -30,6 +30,7 @@ public class StudentEntity {
 
     private Integer id;
     private String name;
+    @JsonIgnore
     private String password;
     @JsonBackReference
     private TeacherEntity teacherByTeacherId;

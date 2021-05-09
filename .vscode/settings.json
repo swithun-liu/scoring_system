@@ -1,5 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
     "maven.view": "flat",
-    "java.dependency.packagePresentation": "flat"
+    "java.dependency.packagePresentation": "flat",
+    "vue3snippets.enable-compile-vue-file-on-did-save-code": false
 }

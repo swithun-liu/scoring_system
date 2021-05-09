@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 16:59:30
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-06 20:03:59
+ * @LastEditTime: 2021-05-09 13:22:50
  */
 package com.swithun.backend.tools.secret.Controller;
 
@@ -20,6 +20,8 @@ import com.swithun.backend.tools.secret.services.JwtStudentUserDetailsService;
 import com.swithun.backend.tools.secret.services.JwtTeacherUserDetailsService;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,26 +53,35 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtAdminUserDetialsService adminUDS;
 
+    Logger logger = LoggerFactory.getLogger(JwtAuthenticationController.class);
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        System.out.println("JwtAuthenticationController : '/authentication'");
+        logger.info("authenticationRequest ");
+        logger.info("usrname " + authenticationRequest.getUsername());
+        logger.info("password " + authenticationRequest.getPassword());
+        logger.info("usertype " + authenticationRequest.getUsertype());
 
         UserDetails userDetails;
 
         // 1. 通过名字 UserDetailService 加载 userDetail
         // 1.1 如果是 学生
         if (authenticationRequest.getUsertype() == 0) {
+            logger.warn("学生 ： " + authenticationRequest.getUsername());
             userDetails = studentUDS.loadUserByUsername(authenticationRequest.getUsername());
         }
         // 1.2 如果是 老师
         else if (authenticationRequest.getUsertype() == 1) {
+            logger.warn("老师 ： " + authenticationRequest.getUsername());
             userDetails = teacherUDS.loadUserByUsername(authenticationRequest.getUsername());
         }
         // 1.3 如果是管理员
         else if (authenticationRequest.getUsertype() == 2) {
+            logger.warn("管理员 ： " + authenticationRequest.getUsername());
             userDetails = adminUDS.loadUserByUsername(authenticationRequest.getUsername());
         } else {
+            logger.error("null ： " + authenticationRequest.getUsername());
             userDetails = null;
         }
         // 2. 验证 前端传来的 名字 和 密码
