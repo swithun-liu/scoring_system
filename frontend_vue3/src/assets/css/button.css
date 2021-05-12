@@ -1,0 +1,55 @@
+.glass-btn {
+    background: rgba( 255, 255, 255, 0.20);
+    backdrop-filter: blur( 9.5px);
+    -webkit-backdrop-filter: blur( 9.5px);
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    /* 结构 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 20px;
+    font-weight: 900;
+}
+
+.glass-btn-important {
+    background: rgba( 255, 255, 255, 0.20) !important;
+    backdrop-filter: blur( 9.5px) !important;
+    -webkit-backdrop-filter: blur( 9.5px) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18) !important;
+    /* 结构 */
+    font-weight: 900 !important;
+    min-height: auto !important;
+}
+
+.el-btn-2-glass-btn {
+    background: rgba( 255, 255, 255, 0.20) !important;
+    backdrop-filter: blur( 9.5px) !important;
+    -webkit-backdrop-filter: blur( 9.5px) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18) !important;
+    /* 结构 */
+    min-height: auto !important;
+    font-size: smaller !important;
+    font-weight: normal !important;
+    padding: 10px 15px !important;
+    margin: 0px 0px !important;
+}
+
+/* 更新文件按钮 input 隐藏, lable->btn*/
+
+.refresh-btn-input-file {
+    display: none;
+}
+
+.refresh-btn-input-file:focus+label, .refresh-btn-input-file+label:hover {
+    cursor: pointer;
+    /* 小手光标*/
+    color: #60ACFD;
+}
+
+.refresh-label {
+    display: flex !important;
+    align-items: center !important;
+}

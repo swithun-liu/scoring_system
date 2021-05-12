@@ -8,7 +8,7 @@
 .teacher-tag {
     color: #ffffff;
     font-weight: bolder;
-    background-color: #409EFF;
+    background-color: #40a0ff77;
     box-shadow: 0 0 4px #409EFF, 0 0 4px #409EFF;
     display: block;
     margin: 5px;
@@ -17,7 +17,7 @@
 .student-tag {
     color: #ffffff;
     font-weight: bolder;
-    background-color: #67C23A;
+    background-color: #67c23a90;
     box-shadow: 0 0 4px #67C23A, 0 0 4px #67C23A;
     display: block;
     margin: 5px;
@@ -33,16 +33,6 @@
     justify-content: flex-end;
 }
 
-.el-tree-node {
-    margin: 10px;
-    margin-left: 30px;
-    border-left: 4px solid #ddd;
-    border-radius: 10px !important;
-    /* border-image: linear-gradient(rgb(56, 56, 56), rgb(141, 141, 141)) 20 20; */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-    white-space: normal !important;
-}
-
 .custom-tree-node {
     width: 100%;
 }
@@ -54,6 +44,23 @@
 }
 
 .el-tree {
-    height: 500px;
+    /* 透明 */
+    background: transparent !important;
+    /* 结构 */
+    height: 100%;
     overflow-y: scroll;
+    /* background-color: transparent !important; */
+}
+
+.el-tree-node {
+    background: rgba( 255, 255, 255, 0.20);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    backdrop-filter: blur( 15.0px);
+    -webkit-backdrop-filter: blur( 15.0px);
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    /* 结构 */
+    margin-left: 30px;
+    margin: 10px;
+    white-space: normal !important;
 }

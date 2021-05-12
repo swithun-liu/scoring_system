@@ -5,78 +5,79 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 20:23:02
+ * @LastEditTime: 2021-05-12 09:29:19
 -->
 
 <template>
-  <div>
-    <!-- 文件列表 begin -->
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="文件id" width="90"></el-table-column>
-      <el-table-column prop="name" label="文件名">
-        <template #default="scope">
-          <el-button
-            icon="el-icon-download"
-            size="small"
-            @click="handleDownload(scope.row.id, scope.row.name)"
-          ></el-button>
-          {{scope.row.name}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="studentId" label="学生id" width="90"></el-table-column>
-      <el-table-column prop="studentName" label="学生名" width="120"></el-table-column>
-      <el-table-column prop="score" label="分数" width="90"></el-table-column>
-      <el-table-column lable="操作" width="200">
-        <template #default="scope">
-          <el-button size="small" icon="el-icon-refresh"></el-button>
-          <el-button size="small" icon="el-icon-s-comment" @click="openCommentDialog(scope.row.id)"></el-button>
-          <el-button
-            size="small"
-            icon="el-icon-edit-outline"
-            @click="openScoreDialog(scope.row.id)"
-          ></el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 评分 Dialog begin -->
-    <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
-      <template #footer>
-        <el-slider v-model="fileScore" show-input></el-slider>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="handleScore()">确 定</el-button>
-        </span>
+  <!-- 文件列表 begin -->
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column prop="id" label="文件id" width="90"></el-table-column>
+    <el-table-column prop="name" label="文件名"></el-table-column>
+    <el-table-column prop="studentId" label="学生id" width="90"></el-table-column>
+    <el-table-column prop="studentName" label="学生名" width="120"></el-table-column>
+    <el-table-column prop="score" label="分数" width="90"></el-table-column>
+    <el-table-column lable="操作" width="300">
+      <template #default="scope">
+        <el-button
+          icon="el-icon-download"
+          size="small"
+          class="el-btn-2-glass-btn table-btn"
+          @click="handleDownload(scope.row.id, scope.row.name)"
+        ></el-button>
+        <el-button size="small" icon="el-icon-refresh" class="el-btn-2-glass-btn table-btn"></el-button>
+        <el-button
+          size="small"
+          icon="el-icon-s-comment"
+          class="el-btn-2-glass-btn table-btn"
+          @click="openCommentDialog(scope.row.id)"
+        ></el-button>
+        <el-button
+          size="small"
+          icon="el-icon-edit-outline"
+          class="el-btn-2-glass-btn table-btn"
+          @click="openScoreDialog(scope.row.id)"
+        ></el-button>
       </template>
-    </el-dialog>
-    <!-- 评分 Dialog end -->
-    <!-- 文件列表 end-->
-    <!-- 回复 Dialog begin -->
-    <el-dialog
-      title="回复"
-      v-model="commentDialogVisible"
-      width="80%"
-      :before-close="handleClose"
-      custom-class="replay-dialog"
-    >
-      <template #footer>
-        <comment :data="commentData" @handleReplay="handleReplay($event)"></comment>
-        <el-form>
-          <el-form-item>
-            <span>{{ replayWhichComment }}</span>
-            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
-            <el-input v-model="commentWatiForPush"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button @click="handleAddComment()">添加</el-button>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-dialog>
-    <!-- 回复 Dialog end-->
-    <button class="custom-btn btn-13">
-      <span>Read More</span>
-    </button>
-  </div>
+    </el-table-column>
+  </el-table>
+  <!-- 评分 Dialog begin -->
+  <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleCommentDialogClose">
+    <template #footer>
+      <el-slider v-model="fileScore" show-input></el-slider>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleScore()">确 定</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- 评分 Dialog end -->
+  <!-- 文件列表 end-->
+  <!-- 回复 Dialog begin -->
+  <el-dialog
+    title="回复"
+    v-model="commentDialogVisible"
+    width="80%"
+    :before-close="handleClose"
+    custom-class="replay-dialog"
+  >
+    <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
+    <template #footer>
+      <el-form>
+        <el-form-item>
+          <span>{{ replayWhichComment }}</span>
+          <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
+          <el-input v-model="commentWatiForPush"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="handleAddComment()">添加</el-button>
+        </el-form-item>
+      </el-form>
+    </template>
+  </el-dialog>
+  <!-- 回复 Dialog end-->
+  <button class="custom-btn btn-13">
+    <span>Read More</span>
+  </button>
 </template>
 
 <script>
@@ -98,6 +99,7 @@ export default {
       commentData: [],
       commentOriginData: [],
       commentWatiForPush: '',
+      loading: true,
     }
   },
   mounted() {
@@ -128,6 +130,7 @@ export default {
         console.log(_this.commentData)
         console.log(_this.testData)
         _this.$forceUpdate()
+        _this.loading = false
       })
     },
     // 打开对话框
@@ -174,8 +177,11 @@ export default {
       this.replayWhichComment = 'replay ' + username
       this.chosedCommentId = node.data.id
     },
-    handleClose() {
+    handleCommentDialogClose() {
+      console.log('Dialog closed')
       this.commentDialogVisible = false
+      this.loading = true
+      this.commentData = []
     },
     handleAddComment() {
       var comment = this.commentWatiForPush
@@ -200,19 +206,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '../assets/css/el-dialog.css';
-.el-table__row {
-  background-color: var(--color-gray0) !important;
-}
-.el-table {
-  background-color: var(--color-gray0) !important;
-}
-.el-table__header-wrapper {
-  border: 0px !important;
-  border-radius: 20px !important;
-}
-.el-table__header {
-  border-radius: 20px;
+@import '../assets/css/el-table.css';
+.table-btn {
+  margin: 0 4px !important;
 }
 </style>

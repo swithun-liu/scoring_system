@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 11:21:54
+ * @LastEditTime: 2021-05-10 19:00:15
 -->
 
 <template>
@@ -99,13 +99,17 @@ export default {
 <style lang="less" scoped>
 @import '../assets/css/radioStyle.css';
 .login-form-wrapper {
-  width: 40%;
-  height: 100%;
+  // 样式
+  background: rgba(255, 255, 255, 0.2);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15.5px);
+  -webkit-backdrop-filter: blur(15.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  // 结构
   margin: 0px auto;
-  background: var(--color-gray2);
-  box-shadow: 0 8px 32px 0 var(--color-gray2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  width: 40%;
+  height: 99%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -113,12 +117,17 @@ export default {
   padding: 0 50px;
 }
 .my-input {
-  border: 0px;
+  // 样式
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15.5px);
+  -webkit-backdrop-filter: blur(15.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  // 结构
   width: 90%;
+  border: 0px;
   border-radius: 16px !important;
-  background: #e0e0e0 !important;
-  background-color: #e0e0e0 !important;
-  box-shadow: 5px 5px 14px #898989, -5px -5px 14px #ffffff !important;
   padding: 20px;
 }
 

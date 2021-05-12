@@ -5,71 +5,76 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 17:14:52
+ * @LastEditTime: 2021-05-11 17:38:06
 -->
 
 <template>
-  <div class="main-wrapper">
-    <!-- 文件列表 begin -->
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="文件id" width="90"></el-table-column>
-      <el-table-column prop="name" label="文件名">
-        <template #default="scope">
-          <el-button
-            icon="el-icon-download"
-            size="small"
-            @click="handleDownload(scope.row.id, scope.row.name)"
-          ></el-button>
-          {{scope.row.name}}
-        </template>
-      </el-table-column>
-      <el-table-column prop="score" label="分数" width="90"></el-table-column>
-      <el-table-column lable="操作">
-        <template #default="scope">
-          <el-button size="small">更新</el-button>
-          <el-button size="small" @click="openCommentDialog(scope.row.id)">回复</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <!-- 文件列表 end -->
-    <!-- 文件卡片 begin -->
-    <!-- <div class="card-wrapper">
-      <div class="card" v-for="(file, index) in tableData" :key="index">
+  <!-- 文件卡片 begin -->
+  <div class="card-wrapper">
+    <div class="card" v-for="(file, index) in tableData" :key="index">
+      <div class="card-title-wrapper">
         <span class="card-title">{{file.name}}</span>
-        <br/>
+      </div>
+      <br />
+      <div class="info-wrapper">
+        <span>id: </span> <span>{{file.id}}</span>
+      </div>
+      <div class="info-wrapper">
         <span class="card-abstract">摘要</span>
       </div>
-    </div> -->
-    <!-- 文件卡片 end-->
-    <!-- 评分 Dialog begin -->
-    <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
-      <template #footer>
-        <el-slider v-model="fileScore" show-input></el-slider>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="handleScore()">确 定</el-button>
-        </span>
-      </template>
-    </el-dialog>
-    <!-- 评分 Dialog end -->
-    <!-- 回复 Dialog begin -->
-    <el-dialog title="回复" v-model="commentDialogVisible" width="50%" :before-close="handleCommentDialogClose">
-      <template #footer>
-        <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
-        <el-form>
-          <el-form-item>
-            <span>{{ replayWhichComment }}</span>
-            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
-            <el-input v-model="commentWatiForPush"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button @click="handleAddComment()">添加</el-button>
-          </el-form-item>
-        </el-form>
-      </template>
-    </el-dialog>
-    <!-- 回复 Dialog end -->
+      <br />
+      <div class="card-abstract-conten-wrapper">
+        <textarea class="card-abstract-content" name="text" rows="14" cols="10" wrap="soft" v-model="file.fileAbstract">
+        </textarea>
+      </div>
+      <div class="card-general-wrapper">
+        <el-progress :format="format" :text-inside="true" :stroke-width="26" :percentage="file.score"></el-progress>
+      </div>
+      <div class="card-footer">
+          <el-button class="glass-btn-important card-btn" icon="el-icon-success" @click="handleEditInfo(file)"></el-button>
+          <el-button class="glass-btn-important card-btn" icon="el-icon-download" size="small" @click="handleDownload(file.id, file.name)"></el-button>
+          <el-button class="glass-btn-important card-btn" icon="el-icon-s-comment" size="small" @click="openCommentDialog(file.id)"></el-button>
+          <input type="file" class="refresh-btn-input-file" value="" id="refreshFile" @change="handleRefreshFile($event, file.id)">
+          <label for="refreshFile" class="glass-btn el-icon-refresh refresh-label"></label>
+      </div>
+    </div>
   </div>
+  <!-- 文件卡片 end-->
+  <!-- 评分 Dialog begin -->
+  <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
+    <template #footer>
+      <el-slider v-model="fileScore" show-input></el-slider>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleScore()">确 定</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- 评分 Dialog end -->
+  <!-- 回复 Dialog begin -->
+  <el-dialog
+    title="回复"
+    v-model="commentDialogVisible"
+    fullscreen: true
+    width="50%"
+    :before-close="handleCommentDialogClose"
+  >
+      <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
+    <template #footer>
+      <el-form>
+        <el-form-item>
+          <span>{{ replayWhichComment }}</span>
+          <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
+          <el-input v-model="commentWatiForPush"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="handleAddComment()">添加</el-button>
+        </el-form-item>
+      </el-form>
+    </template>
+  </el-dialog>
+  <!-- 回复 Dialog end -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -91,7 +96,7 @@ export default {
       commentData: [],
       commentWatiForPush: '',
       vuexComponentStudent: 'student',
-      loading: true
+      loading: true,
     }
   },
   mounted() {
@@ -104,6 +109,8 @@ export default {
       'studentGetAllComment',
       'studentDownloadThisFile',
       'studentAddCommentForThisFile',
+      'studentEditFileInfo',
+      'studentRefreshFile'
     ]),
     ...mapActions('comment', ['getComments']),
     // 刷新
@@ -188,9 +195,28 @@ export default {
         _this.flashComments()
       })
     },
+    handleEditInfo(file) {
+      this.studentEditFileInfo(file)
+    },
     cancleChooseComment() {
       this.chosedCommentId = -1
       this.replayWhichComment = '新建评论'
+    },
+    handleRefreshFile(e, id) {
+      const file = e.target.files[0]
+      const param = new FormData()
+      param.append('file', file)
+      param.append('id', id)
+      param.append('name', file.name)
+      const config = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }
+      this.studentRefreshFile({ param: param, config: config }).then((res) => {
+        console.log('refresh file : ' + id);
+      })
+    },
+    format(percentage) {
+      return `${percentage}分`
     },
   },
 }
@@ -198,4 +224,5 @@ export default {
 
 <style>
 @import '../assets/css/card.css';
+@import '../assets/css/el-dialog.css';
 </style>

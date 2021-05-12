@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:38:13
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-04 14:45:00
+ * @LastEditTime: 2021-05-11 10:58:33
  */
 
 import axios from 'axios';
@@ -41,7 +41,24 @@ const actions = {
   }, payload) {
     const reponse = await axios.post('http://localhost:8089/student/addCommentForThisFile', payload)
     return reponse
+  },
+  async studentEditFileInfo({
+    commit
+  }, payload) {
+    const response = await axios.post('http://localhost:8089/student/addAbstract', payload)
+    return response
+  },
+  async studentRefreshFile ({
+    commit,
+  }, payload) {
+    console.log('studentRefreshFile')
+    console.log(payload);
+    console.log(payload.param)
+    console.log(payload.config)
+    const response = await axios.post('http://localhost:8089/student/refreshFile', payload.param, payload.config)
+    return response
   }
+
 }
 
 export default {

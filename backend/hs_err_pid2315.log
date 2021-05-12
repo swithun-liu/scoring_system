@@ -1,0 +1,30 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0x7) at pc=0x00007f1094981dae, pid=2315, tid=2344
+#
+# JRE version: OpenJDK Runtime Environment (11.0.10+9) (build 11.0.10+9-Ubuntu-0ubuntu1.20.04)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.10+9-Ubuntu-0ubuntu1.20.04, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# v  ~RuntimeStub::g1_pre_barrier_slow
+#
+# No core dump will be written. 
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xverify:none -XX:TieredStopAtLevel=1 com.swithun.backend.BackendApplication
+
+Host: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz, 5 cores, 5G, Ubuntu 20.04.2 LTS
+Time: Tue May 11 21:33:58 2021 CST elapsed time: 26866.115380 seconds (0d 7h 27m 46s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f10448a4000):  JavaThread "mysql-cj-abandoned-connection-cleanup" daemon [_thread_in_Java, id=2344, stack(0x00007f105fafa000,0x00007f105fbfb000)]
+
+Stack: [0x00007f105fafa000,0x00007f105fbfb000],  sp=0x00007f105fbf8c80,  free space=1019k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+v  ~RuntimeStub::g1_pre_barrier_slow

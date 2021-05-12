@@ -2,9 +2,9 @@ import {
   createRouter,
   createWebHashHistory
 } from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
-import StudentHome from '../components/StudentHome.vue'
+import Home from '../components/Home.vue'
 import StudentUploadPaper from '../components/StudentUploadPaper.vue';
 import ProfessorStudentsPaper from '../components/professorStudentsPaper.vue';
 import FilePreview from '../components/FilePreview.vue';
@@ -13,6 +13,7 @@ import ScoreStatistic from '../components/admin/statistic/scoreStatistic'
 import TeacherTask from '../components/admin/statistic/teacherTask';
 import Students from '../components/admin/manage/students'
 import Teachers from '../components/admin/manage/teachers'
+import Profile from '../components/profile'
 import store from '../store/index';
 
 const routes = [{
@@ -43,13 +44,21 @@ const routes = [{
   }
 },
 {
-  path: '/student_home',
-  name: 'StudentHome',
-  component: StudentHome,
+  path: '/home',
+  name: 'Home',
+  component: Home,
   children: [{
     path: '/student_upload_paper',
     name: 'StudentUploadPaper',
     component: StudentUploadPaper,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       requiredAuth: true
     }
@@ -149,7 +158,7 @@ router.beforeEach((to, from, next) => {
   } else if (auth && !to.meta.requiredAuth) {
     console.log('router: -> /dashboard ')
     return next({
-      path: '/student_home'
+      path: '/profile'
     });
   } else if (!auth && to.meta.requiredAuth) {
     console.log('router: -> /login')

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-07 14:44:39
+ * @LastEditTime: 2021-05-11 19:30:07
  */
 import {
   createStore
@@ -25,7 +25,7 @@ const store = createStore({
     teacher: teacherModule,
     student: studentModule,
     comment: commentModule,
-    admin: adminMoudule
+    admin: adminMoudule,
   }
 })
 

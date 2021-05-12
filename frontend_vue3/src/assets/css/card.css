@@ -1,3 +1,4 @@
+@import 'button.css';
 .main-wrapper {
     /* overflow-x: scroll; */
     height: 100%;
@@ -10,27 +11,91 @@
     height: 100%;
 }
 
+/* 整体 */
+
 .card {
-    /* background-color: aquamarine; */
-    height: 80%;
-    width: 400px;
-    margin: 20px;
-    margin-right: 0 !important;
-    flex-shrink: 0;
-    padding: 30px;
-    background: rgba( 255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-    backdrop-filter: blur( 4px);
-    -webkit-backdrop-filter: blur( 4px);
-    border-radius: 10px;
+    /* 透明 */
+    background: rgba( 255, 255, 255, 0.05);
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37); */
+    backdrop-filter: blur( 9.5px);
+    -webkit-backdrop-filter: blur( 9.5px);
+    border-radius: 30px;
     border: 1px solid rgba( 255, 255, 255, 0.18);
+    /* 格式 */
+    /* 作为子 */
+    flex-shrink: 0;
+    /* 作为父 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    margin: 30px;
+    padding: 20px;
+}
+
+/* 标题 */
+
+.card-title-wrapper {
+    height: 5%;
 }
 
 .card-title {
-    font-size: 25px;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
 }
+
+/* 摘要 */
+
 .card-abstract {
     text-align: left;
     font-size: 20px;
     font-weight: 1000;
+}
+
+/* 摘要内容 */
+
+.card-abstract-conten-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+}
+
+.card-abstract-content {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid rgba( 255, 255, 255, 0.45);
+    border-radius: 20px;
+    display: block;
+    height: 40%;
+    background-color: rgba( 255, 255, 255, 0.25);
+}
+
+textarea:focus {
+    outline: none;
+    border: 1px solid rgba(170, 170, 170, 0.45);
+    box-shadow: 0 0px 10px 0 rgba( 31, 38, 135, 0.37);
+}
+
+/* 底部 */
+
+.card-footer {
+    height: 5%;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 通用 */
+
+.card-btn {
+    font-size: smaller !important;
+    font-weight: normal !important;
+}
+
+.card-general-wrapper {
+    padding: 20px 0;
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-04-28 14:51:43
+ * @LastEditTime: 2021-05-11 20:17:42
 -->
 <template>
   <div class='student_upload_paper_container0 container0'>
@@ -96,9 +96,6 @@ export default {
 </script>
 
 <style>
-.student_upload_paper_container0 {
-  /* background-color: rgba(201, 253, 223, 0); */
-}
 .uploadButton {
   font-family: fantasy !important;
   font-size: 25px !important;

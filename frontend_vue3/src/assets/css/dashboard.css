@@ -1,0 +1,33 @@
+@import "header.css";
+@import "button.css";
+@import "scrollbar.css";
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(to right, #74ebd5 30%, rgb(170, 190, 232) 60%, #9face6 100%) !important;
+}
+
+#app, .el-menu, .el-header, .el-footer, .el-container, .container0, .container1, .el-menu-item-group {
+  background-color: transparent !important;
+}
+
+.el-container {
+  height: 100%;
+}
+
+.el-main {
+  background: rgba( 255, 255, 255, 0.30);
+  /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37); */
+  backdrop-filter: blur( 11.0px);
+  -webkit-backdrop-filter: blur( 11.0px);
+  border-radius: 30px;
+  border: 1px solid rgba( 255, 255, 255, 0.18);
+  margin: 25px;
+}
+
+.el-menu {
+  /* 去掉 menu 和 main 之间的空隙 */
+  border-right: 0px !important;
+}

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 20:21:26
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-08 11:07:58
+ * @LastEditTime: 2021-05-11 20:43:13
 -->
 <template>
   <div ref="chart" style="width: 100%; height: 100%;" />

@@ -1,0 +1,12 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.profile-name-wrapper {
+    padding: 20px;
+    font-size: 70px;
+    font-family: fantasy;
+    color: #4b4b4b;
+}

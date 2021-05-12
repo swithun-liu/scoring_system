@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-02 18:35:44
+ * @LastEditTime: 2021-05-10 14:29:51
  */
 package com.swithun.backend.entity;
 
@@ -31,6 +31,8 @@ public class StudentFileEntity {
     private String type;
     private byte[] data;
     private Integer score;
+    private String fileAbstract;
+
     @JsonBackReference
     private StudentEntity studentByStudentId;
     @JsonIgnore
@@ -50,6 +52,16 @@ public class StudentFileEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId() {
         return id;
+    }
+
+    @Basic
+    @Column(name = "file_abstract")
+    public String getFileAbstract() {
+        return fileAbstract;
+    }
+
+    public void setFileAbstract(String fileAbstract) {
+        this.fileAbstract = fileAbstract;
     }
 
     public void setId(Integer id) {
