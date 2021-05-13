@@ -1,0 +1,68 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0x7) at pc=0x00007f2e1e312ab7, pid=4550, tid=27990
+#
+# JRE version: OpenJDK Runtime Environment (11.0.10+9) (build 11.0.10+9-Ubuntu-0ubuntu1.20.04)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.10+9-Ubuntu-0ubuntu1.20.04, mixed mode, sharing, tiered, compressed oops, g1 gc, linux-amd64)
+# Problematic frame:
+# 
+[error occurred during error reporting (printing problematic frame), id 0x7, SIGBUS (0x7) at pc=0x00007f2e1ea81de4]
+
+# No core dump will be written. 
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xverify:none -XX:TieredStopAtLevel=1 com.swithun.backend.BackendApplication
+
+Host: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz, 5 cores, 5G, Ubuntu 20.04.2 LTS
+Time: Wed May 12 20:37:26 2021 CST elapsed time: 43128.560002 seconds (0d 11h 58m 48s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f2d94015800):  JavaThread "restartedMain" [_thread_in_vm, id=27990, stack(0x00007f2da50e9000,0x00007f2da51ea000)]
+
+Stack: [0x00007f2da50e9000,0x00007f2da51ea000],  sp=0x00007f2da51e7358,  free space=1016k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+[error occurred during error reporting (printing native stack), id 0x7, SIGBUS (0x7) at pc=0x00007f2e1ea81de4]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 1956  java.lang.Class.getDeclaredConstructors0(Z)[Ljava/lang/reflect/Constructor; java.base@11.0.10 (0 bytes) @ 0x00007f2e011fb188 [0x00007f2e011fb140+0x0000000000000048]
+J 1703 c1 java.lang.Class.privateGetDeclaredConstructors(Z)[Ljava/lang/reflect/Constructor; java.base@11.0.10 (79 bytes) @ 0x00007f2e0119b4e4 [0x00007f2e0119b380+0x0000000000000164]
+J 2258 c1 java.lang.Class.getConstructor0([Ljava/lang/Class;I)Ljava/lang/reflect/Constructor; java.base@11.0.10 (83 bytes) @ 0x00007f2e0128b4ac [0x00007f2e0128b320+0x000000000000018c]
+J 2360 c1 java.lang.Class.getDeclaredConstructor([Ljava/lang/Class;)Ljava/lang/reflect/Constructor; java.base@11.0.10 (31 bytes) @ 0x00007f2e012b0eec [0x00007f2e012b0d20+0x00000000000001cc]
+j  org.springframework.boot.diagnostics.FailureAnalyzers.createAnalyzer(Lorg/springframework/context/ConfigurableApplicationContext;Ljava/lang/String;)Lorg/springframework/boot/diagnostics/FailureAnalyzer;+12
+j  org.springframework.boot.diagnostics.FailureAnalyzers.loadFailureAnalyzers(Lorg/springframework/context/ConfigurableApplicationContext;Ljava/lang/ClassLoader;)Ljava/util/List;+50
+j  org.springframework.boot.diagnostics.FailureAnalyzers.<init>(Lorg/springframework/context/ConfigurableApplicationContext;Ljava/lang/ClassLoader;)V+28
+j  org.springframework.boot.diagnostics.FailureAnalyzers.<init>(Lorg/springframework/context/ConfigurableApplicationContext;)V+3
+v  ~StubRoutines::call_stub
+J 1612  jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (0 bytes) @ 0x00007f2e01174d33 [0x00007f2e01174cc0+0x0000000000000073]
+J 1611 c1 jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (89 bytes) @ 0x00007f2e01176cc4 [0x00007f2e01176a40+0x0000000000000284]
+J 1610 c1 jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance([Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (9 bytes) @ 0x00007f2e011766a4 [0x00007f2e01176640+0x0000000000000064]
+J 2377 c1 org.springframework.beans.BeanUtils.instantiateClass(Ljava/lang/reflect/Constructor;[Ljava/lang/Object;)Ljava/lang/Object; (187 bytes) @ 0x00007f2e012b70ac [0x00007f2e012b6c80+0x000000000000042c]
+j  org.springframework.boot.SpringApplication.createSpringFactoriesInstances(Ljava/lang/Class;[Ljava/lang/Class;Ljava/lang/ClassLoader;[Ljava/lang/Object;Ljava/util/Set;)Ljava/util/List;+73
+j  org.springframework.boot.SpringApplication.getSpringFactoriesInstances(Ljava/lang/Class;[Ljava/lang/Class;[Ljava/lang/Object;)Ljava/util/Collection;+29
+j  org.springframework.boot.SpringApplication.getExceptionReporters(Lorg/springframework/context/ConfigurableApplicationContext;)Ljava/util/Collection;+22
+j  org.springframework.boot.SpringApplication.handleRunFailure(Lorg/springframework/context/ConfigurableApplicationContext;Ljava/lang/Throwable;Lorg/springframework/boot/SpringApplicationRunListeners;)V+19
+j  org.springframework.boot.SpringApplication.run([Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;+179
+j  org.springframework.boot.SpringApplication.run([Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;+9
+j  org.springframework.boot.SpringApplication.run(Ljava/lang/Class;[Ljava/lang/String;)Lorg/springframework/context/ConfigurableApplicationContext;+9
+j  com.swithun.backend.BackendApplication.main([Ljava/lang/String;)V+3
+v  ~StubRoutines::call_stub
+J 2495  jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (0 bytes) @ 0x00007f2e012eb047 [0x00007f2e012eafc0+0x0000000000000087]
+J 2494 c1 jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (104 bytes) @ 0x00007f2e012eb85c [0x00007f2e012eb4a0+0x00000000000003bc]
+J 2090 c1 jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (10 bytes) @ 0x00007f2e01236da4 [0x00007f2e01236d40+0x0000000000000064]
+J 2109 c1 java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object; java.base@11.0.10 (65 bytes) @ 0x00007f2e0123df84 [0x00007f2e0123de60+0x0000000000000124]
+j  org.springframework.boot.devtools.restart.RestartLauncher.run()V+42
+v  ~StubRoutines::call_stub
+
+siginfo: si_signo: 7 (SIGBUS), si_code: 2 (BUS_ADRERR), si_addr: 0x00007f2da7520260
+
+Register to memory mapping:
+
+RAX=

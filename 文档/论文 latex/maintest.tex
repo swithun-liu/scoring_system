@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt,openany,oneside]{book}
+
+% 字体配置文件
+\input{setup/fonts}
+
+% 宏包配置文件
+\input{setup/packages}
+
+% 格式文件
+\input{setup/format}
+
+\begin{document}
+\input{preface/cover}
+\include{body/original}
+\include{body/grant}
+\frontmatter
+\pagenumbering{Roman}
+\makeabstract
+\defaultmenufont
+\tableofcontents
+
+
+\mainmatter
+
+\include{body/chap00}
+\include{body/chap01}
+\include{body/chap02}
+\include{body/chap03}
+\include{body/chap04}
+\include{body/chap05}
+\cleardoublepage
+
+\include{body/conclusion}
+\include{body/reference}
+\include{body/appendix1}
+\include{body/modify}
+\include{body/thank}
+
+\backmatter
+
+\end{document}
