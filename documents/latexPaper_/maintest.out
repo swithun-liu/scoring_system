@@ -58,8 +58,26 @@
 \BOOKMARK [2][]{subsection.6.3.1}{6.3.1 系统总体功能}{section.6.3}% 58
 \BOOKMARK [2][]{subsection.6.3.2}{6.3.2 用户登录}{section.6.3}% 59
 \BOOKMARK [2][]{subsection.6.3.3}{6.3.3 论文上传}{section.6.3}% 60
-\BOOKMARK [0][]{chapter*.19}{结　　论（设计类为设计总结）}{}% 61
-\BOOKMARK [0][]{chapter*.20}{参 考 文 献}{}% 62
-\BOOKMARK [0][]{chapter*.23}{附录A 附录内容名称}{}% 63
-\BOOKMARK [0][]{chapter*.24}{修改记录}{}% 64
-\BOOKMARK [0][]{chapter*.25}{致　　谢}{}% 65
+\BOOKMARK [2][]{subsection.6.3.4}{6.3.4 论文评审评分}{section.6.3}% 61
+\BOOKMARK [2][]{subsection.6.3.5}{6.3.5 统计评审情况}{section.6.3}% 62
+\BOOKMARK [0][]{chapter.7}{7 系统设计}{}% 63
+\BOOKMARK [1][]{section.7.1}{7.1 系统架构设计}{chapter.7}% 64
+\BOOKMARK [2][]{subsection.7.1.1}{7.1.1 系统整体模块设计}{section.7.1}% 65
+\BOOKMARK [1][]{section.7.2}{7.2 数据库设计}{chapter.7}% 66
+\BOOKMARK [2][]{subsection.7.2.1}{7.2.1 概念结构设计}{section.7.2}% 67
+\BOOKMARK [2][]{subsection.7.2.2}{7.2.2 逻辑结构设计}{section.7.2}% 68
+\BOOKMARK [2][]{subsection.7.2.3}{7.2.3 物理结构设计}{section.7.2}% 69
+\BOOKMARK [0][]{chapter.8}{8 实现与测试}{}% 70
+\BOOKMARK [1][]{section.8.1}{8.1 系统环境}{chapter.8}% 71
+\BOOKMARK [2][]{subsection.8.1.1}{8.1.1 硬件环境}{section.8.1}% 72
+\BOOKMARK [2][]{subsection.8.1.2}{8.1.2 软件环境}{section.8.1}% 73
+\BOOKMARK [1][]{section.8.2}{8.2 持久化}{chapter.8}% 74
+\BOOKMARK [2][]{subsection.8.2.1}{8.2.1\040Spring\040Date\040&\040JPA\040Hibernate}{section.8.2}% 75
+\BOOKMARK [1][]{section.8.3}{8.3 登陆&验证授权模块}{chapter.8}% 76
+\BOOKMARK [2][]{subsection.8.3.1}{8.3.1 JWT优势}{section.8.3}% 77
+\BOOKMARK [2][]{subsection.8.3.2}{8.3.2 使用JWT&Spring Security 实现验证和授权}{section.8.3}% 78
+\BOOKMARK [0][]{chapter*.23}{结　　论（设计类为设计总结）}{}% 79
+\BOOKMARK [0][]{chapter*.24}{参 考 文 献}{}% 80
+\BOOKMARK [0][]{chapter*.26}{附录A 附录内容名称}{}% 81
+\BOOKMARK [0][]{chapter*.27}{修改记录}{}% 82
+\BOOKMARK [0][]{chapter*.28}{致　　谢}{}% 83

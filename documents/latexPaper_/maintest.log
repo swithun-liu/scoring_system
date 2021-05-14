@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  13 MAY 2021 16:43
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  14 MAY 2021 10:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1204,7 +1204,15 @@ Package: xeCJK-listings 2020/02/14 v3.8.1 xeCJK patch file for listings
 
 LaTeX Warning: Label `chap04' multiply defined.
 
-) (./body/chap07.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/appendix1.aux) (./body/modify.aux) (./body/thank.aux))
+) (./body/chap07.aux) (./body/chap08.aux
+
+LaTeX Warning: Label `chap07' multiply defined.
+
+) (./body/chap09.aux
+
+LaTeX Warning: Label `chap07' multiply defined.
+
+) (./body/conclusion.aux) (./body/reference.aux) (./body/appendix1.aux) (./body/modify.aux) (./body/thank.aux))
 \openout1 = `maintest.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -1830,27 +1838,117 @@ Overfull \hbox (12.0pt too wide) detected at line 60
 
 
 Overfull \hbox (12.0pt too wide) detected at line 61
- \TU/TimesNewRoman(0)/m/n/12 21
+ \TU/TimesNewRoman(0)/m/n/12 20
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 62
- \TU/TimesNewRoman(0)/m/n/12 22
+ \TU/TimesNewRoman(0)/m/n/12 20
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 63
- \TU/TimesNewRoman(0)/m/n/12 26
+ \TU/TimesNewRoman(0)/m/n/12 22
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 64
- \TU/TimesNewRoman(0)/m/n/12 27
+ \TU/TimesNewRoman(0)/m/n/12 22
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 65
+ \TU/TimesNewRoman(0)/m/n/12 22
  []
 
 [4]
-Overfull \hbox (12.0pt too wide) detected at line 65
+Overfull \hbox (12.0pt too wide) detected at line 66
+ \TU/TimesNewRoman(0)/m/n/12 23
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 67
+ \TU/TimesNewRoman(0)/m/n/12 23
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 68
+ \TU/TimesNewRoman(0)/m/n/12 23
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 69
+ \TU/TimesNewRoman(0)/m/n/12 23
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 70
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 71
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 72
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 73
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 74
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 75
+ \TU/TimesNewRoman(0)/m/n/12 24
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 76
+ \TU/TimesNewRoman(0)/m/n/12 26
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 77
+ \TU/TimesNewRoman(0)/m/n/12 26
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 78
+ \TU/TimesNewRoman(0)/m/n/12 26
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 79
  \TU/TimesNewRoman(0)/m/n/12 28
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 80
+ \TU/TimesNewRoman(0)/m/n/12 29
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 81
+ \TU/TimesNewRoman(0)/m/n/12 33
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 82
+ \TU/TimesNewRoman(0)/m/n/12 34
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 83
+ \TU/TimesNewRoman(0)/m/n/12 36
  []
 
 )
@@ -1964,6 +2062,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 13--14
 
  []
 
+
+Package natbib Warning: Citation `.2019' on page 18 undefined on input line 21.
+
+
+Package natbib Warning: Citation `master1' on page 18 undefined on input line 22.
+
 File: out/uml/流程图/系统总体活动流程图/系统总体活动流程图.png Graphic file (type bmp)
 <out/uml/流程图/系统总体活动流程图/系统总体活动流程图.png>
 
@@ -1992,10 +2096,78 @@ LaTeX Warning: Text page 19 contains only floats.
 [19]
 File: out/uml/用例图/2-论文上传/2-论文上传.png Graphic file (type bmp)
 <out/uml/用例图/2-论文上传/2-论文上传.png>
-) [20]
+File: out/uml/用例图/3-论文评审评分/3-论文评审评分.png Graphic file (type bmp)
+<out/uml/用例图/3-论文评审评分/3-论文评审评分.png>
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+File: out/uml/用例图/4-统计评审情况/4-统计评审情况.png Graphic file (type bmp)
+<out/uml/用例图/4-统计评审情况/4-统计评审情况.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [20] [21]
+\openout2 = `body/chap08.aux'.
+
+ (./body/chap08.tex
+Chapter 7.
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--8
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+File: out/uml/WBS/系统WBS/系统WBS.png Graphic file (type bmp)
+<out/uml/WBS/系统WBS/系统WBS.png>
+) [22
+
+
+
+] [23]
+\openout2 = `body/chap09.aux'.
+
+ (./body/chap09.tex
+Chapter 8.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+
+LaTeX Font Warning: Font shape `TU/SimSun(1)/m/it' undefined
+(Font)              using `TU/SimSun(1)/m/n' instead on input line 50.
+
+[24
+
+
+
+] [25]
+
+Package natbib Warning: Citation `.2019h' on page 26 undefined on input line 111.
+
+
+Package natbib Warning: Citation `.2019h' on page 26 undefined on input line 116.
+
+File: out/uml/时序图/时序图-authentication/时序图-authentication.png Graphic file (type bmp)
+<out/uml/时序图/时序图-authentication/时序图-authentication.png>
+
+LaTeX Warning: Float too large for page by 24.06517pt on input line 126.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (4.12967pt too wide) in paragraph at lines 135--136
+[][][][][][]\TU/SimSun(1)/m/n/12 ：|  认 证 器，|  不 同 的[][][][][]
+ []
+
+) [26] [27]
 \openout2 = `body/conclusion.aux'.
 
- (./body/conclusion.tex) [21
+ (./body/conclusion.tex) [28
 
 
 
@@ -2027,23 +2199,28 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 (fontspec)             <->"宋体/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- (./maintest.bbl [22
+
+
+LaTeX Font Warning: Font shape `TU/宋体(0)/b/n' undefined
+(Font)              using `TU/宋体(0)/m/n' instead on input line 42.
+
+
+Package natbib Warning: Citation `.2019' on page 29 undefined on input line 42.
+
+
+Package natbib Warning: Citation `master1' on page 29 undefined on input line 43.
+
+No file maintest.bbl.
+[29
 
 
 
-]
-
-LaTeX Font Warning: Font shape `TU/宋体(0)/m/it' undefined
-(Font)              using `TU/宋体(0)/m/n' instead on input line 7.
-
-) [23
-
-]
+] [30]
 Overfull \hbox (18.16046pt too wide) in paragraph at lines 90--91
-\TU/SimSun(0)/m/it/10.5 国\TU/宋体(0)/m/n/10.5 ,01129210.5[P/ OL].2001-10-24[2002-05-28].http:// 211.152.9.47/ sipoasp/ zlijs/ hyjs-
+\TU/SimSun(0)/m/n/10.5 国\TU/宋体(0)/m/n/10.5 ,01129210.5[P/ OL].2001-10-24[2002-05-28].http:// 211.152.9.47/ sipoasp/ zlijs/ hyjs-
  []
 
-[24]) [25]
+) [31]
 \openout2 = `body/appendix1.aux'.
 
  (./body/appendix1.tex
@@ -2052,21 +2229,21 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 10.5pt
 (hyperref)                replaced by space on input line 5.
 
-) [26
+) [32
 
 
 
 ]
 \openout2 = `body/modify.aux'.
 
- (./body/modify.tex) [27
+ (./body/modify.tex) [33
 
 
 
 ]
 \openout2 = `body/thank.aux'.
 
- (./body/thank.tex) [28
+ (./body/thank.tex) [34
 
 
 
@@ -2074,13 +2251,17 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 \tf@thm=\write7
 \openout7 = `maintest.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 42.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 42.
- (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/chap00.aux) (./body/chap01.aux) (./body/chap02.aux) (./body/chap03.aux) (./body/chap04.aux) (./body/chap05.aux) (./body/chap07.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/appendix1.aux) (./body/modify.aux) (./body/thank.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 42.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 42.
+
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 44.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 44.
+(./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/chap00.aux) (./body/chap01.aux) (./body/chap02.aux) (./body/chap03.aux) (./body/chap04.aux) (./body/chap05.aux) (./body/chap07.aux) (./body/chap08.aux) (./body/chap09.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/appendix1.aux) (./body/modify.aux) (./body/thank.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 44.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 44.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 64E9E2EE761D367A863BE60C12848364;4675.
+(rerunfilecheck)             Checksum: F27AA232C9D7FF4165B683CE42F12852;5990.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2088,15 +2269,15 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 42.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 44.
  ) 
 Here is how much of TeX's memory you used:
- 40027 strings out of 479819
- 807601 string characters out of 5895846
- 1133693 words of memory out of 5000000
- 56247 multiletter control sequences out of 15000+600000
- 549734 words of font info for 200 fonts, out of 8000000 for 9000
+ 40293 strings out of 479819
+ 813392 string characters out of 5895846
+ 1326929 words of memory out of 5000000
+ 56486 multiletter control sequences out of 15000+600000
+ 549766 words of font info for 204 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 63i,13n,92p,2941b,1074s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,13n,92p,2966b,2614s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on maintest.pdf (36 pages).
+Output written on maintest.pdf (42 pages).

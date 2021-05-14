@@ -58,9 +58,27 @@
 \contentsline {subsection}{\numberline {6.3.1}系统总体功能}{20}{subsection.6.3.1}%
 \contentsline {subsection}{\numberline {6.3.2}用户登录}{20}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}论文上传}{20}{subsection.6.3.3}%
-\contentsline {chapter}{结　　论（设计类为设计总结）}{21}{chapter*.19}%
-\contentsline {chapter}{参\nobreakspace {}考\nobreakspace {}文\nobreakspace {}献}{22}{chapter*.20}%
-\contentsline {chapter}{附录A\hskip 1em\relax 附录内容名称}{26}{chapter*.23}%
-\contentsline {chapter}{修改记录}{27}{chapter*.24}%
-\contentsline {chapter}{致　　谢}{28}{chapter*.25}%
+\contentsline {subsection}{\numberline {6.3.4}论文评审评分}{20}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}统计评审情况}{20}{subsection.6.3.5}%
+\contentsline {chapter}{\numberline {7}系统设计}{22}{chapter.7}%
+\contentsline {section}{\numberline {7.1}系统架构设计}{22}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}系统整体模块设计}{22}{subsection.7.1.1}%
+\contentsline {section}{\numberline {7.2}数据库设计}{23}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}概念结构设计}{23}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}逻辑结构设计}{23}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}物理结构设计}{23}{subsection.7.2.3}%
+\contentsline {chapter}{\numberline {8}实现与测试}{24}{chapter.8}%
+\contentsline {section}{\numberline {8.1}系统环境}{24}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}硬件环境}{24}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}软件环境}{24}{subsection.8.1.2}%
+\contentsline {section}{\numberline {8.2}持久化}{24}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Spring Date \& JPA Hibernate}{24}{subsection.8.2.1}%
+\contentsline {section}{\numberline {8.3}登陆\&验证授权模块}{26}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}JWT优势}{26}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}使用JWT\&Spring Security 实现验证和授权}{26}{subsection.8.3.2}%
+\contentsline {chapter}{结　　论（设计类为设计总结）}{28}{chapter*.23}%
+\contentsline {chapter}{参\nobreakspace {}考\nobreakspace {}文\nobreakspace {}献}{29}{chapter*.24}%
+\contentsline {chapter}{附录A\hskip 1em\relax 附录内容名称}{32}{chapter*.26}%
+\contentsline {chapter}{修改记录}{33}{chapter*.27}%
+\contentsline {chapter}{致　　谢}{34}{chapter*.28}%
 \contentsfinish 

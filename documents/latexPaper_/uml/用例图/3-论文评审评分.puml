@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+rectangle "论文评审评分" {
+    actor sa as "学生"
+    actor ta as "导师"
+    usecase reveiew as "论文评审"
+    usecase download as "论文下载"
+    usecase tip as "添加问题标签"
+    usecase comment as "评论回复"
+    usecase renewPaper as "论文更新"
+    usecase score as "论文评分"
+    download ..> reveiew: <<extends>>
+    sa --> comment
+    aa --> comment
+    sa --> renewPaper
+    aa --> score
+    aa --> reveiew
+    aa --> tip
+}
+
+@enduml

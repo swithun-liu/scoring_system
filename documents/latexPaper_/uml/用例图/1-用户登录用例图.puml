@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+rectangle "用户登录" {
+    actor user
+    usecase input as "输入登录名，密码，选择人员类型（前端）"
+    usecase submit as "提交登陆（前端）"
+    usecase check as "验证和授权（后端）"
+    usecase ok as "登陆成功进入系统（前端）"
+    user --> input
+    input --> submit
+    submit -down-> check
+    check -left-> ok
+}
+
+@enduml
