@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-12 10:23:25
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-12 15:40:05
+ * @LastEditTime: 2021-05-16 19:49:39
  */
 package com.swithun.backend.tools.secret.tools;
 
@@ -63,8 +63,8 @@ public class temp {
             flag &= checkLoopItem(newPiles, next, begin, time);
         }
         // 1.2 尝试时间出度
-        String next = getNextTPlan();
-        flag &= checkLoopItem(newPiles, next, begin, time);
+        // String next = getNextTPlan();
+        // flag &= checkLoopItem(newPiles, next, begin, time);
 
         return flag;
     }

@@ -12,18 +12,13 @@ package com.swithun.backend.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import com.swithun.backend.dao.StudentFileRepository;
 import com.swithun.backend.dao.StudentRepository;
 import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dto.AddFileFileListDTO;
-import com.swithun.backend.dto.StudentGetFileListDTO;
-import com.swithun.backend.dto.CommentDTO;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
-import com.swithun.backend.tools.convert.Entity2DTO;
 import com.swithun.backend.entity.CommentForFileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +34,6 @@ public class StudentService {
     private StudentFileRepository fileR;
     @Autowired
     private CommentForFileRepository commentR;
-    @Autowired
-    private Entity2DTO converter;
 
     /**
      * @description: 为 添加论文 页面 获取 文件列表

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:44:19
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-03 16:37:04
+ * @LastEditTime: 2021-05-16 20:06:31
  */
 package com.swithun.backend.controller;
 
@@ -21,7 +21,6 @@ import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.TeacherService;
-import com.swithun.backend.tools.convert.Entity2DTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -41,9 +40,6 @@ public class TeacherController {
 
     @Autowired
     private FileService fileservice;
-
-    @Autowired
-    private Entity2DTO converter;
 
     @GetMapping(value = "/testprincipal")
     public String testPrincipal(Principal principal) {

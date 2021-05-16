@@ -128,13 +128,110 @@ JWT(JSON Web Token)的优势在于
 关键问题如下：
 \begin{enumerate}
     \item 多用户表使用Spring Security\\
-    验证授权涉及到的关键类：
-    \begin{enumerate}
-        \item \lstinline[language = Java]| Authentication |：用户认证信息。
-        \item \lstinline[language = Java]| UsernamePasswordAuthenticationToken |：\lstinline[language = Java]| Authentication |的实现类，用于登陆验证，最为常用。
-        \item \lstinline[language = Java]| AuthenticationProvider |：认证器，不同的\lstinline[language = Java]| AuthenticationProvider | 处理不同的 \lstinline[language = Java]| Authentication |
-        \item \lstinline[language = Java]| DaoAuthenticationProvider |：\lstinline[language = Java]| AuthenticationProvider |的实现类，用于处理\lstinline[language = Java]| UsernamePasswordAuthenticationToken |
-        \item \lstinline[language = Java]| ProviderManager |：用于管理\lstinline[language = Java]| AuthenticationProvider |
-        \item \lstinline[language = Java]| UserDetailService |：为\lstinline[language = Java]| DaoAuthenticationProvider |提供从数据库查询用户的功能，用于做密码对比。
-    \end{enumerate}
+          验证授权涉及到的关键类（图\ref{SpringSecurity}）：
+          \begin{figure}[h]
+              \centering
+              \includegraphics[scale = 0.5]{out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png}
+              \caption{\song\wuhao Spring Security 验证授权关键类}
+              \label{SpringSecurity}
+          \end{figure}
+          \begin{enumerate}
+              \item \lstinline[language = Java]| Authentication |：用户认证信息。
+              \item \lstinline[language = Java]| UsernamePasswordAuthenticationToken |：\lstinline[language = Java]| Authentication |的实现类，用于登陆验证，最为常用。
+              \item \lstinline[language = Java]| AuthenticationProvider |：认证器，不同的\lstinline[language = Java]| AuthenticationProvider | 处理不同的 \lstinline[language = Java]| Authentication |
+              \item \lstinline[language = Java]| DaoAuthenticationProvider |：\lstinline[language = Java]| AuthenticationProvider |的实现类，用于处理\lstinline[language = Java]| UsernamePasswordAuthenticationToken |
+              \item \lstinline[language = Java]| ProviderManager |：用于管理\lstinline[language = Java]| AuthenticationProvider |
+              \item \lstinline[language = Java]| UserDetailService |：为\lstinline[language = Java]| DaoAuthenticationProvider |提供从数据库查询用户的功能，用于做密码对比。
+          \end{enumerate}
+          多用户表配置Spring Security（图\ref{SpringSecurityMultiUser}）：
+          \begin{enumerate}
+              \item 为不同用户建立各自的\lstinline[language = Java]| UserDetailService |
+                    \begin{lstlisting} [language = Java]
+    public class XXXUserDetialsService 
+                implements UserDetailService
+                \end{lstlisting}
+                    ，各自的\lstinline[language = Java]| UserDetailService |从各自的数据库表中查询密码，提供给各自的\lstinline[language = Java]| DaoAuthenticationProvider |使用。
+              \item 为不同用户建立各自的\lstinline[language = Java]| UsernamePasswordAuthenticationToken | \begin{lstlisting} [language = Java]
+    public class XXXUPAuthToken 
+                extends UsernamePasswordAuthenticationToken
+              \end{lstlisting}
+              \item 为不同用户建立各自的\lstinline[language = Java]| DaoAuthenticationProvider | \begin{lstlisting} [language = Java]
+    public class XXXDaoAuthProvider 
+                extends DaoAuthenticationProvider
+              \end{lstlisting}
+              \item 进行Security配置 \begin{lstlisting} [language = Java]
+    @Configuration
+    @EnableWebSecurity
+    @EnableGlobalMethodSecurity(prePostEnabled = true)
+    public class MySecurityConfig 
+                extends WebSecurityConfigurerAdapter 
+              \end{lstlisting}
+                    需要的关键配置：\begin{enumerate}
+                        \item 注入\lstinline[language = Java]| XXXAuthProvider |
+                        \item 向\lstinline[language = Java]| AuthenticationManager |添加\lstinline[language = Java]| XXXAuthProvider |
+                        \item 注入\lstinline[language = Java]| AuthenticationManager |
+                    \end{enumerate}
+          \end{enumerate}
+          \begin{figure}[h]
+              \centering
+              \includegraphics[scale = 0.35]{out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png}
+              \caption{\song\wuhao SpringSecurity多用户表验证}
+              \label{SpringSecurityMultiUser}
+          \end{figure}
+    \item CORS跨域问题\\
+          CORS(Cross-origin resource sharing)——跨域资源共享，一种可以允许访问其他域名下的受限资源的机制。
+          目前CORS的现行标准由WHATWG(Web Hypertext Application Technology Working Group)在网络浏览器中实现和测试。\\
+          CORS-preflight request——预检请求，对于可能会对服务器造成副作用的请求（非简单请求），浏览器会先使用OPTIONS方法发送预检请求
+          询问服务器是否允许此次跨域请求。\\
+          简单请求需满足：
+          \begin{enumerate}
+              \item 请求方法：\lstinline[language = xml]| GET、POST、HEAD |
+              \item 只使用了如下的安全首部字段，不得人为设置其他首部字段\begin{lstlisting} [language = Java]
+    Accept
+    Accept-Language
+    Content-Language
+    Content-Type 仅限以下三种
+            text/plain
+            multipart/form-data
+            application/x-www-form-urlencoded
+    HTML头部header field字段：
+                DPR、Download、Save-Data、Viewport-Width、WIdth
+              \end{lstlisting}
+              \item 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问
+              \item 请求中没有使用 ReadableStream 对象
+          \end{enumerate}
+          CORS流程（图\ref{CORS-flow}）：
+          \begin{figure}[h]
+              \centering
+              \includegraphics[scale = 0.6]{out/uml/时序图/CORS-flow/CORS-flow.png}
+              \caption{\song\wuhao CORS流程}
+              \label{CORS-flow}
+          \end{figure}
+          Spring Security 配置配置CORS：
+          \begin{enumerate}
+              \item 打开CORS \begin{lstlisting} [language = Java]
+// MySecurityConfig.java
+  protected void configure(HttpSecurity httpSecurity) 
+                            throws Exception {
+    httpSecurity..cors()
+              \end{lstlisting}
+              \item 配置配置CORS response
+                    \begin{lstlisting} [language = Java]
+// MySecurityConfig.java
+@Bean
+CorsConfigurationSource corsConfigurationSource() {
+  CorsConfiguration configuration = new CorsConfiguration();
+  configuration.addAllowedOrigin("*"); 
+                // 应设置为前端服务器域名前缀
+  configuration.setAllowedMethods(
+              Arrays.asList("GET", "POST", "OPTION"));
+  configuration.addAllowedHeader("*");
+  // 允许的Header，起码需要允许 Access-Control-Allow-Origin
+  UrlBasedCorsConfigurationSource source = 
+                          new UrlBasedCorsConfigurationSource();
+  source.registerCorsConfiguration("/**", configuration);
+  return source;
+}
+          \end{lstlisting}
+          \end{enumerate}
 \end{enumerate}

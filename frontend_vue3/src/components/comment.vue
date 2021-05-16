@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-04 10:58:35
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 20:05:21
+ * @LastEditTime: 2021-05-16 19:46:00
 -->
 <template>
   <el-tree
@@ -45,6 +45,8 @@ export default {
         children: 'commentForFilesById',
         label: 'comments',
       },
+      tags: {
+      }
     }
   },
 }

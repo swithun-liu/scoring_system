@@ -10,6 +10,16 @@ import java.util.Objects;
 @Entity
 @Table(name = "CommentForFile", schema = "scoring_system", catalog = "")
 public class CommentForFileEntity {
+    private Integer id;
+    private String comments;
+    private StudentFileEntity studentFileByStudentFileId;
+    private StudentEntity studentByStudentId;
+    private TeacherEntity teacherByTeacherId;
+    @JsonIgnore
+    private CommentForFileEntity commentForFileByParentCommentId;
+    private Collection<CommentForFileEntity> commentForFilesById;
+    private Collection<TagCommentEntity> tagCommentsById;
+
     public CommentForFileEntity(String comments, StudentFileEntity studentFileByStudentFileId,
             TeacherEntity teacherByTeacherId, CommentForFileEntity commentForFileByParentCommentId) {
         this.comments = comments;
@@ -32,15 +42,6 @@ public class CommentForFileEntity {
 
     public CommentForFileEntity() {
     }
-
-    private Integer id;
-    private String comments;
-    private StudentFileEntity studentFileByStudentFileId;
-    private StudentEntity studentByStudentId;
-    private TeacherEntity teacherByTeacherId;
-    @JsonIgnore
-    private CommentForFileEntity commentForFileByParentCommentId;
-    private Collection<CommentForFileEntity> commentForFilesById;
 
     @Id
     @Column(name = "id")
@@ -65,8 +66,10 @@ public class CommentForFileEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         CommentForFileEntity that = (CommentForFileEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(comments, that.comments);
     }
@@ -123,5 +126,14 @@ public class CommentForFileEntity {
 
     public void setCommentForFilesById(Collection<CommentForFileEntity> commentForFilesById) {
         this.commentForFilesById = commentForFilesById;
+    }
+
+    @OneToMany(mappedBy = "commentForFileByCommentId")
+    public Collection<TagCommentEntity> getTagCommentsById() {
+        return tagCommentsById;
+    }
+
+    public void setTagCommentsById(Collection<TagCommentEntity> tagCommentsById) {
+        this.tagCommentsById = tagCommentsById;
     }
 }
