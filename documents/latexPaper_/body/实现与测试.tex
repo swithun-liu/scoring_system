@@ -172,6 +172,100 @@ JWT(JSON Web Token)的优势在于
                         \item 注入\lstinline[language = Java]| AuthenticationManager |
                     \end{enumerate}
           \end{enumerate}
+          总体流程：
+          \begin{enumerate}
+              \item 前端发起身份验证请求，由于尚未登陆，所以前端没有Token信息，因而无法通过Spring Security的验证，这需要在 MySecurityConfig 中配置——放过访问"/authentication"的请求，以便进行身份验证和授权。\begin{lstlisting} [language = Java]
+  @Override
+  protected void configure(HttpSecurity httpSecurity)
+                                    throws Exception {
+    httpSecurity.authorizeRequests()
+        .antMatchers("/authenticate", "/register")
+        .permitAll()// 身份验证和注册不需要拦截
+        ...
+  }
+              \end{lstlisting}
+              \item 请求到达 MyAuthenticationController，此时可以从请求中获取到登陆用户身份类型，如果是学生则需要使用 StudentUserDetailService 获取UserDetails，如果是教师则需要使用 TeacherDetailsService 获取UserDetails，同理，如果是管理员则需要使用 AdminDetailsService 获取UserDetials。
+              \item 此时进入到 XXXUserDetialsService 中，这里需要重写方法 loadUserByUsername(String username)，如果是为学生用户服务的，则需要根据传入的username从学生表中取出用户，如果是为教师服务的，则需要查询教师表并从中找到用户。如果没有找到用户则抛出异常，如果找的了则建立 org.springframework.security.core.userdetails.User（为UserDetials的实现类）其中包含用户名，用户密码，用户权限和用户身份。
+              \item 当获得了 XXXUserDetialsService 返还的 UserDetials，则可以开始进行身份验证。该验证需要 AuthenticationProvider 来完成，因此需要传递需要验证的东西（Authentication）给管理 AuthenticationProvider 的 AuthenticationManager 进行身份验证。由于这里有不同种类的用户且不同种类用户需要查询不同的表，所以需要建立不同 AuthenticationProvider （使用不同的 XXXUserDetialsService（从不同的数据库查询用户））去处理不同的 Authentication，而用来处理用户名用户密码的 AuthenticationProvider 是 DaoAuthenticationProvider，用来处理用户名用户密码的 Authentication 是 UsernamePasswordAuthenticationToken，所以需要为不同用户建立不同的 XXXUsernamePasswordAuthenticationToken 和不同的 XXXAuthProvider。为了绑定 XXXAuthProvider 和 XXXUsernamePasswordAuthenticationToken 则需要重写 XXXAuthProvider 的 supports 方法。
+                    \begin{lstlisting} [language = Java]
+    // XXXDaoAuthProvider
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return XXXUsernamePasswordAutenticationToken
+                .class
+                .isAssignableFrom(authentication);
+    }
+              \end{lstlisting}
+                    DaoAuthenticationProvider 是继承 AbstractUserDetailsAuthenticationProvider 的，不同在于 DaoAuthenticationProvider 增加了验证密码的功能，这也正是我们需要的，但是验证密码需要查询数据库也就需要 UserDetailService，所以需要通过 MySecurityConfig 为 XXXAuthProvider 注入不同的 XXXUserDetialsService。这里选择setter注入：
+                    \begin{lstlisting} [language = Java]
+  // XXXDaoAuthProvider
+  @Override
+  public void setUserDetailsService(
+      UserDetailsService userDetailsService) {
+      super.setUserDetailsService(userDetailsService);
+  }
+              \end{lstlisting}
+                    \begin{lstlisting} [language = Java]
+  // MySecurityConfig
+  @Autowired
+  @Qualifier("XXXUserDetailsService")
+  private UserDetailsService XXXUserDetailsService;
+
+  // 注入
+  @Bean("XXXDaoAutenticationProvider")
+  DaoAuthenticationProvider daoXXXDaoAutenticationProvider() 
+  {
+    return new XXXDaoAutenticationProvider(
+                                passwordEncoder(), 
+                                XXXUserDetailsService);
+  }
+              \end{lstlisting}
+                    这个过程中涉及的类比较多且关系比较笔复杂，可以参考图\ref{SpringSecurityMultiUser}（经过简化，略去了与该流程相关程度不大的类）。
+              \item 之后流程又回到了 MyAuthenticationController，此时如果通过了之前的身份验证则可以为用户生成Token了，这里需要使用 JwTokenUtil 生成Token，将 之前获得的 userdetails 传递给 JwTokenUtil，需要注意的是要在 claims 中填入用户角色，这样前端拿到Token之后可以解析出用户角色（这部分信息对应图\ref{jwt}Payload部分）。
+                    \begin{lstlisting} [language = Java]
+  // 后端生成Token
+  public String generateToken(UserDetails userDetails) {
+      Map<String, Object> claims = new HashMap<>();
+      Collection<? extends GrantedAuthority> it = 
+                          userDetails.getAuthorities();
+
+      List<String> roles = new ArrayList<String>();
+      for (GrantedAuthority grantedAuthority : it) {
+          System.out.println(grantedAuthority.toString());
+          if (grantedAuthority.toString()
+                          .startsWith("ROLE_")) {
+              roles.add(
+                  grantedAuthority.toString().substring(5));
+          }
+      }
+      
+      claims.put("userType", roles); 
+          // 在 JWT payload 中放入 自定义的角色信息
+
+      return doGenerateToken(
+              claims, userDetails.getUsername());
+  }
+              \end{lstlisting}
+                    \begin{lstlisting} [language = Java]
+  // 前端解析Token
+  export function jwtDecrypt(token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+')
+                            .replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+      .split('')
+        .map(function (c) {
+          return '%' + ('00' + 
+            c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  }
+                \end{lstlisting}
+                \item 当前端接收到后端的response之后，则可以从返还的Token中获取用户信息存储到localStore。之后的每个请求也都需要在Header中放入Token用于身份验证。
+          \end{enumerate}
           \begin{figure}[h]
               \centering
               \includegraphics[scale = 0.35]{out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png}
@@ -233,5 +327,13 @@ CorsConfigurationSource corsConfigurationSource() {
   return source;
 }
           \end{lstlisting}
+          各个字段的含义：
+          \begin{enumerate}
+              \item Access-Control-Allow-Origin：\\
+              \begin{lstlisting} [language = XML]
+                  Access-Control-Allow-Origin: <origin> | *
+              \end{lstlisting}
+              origin 的值至少需要指定前端服务器的URL，这样前端向后端发送的请求才能被允许。
+          \end{enumerate}
           \end{enumerate}
 \end{enumerate}

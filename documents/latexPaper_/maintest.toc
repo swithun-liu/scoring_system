@@ -1,0 +1,91 @@
+\contentsline {chapter}{摘　　要}{I}{chapter*.1}%
+\contentsline {chapter}{Abstract}{II}{chapter*.2}%
+\contentsline {chapter}{引　　言}{1}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}正文格式说明}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}论文格式基本要求}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}论文页眉页脚的编排}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}论文正文格式}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}章节标题格式}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.5}各章之间的分隔符设置}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}正文中的编号}{4}{section.1.6}%
+\contentsline {chapter}{\numberline {2}图表及公式的格式说明}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}图的格式说明}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}图的格式示例}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}图的格式描述}{5}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}表的格式说明}{6}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}表的格式示例}{6}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}表的格式描述}{6}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}公式的格式说明}{8}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}公式的格式示例}{8}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}公式的格式描述}{8}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}参考文献的格式说明}{8}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}参考文献在正文中的引用实例}{8}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}参考文献在正文中引用的书写格式}{8}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}参考文献的书写格式}{8}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}参考文献的书写格式示例}{9}{subsection.2.4.4}%
+\contentsline {section}{\numberline {2.5}量和单位的使用}{9}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}使用方法}{9}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}中华人名共和国法定计量单位}{9}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}规范表达注意事项}{9}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}名词术语}{9}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}数字}{11}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}外文字母}{12}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.4}量和单位}{13}{subsection.2.6.4}%
+\contentsline {subsection}{\numberline {2.6.5}标点符号}{13}{subsection.2.6.5}%
+\contentsline {chapter}{\numberline {3}打印说明}{14}{chapter.3}%
+\contentsline {section}{\numberline {3.1}封面}{14}{section.3.1}%
+\contentsline {section}{\numberline {3.2}原创性声明}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.3}关于使用授权的声明}{14}{section.3.3}%
+\contentsline {section}{\numberline {3.4}中英文摘要}{14}{section.3.4}%
+\contentsline {section}{\numberline {3.5}目录}{14}{section.3.5}%
+\contentsline {section}{\numberline {3.6}正文}{14}{section.3.6}%
+\contentsline {chapter}{\numberline {4}论文装订注意事项}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}设计说明书（论文）}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}外文翻译}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}装订规范要求}{15}{section.4.3}%
+\contentsline {chapter}{\numberline {5}绪论}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}研究背景}{17}{section.5.1}%
+\contentsline {section}{\numberline {5.2}国内外发展现状}{17}{section.5.2}%
+\contentsline {section}{\numberline {5.3}研究意义及本人工作}{18}{section.5.3}%
+\contentsline {section}{\numberline {5.4}本文组织结构}{18}{section.5.4}%
+\contentsline {chapter}{\numberline {6}系统相关技术}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Spring Boot介绍}{19}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Spring Security介绍}{19}{section.6.2}%
+\contentsline {section}{\numberline {6.3}JWT介绍}{19}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Spring Data Jpa \& Hibernate介绍}{19}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Vue.js介绍}{22}{section.6.5}%
+\contentsline {chapter}{\numberline {7}需求分析}{26}{chapter.7}%
+\contentsline {section}{\numberline {7.1}可行性分析}{26}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}技术可行性分析}{26}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}经济可行性分析}{26}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}操作可行性分析}{26}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}业务流程分析}{26}{section.7.2}%
+\contentsline {section}{\numberline {7.3}系统功能需求分析}{27}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}系统总体功能}{27}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}用户登录}{28}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}论文上传}{28}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}论文下载}{29}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}论文评审评分}{29}{subsection.7.3.5}%
+\contentsline {subsection}{\numberline {7.3.6}统计评审情况}{29}{subsection.7.3.6}%
+\contentsline {chapter}{\numberline {8}系统设计}{31}{chapter.8}%
+\contentsline {section}{\numberline {8.1}系统整体模块设计}{31}{section.8.1}%
+\contentsline {section}{\numberline {8.2}系统架构设计}{31}{section.8.2}%
+\contentsline {section}{\numberline {8.3}数据库设计}{33}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}概念结构设计}{33}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}逻辑结构设计}{33}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}物理结构设计}{33}{subsection.8.3.3}%
+\contentsline {chapter}{\numberline {9}实现与测试}{35}{chapter.9}%
+\contentsline {section}{\numberline {9.1}系统环境}{35}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}硬件环境}{35}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}软件环境}{35}{subsection.9.1.2}%
+\contentsline {section}{\numberline {9.2}持久化}{35}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Spring Date \& JPA Hibernate}{35}{subsection.9.2.1}%
+\contentsline {section}{\numberline {9.3}登陆\&验证授权模块}{37}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}JWT优势}{37}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}使用JWT\&Spring Security 实现验证和授权}{37}{subsection.9.3.2}%
+\contentsline {chapter}{结　　论（设计类为设计总结）}{47}{chapter*.31}%
+\contentsline {chapter}{参\nobreakspace {}考\nobreakspace {}文\nobreakspace {}献}{48}{chapter*.32}%
+\contentsline {chapter}{附录A\hskip 1em\relax 附录内容名称}{52}{chapter*.35}%
+\contentsline {chapter}{修改记录}{53}{chapter*.36}%
+\contentsline {chapter}{致　　谢}{54}{chapter*.37}%
+\contentsfinish 

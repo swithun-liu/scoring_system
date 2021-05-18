@@ -32,6 +32,16 @@ Spring Security特点：
     \item 与Spring Web MVC的可选继承。
 \end{enumerate}
 
+\section{JWT介绍}
+
+JSON Web Toen(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.4]{out/uml/部署图/JWT/JWT.png}
+    \caption{\song\wuhao JWT示例}
+    \label{jwt}
+\end{figure}
+
 \section{Spring Data Jpa \& Hibernate介绍}
 
 目前主流的ORM(Object/Relation Mapping)工具有Hibernate和MyBatis。
@@ -143,7 +153,7 @@ createApp(App).mount('#app')
     \end{lstlisting}
           改变化解决了Vue2全局配置在单元测试中产生的问题（测试用户会因全局配置而互相影响）
     \item 多Root
-\begin{lstlisting} [language = HTML]
+          \begin{lstlisting} [language = HTML]
 <template>
   <div> // 在Vue3中可以去掉
     <h1>{{ msg }}</h1>
@@ -155,9 +165,9 @@ createApp(App).mount('#app')
 </template>
 \end{lstlisting}
     \item 组合式API。这应该是Vue3最大的变化，该变化主要是为了解决Vue2大组件难以阅读和维护的问题以及管理和维护组件之间的逻辑的问题。主要变化有：
-    \begin{enumerate}
-        \item Setup
-            \begin{lstlisting} [language = HTML]
+          \begin{enumerate}
+              \item Setup
+                    \begin{lstlisting} [language = HTML]
 <template>
   <!-- your template code -->
 </template>
@@ -169,32 +179,32 @@ export default {
 };
 </script>
             \end{lstlisting}
-        \item Reactive References\\
-        \lstinline[language = Java]| ref |即"Reactive References"，它包装了原始数据并且允许我们跟踪变化。（在Vue2中是使用\lstinline[language = Java]| data() |包装原始内部对象。
-        \item Methods/Computed/Watch\\
-        Vue2中有一个单独的methods/Computed/Watch部分用来编写方法，在vue3中则在setup()中编写。
-        \item Props\\
-        在Vue3中不需要this就可以访问props
-        \item 移除了Vue filter\\
-        在Vue2中filter主要用于普通文本的格式化，而在Vue3中被移除了。移除的主要原因是它的性能和普通的函数没有区别，而写成普通的函数则会有更大的复用空间。
-        \item 多个v-model\\
-        一个组件可以处理多个v-model，这样在多值处理地情况下，Vue3能更简单地通过多个event将值从子组件传递到父组件。
-        \item 模块化
-        可以将setup()中的内容分离到另一个composition function中并保存在一个js文件中以便重用。
-        \item 声明周期钩子
-            \begin{enumerate}
-                \item (Vue2)beforeCreate()
-                \item (vue2)无$\Rightarrow$(Vue3)setup()
-                \item (Vue2)created()
-                \item (Vue2)beforeMount()
-                \item (Vue2)mounted()
-                \item (Vue2)beforeUpdate()
-                \item (Vue2)updated()
-                \item (Vue2)beforeDestroy()$\Rightarrow$(Vue3)beforeUnmount()
-                \item (Vue2)destroyed()$\Rightarrow$(Vue3)unmouted()
-                \item (Vue3)onRenderTracked()
-                \item (Vue3)onRenderTriggered()
-            \end{enumerate}
-            并且beforeCreate()和create()不在需要，它们的工作放在setup()中完成。
-    \end{enumerate}
+              \item Reactive References\\
+                    \lstinline[language = Java]| ref |即"Reactive References"，它包装了原始数据并且允许我们跟踪变化。（在Vue2中是使用\lstinline[language = Java]| data() |包装原始内部对象。
+              \item Methods/Computed/Watch\\
+                    Vue2中有一个单独的methods/Computed/Watch部分用来编写方法，在vue3中则在setup()中编写。
+              \item Props\\
+                    在Vue3中不需要this就可以访问props
+              \item 移除了Vue filter\\
+                    在Vue2中filter主要用于普通文本的格式化，而在Vue3中被移除了。移除的主要原因是它的性能和普通的函数没有区别，而写成普通的函数则会有更大的复用空间。
+              \item 多个v-model\\
+                    一个组件可以处理多个v-model，这样在多值处理地情况下，Vue3能更简单地通过多个event将值从子组件传递到父组件。
+              \item 模块化
+                    可以将setup()中的内容分离到另一个composition function中并保存在一个js文件中以便重用。
+              \item 声明周期钩子
+                    \begin{enumerate}
+                        \item (Vue2)beforeCreate()
+                        \item (vue2)无$\Rightarrow$(Vue3)setup()
+                        \item (Vue2)created()
+                        \item (Vue2)beforeMount()
+                        \item (Vue2)mounted()
+                        \item (Vue2)beforeUpdate()
+                        \item (Vue2)updated()
+                        \item (Vue2)beforeDestroy()$\Rightarrow$(Vue3)beforeUnmount()
+                        \item (Vue2)destroyed()$\Rightarrow$(Vue3)unmouted()
+                        \item (Vue3)onRenderTracked()
+                        \item (Vue3)onRenderTriggered()
+                    \end{enumerate}
+                    并且beforeCreate()和create()不在需要，它们的工作放在setup()中完成。
+          \end{enumerate}
 \end{enumerate}
