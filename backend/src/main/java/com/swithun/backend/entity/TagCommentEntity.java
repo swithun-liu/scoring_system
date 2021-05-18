@@ -42,7 +42,7 @@ public class TagCommentEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
     public TagEntity getTagByTagId() {
         return tagByTagId;
     }
@@ -52,7 +52,7 @@ public class TagCommentEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "comment_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "comment_id", referencedColumnName = "id")
     public CommentForFileEntity getCommentForFileByCommentId() {
         return commentForFileByCommentId;
     }
