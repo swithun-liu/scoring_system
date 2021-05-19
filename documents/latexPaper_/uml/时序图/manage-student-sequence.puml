@@ -1,0 +1,25 @@
+@startuml
+actor user as "用户"
+participant f as "前端"
+participant c as "Contorller"
+participant s as "Service"
+participant r as "StudentRepsotory"
+participant e as "StudentEntity"
+user --> f: 切换学生统计页面
+f --> c: request
+c --> s: getAllStudents
+s --> r: findAll
+r --> e: new
+e --> r: entities
+r --> c: entities
+c --> f: response
+f --> user: 展示给用户
+user --> f: 点击学生条目并修改
+f --> c: request
+c --> s: entity
+s --> r: save
+r --> s: entity
+s --> c
+c --> f: response
+f --> user: 成功消息
+@enduml

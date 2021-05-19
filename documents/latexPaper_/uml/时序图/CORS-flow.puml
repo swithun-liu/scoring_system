@@ -1,6 +1,5 @@
 @startuml
 
-
 participant jscode as "JavaScript Code"
 jscode -> Browser: axios.request()
 alt 非简单请求

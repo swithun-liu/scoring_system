@@ -54,37 +54,52 @@
 \BOOKMARK [1][]{section.6.3}{6.3 JWT介绍}{chapter.6}% 54
 \BOOKMARK [1][]{section.6.4}{6.4 Spring Data Jpa & Hibernate介绍}{chapter.6}% 55
 \BOOKMARK [1][]{section.6.5}{6.5 Vue.js介绍}{chapter.6}% 56
-\BOOKMARK [0][]{chapter.7}{7 需求分析}{}% 57
-\BOOKMARK [1][]{section.7.1}{7.1 可行性分析}{chapter.7}% 58
-\BOOKMARK [2][]{subsection.7.1.1}{7.1.1 技术可行性分析}{section.7.1}% 59
-\BOOKMARK [2][]{subsection.7.1.2}{7.1.2 经济可行性分析}{section.7.1}% 60
-\BOOKMARK [2][]{subsection.7.1.3}{7.1.3 操作可行性分析}{section.7.1}% 61
-\BOOKMARK [1][]{section.7.2}{7.2 业务流程分析}{chapter.7}% 62
-\BOOKMARK [1][]{section.7.3}{7.3 系统功能需求分析}{chapter.7}% 63
-\BOOKMARK [2][]{subsection.7.3.1}{7.3.1 系统总体功能}{section.7.3}% 64
-\BOOKMARK [2][]{subsection.7.3.2}{7.3.2 用户登录}{section.7.3}% 65
-\BOOKMARK [2][]{subsection.7.3.3}{7.3.3 论文上传}{section.7.3}% 66
-\BOOKMARK [2][]{subsection.7.3.4}{7.3.4 论文下载}{section.7.3}% 67
-\BOOKMARK [2][]{subsection.7.3.5}{7.3.5 论文评审评分}{section.7.3}% 68
-\BOOKMARK [2][]{subsection.7.3.6}{7.3.6 统计评审情况}{section.7.3}% 69
-\BOOKMARK [0][]{chapter.8}{8 系统设计}{}% 70
-\BOOKMARK [1][]{section.8.1}{8.1 系统整体模块设计}{chapter.8}% 71
-\BOOKMARK [1][]{section.8.2}{8.2 系统架构设计}{chapter.8}% 72
-\BOOKMARK [1][]{section.8.3}{8.3 数据库设计}{chapter.8}% 73
-\BOOKMARK [2][]{subsection.8.3.1}{8.3.1 概念结构设计}{section.8.3}% 74
-\BOOKMARK [2][]{subsection.8.3.2}{8.3.2 逻辑结构设计}{section.8.3}% 75
-\BOOKMARK [2][]{subsection.8.3.3}{8.3.3 物理结构设计}{section.8.3}% 76
-\BOOKMARK [0][]{chapter.9}{9 实现与测试}{}% 77
-\BOOKMARK [1][]{section.9.1}{9.1 系统环境}{chapter.9}% 78
-\BOOKMARK [2][]{subsection.9.1.1}{9.1.1 硬件环境}{section.9.1}% 79
-\BOOKMARK [2][]{subsection.9.1.2}{9.1.2 软件环境}{section.9.1}% 80
-\BOOKMARK [1][]{section.9.2}{9.2 持久化}{chapter.9}% 81
-\BOOKMARK [2][]{subsection.9.2.1}{9.2.1\040Spring\040Date\040&\040JPA\040Hibernate}{section.9.2}% 82
-\BOOKMARK [1][]{section.9.3}{9.3 登陆&验证授权模块}{chapter.9}% 83
-\BOOKMARK [2][]{subsection.9.3.1}{9.3.1 JWT优势}{section.9.3}% 84
-\BOOKMARK [2][]{subsection.9.3.2}{9.3.2 使用JWT&Spring Security 实现验证和授权}{section.9.3}% 85
-\BOOKMARK [0][]{chapter*.31}{结　　论（设计类为设计总结）}{}% 86
-\BOOKMARK [0][]{chapter*.32}{参 考 文 献}{}% 87
-\BOOKMARK [0][]{chapter*.35}{附录A 附录内容名称}{}% 88
-\BOOKMARK [0][]{chapter*.36}{修改记录}{}% 89
-\BOOKMARK [0][]{chapter*.37}{致　　谢}{}% 90
+\BOOKMARK [1][]{section.6.6}{6.6 Vuex介绍}{chapter.6}% 57
+\BOOKMARK [0][]{chapter.7}{7 需求分析}{}% 58
+\BOOKMARK [1][]{section.7.1}{7.1 可行性分析}{chapter.7}% 59
+\BOOKMARK [2][]{subsection.7.1.1}{7.1.1 技术可行性分析}{section.7.1}% 60
+\BOOKMARK [2][]{subsection.7.1.2}{7.1.2 经济可行性分析}{section.7.1}% 61
+\BOOKMARK [2][]{subsection.7.1.3}{7.1.3 操作可行性分析}{section.7.1}% 62
+\BOOKMARK [1][]{section.7.2}{7.2 业务流程分析}{chapter.7}% 63
+\BOOKMARK [1][]{section.7.3}{7.3 系统功能需求分析}{chapter.7}% 64
+\BOOKMARK [2][]{subsection.7.3.1}{7.3.1 系统总体功能}{section.7.3}% 65
+\BOOKMARK [2][]{subsection.7.3.2}{7.3.2 用户登录}{section.7.3}% 66
+\BOOKMARK [2][]{subsection.7.3.3}{7.3.3 论文上传}{section.7.3}% 67
+\BOOKMARK [2][]{subsection.7.3.4}{7.3.4 论文下载}{section.7.3}% 68
+\BOOKMARK [2][]{subsection.7.3.5}{7.3.5 论文评审评分}{section.7.3}% 69
+\BOOKMARK [2][]{subsection.7.3.6}{7.3.6 统计评审情况}{section.7.3}% 70
+\BOOKMARK [0][]{chapter.8}{8 系统设计}{}% 71
+\BOOKMARK [1][]{section.8.1}{8.1 系统架构设计}{chapter.8}% 72
+\BOOKMARK [1][]{section.8.2}{8.2 系统整体模块设计}{chapter.8}% 73
+\BOOKMARK [2][]{subsection.8.2.1}{8.2.1 文件上传模块}{section.8.2}% 74
+\BOOKMARK [2][]{subsection.8.2.2}{8.2.2 文件下载模块}{section.8.2}% 75
+\BOOKMARK [2][]{subsection.8.2.3}{8.2.3 文件更新模块}{section.8.2}% 76
+\BOOKMARK [2][]{subsection.8.2.4}{8.2.4 文件评论模块}{section.8.2}% 77
+\BOOKMARK [2][]{subsection.8.2.5}{8.2.5 问题标签模块}{section.8.2}% 78
+\BOOKMARK [2][]{subsection.8.2.6}{8.2.6 论文评分模块}{section.8.2}% 79
+\BOOKMARK [2][]{subsection.8.2.7}{8.2.7 论文得分情况统计模块}{section.8.2}% 80
+\BOOKMARK [2][]{subsection.8.2.8}{8.2.8 教师任务完成请求统计模块}{section.8.2}% 81
+\BOOKMARK [2][]{subsection.8.2.9}{8.2.9 学生管理模块}{section.8.2}% 82
+\BOOKMARK [2][]{subsection.8.2.10}{8.2.10 教师管理模块}{section.8.2}% 83
+\BOOKMARK [1][]{section.8.3}{8.3 数据库设计}{chapter.8}% 84
+\BOOKMARK [2][]{subsection.8.3.1}{8.3.1 概念结构设计}{section.8.3}% 85
+\BOOKMARK [2][]{subsection.8.3.2}{8.3.2 逻辑结构设计}{section.8.3}% 86
+\BOOKMARK [2][]{subsection.8.3.3}{8.3.3 物理结构设计}{section.8.3}% 87
+\BOOKMARK [0][]{chapter.9}{9 实现与测试}{}% 88
+\BOOKMARK [1][]{section.9.1}{9.1 系统环境}{chapter.9}% 89
+\BOOKMARK [2][]{subsection.9.1.1}{9.1.1 硬件环境}{section.9.1}% 90
+\BOOKMARK [2][]{subsection.9.1.2}{9.1.2 软件环境}{section.9.1}% 91
+\BOOKMARK [1][]{section.9.2}{9.2 持久化}{chapter.9}% 92
+\BOOKMARK [2][]{subsection.9.2.1}{9.2.1\040Spring\040Date\040&\040JPA\040Hibernate}{section.9.2}% 93
+\BOOKMARK [1][]{section.9.3}{9.3 登陆&验证授权模块}{chapter.9}% 94
+\BOOKMARK [2][]{subsection.9.3.1}{9.3.1 JWT优势}{section.9.3}% 95
+\BOOKMARK [2][]{subsection.9.3.2}{9.3.2 使用JWT&Spring Security 实现验证和授权}{section.9.3}% 96
+\BOOKMARK [1][]{section.9.4}{9.4 上传文件&更新文件&下载文件}{chapter.9}% 97
+\BOOKMARK [2][]{subsection.9.4.1}{9.4.1 上传文件}{section.9.4}% 98
+\BOOKMARK [2][]{subsection.9.4.2}{9.4.2 更新文件}{section.9.4}% 99
+\BOOKMARK [2][]{subsection.9.4.3}{9.4.3 下载文件}{section.9.4}% 100
+\BOOKMARK [0][]{chapter*.41}{结　　论（设计类为设计总结）}{}% 101
+\BOOKMARK [0][]{chapter*.42}{参 考 文 献}{}% 102
+\BOOKMARK [0][]{chapter*.45}{附录A 附录内容名称}{}% 103
+\BOOKMARK [0][]{chapter*.46}{修改记录}{}% 104
+\BOOKMARK [0][]{chapter*.47}{致　　谢}{}% 105

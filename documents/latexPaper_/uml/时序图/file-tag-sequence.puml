@@ -1,0 +1,18 @@
+@startuml
+actor user as "用户"
+participant f as "前端"
+participant c as "Contorller"
+participant s as "Service"
+participant te as "TagCommentEntity"
+participant tr as "TagCommentRepsotory"
+user --> f: 浏览所有标签并选择一个
+f --> c: request
+c --> s: addTag
+s --> te: new
+te --> s: tagCommentEntity
+te --> te: 为 tagCommentEnityA 填入评论id和标签id
+te --> tr: save
+tr --> s: tagCommentEntity
+s --> c: tagCommentEntity
+c --> f: response
+@enduml

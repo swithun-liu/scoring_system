@@ -7,17 +7,6 @@
 
 \defaultfont
 
-\section{系统整体模块设计}
-
-系统整体模块设计如图\ref{system-wbs}所示，总体可以分为学生模块，教师模块，管理员模块。在学生模块中可以进一步将功能细分为论文上传功能，论文下载功能，成绩查看功能，回复评论功能，论文更新功能。教师模块可以进一步分为查看所管理的学生论文信息功能，论文下载功能，论文评论功能，论文添加问题标签功能，论文评分功能。管理模块可以进一步分为系统管理和论文管理，系统管理可以进一步分为用户管理，上传通道管理，论文管理可以进一步分为评审情况统计，教师评审情况统计。
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale = 0.6]{out/uml/WBS/系统WBS/系统WBS.png}
-    \caption{\song\wuhao 系统整体模块}
-    \label{system-wbs}
-\end{figure}
-
 \section{系统架构设计}
 
 如图\ref{system-frame-deployment}所示，本系统采用的时前后端分离架构，系统前端使用vue，Element Plus UI，axios，vuex，vue-router，系统后端使用了Spring Boot，同时配置Tomcat，Spring Security，Spring Data JPA，系统的持久化选择Hibernate和MySQL。
@@ -33,12 +22,133 @@
     \item 模块化。\\如果您的前端与后端分离，那么在一个模块上工作而不影响另一个模块就变得更容易了。模块化还使两个团队或两个人同时在前端和后端工作变得更容易，而不必担心覆盖或搞乱其他人的工作。他们也可以用不同的节奏工作。
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[scale = 0.5]{out/uml/部署图/系统架构/系统架构.png}
     \caption{\song\wuhao 系统架构设计}
     \label{system-frame-deployment}
 \end{figure}
+
+\section{系统整体模块设计}
+
+系统整体模块设计如图\ref{system-wbs}所示，总体可以分为学生模块，教师模块，管理员模块。在学生模块中可以进一步将功能细分为论文上传功能，论文下载功能，成绩查看功能，回复评论功能，论文更新功能。教师模块可以进一步分为查看所管理的学生论文信息功能，论文下载功能，论文评论功能，论文添加问题标签功能，论文评分功能。管理模块可以进一步分为系统管理和论文管理，系统管理可以进一步分为用户管理，上传通道管理，论文管理可以进一步分为评审情况统计，教师评审情况统计。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/WBS/系统WBS/系统WBS.png}
+    \caption{\song\wuhao 系统整体模块}
+    \label{system-wbs}
+\end{figure}
+
+\subsection{文件上传模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/file-upload-sequence/file-upload-sequence.png}
+    \caption{\song\wuhao 文件上传时序图}
+    \label{file-upload-sequence}
+\end{figure}
+
+如图\ref{file-upload-sequence}所示，首先用户点击上传文件按钮，选择文件后前端会发起上传请求，请求体中会包含二进制文件以及文件信息，Controller接收到请求之后，从请求体中取出文件，并获取文件名，文件类型，文件数据，通过Spirng Security 的机制可以获取到用户信息，这样一个文件实体所需要的所有信息都可以获得（文件名，文件类型，文件数据，文件所属学生id），将创建的文件实体传递给Service，Service调用文件Repository将文件实体持久化。该流程完毕之后，数据库文件表会增加一条数据。
+
+\subsection{文件下载模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/file-download-sequence/file-download-sequence.png}
+    \caption{\song\wuhao 文件下载时序图}
+    \label{file-download-sequence}
+\end{figure}
+
+如图\ref{file-download-sequence}所示，首先用点击文件下载按钮，之后前端会发起下载请求，url参数会有想要下载的文件id，Controller接收到请求之后，解析出需要获取的文件id，将id传递给Service，Service使用文件Repository通过id查询数据库，并利用查询到的数据生成文件实体，将实体中的data[]即二进制文件数据返还给Controller，Controller将response返还给前端，前端解析出文件并下载。
+
+\subsection{文件更新模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/file-refresh-sequence/file-refresh-sequence.png}
+    \caption{\song\wuhao 文件更新时序图}
+    \label{file-refresh-sequence}
+\end{figure}
+
+如图\ref{file-refresh-sequence}所示，首先用户点击文件更新按钮，之后前端会发起更新文件请求，请求体中会带有新的二进制文件以及要更新的文件id，Controller接收到请求之后，解析出文件和文件id，将两者传递给Service，Service首先会重数据库中取出原来的文件，然后使用新传来的文件信息更新就文件，最后再将更新后的文件使用文件Repository写回数据库。之后Controller返回表示成功的response给前端。
+
+\subsection{文件评论模块}
+
+学生和教师都可以针对一个文件进行评论，用户双方的沟通，教师可以使用评论功能提出文章的问题，学生可以根据教师的回复进行对文章的更改，更改之后更新文章。如图\ref{file-comment-sequence}所示，用户首先选择要评论的文件并填入评论内容，前端发起请求，请求体中带有文件id，父级评论id和评论内容，Controller接收到请求之后，将二者转交给Service处理，Service需要创建一个评论实体，需要填入评论内容，为哪个文件评论（文件id），由谁评论（从principal中可以取出发送请求的用户信息），回复那一条评论（父级评论id），这些信息便可以确定唯一一条评论，之后使用CommentRepository保存，将信息持久化。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/file-comment-sequence/file-comment-sequence.png}
+    \caption{\song\wuhao 文件评论时序图}
+    \label{file-comment-sequence}
+\end{figure}
+
+\subsection{问题标签模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.45]{out/uml/时序图/file-tag-sequence/file-tag-sequence.png}
+    \caption{\song\wuhao 问题标签时序图}
+    \label{file-tag-sequence}
+\end{figure}
+
+在教师为文章评论时，教师可以为同时为评论添加问题标签，便于学生快速了解到文章的问题所在，标签也可以用于后序的论文问题统计。如图\ref{file-tag-sequence}所示，用户可以在评论上点击添加问题标签，当选择标签并且确定之后前端将发起一个请求，Controller接收到请求之后，从请求体中解析出评论id和所有的标签id并将其传递给Service进行处理，Service新建一个TagComment对象，填充评论属性和标签属性并使用Repository将数据保存到数据库。
+
+\subsection{论文评分模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/file-score-sequence/file-score-sequence.png}
+    \caption{\song\wuhao 论文评分时序图}
+    \label{file-score-sequence}
+\end{figure}
+
+当教师认为论文达到评审标准之后可以对论文进行评分。如图\ref{file-score-sequence}所示，教师点击评分按钮弹出对话框，可以滑动对话框中的滑动条进行分数选择，点击确定按钮，前端将发起评分请求，Controller接收到请求之后，可以解析出文件的id和分数，Controller将两个参数传递给Service，Service调用Repository根据文件id查询数据库返回文件实体对象，Service操作实体对象填入分数并调用Repository的方法将数据保存回数据库。
+
+\subsection{论文得分情况统计模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/statistic-score-sequence/statistic-score-sequence.png}
+    \caption{\song\wuhao 统计分数时序图}
+    \label{statistic-score-sequence}
+\end{figure}
+
+如图\ref{statistic-score-sequence}所示，管理员点击得分总览页面，前端向后台发起请求，Controller接到请求之后请求Service服务，Service从数据库取出所有论文信息并总动填充为文件实体的list，之后根据文件的得分情况进行分类，分类后的数据从Service传回Controller，之后Controller将返回输入放入response返还给前端，前端使用Echarts可视化展示给用户。
+
+\subsection{教师任务完成请求统计模块}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/statistic-teacher-task-sequence/statistic-teacher-task-sequence.png}
+    \caption{\song\wuhao 统计教师任务完成情况时序图}
+    \label{statistic-teacher-task-sequence}
+\end{figure}
+
+如图\ref{statistic-teacher-task-sequence}所示，管理员点击学生任务统计页面，前端向后台发起请求，Controller接到请求Service服务，Service从数据库取出所有的教师信息，其中与教师关联的学生属性会由Hibernate框架填充，同样的，学生的论文属性也会被填充，这样就可以获得所有与教师任务相关的信息，也就可以进行分离，Service将分类后的数据返还给Controller，Controller将其放入response中发还给前端，前端使用Echarts进行进行可视化处理展示给用户。
+
+\subsection{学生管理模块}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/manage-student-sequence/manage-student-sequence.png}
+    \caption{\song\wuhao 学生管理时序图}
+    \label{manage-student-sequence}
+\end{figure}
+
+如图\ref{manage-student-sequence}所示，当管理员切换到学生管理页面，前端向后端发起请求，Controller接收到请求之后调用Service，Service使用Repository查询出所有的学生信息并映射为学生实体，之后返还给Controller，Controller将其附加在response返还给前端进行展示。用户可以点击学生条目，进行修改，修改后点击确认，前端将向后端发起请求，Controller接收到请求之后可以解析出学生实体，Controller调用Service，Service将调用Repository将实体保存（因为该实体id属性不为空，所以会更新id相同的那一条学生信息）。
+
+\subsection{教师管理模块}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/时序图/manage-teacher-sequence/manage-teacher-sequence.png}
+    \caption{\song\wuhao 教师管理时序图}
+    \label{manage-teacher-sequence}
+\end{figure}
+
+如图\ref{manage-teacher-sequence}所示，当管理员切换到学生管理页面，前端想后端发起请求，Controller收到请求之后使用Service获取所有教师信息，其中Service会调用Repository查询数据库并将教师信息映射为实体对象，Controller将获得的所有教师信息放入response中返还给前端，用户可以点击教师条目，在对话框中修改教师信息，点击确认之后前端将发起修改请求，Controller接收到请求之后可以从请求中解析出教师实体，之后使用Repository使用这个新的教师实体对象更新旧得教师数据。
 
 \section{数据库设计}
 \subsection{概念结构设计}
