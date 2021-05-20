@@ -148,10 +148,74 @@
     \label{manage-teacher-sequence}
 \end{figure}
 
-如图\ref{manage-teacher-sequence}所示，当管理员切换到学生管理页面，前端想后端发起请求，Controller收到请求之后使用Service获取所有教师信息，其中Service会调用Repository查询数据库并将教师信息映射为实体对象，Controller将获得的所有教师信息放入response中返还给前端，用户可以点击教师条目，在对话框中修改教师信息，点击确认之后前端将发起修改请求，Controller接收到请求之后可以从请求中解析出教师实体，之后使用Repository使用这个新的教师实体对象更新旧得教师数据。
+如图\ref{manage-teacher-sequence}所示，当管理员切换到学生管理页面，前端想后端发起请求，Controller收到请求之后使用Service获取所有教师信息，其中Service会调用Repository查询数据库并将教师信息映射为实体对象，Controller将获得的所有教师信息放入response中返还给前端，用户可以点击教师条目，在对话框中修改教师信息，点击确认之后前端将发起修改请求，Controller接收到请求之后可以从请求中解析出教师实体，之后使用Repository使用这个新的教师实体对象更新旧的教师数据。
 
 \section{数据库设计}
 \subsection{概念结构设计}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.5]{out/uml/数据库/conceptual-model.png}
+    \caption{\song\wuhao 概念模型}
+    \label{conceptual-model}
+\end{figure}
+
+如图\ref{conceptual-model}所示，本系统一共有三种用户，学生（student）、教师（teacher）以及管理员（admin），每一个教师拥有多个学生，每个学生分给一个教师。每一名学生拥有多篇论文（student\_file），每一篇论文可以有多个评论（comment\_for\_file），每条评论可以添加多个问题标签（tag）,同一个标签可以被多条论文引用，所以标签和评论之间时多对多的关系，因此需要一个连接表（tag\_comment）。
+
 \subsection{逻辑结构设计}
+
+如图\ref{logical-model}所示，
+\begin{enumerate}
+    \item 学生表\\
+    id作为学生序号，该字段自增且为主键，不能为空。name字段为学号，根据学校要求进行编码，又有学号可能有字母例如 “student0001" 等等用于学生类型分类，所以该字段选择使用String类型，password字段为学生密码，由于密码可以使用字母和数字，所以这里选择String类型，teacher\_id字段表示该学生分配给哪一名教师管理，由于教师id字段为Integer类型，所以teacher\_id字段也为Integer类型。
+    \item 教师表\\
+    共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
+    \item 管理员表\\
+    共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
+    \item 论文表\\
+    id字段作为论文编号，该字段自增且为主键，不能为空，选择Integer类型；data字段为 byte[] 类型，用于存放二进制文件数据；name字段为文件名，为String类型；score字段存放论文得分，选择Integer类型；type字段用于存放文件类型，例如pdf，word，选择String类型；student\_id字段指示该论文属于哪一名学生，因此该字段为外键，引用学生表的id字段；file\_abstract字段为论文摘要，使用String类型。
+    \item 评论表\\
+    id字段作为评论编号，该字段自增且为主键，不能为空，选择Integer类型；comments字段为评论的具体内容，选择String类型；parent\_comemnt\_id字段指示该条评论是回复那一条评论的，该字段为外键应用评论表的id字段，所以为Integer类型；student\_file\_id字段指示该评论是在那一篇论文下回复的，该字段为外键，引用论文表的id字段，因此为Integer类型；student\_id字段指示该条评论是哪一名学生回复的，该字段为外键，引用学生表的id字段，因此为Integer类型，如果这条评论是教师回复的，那么该字段的值为null；teacher\_id字段指示该条评论是哪一名教师回复的，该字段为外键，引用教师表的id字段，因此为Integer类型，如果这条评论是学生回复的，那么该字段的值为null。
+    \item 标签表\\
+    id字段作为标签编号，该字段自增且为主键，不能为空，选择Integer类型；name字段为标签名字，使用String类型。
+    \item 评论标签表\\
+    该表用于记录某一条评论引用了哪一个标签，为多对多。id字段作为引用记录的id，该字段自增且为主键，不能为空，使用Integer类型；comment\_id指示为哪一条评论添加标签，该字段为外键，引用评论表的主键id字段；tag\_id字段指示为这条评论添加哪一个标签，该字段为外键，引用标签表的主键id字段。
+\end{enumerate}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/数据库/logical-model.png}
+    \caption{\song\wuhao 逻辑模型}
+    \label{logical-model}
+\end{figure}
+
 \subsection{物理结构设计}
 
+如图\ref{logical-model}所示，
+\begin{enumerate}
+    \item 学生表\\
+    学生表id字段使用int类型；学生表name（编号）字段使用varchar(255)类型；学生表password（密码）字段使用varchar(255)类型；学生表teacher\_id（所属教师id）字段使用int类型；
+    \item 教师表\\
+    共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
+    \item 管理员表\\
+    共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
+    \item 论文表\\
+    论文表id（论文编号）字段使用int类型；论文表data（论文二进制数据）字段使用longblob类型；论文表name（论文题目）字段使用varchar(255)类型；论文表score（论文得分）字段使用int类型；论文表type（论文文件的类型）字段使用varchar(255)类型；论文表student\_id（论文所属学生编号）字段使用int类型；论文表file\_abstract（论文摘要内容）字段使用varchar(255)类型。
+    \item 评论表\\
+    评论表id（评论编号）字段使用int类型；评论表comments（评论内容字段）使用varchar(255)类型；评论表parent\_comment\_id（指明该评论是回复哪一条评论的）使用int类型；评论表student\_id（指明是哪一名学生写的此条评论）使用int类型；评论表teacher\_id（指明这条评论是哪一名教师写的）使用int类型；评论表student\_file\_id（指明该条评论是回复那一条论文的）。
+    \item 标签表\\
+    标签表id（标签编号）字段使用int类型；标签表name（标签名字）字段使用varchar(255)类型。
+    \item 评论标签表\\
+    评论标签表id（添加标签记录编号）字段使用int类型；标签评论表comment\_id（指明将标签添加到哪一条评论上）使用int类型；标签评论表tag\_id（指明将哪一个tag添加到评论上）使用int类型。
+\end{enumerate}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/数据库/physical-model.png}
+    \caption{\song\wuhao 物理模型}
+    \label{physical-model}
+\end{figure}
+
+\section{本章小结}
+
+本章的主要内容是系统设计，首先对系统的整体加架构进行了简单介绍并且谈论了选择该架构的原因，其次介绍了系统各个模块的功能以及工作流程，然后详细介绍了论文评审评分系统的数据库设计。

@@ -1,0 +1,9 @@
+@startuml
+left to right direction
+storage s as "state"
+storage a as "actions"
+storage v as "view"
+a --> s
+s --> v
+v --> a
+@enduml

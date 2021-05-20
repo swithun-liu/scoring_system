@@ -97,6 +97,113 @@
         \end{enumerate}
 \end{enumerate}
 
+\section{统一返回对象}
+
+使用统一的返回格式不仅可以让接口更漂亮，也可以让前端更方便地处理数据。
+
+为了实现自动格式化，需要：
+\begin{enumerate}
+  \item 接口：\lstinline[language = Java]| org.springframework.web.servlet.mvc.method.annotation |\\\lstinline[language = Java]| MappingJackson2HttpMessageConverter |\\
+        允许在执行@ResponseBody或ResponseEntity控制器方法后，但在使用HttpMessageConverter编写响应体之前定制响应。
+
+        这正是需要处理返回对象的时机。
+
+        实现可以直接注册到RequestMappingHandlerAdapter和ExceptionHandlerExceptionResolver，或者更有可能用@ControllerAdvice注释，在这种情况下，它们将被两者自动检测到。
+
+        本系统的实现选择第二种方式：使用@ControllerAdvice注解。
+  \item 注解：\lstinline[language = Java]| org.springframework.web.bind.annotation.RestControllerAdvice |\\
+        这是一个方便的注释，它本身由@ControllerAdvice和@ResponseBody注释组成。携带该注释的类型被视为controller advice，其中@ExceptionHandler方法默认使用@ResponseBody语义。
+\end{enumerate}
+
+\begin{lstlisting} [language = Java]
+@RestControllerAdvice
+public class CustomResponseBodyAdvice implements ResponseBodyAdvice<Object> {
+
+    @Override
+    public boolean supports(MethodParameter arg0, Class<? extends 
+                                             HttpMessageConverter<?>> arg1) {
+        return true;
+    }
+
+    @Override
+    public Object beforeBodyWrite(Object arg0, MethodParameter arg1, 
+            MediaType arg2, Class<? extends HttpMessageConverter<?>> arg3, 
+            ServerHttpRequest arg4, ServerHttpResponse arg5) {
+        if (arg0 == null) {
+            return UnifiedResponsor.ofFail(CommonStatusCodeEnum.SUCCESS_COMMON);
+        } else if (arg0 instanceof UnifiedResponsor) {
+            return arg0;
+        } else if (arg0 instanceof byte[]) {
+            return arg0;
+        }
+        else {
+            return UnifiedResponsor.ofSuccess(
+                              CommonStatusCodeEnum.SUCCESS_COMMON, arg0);
+        }
+    }
+}
+\end{lstlisting}
+
+需要注意的一点是，如果返回对象为String类型时会出现错误： \\java.lang.ClassCastException :  your response class can not cast to java.lang.String
+
+该问题出现的原因是String类型在ResponseAdvice.beforeBodyWrite()方法中已经被处理为UnifiedResponsor对象，当控制器请求方法的返回类型是String时，用于转换返回值的HttpMessageConverter实例是StringHttpMessageConverter。
+
+解决方式如图\ref{WebMvcConfigurer}所示：告诉spring框架，不要使用StringHttpMessageConverter来处理控制器方法中的String返回类型，需要在StringHttpMessageConverter前面添加一个MappingJackson2HttpMessageConverter，即代码的第16行。
+
+在运行到15行时（即解决问题之前的情况），处理控制器方法的返回值时使用的转换器序列如图\ref{MessageConverter-list}所示，第二个即为StringHttpMessageConverter。
+
+在写入和刷新响应之前，应该计算ContentLength(当添加http头时)。StringHttpMessageConverter.getContentLength的实现是这样的:
+\begin{lstlisting} [language = Java]
+  // org.springframework.http.converter.StringHttpMessageConverter
+	@Override
+	protected Long getContentLength(
+                        String str, 
+                        @Nullable MediaType contentType) {
+		Charset charset = getContentTypeCharset(contentType);
+		return (long) str.getBytes(charset).length;
+	}
+\end{lstlisting}
+
+函数的第一个参数为 String 类型，但是返回值已经在ResponseAdvice.beforeBodyWrite()方法中已经被处理为UnifiedResponsor对象，造成参数类型不匹配，抛出ClassCastException。
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale = 0.6]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-Code.png}
+  \caption{\song\wuhao WebMvcConfigurer}
+  \label{WebMvcConfigurer}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale = 0.8]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.png}
+  \caption{\song\wuhao MessageConverter序列}
+  \label{MessageConverter-list}
+\end{figure}
+
+之后运行到16行，添加MappingJackson2HttpMessageConverter，添加后如图\ref{MessageConverter-list-after-add}所示，该类继承AbstractJackson2HttpMessageConverter，其中的getContentLength()方法的实现为：
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale = 0.8]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png}
+  \caption{\song\wuhao 处理后的MessageConverter序列}
+  \label{MessageConverter-list-after-add}
+\end{figure}
+
+\begin{lstlisting} [language = Java]
+//org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
+	@Override
+	protected Long getContentLength(
+                    Object object, 
+                    @Nullable MediaType contentType) throws IOException {
+		if (object instanceof MappingJacksonValue) {
+			object = ((MappingJacksonValue) object).getValue();
+		}
+		return super.getContentLength(object, contentType);
+	}
+\end{lstlisting}
+
+这里第一个参数类型为Object，所以并不会出现异常。
+
 \section{登陆\&验证授权模块}
 
 \subsection{JWT优势}
@@ -448,9 +555,9 @@ axios.interceptors.request.use((config) => {
         首先从 store 中获取用户身份信息，之后通过操作 config 对象在 header 中添加 Authorization 字段，值为用户身份信息当中保存的 token。在这样的里处理之后所有的请求都会在 header 中自动加入 token。
 \end{enumerate}
 
-\section{上传文件\&更新文件\&下载文件}
+\section{文件上传\&文件更新\&文件下载}
 
-\subsection{上传文件}
+\subsection{文件上传}
 
 \begin{enumerate}
   \item 前端配置\\
@@ -539,7 +646,7 @@ axios.interceptors.request.use((config) => {
         \end{enumerate}
 \end{enumerate}
 
-\subsection{更新文件}
+\subsection{文件更新}
 
 由于页面的结构，该功能并不适合使用 Elment Plus 的组件。
 
@@ -615,7 +722,7 @@ axios.interceptors.request.use((config) => {
         首先从数据库取出原文件，更新文件的名称，文件的类型，文件的数据，之后重新保存回数据库。
 \end{enumerate}
 
-\subsection{下载文件}
+\subsection{文件下载}
 
 \begin{enumerate}
   \item 前端请求函数：
@@ -641,9 +748,9 @@ axios.interceptors.request.use((config) => {
   }
   \end{lstlisting}
         这里需要注意两点，
-        
+
         第一点是一定要设置response的Content-Type为"application/pdf"，设置方法为将produces参数赋值为"application/pdf"。
-        
+
         第二点是因为本系统配置了统一返回对象，会对返回值在发送前进行封装，这次封装会导致返回的值不再是文件数据本身，所以需要设置不对 byte[] 类型进行重新封装。
         \begin{lstlisting} [language = Java]
 @RestControllerAdvice
@@ -662,3 +769,190 @@ public class CustomResponseBodyAdvice implements
         ...
 \end{lstlisting}
 \end{enumerate}
+
+\section{文件评论}
+
+由于评论模块在学生页面和教师页面都需要使用，所以这里将评论功能抽出为一个组件。评论的结构是树形结构，选择对Element UI中的树形组件进行二次封装为一个组件。
+
+新建一条评论需要四个属性，评论id（回复哪一条评论，如果为空则表示新建一条评论），文件id（表示在哪篇论文下评论），评论人，评论内容。
+
+在data()中建立fileId，commentId对象，和组件进行绑定，这样在选择文件和选择评论时就可以记录这两个属性。评论内容只需要将input和commentData中的comment属性绑定就可以获得。
+
+至于最后一个属性——评论人，在后台Controller接收到请求后利用Principal便可以获得发送请求的用户信息，至此四个属性全部获得便可以存储到数据库。
+
+\section{测试}
+
+\subsection{系统测试环境}
+
+\begin{table}[ht]
+  \centering
+  \song\wuhao
+  \caption{系统配置表}
+  \begin{tabular}{|l|l|l|}
+    \hline
+    \multicolumn{3}{|c|}{硬件配置}                                                                     \\ \hline
+    \multirow{4}{*}{服务器端} & CPU          & Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz               \\ \cline{2-3}
+                              & 内存         & 6GB                                                     \\ \cline{2-3}
+                              & 硬盘         & 1TB                                                     \\ \cline{2-3}
+                              & 网卡         & 1000M以太网卡                                           \\ \hline
+    \multirow{4}{*}{客户端}   & CPU          & Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz               \\ \cline{2-3}
+                              & 内存         & 10GB                                                    \\ \cline{2-3}
+                              & 硬盘         & 1TB                                                     \\ \cline{2-3}
+                              & 网卡         & 1000M以太网卡                                           \\ \hline
+    \multicolumn{3}{|c|}{软件配置}                                                                     \\ \hline
+    \multirow{2}{*}{服务器端} & 操作系统     & Ubuntu 20.04.2 LTS                                      \\ \cline{2-3}
+                              & 数据库服务器 & 8.0.23-0ubuntu0.20.04.1 for Linux on x86\_64 ((Ubuntu)) \\ \hline
+    \multirow{2}{*}{客户端}   & 操作系统     & Windows 10 家庭中文版(版本号20H2)                       \\ \cline{2-3}
+                              & 浏览器       & Microsoft Edge(版本90.0.818.62)                         \\ \hline
+  \end{tabular}
+\end{table}
+
+
+\subsection{测试用例与测试过程}
+
+\begin{table}[ht]
+  \centering
+  \song\wuhao
+  \caption{ 测试用例表 }
+  \begin{tabular}{|l|l|l|}
+    \hline
+    测试项目     & 测试用例                                   & 测试结果     \\ \hline
+    用户登陆     & 验证不同用户是否能正确登陆                 & 功能准确实现 \\ \hline
+    论文上传     & 验证能否正确上传pdf论文                    & 功能准确实现 \\ \hline
+    论文下载     & 验证能否正确下载pdf论文                    & 功能准确实现 \\ \hline
+    论文更新     & 验证能否正确更新选定的论文                 & 功能准确实现 \\ \hline
+    论文评论     & 验证能否正确新建评论，回复评论             & 功能准确实现 \\ \hline
+    问题标签     & 验证能否正确为评论添加标签                 & 功能准确实现 \\ \hline
+    论文评分     & 验证能否正确为所选论文评分                 & 功能准确实现 \\ \hline
+    论文得分统计 & 验证能否正确统计论文的得分情况             & 功能准确实现 \\ \hline
+    教师任务统计 & 验证能否正确统计教师的评审评分任务完成情况 & 功能准确实现 \\ \hline
+    学生管理     & 验证能否正确修改学生信息                   & 功能准确实现 \\ \hline
+    教师管理     & 验证能否正确修改教师信息                   & 功能准确实现 \\ \hline
+  \end{tabular}
+\end{table}
+
+用户登陆测试如图\ref{login-test}，需要测试不同用户的登陆能够成功，一点是用户只有输入正确的用户名和密码才能正确登陆，另一点是用户只有选择正确的用户类型才能正确登陆。每类用户都需要进行多次测试，使用正确用户名，错误用户名，正确密码，错误密码，正确类型，错误类型，各自组合测试。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.57]{out/figure/测试/login-test.png}
+    \caption{\song\wuhao 登陆测试图}
+    \label{login-test}
+\end{figure}
+
+论文上传测试如图\ref{upload-test}所示，需要测试学生上传的论文能否正确的使用后台保存到后台的数据库，论文的所属学生是否是登陆用户。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.8]{out/figure/测试/upload-test.png}
+    \caption{\song\wuhao 论文上传测试图}
+    \label{upload-test}
+\end{figure}
+
+论文下载测试如图\ref{download-student-test}和图\ref{download-teacher-test}所示，需要在学生页面和教师页面都测试，需要测试点击下载按钮能否下载文件，下载的文件能否正常打开，文件的内容是否正确。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/download-student-test.png}
+    \caption{\song\wuhao 学生论文下载测试图}
+    \label{download-student-test}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/download-teacher-test.png}
+    \caption{\song\wuhao 教师论文下载测试图}
+    \label{download-teacher-test}
+\end{figure}
+
+论文更新模块测试如图\ref{file-refresh-test}所示，学生点击更新论文按钮，选择新的文件，点击确定，文件上传。需要测试文件是否更新成功，数据库中的文件附加信息（文件名，文件类型，所属学生等）是否正确，更新的文件能否下载，下载的文件及其附加信息是否正确。
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/file-refresh-test.png}
+    \caption{\song\wuhao 更新文件测试图}
+    \label{file-refresh-test}
+\end{figure}
+
+论文评论模块测试如图\ref{comment-add}，图\ref{comment-replay}所示，学生或教师可以新建评论（不点击回复按钮或者点击回复按钮之后点击取消），测试新建评论是否是顶级评论，点击评论条目右下角的回复（replay)按钮将选择回复这一条评论，需要测试回复的评论是否为选择的评论的子级，评论人是否为登录用户，刷新后评论条目结构是否正确，使用其他用户登陆查看此论文评论是否一致。
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/comment-add.png}
+    \caption{\song\wuhao 新建评论测试图}
+    \label{comment-add}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/comment-replay.png}
+    \caption{\song\wuhao 回复评论测试图}
+    \label{comment-replay}
+\end{figure}
+
+论文评分模块测试如图\ref{score-student}和图\ref{score-teacher}所示，教师可以点击评分按钮，弹出评分对话框，滑动分数滑动条可以选择分数，点解确定为学生评分。该部分需要测试是否可以评分，是否为正确的论文评分，分数是否正确，评分人是否正确记录，学生端是否正确显示分数。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/score-student.png}
+    \caption{\song\wuhao 学生查看得分测试图}
+    \label{score-student}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/score-teacher.png}
+    \caption{\song\wuhao 教师评分测试图}
+    \label{score-teacher}
+\end{figure}
+
+论文得分统计模块测试如图\ref{statistic-score-student-test}所示，管理员可以切换论文得分统计页面，页面将展示学生的得分情况，需要测试各个分数段的人数是否正确，多次增删论文并评分，测试得分统计是否一致。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.48]{out/figure/测试/statistic-score-student-test.png}
+    \caption{\song\wuhao 论文得分统计测试图}
+    \label{statistic-score-student-test}
+\end{figure}
+
+教师评审任务完成情况统计模块测试如图\ref{statistic-teacher-task-test}所示，管理员可以切换到教师评审任务统计完成情况统计页面，需要测试各个教师管理的学生数是否正确，需要管理的所有论文数量是否正确，已经评分的论文数量是否正确，尚未评分的论文数量是否正确。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.48]{out/figure/测试/statistic-teacher-task-test.png}
+    \caption{\song\wuhao 教师任务统计测试图}
+    \label{statistic-teacher-task-test}
+\end{figure}
+
+人员管理模块测试如图\ref{manage-students}和图\ref{manage-edit-student-test}所示，在查看方面，需要测试所有学生信息是否正确显示；在修改信息方面需要测试各个字段的更改是否有效，密码不更改是否会清空密码，修改密码后是否能使用新密码登陆。
+
+\begin{figure}
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/manage-students.png}
+    \caption{\song\wuhao 学生管理功能测试}
+    \label{manage-students}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.6]{out/figure/测试/manage-edit-student-test.png}
+    \caption{\song\wuhao 编辑学生功能测试}
+    \label{manage-edit-student-test}
+\end{figure}
+
+\begin{table}
+  \centering
+  \song\wuhao
+  \caption{ 统计表}
+  \begin{tabular}{ccccc}
+    \hline
+    年度   & 产量  & 销量  & 产值 & 比重  \\
+    \hline
+    手机   & 11000 & 10000 & 500  & 50\%  \\
+    电视机 & 5500  & 5000  & 220  & 22\%  \\
+    计算机 & 1100  & 1000  & 280  & 28\%  \\
+    \hline
+    合计   & 17600 & 16000 & 1000 & 100\% \\
+    \hline
+  \end{tabular}
+\end{table}

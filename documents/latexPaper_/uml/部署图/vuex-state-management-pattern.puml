@@ -1,0 +1,19 @@
+@startuml
+skinparam roundCorner 15
+rectangle "vuex" {
+    rectangle a as "Actions"
+    rectangle m as "Mutations"
+    rectangle s as "State"
+    a --> m: Commit
+    m --> s: Mutate
+}
+rectangle vc as "Vue Components"
+rectangle ba as "Backend API"
+rectangle dt as "Devtools"
+s -left-> vc: Render
+vc -right-> a: Dispatch
+a ..> ba
+ba ..> a
+m ..> dt
+dt ..> m
+@enduml

@@ -50,57 +50,67 @@
 \contentsline {section}{\numberline {5.4}本文组织结构}{18}{section.5.4}%
 \contentsline {chapter}{\numberline {6}系统相关技术}{19}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Spring Boot介绍}{19}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Spring Security介绍}{19}{section.6.2}%
-\contentsline {section}{\numberline {6.3}JWT介绍}{19}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Spring Data Jpa \& Hibernate介绍}{19}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Vue.js介绍}{22}{section.6.5}%
-\contentsline {section}{\numberline {6.6}Vuex介绍}{26}{section.6.6}%
-\contentsline {chapter}{\numberline {7}需求分析}{27}{chapter.7}%
-\contentsline {section}{\numberline {7.1}可行性分析}{27}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}技术可行性分析}{27}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}经济可行性分析}{27}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}操作可行性分析}{27}{subsection.7.1.3}%
-\contentsline {section}{\numberline {7.2}业务流程分析}{27}{section.7.2}%
-\contentsline {section}{\numberline {7.3}系统功能需求分析}{28}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}系统总体功能}{28}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}用户登录}{29}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}论文上传}{29}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}论文下载}{30}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}论文评审评分}{30}{subsection.7.3.5}%
-\contentsline {subsection}{\numberline {7.3.6}统计评审情况}{30}{subsection.7.3.6}%
-\contentsline {chapter}{\numberline {8}系统设计}{32}{chapter.8}%
-\contentsline {section}{\numberline {8.1}系统架构设计}{32}{section.8.1}%
-\contentsline {section}{\numberline {8.2}系统整体模块设计}{33}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}文件上传模块}{33}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}文件下载模块}{33}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}文件更新模块}{33}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}文件评论模块}{35}{subsection.8.2.4}%
-\contentsline {subsection}{\numberline {8.2.5}问题标签模块}{36}{subsection.8.2.5}%
-\contentsline {subsection}{\numberline {8.2.6}论文评分模块}{37}{subsection.8.2.6}%
-\contentsline {subsection}{\numberline {8.2.7}论文得分情况统计模块}{37}{subsection.8.2.7}%
-\contentsline {subsection}{\numberline {8.2.8}教师任务完成请求统计模块}{37}{subsection.8.2.8}%
-\contentsline {subsection}{\numberline {8.2.9}学生管理模块}{38}{subsection.8.2.9}%
-\contentsline {subsection}{\numberline {8.2.10}教师管理模块}{40}{subsection.8.2.10}%
-\contentsline {section}{\numberline {8.3}数据库设计}{42}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}概念结构设计}{42}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}逻辑结构设计}{42}{subsection.8.3.2}%
-\contentsline {subsection}{\numberline {8.3.3}物理结构设计}{42}{subsection.8.3.3}%
-\contentsline {chapter}{\numberline {9}实现与测试}{44}{chapter.9}%
-\contentsline {section}{\numberline {9.1}系统环境}{44}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}硬件环境}{44}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}软件环境}{44}{subsection.9.1.2}%
-\contentsline {section}{\numberline {9.2}持久化}{44}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Spring Date \& JPA Hibernate}{44}{subsection.9.2.1}%
-\contentsline {section}{\numberline {9.3}登陆\&验证授权模块}{46}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}JWT优势}{46}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}使用JWT\&Spring Security 实现验证和授权}{46}{subsection.9.3.2}%
-\contentsline {section}{\numberline {9.4}上传文件\&更新文件\&下载文件}{56}{section.9.4}%
-\contentsline {subsection}{\numberline {9.4.1}上传文件}{56}{subsection.9.4.1}%
-\contentsline {subsection}{\numberline {9.4.2}更新文件}{58}{subsection.9.4.2}%
-\contentsline {subsection}{\numberline {9.4.3}下载文件}{60}{subsection.9.4.3}%
-\contentsline {chapter}{结　　论（设计类为设计总结）}{65}{chapter*.41}%
-\contentsline {chapter}{参\nobreakspace {}考\nobreakspace {}文\nobreakspace {}献}{66}{chapter*.42}%
-\contentsline {chapter}{附录A\hskip 1em\relax 附录内容名称}{70}{chapter*.45}%
-\contentsline {chapter}{修改记录}{71}{chapter*.46}%
-\contentsline {chapter}{致　　谢}{72}{chapter*.47}%
+\contentsline {subsection}{\numberline {6.1.1}Spring 5: Spring Boot 2及其模块的基础}{19}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Spring Security介绍}{20}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Spring Security 5.5 新特性}{21}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Spring Data Jpa \& Hibernate介绍}{22}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Vue.js介绍}{24}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Vuex介绍}{28}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}状态管理模式}{28}{subsection.6.5.1}%
+\contentsline {section}{\numberline {6.6}Echarts介绍}{29}{section.6.6}%
+\contentsline {chapter}{\numberline {7}需求分析}{31}{chapter.7}%
+\contentsline {section}{\numberline {7.1}可行性分析}{31}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}技术可行性分析}{31}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}经济可行性分析}{31}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}操作可行性分析}{31}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}业务流程分析}{31}{section.7.2}%
+\contentsline {section}{\numberline {7.3}系统功能需求分析}{32}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}系统总体功能}{32}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}用户登录}{33}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}论文上传}{33}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}论文下载}{34}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}论文评审评分}{34}{subsection.7.3.5}%
+\contentsline {subsection}{\numberline {7.3.6}统计评审情况}{34}{subsection.7.3.6}%
+\contentsline {section}{\numberline {7.4}本章小结}{35}{section.7.4}%
+\contentsline {chapter}{\numberline {8}系统设计}{36}{chapter.8}%
+\contentsline {section}{\numberline {8.1}系统架构设计}{36}{section.8.1}%
+\contentsline {section}{\numberline {8.2}系统整体模块设计}{37}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}文件上传模块}{37}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}文件下载模块}{37}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}文件更新模块}{37}{subsection.8.2.3}%
+\contentsline {subsection}{\numberline {8.2.4}文件评论模块}{39}{subsection.8.2.4}%
+\contentsline {subsection}{\numberline {8.2.5}问题标签模块}{40}{subsection.8.2.5}%
+\contentsline {subsection}{\numberline {8.2.6}论文评分模块}{41}{subsection.8.2.6}%
+\contentsline {subsection}{\numberline {8.2.7}论文得分情况统计模块}{41}{subsection.8.2.7}%
+\contentsline {subsection}{\numberline {8.2.8}教师任务完成请求统计模块}{41}{subsection.8.2.8}%
+\contentsline {subsection}{\numberline {8.2.9}学生管理模块}{42}{subsection.8.2.9}%
+\contentsline {subsection}{\numberline {8.2.10}教师管理模块}{44}{subsection.8.2.10}%
+\contentsline {section}{\numberline {8.3}数据库设计}{46}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}概念结构设计}{46}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}逻辑结构设计}{47}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}物理结构设计}{49}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}本章小结}{51}{section.8.4}%
+\contentsline {chapter}{\numberline {9}实现与测试}{53}{chapter.9}%
+\contentsline {section}{\numberline {9.1}系统环境}{53}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}硬件环境}{53}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}软件环境}{53}{subsection.9.1.2}%
+\contentsline {section}{\numberline {9.2}持久化}{53}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Spring Date \& JPA Hibernate}{53}{subsection.9.2.1}%
+\contentsline {section}{\numberline {9.3}统一返回对象}{55}{section.9.3}%
+\contentsline {section}{\numberline {9.4}登陆\&验证授权模块}{58}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}JWT优势}{58}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}使用JWT\&Spring Security 实现验证和授权}{58}{subsection.9.4.2}%
+\contentsline {section}{\numberline {9.5}文件上传\&文件更新\&文件下载}{68}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}文件上传}{68}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}文件更新}{70}{subsection.9.5.2}%
+\contentsline {subsection}{\numberline {9.5.3}文件下载}{72}{subsection.9.5.3}%
+\contentsline {section}{\numberline {9.6}文件评论}{73}{section.9.6}%
+\contentsline {section}{\numberline {9.7}测试}{74}{section.9.7}%
+\contentsline {subsection}{\numberline {9.7.1}系统测试环境}{74}{subsection.9.7.1}%
+\contentsline {subsection}{\numberline {9.7.2}测试用例与测试过程}{74}{subsection.9.7.2}%
+\contentsline {chapter}{结　　论（设计类为设计总结）}{88}{chapter*.65}%
+\contentsline {chapter}{参\nobreakspace {}考\nobreakspace {}文\nobreakspace {}献}{89}{chapter*.66}%
+\contentsline {chapter}{附录A\hskip 1em\relax 附录内容名称}{92}{chapter*.68}%
+\contentsline {chapter}{修改记录}{93}{chapter*.69}%
+\contentsline {chapter}{致　　谢}{94}{chapter*.70}%
 \contentsfinish 
