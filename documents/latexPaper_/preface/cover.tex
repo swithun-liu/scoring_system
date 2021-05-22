@@ -17,11 +17,11 @@
 \etitle{The Subject of Undergraduate Graduation Project (Thesis) of DUT}
 
 % 根据需要添加字符间距
-\department{\makebox[6.1cm][c]{软件学院}}   
+\department{\makebox[6.1cm][c]{软件学院}}
 \csubject{\makebox[6.1cm][c]{软件工程}}
-\cauthor{\makebox[6.1cm][c]{李某}}
-\cauthorno{\makebox[6.1cm][c]{201990000}}
-\csupervisor{\makebox[6.1cm][c]{}}
+\cauthor{\makebox[6.1cm][c]{刘树东}}
+\cauthorno{\makebox[6.1cm][c]{201792409}}
+\csupervisor{\makebox[6.1cm][c]{李明楚}}
 \teacher{\makebox[6.1cm][c]{}}
 \cdate{\makebox[6.1cm][c]{\today}}
 
@@ -29,34 +29,24 @@
 %\cdate{{\quad\;}\the\year~年~\the\month~月~\the\day~日}
 
 \cabstract{
-“摘要”是摘要部分的标题，不可省略。
+    本系统的建立旨在将传统的使用纸质论文评审的流程变为Web系统，使学生教师可以在网络上完成评审工作，免除了论文传递中的纸张浪费，减小了传递过程中论文丢失的可能性，方便教务统计论文评审情况，论文得分情况。
 
-标题“摘要”选用模板中的样式所定义的“标题1”，再居中；或者手动设置成字体：黑体，居中，字号：小三，1.5倍行距，段后11磅，段前为0。
+    本文针对论文评审系统相关内容对国内外高校进行了广泛的调查，了解学生，教师以及教务的需求。在技术方面，本系统采用较新，稳定成熟且发展前景较好的框架搭建系统，保证系统的可维护性，例如系统的总体架构选择的前后端分离的架构设计，前后端可独自开发部署和升级，系统的持久化方面选择了ORM工具中的Hibernate框架，该框架可以适应多种数据库，所以校方可以方便的切换数据库类型。在界面的设计上，本系统参考了许多优秀的UI设计和交互设计，使系统界面美观且易操作。
 
-摘要是毕业设计（论文）的缩影，文字要简练、明确。内容要包括目的、方法、结果和结论。单位采用国际标准计量单位制，除特别情况外，数字一律用阿拉伯数码。文中不允许出现插图。重要的表格可以写入。
-
-摘要正文选用模板中的样式所定义的“正文”，每段落首行缩进2个汉字；或者手动设置成每段落首行缩进2个汉字，字体：宋体，字号：小四，行距：多倍行距 1.25，间距：段前、段后均为0行，取消网格对齐选项。
-
-摘要篇幅以一页为限，字数限500字以内。
-
-摘要正文后，列出3-5个关键词。“关键词：”是关键词部分的引导，不可省略。关键词请尽量用《汉语主题词表》等词表提供的规范词。
-
-关键词与摘要之间空一行。关键词词间用分号间隔，末尾不加标点，3-5个；黑体，小四，加粗。关键词整体字数限制在一行。
+    论文分为六章，第一章绪论介绍了研究背景和本系统的开发意义；第二章系统相关技术介绍了本系统的使用的技术以及和其他技术之间的抉择；第三章需求分析从不同用户的角度分析了系统的需求；第四章系统设计详细地设计了系统的各个模块的结构和工作流程；第五章实现与测试重点介绍了系统设计中遇到的技术难题，最后一章为设计总结，总结了系统设计和实现过程中值得记录的内容。
 }
 
-\ckeywords{写作规范；排版格式；毕业设计（论文）}
+\ckeywords{论文评审；自动化办公；毕业设计（论文）;Spring Boot；Spring Security；JWT;Hibernate；Vue.js}
 
 \eabstract{
-外文摘要要求用英文书写，内容应与“中文摘要”对应。使用第三人称，最好采用现在时态编写。
 
-“Abstract”不可省略。标题“Abstract”选用模板中的样式所定义的“标题1”，再居中；或者手动设置成字体：Times New Roman，居中，字号：小三，多倍行距1.5倍行距，段后11磅，段前为0行。
+    The establishment of this system aims to change the traditional process of using paper paper for review into a Web system, so that students and teachers can complete the review work on the network, eliminate the paper waste in the delivery of paper, reduce the possibility of paper lost in the delivery process, and facilitate the educational administration statistics of paper review, paper score.
 
-标题“Abstract”上方是论文的英文题目，字体：Times New Roman，居中，字号：小三，行距：多倍行距 1.25，间距：段前、段后均为0行，取消网格对齐选项。
+    In this paper, a broad survey of domestic and foreign colleges and universities has been conducted on the content of paper review system to understand the needs of students, teachers and educational administration.In terms of technology, the system adopts a relatively new, stable, mature and promising framework to build the system, so as to ensure the maintainability of the system. For example, the overall architecture of the system is designed to separate the front and back ends, so that the front and back ends can be independently developed, deployed and upgraded. For the persistence of the system, the Hibernate framework in the ORM tool is chosen.The framework can be adapted to a variety of databases, so schools can easily switch database types.In the interface design, the system refers to many excellent UI design and interaction design, so that the system interface is beautiful and easy to operate.
 
-Abstract正文选用设置成每段落首行缩进2字，字体：Times New Roman，字号：小四，行距：多倍行距 1.25，间距：段前、段后均为0行，取消网格对齐选项。
+    The paper is divided into six chapters. The first chapter introduces the research background and the significance of the development of this system.The second chapter introduces the technology used in this system and the choice between other technologies.The third chapter analyzes the requirements of the system from the perspective of different users.The fourth chapter of the system design detailed design of the system of each module structure and work flow;The fifth chapter mainly introduces the technical problems encountered in the system design. The last chapter is the design summary, which summarizes the content worth recording in the process of system design and implementation.
 
-Key words与摘要正文之间空一行。Key words与中文“关键词”一致。词间用分号间隔，末尾不加标点，3-5个；Times New Roman，小四，加粗。
 }
 
-\ekeywords{Write Criterion;Typeset Format;Graduation Project(Thesis)}
-\makecover 
+\ekeywords{Paper review;Automated office;Graduation Design (Thesis);Spring Boot；Spring Security；JWT;Hibernate；Vue.js}
+\makecover

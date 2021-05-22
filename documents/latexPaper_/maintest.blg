@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: maintest.aux
+The style file: gbt7714-unsrt.bst
+A level-1 auxiliary file: body/original.aux
+A level-1 auxiliary file: body/grant.aux
+A level-1 auxiliary file: body/绪论.aux
+A level-1 auxiliary file: body/系统相关技术.aux
+A level-1 auxiliary file: body/需求分析.aux
+A level-1 auxiliary file: body/系统设计.aux
+A level-1 auxiliary file: body/实现与测试.aux
+A level-1 auxiliary file: body/conclusion.aux
+A level-1 auxiliary file: body/reference.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: reference.bib
+Warning--empty author in .20183
+Warning--empty journal in .20183
+You've used 13 entries,
+            4066 wiz_defined-function locations,
+            938 strings with 7860 characters,
+and the built_in function-call counts, 31011 in all, are:
+= -- 1188
+> -- 2697
+< -- 3786
++ -- 1446
+- -- 513
+* -- 389
+:= -- 4769
+add.period$ -- 38
+call.type$ -- 13
+change.case$ -- 18
+chr.to.int$ -- 1208
+cite$ -- 16
+duplicate$ -- 261
+empty$ -- 657
+format.name$ -- 137
+if$ -- 7774
+int.to.chr$ -- 1
+int.to.str$ -- 14
+missing$ -- 0
+newline$ -- 73
+num.names$ -- 36
+pop$ -- 718
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 2671
+stack$ -- 0
+substring$ -- 1954
+swap$ -- 28
+text.length$ -- 108
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 153
+warning$ -- 2
+while$ -- 148
+width$ -- 0
+write$ -- 181
+(There were 2 warnings)
