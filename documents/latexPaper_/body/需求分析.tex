@@ -21,35 +21,31 @@
 
 \section{业务流程分析}
 
- (1) 管理员通过教职员学生管理系统与论文评审评分系统联动导入学生，教师信息。
+\begin{enumerate}
+    \item 管理员通过教职员学生管理系统与论文评审评分系统联动导入学生，教师信息。
+    \item 学生上传论文\\
+          在允许论文上传期间，学生可以上传论文，待评审导师进行检查。
+    \item 论文审查\\
+          教师可以查看由自己管理的所有学生的论文，教师可以下载并审查论文，若论文未达到审批要求，教师可进行留言并贴上缺陷标签，待学生修改论文并重新上传论文。
+    \item 论文评分\\
+          若论文达到审批要求，教师可对论文进行打分。
+    \item 论文评论\\
+          教师可以针对论文中出现的问题进行评论，学生也可以回复，探讨问题的解决方式。
+    \item 问题标签\\
+          教师在评论的时候可以选择问题标签，便于学生快速了解问题所在。
+    \item 得分统计\\
+          管理员可以查看所有学生的得分统计情况，可以按照不同分数段进行分类统计。
+    \item 教师评审任务统计\\
+          管理员可以查看所有教师的评审任务完成情况，作为之后任务分配的参考。
+    \item 问题标签统计\\
+          管理原可以查看问题标签出现过的次数，作为通知学生需要重点注意的问题的参考。
 
-(2) 学生上传论文
+\end{enumerate}
 
-学生上传论文，待评审导师进行检查。
-
-(3) 检查论文
-
-教师检查论文，若论文未达到审批要求，教师可进行留言并贴上缺陷标签，待学生修改论文并重新上传论文。
-
-(4) 论文打分
-
-若论文达到审批要求，教师可对论文进行打分。
-
-(5) 统计得分情况
-
-管理员可查看所有学生论文得分比例。
-
-(5) 统计教师评审量，评审情况
-
-管理员可查看各个教师总评审量，已完成评审比例，供后续任务量分配做参考。
-
-(6) 统计论文中出现的问题
-
-管理可查看所有缺陷标签以及标签引用量。
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/流程图/系统总体活动流程图/系统总体活动流程图.png}
-	\caption{\song\wuhao 系统总体活动流程图}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/流程图/系统总体活动流程图/系统总体活动流程图.png}
+    \caption{\song\wuhao 系统总体活动流程图}
 \end{figure}
 
 
@@ -60,10 +56,10 @@
 如图\ref{system-usecase}所示，系统的主要功能有用户登陆功能（学生，教师，管理员），论文上传功能（学生），论文评审评分功能（教师）,统计评审情况功能（管理员）。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/用例图/系统总体功能用例图/系统总体功能用例图.png}
-	\caption{\song\wuhao 系统总体功能用例图}
-	\label{system-usecase}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/用例图/系统总体功能用例图/系统总体功能用例图.png}
+    \caption{\song\wuhao 系统总体功能用例图}
+    \label{system-usecase}
 \end{figure}
 
 \subsection{用户登录}
@@ -71,10 +67,10 @@
 如图\ref{login-usecase}所示，用户填入用户名，用户密码，登陆人员类型（学生，教师，管理员），点击提交，后台从数据库验证用户名，用户密码是否正确，如果正确，则为用户授权，不同用户拥有不同的权力，将包含用户信息的Token返回给前端，前端将Token保存在浏览器，之后的通信都需要携带Token，后台可以从Token中获取用户信息用来验证用户合法性。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.45]{out/uml/用例图/1-用户登录用例图/1-用户登录用例图.png}
-	\caption{\song\wuhao 用户登录用例图}
-	\label{login-usecase}
+    \centering
+    \includegraphics[scale = 0.45]{out/uml/用例图/1-用户登录用例图/1-用户登录用例图.png}
+    \caption{\song\wuhao 用户登录用例图}
+    \label{login-usecase}
 \end{figure}
 
 \subsection{论文上传}
@@ -82,10 +78,10 @@
 如图\ref{upload-usecase}所示，管理员可以选择是否开放论文上传通道，在论文开放通道期间，学生可以使用用户名，用户密码登陆系统，选择自己的论文进行上传。且当自己的论文没有通过教师的评审时，根据老师的评论和问题标签，学生修改自己的论文并更新自己的文档。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/用例图/2-论文上传/2-论文上传.png}
-	\caption{\song\wuhao 论文上传用例图}
-	\label{upload-usecase}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/用例图/2-论文上传/2-论文上传.png}
+    \caption{\song\wuhao 论文上传用例图}
+    \label{upload-usecase}
 \end{figure}
 
 \subsection{论文下载}
@@ -93,10 +89,10 @@
 如图\ref{download-usecase}所示，学生，教师，管理员分别可以从各自的页面下载论文的最新版本进行查看。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/用例图/5-论文下载/5-论文下载.png}
-	\caption{\song\wuhao 论文下载用例图}
-	\label{download-usecase}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/用例图/5-论文下载/5-论文下载.png}
+    \caption{\song\wuhao 论文下载用例图}
+    \label{download-usecase}
 \end{figure}
 
 \subsection{论文评审评分}
@@ -104,10 +100,10 @@
 如图\ref{scoring-usecase}所示，教师可以从学生管理页面浏览论文列表，下载之后教师进行阅读和评审，如果评审未通过，教师可以选择论文进行评论，讲解论文出现的问题，同时可以为论文添加问题标签，便于学生快速了解自己的问题所在并进行论文的修改，学生在修改论文之后，重新上传自己的论文，教师重新阅读，达到评审标准之后，教师可以为论文评分，学生可以登陆系统查看论文得分。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/用例图/3-论文评审评分/3-论文评审评分.png}
-	\caption{\song\wuhao 论文评审评分用例图}
-	\label{scoring-usecase}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/用例图/3-论文评审评分/3-论文评审评分.png}
+    \caption{\song\wuhao 论文评审评分用例图}
+    \label{scoring-usecase}
 \end{figure}
 
 \subsection{统计评审情况}
@@ -115,10 +111,10 @@
 如图\ref{statistic=usecase}所示，管理员可以登陆系统查看所有论文的得分统计（分类有95以上，90-95分，80-90分，70-80分，60-70分，60分以下，待评分），管理员可以通过该比例把控论文评审进程。管理员还可以查看教师的评审工作统计（分类有总分配学生数量，总分类论文数量，已评分论文数量，尚未评审论文数量），管理员可以根据教师的任务完成情况进行之后的任务分配。
 
 \begin{figure}[htbp]
-	\centering
-	\includegraphics[scale = 0.6]{out/uml/用例图/4-统计评审情况/4-统计评审情况.png}
-	\caption{\song\wuhao 统计评审情况用例图}
-	\label{statistic=usecase}
+    \centering
+    \includegraphics[scale = 0.6]{out/uml/用例图/4-统计评审情况/4-统计评审情况.png}
+    \caption{\song\wuhao 统计评审情况用例图}
+    \label{statistic=usecase}
 \end{figure}
 
 \section{本章小结}
