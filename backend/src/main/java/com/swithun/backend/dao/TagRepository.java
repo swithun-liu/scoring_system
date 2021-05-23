@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-16 20:15:20
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-16 20:16:02
+ * @LastEditTime: 2021-05-22 20:10:03
  */
 package com.swithun.backend.dao;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TagRepository extends JpaRepository<TagEntity, Integer>{
-    
+    TagEntity findByName(String name);
 }
 /*
  * @Descripttion: 

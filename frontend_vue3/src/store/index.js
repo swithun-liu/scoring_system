@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:25:47
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 19:30:07
+ * @LastEditTime: 2021-05-22 18:23:05
  */
 import {
   createStore
@@ -15,6 +15,7 @@ import teacherModule from './modules/teacher'
 import studentModule from './modules/student'
 import commentModule from './modules/comment'
 import adminMoudule from './modules/admin'
+import tagMoudule from './modules/tag';
 
 const store = createStore({
   state: {},
@@ -26,6 +27,7 @@ const store = createStore({
     student: studentModule,
     comment: commentModule,
     admin: adminMoudule,
+    tag: tagMoudule
   }
 })
 

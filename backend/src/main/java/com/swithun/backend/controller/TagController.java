@@ -5,13 +5,15 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-16 20:09:52
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-16 21:36:31
+ * @LastEditTime: 2021-05-22 20:13:40
  */
 package com.swithun.backend.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import com.swithun.backend.entity.TagCommentEntity;
+import com.swithun.backend.entity.TagEntity;
 import com.swithun.backend.service.TagService;
 
 import org.slf4j.Logger;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @RestController
@@ -38,9 +42,15 @@ public class TagController {
         return "添加成功";
     }
 
-    @PostMapping(value="/tag/addTagForComment")
-    public String addTagForComment(@RequestBody TagCommentEntity tagComment) {
-        tagS.addTagForComment(tagComment);
+    @GetMapping(value="/tag/getAll")
+    public List<TagEntity> getAllTag() {
+        return tagS.getAllTag();
+    }
+    
+
+    @PostMapping(value="/tag/CommentAddTag")
+    public String addTagForComment(@RequestBody Map<String, Object> mp) {
+        tagS.addTagForComment(mp);
         return "添加成功";
     }
     

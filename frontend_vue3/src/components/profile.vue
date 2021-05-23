@@ -5,11 +5,11 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-11 19:25:50
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 20:08:10
+ * @LastEditTime: 2021-05-23 11:16:27
 -->
 <template>
   <div class="profile-container">
-    <div class="profile-name-wrapper">Hi~{{userName}}中文测试</div>
+    <div class="profile-name-wrapper">Hi~{{userName}}</div>
   </div>
 </template>
 

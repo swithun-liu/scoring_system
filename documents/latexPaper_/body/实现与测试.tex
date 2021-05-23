@@ -567,6 +567,85 @@ axios.interceptors.request.use((config) => {
         首先从 store 中获取用户身份信息，之后通过操作 config 对象在 header 中添加 Authorization 字段，值为用户身份信息当中保存的 token。在这样的里处理之后所有的请求都会在 header 中自动加入 token。
 \end{enumerate}
 
+\section{Jackson序列化时无限递归问题}
+
+\begin{lstlisting} [language = Java]
+public class A {
+  private Integer id;
+  private List<B> bs;
+}
+\end{lstlisting}
+
+\begin{lstlisting} [language = Java]
+public class B {
+  private Integer id;
+  private A a;
+}
+\end{lstlisting}
+
+对应的数据库表表\ref{jackson-A}和\ref{jackson-B}所示。
+
+例子（省略其他相关性不大代码）：
+
+\begin{table}[htbp]
+  \centering
+  \song\wuhao
+  \caption{jackson-A}
+  \label{jackson-A}
+  \begin{tabular}{|l|}
+    \hline
+    A的id \\ \hline
+    id    \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \song\wuhao
+  \caption{jackson-B}
+  \label{jackson-B}
+  \begin{tabular}{|l|l|}
+    \hline
+    B的id & A的id \\ \hline
+    id    & A\_id \\ \hline
+  \end{tabular}
+\end{table}
+
+关于Jackson需要知道的两个概念：
+\begin{enumerate}
+  \item 序列化：从实体对象映射为Json对象
+  \item 反序列化：从Json对象映射为实体对象
+\end{enumerate}
+
+如果现在获取A，序列化A的时候会序列化bs，而bs中的每一个B对象都需要序列化A，此时会造成无限序列化。
+
+解决方式：
+\begin{enumerate}
+  \item 使用 @JsonManagedReference 和 @JsonBackReference\\
+        @JsonManagedReference(com.fasterxml.jackson.annotation.JsonManagedReference)\\
+        @JsonBackReference(com.fasterxml.jackson.annotation.JsonBackReference)\\
+        Managed用于“一方”，即A中的List<B>，Back用于“多方”，即B中的A，表示能从A放找到B，但是无法从B放找到A。
+  \item 使用 @JsonIgnore\\
+        @JsonIgnore(com.fasterxml.jackson.annotation.JsonIgnore)\\
+        第一种方法的问题是，序列化时A会序列化List<B>，B不会序列化A，如果此时想要A不序列化List<B>，B序列化A就无法做到。可以将@JsonIgnore注解加载List<B>上从而实现。
+  \item 使用 @JsonProperty(access = ...)\\
+        @JsonProperty(com.fasterxml.jackson.annotation.JsonIgnore)\\
+        前两种方法在序列化和发序列化时的效果都相同，但是如果此时的需求是前端发过来的json对象映射为B时需要映射a属性，但是发送给前端json对象时不需要映射a属性（防止造成无限递归序列化）时可以设置JsonProperty.access()，序列化对应read，反序列化对应write，共有四种选择：
+        \begin{enumerate}
+          \item AUTO
+          \item READ\_ONLY
+          \item READ\_WRITE
+          \item WRITE\_ONLY
+        \end{enumerate}
+        选择第四种方式即可实现。
+        \begin{lstlisting} [language = Java]
+        public class B {
+            @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+            private A a;
+        }
+    \end{lstlisting}
+\end{enumerate}
+
 \section{文件上传模块\&文件更新模块\&文件下载模块}
 
 \subsection{文件上传模块}

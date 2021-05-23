@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-12 09:29:19
+ * @LastEditTime: 2021-05-23 09:50:29
 -->
 
 <template>
@@ -60,7 +60,7 @@
     :before-close="handleClose"
     custom-class="replay-dialog"
   >
-    <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
+    <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)" @refresh-data="flashComments"></comment>
     <template #footer>
       <el-form>
         <el-form-item>

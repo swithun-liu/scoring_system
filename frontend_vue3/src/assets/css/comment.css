@@ -9,7 +9,7 @@
     color: #ffffff;
     font-weight: bolder;
     background-color: #40a0ff77;
-    box-shadow: 0 0 4px #409EFF, 0 0 4px #409EFF;
+    /* box-shadow: 0 0 4px #409EFF, 0 0 4px #409EFF; */
     display: block;
     margin: 5px;
 }
@@ -18,7 +18,7 @@
     color: #ffffff;
     font-weight: bolder;
     background-color: #67c23a90;
-    box-shadow: 0 0 4px #67C23A, 0 0 4px #67C23A;
+    /* box-shadow: 0 0 4px #67C23A, 0 0 4px #67C23A; */
     display: block;
     margin: 5px;
 }
@@ -63,4 +63,30 @@
     margin-left: 30px;
     margin: 10px;
     white-space: normal !important;
+}
+/* 问题标签wrapper */
+.tags-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+/*  问题标签样式 */
+.el-tag {
+}
+
+.tag {
+    /* 样式 */
+    background: rgba( 155, 221, 255, 0.45);
+    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37); */
+    backdrop-filter: blur( 5.0px);
+    -webkit-backdrop-filter: blur( 5.0px);
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    /* 结构 */
+    display: block;
+    margin: 0 5px;
+    padding: 2px 5px;
+    font-size: 5px;
 }

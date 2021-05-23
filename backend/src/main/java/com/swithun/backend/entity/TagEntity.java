@@ -1,6 +1,18 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-05-16 20:03:11
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-05-22 14:52:34
+ */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -9,6 +21,7 @@ import java.util.Objects;
 public class TagEntity {
     private Integer id;
     private String name;
+    @JsonIgnore
     private Collection<TagCommentEntity> tagCommentsById;
 
     @Id

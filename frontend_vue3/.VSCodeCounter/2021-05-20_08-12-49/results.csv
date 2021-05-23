@@ -1,0 +1,18 @@
+"filename", "language", "Vue", "comment", "blank", "total"
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/App.vue", "Vue", 26, 0, 4, 30
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/FilePreview.vue", "Vue", 37, 0, 3, 40
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/HelloWorld.vue", "Vue", 57, 0, 3, 60
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/Home.vue", "Vue", 106, 2, 4, 112
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/Login.vue", "Vue", 127, 7, 6, 140
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/StudentMyPapers.vue", "Vue", 221, 3, 5, 229
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/StudentUploadPaper.vue", "Vue", 112, 0, 4, 116
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/admin/manage/students.vue", "Vue", 137, 1, 12, 150
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/admin/manage/teachers.vue", "Vue", 149, 1, 12, 162
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/admin/statistic/scoreStatistic.vue", "Vue", 102, 0, 10, 112
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/admin/statistic/teacherTask.vue", "Vue", 120, 1, 6, 127
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/comment.vue", "Vue", 53, 0, 3, 56
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/professorStudentsPaper.vue", "Vue", 205, 6, 5, 216
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/components/profile.vue", "Vue", 35, 0, 6, 41
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/views/About.vue", "Vue", 5, 0, 1, 6
+"/home/swithun/project/vscode/java/spring boot/scoring_system/frontend_vue3/src/views/Home.vue", "Vue", 15, 1, 3, 19
+"Total", "-", 1507, 22, 87, 1616

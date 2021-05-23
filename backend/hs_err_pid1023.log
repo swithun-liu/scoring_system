@@ -1,0 +1,50 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGBUS (0x7) at pc=0x00007fa6b1649d44, pid=1023, tid=1369
+#
+# JRE version: OpenJDK Runtime Environment (11.0.10+9) (build 11.0.10+9-Ubuntu-0ubuntu1.20.04)
+# Java VM: OpenJDK 64-Bit Server VM (11.0.10+9-Ubuntu-0ubuntu1.20.04, mixed mode, sharing, tiered, compressed oops, parallel gc, linux-amd64)
+# Problematic frame:
+# J 3745 c1 org.eclipse.osgi.storage.Storage.save0()V (240 bytes) @ 0x00007fa6b1649d44 [0x00007fa6b1649ca0+0x00000000000000a4]
+#
+# No core dump will be written. 
+#
+# If you would like to submit a bug report, please visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-lts
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: --add-modules=ALL-SYSTEM --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED -Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -Dfile.encoding=utf8 -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -Xverify:none /home/swithun/.vscode-server/extensions/redhat.java-0.79.2/server/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar -configuration /home/swithun/.vscode-server/data/User/globalStorage/redhat.java/0.79.2/config_ss_linux -data /home/swithun/.vscode-server/data/User/workspaceStorage/d97e96bfa81d96c4b347742af0e7446d/redhat.java/ss_ws
+
+Host: Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz, 5 cores, 5G, Ubuntu 20.04.2 LTS
+
+[error occurred during error reporting (printing date and time), id 0x7, SIGBUS (0x7) at pc=0x00007fa6cdf3626e]
+
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fa6c83b1800):  JavaThread "Active Thread: Equinox Container: 3902ac05-e894-4dec-bf32-844fc149db1b" [_thread_in_Java, id=1369, stack(0x00007fa68b6f6000,0x00007fa68b7f7000)]
+
+Stack: [0x00007fa68b6f6000,0x00007fa68b7f7000],  sp=0x00007fa68b7f5380,  free space=1020k
+Native frames: (J=compiled Java code, A=aot compiled Java code, j=interpreted, Vv=VM code, C=native code)
+J 3745 c1 org.eclipse.osgi.storage.Storage.save0()V (240 bytes) @ 0x00007fa6b1649d44 [0x00007fa6b1649ca0+0x00000000000000a4]
+J 3744 c1 org.eclipse.osgi.storage.Storage.save()V (64 bytes) @ 0x00007fa6b1648e0c [0x00007fa6b1648a00+0x000000000000040c]
+J 3735 c1 org.eclipse.osgi.internal.framework.StorageSaver$StorageSaverTask.run()V (31 bytes) @ 0x00007fa6b1647dc4 [0x00007fa6b1647ce0+0x00000000000000e4]
+J 3557 c1 java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object; java.base@11.0.10 (14 bytes) @ 0x00007fa6b15bcaf4 [0x00007fa6b15bc9c0+0x0000000000000134]
+J 3688 c1 java.util.concurrent.FutureTask.runAndReset()Z java.base@11.0.10 (125 bytes) @ 0x00007fa6b16190dc [0x00007fa6b1618a00+0x00000000000006dc]
+J 3635 c1 java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run()V java.base@11.0.10 (57 bytes) @ 0x00007fa6b15e5e44 [0x00007fa6b15e5c40+0x0000000000000204]
+j  java.util.concurrent.ThreadPoolExecutor.runWorker(Ljava/util/concurrent/ThreadPoolExecutor$Worker;)V+92 java.base@11.0.10
+j  java.util.concurrent.ThreadPoolExecutor$Worker.run()V+5 java.base@11.0.10
+j  java.lang.Thread.run()V+11 java.base@11.0.10
+v  ~StubRoutines::call_stub
+
+[error occurred during error reporting (printing native stack), id 0x7, SIGBUS (0x7) at pc=0x00007fa6cde42de4]
+
+
+siginfo: si_signo: 7 (SIGBUS), si_code: 2 (BUS_ADRERR), si_addr: 0x00007fa6a9e73ccc
+
+Register to memory mapping:
+
+RAX=

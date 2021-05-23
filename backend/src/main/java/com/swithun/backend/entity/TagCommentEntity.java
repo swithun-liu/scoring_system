@@ -1,8 +1,17 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @@Company: None
+ * @Author: Swithun Liu
+ * @Date: 2021-05-16 20:03:11
+ * @LastEditors: Swithun Liu
+ * @LastEditTime: 2021-05-22 14:46:20
+ */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
@@ -10,9 +19,8 @@ import java.util.Objects;
 @Table(name = "tag_comment", schema = "scoring_system", catalog = "")
 public class TagCommentEntity {
     private Integer id;
-    @JsonIgnore
     private TagEntity tagByTagId;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private CommentForFileEntity commentForFileByCommentId;
 
     @Id

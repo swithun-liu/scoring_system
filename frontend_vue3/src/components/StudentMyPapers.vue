@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 17:38:06
+ * @LastEditTime: 2021-05-23 09:48:38
 -->
 
 <template>
@@ -56,10 +56,10 @@
     title="回复"
     v-model="commentDialogVisible"
     fullscreen: true
-    width="50%"
+    width="40%"
     :before-close="handleCommentDialogClose"
   >
-      <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)"></comment>
+      <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)" @refresh-data="flashComments" @test="test()"></comment>
     <template #footer>
       <el-form>
         <el-form-item>
@@ -124,13 +124,18 @@ export default {
     },
     flashComments() {
       const _this = this
+      console.log('刷新评论');
       var chosedFileId = _this.chosedFileId
       this.studentGetAllComment({ chosedFileId }).then((res) => {
         _this.commentData = res.data.data
-        console.log(_this.commentData)
+        console.log('刷新评论', _this.commentData)
         _this.$forceUpdate()
         _this.loading = false
       })
+    },
+    test() {
+      console.log('outter test');
+      this.replayWhichComment = '新建评论hhhh'
     },
     // 打开对话框
     openScoreDialog(id) {
@@ -162,6 +167,7 @@ export default {
       })
     },
     handleReplay(node) {
+      console.log('回复评论', node);
       var student = node.data.studentByStudentId
       var teacher = node.data.teacherByTeacherId
       var username = null
@@ -171,7 +177,9 @@ export default {
       if (teacher != null) {
         username = teacher.name
       }
-      this.replayWhichComment = 'replay ' + username
+      this.replayWhichComment = 'replay??? ' + username
+      console.log('hahahahhaha');
+      this.test()
       this.chosedCommentId = node.data.id
     },
     handleCommentDialogClose() {

@@ -5,35 +5,38 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 20:17:42
+ * @LastEditTime: 2021-05-18 14:04:12
 -->
 <template>
-  <div class='student_upload_paper_container0 container0'>
+  <div class="student_upload_paper_container0 container0">
     <el-upload
-      class='upload-demo'
-      action='http://localhost:8089/student/studentuploadpaper/'
-      :on-success='handleSuccess'
-      :on-preview='handlePreview'
-      :on-remove='handleRemove'
-      :before-remove='beforeRemove'
+      class="upload-demo"
+      action="http://localhost:8089/student/studentuploadpaper/"
+      :on-success="handleSuccess"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
       multiple
-      :on-exceed='handleExceed'
-      :file-list='fileList'
-      :data='{userName}'
-      :headers='myHeaders'
-      :auto-upload='true'
-      list-type='text'
+      :on-exceed="handleExceed"
+      :file-list="fileList"
+      :data="{userName}"
+      :headers="myHeaders"
+      :auto-upload="true"
+      list-type="text"
     >
-      <button class='custom-btn btn-12 uploadButton'><span>Click!</span><span>UPLOAD</span></button>
+      <button class="custom-btn btn-12 uploadButton">
+        <span>Click!</span>
+        <span>UPLOAD</span>
+      </button>
       <template #tip>
-        <div class='el-upload__tip'></div>
+        <div class="el-upload__tip"></div>
       </template>
     </el-upload>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   computed: {
@@ -57,42 +60,42 @@ export default {
       myHeaders: {
         authorization: 1,
       },
-    };
+    }
   },
   mounted() {
-    this.myHeaders.authorization = 'bearer ' + this.gettersAuthData.token;
-    console.log(this.myHeaders.Authoriztion);
-    var _this = this;
+    this.myHeaders.authorization = 'bearer ' + this.gettersAuthData.token
+    console.log(this.myHeaders.Authoriztion)
+    var _this = this
     this.getMyPaper().then((res) => {
-      console.log(res.data.data);
-      _this.fileList = res.data.data;
-    });
+      console.log(res.data.data)
+      _this.fileList = res.data.data
+    })
   },
   methods: {
     ...mapActions('auth', ['getMyPaper']),
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      console.log(file, fileList)
     },
     handlePreview(file) {
-      console.log(file);
+      console.log(file)
     },
     handleExceed(files, fileList) {
-      console.log('handleExceed');
+      console.log('handleExceed')
       this.$message.warning(
         `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
           files.length + fileList.length
         } 个文件`
-      );
+      )
     },
     handleSuccess(response, file, fileList) {
-      console.log('handle success');
-      console.log(response);
+      console.log('handle success')
+      console.log(response)
     },
     beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
+      return this.$confirm(`确定移除 ${file.name}？`)
     },
   },
-};
+}
 </script>
 
 <style>

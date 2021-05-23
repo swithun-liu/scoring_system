@@ -57,15 +57,16 @@
 \BOOKMARK [1][]{section.5.4}{5.4 登陆&验证授权模块}{chapter.5}% 57
 \BOOKMARK [2][]{subsection.5.4.1}{5.4.1 JWT优势}{section.5.4}% 58
 \BOOKMARK [2][]{subsection.5.4.2}{5.4.2 使用JWT&Spring Security 实现验证和授权}{section.5.4}% 59
-\BOOKMARK [1][]{section.5.5}{5.5 文件上传模块&文件更新模块&文件下载模块}{chapter.5}% 60
-\BOOKMARK [2][]{subsection.5.5.1}{5.5.1 文件上传模块}{section.5.5}% 61
-\BOOKMARK [2][]{subsection.5.5.2}{5.5.2 文件更新模块}{section.5.5}% 62
-\BOOKMARK [2][]{subsection.5.5.3}{5.5.3 文件下载模块}{section.5.5}% 63
-\BOOKMARK [1][]{section.5.6}{5.6 文件评论模块}{chapter.5}% 64
-\BOOKMARK [1][]{section.5.7}{5.7 统计模块模块}{chapter.5}% 65
-\BOOKMARK [1][]{section.5.8}{5.8 测试}{chapter.5}% 66
-\BOOKMARK [2][]{subsection.5.8.1}{5.8.1 系统测试环境}{section.5.8}% 67
-\BOOKMARK [2][]{subsection.5.8.2}{5.8.2 测试用例与测试过程}{section.5.8}% 68
-\BOOKMARK [1][]{section.5.9}{5.9 本章小结}{chapter.5}% 69
-\BOOKMARK [0][]{chapter*.60}{设计总结}{}% 70
-\BOOKMARK [0][]{chapter*.62}{致　　谢}{}% 71
+\BOOKMARK [1][]{section.5.5}{5.5 Jackson序列化时无限递归问题}{chapter.5}% 60
+\BOOKMARK [1][]{section.5.6}{5.6 文件上传模块&文件更新模块&文件下载模块}{chapter.5}% 61
+\BOOKMARK [2][]{subsection.5.6.1}{5.6.1 文件上传模块}{section.5.6}% 62
+\BOOKMARK [2][]{subsection.5.6.2}{5.6.2 文件更新模块}{section.5.6}% 63
+\BOOKMARK [2][]{subsection.5.6.3}{5.6.3 文件下载模块}{section.5.6}% 64
+\BOOKMARK [1][]{section.5.7}{5.7 文件评论模块}{chapter.5}% 65
+\BOOKMARK [1][]{section.5.8}{5.8 统计模块模块}{chapter.5}% 66
+\BOOKMARK [1][]{section.5.9}{5.9 测试}{chapter.5}% 67
+\BOOKMARK [2][]{subsection.5.9.1}{5.9.1 系统测试环境}{section.5.9}% 68
+\BOOKMARK [2][]{subsection.5.9.2}{5.9.2 测试用例与测试过程}{section.5.9}% 69
+\BOOKMARK [1][]{section.5.10}{5.10 本章小结}{chapter.5}% 70
+\BOOKMARK [0][]{chapter*.62}{设计总结}{}% 71
+\BOOKMARK [0][]{chapter*.63}{致　　谢}{}% 72
