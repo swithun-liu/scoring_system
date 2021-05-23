@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 20:21:26
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 20:43:13
+ * @LastEditTime: 2021-05-23 18:52:35
 -->
 <template>
   <div ref="chart" style="width: 100%; height: 100%;" />
@@ -17,7 +17,6 @@ import { useStore } from 'vuex'
 import { init } from 'echarts'
 
 export default {
-  name: 'HelloWorld',
   setup(props, ctx) {
     const store = useStore()
 
@@ -84,8 +83,9 @@ export default {
 
     onMounted(() => {
       initChart()
-      mountData()
+      // mountData()
       store.dispatch('admin/getAllFile').then((res) => {
+        console.log('分数统计数据', res.data.data)
         option.dataset[0].source = res.data.data
       })
     })

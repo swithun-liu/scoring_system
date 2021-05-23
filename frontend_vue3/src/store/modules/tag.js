@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-22 18:17:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-22 20:30:38
+ * @LastEditTime: 2021-05-23 20:33:24
  */
 
 import axios from 'axios';
@@ -20,7 +20,10 @@ const actions = {
     });
     return tags;
   },
-
+  async tagStatistic() {
+    const response = await axios.get('http://localhost:8089/tag/statistic')
+    return response
+  },
   async commentAddTag({
     commit
   }, payload) {

@@ -34,6 +34,9 @@
           <el-menu-item index="/admin/teacher_task">教师任务</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
+          <el-menu-item index="/admin/tag_statistic">标签统计</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group v-if="type[0] === 'admin'">
           <el-menu-item index="/admin/manage/students">学生管理</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
@@ -74,20 +77,10 @@ export default {
   methods: {
     ...mapActions('auth', ['signOut']),
     handleOpen(key, keyPath) {
-      console.log('handleOpen')
-      console.log('key')
-      console.log(key)
-      console.log('keyPath')
-      console.log(keyPath)
-      // console.log(key, keyPath)
+      console.log(key, keyPath)
     },
     handleClose(key, keyPath) {
-      console.log('handleColse')
-      console.log('key')
-      console.log(key)
-      console.log('keyPath')
-      console.log(keyPath)
-      // console.log(key, keyPath)
+      console.log(key, keyPath)
     },
     handleSignOut() {
       this.signOut().then(() => {

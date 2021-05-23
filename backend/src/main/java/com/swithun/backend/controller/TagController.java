@@ -5,14 +5,13 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-16 20:09:52
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-22 20:13:40
+ * @LastEditTime: 2021-05-23 20:29:47
  */
 package com.swithun.backend.controller;
 
 import java.util.List;
 import java.util.Map;
 
-import com.swithun.backend.entity.TagCommentEntity;
 import com.swithun.backend.entity.TagEntity;
 import com.swithun.backend.service.TagService;
 
@@ -52,6 +51,11 @@ public class TagController {
     public String addTagForComment(@RequestBody Map<String, Object> mp) {
         tagS.addTagForComment(mp);
         return "添加成功";
+    }
+    
+    @GetMapping(value="/tag/statistic")
+    public List<List<Object>> statisticTag() {
+        return tagS.statisticTag();
     }
     
 }

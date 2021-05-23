@@ -13,6 +13,7 @@ import ScoreStatistic from '../components/admin/statistic/scoreStatistic'
 import TeacherTask from '../components/admin/statistic/teacherTask';
 import Students from '../components/admin/manage/students'
 import Teachers from '../components/admin/manage/teachers'
+import Tag from '../components/admin/statistic/tagStatistic';
 import Profile from '../components/profile'
 import store from '../store/index';
 
@@ -96,6 +97,14 @@ const routes = [{
     }
   },
   {
+    path: '/admin/tag_statistic',
+    name: 'Tag',
+    component: Tag,
+    meta: {
+      requiredAuth: true
+    }
+  },
+  {
     path: '/admin/manage/students',
     name: 'Students',
     component: Students,
@@ -110,7 +119,7 @@ const routes = [{
     meta: {
       requiredAuth: true
     }
-  }
+  },
   ],
   meta: {
     requiredAuth: true
