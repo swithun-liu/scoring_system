@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  22 MAY 2021 15:41
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  24 MAY 2021 09:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1888,7 +1888,7 @@ Overfull \hbox (12.0pt too wide) detected at line 71
 
 
 Overfull \hbox (12.0pt too wide) detected at line 72
- \TU/TimesNewRoman(0)/m/n/12 76
+ \TU/TimesNewRoman(0)/m/n/12 77
  []
 
 )
@@ -1900,58 +1900,15 @@ Overfull \hbox (12.0pt too wide) detected at line 72
 
  (./body/绪论.tex
 Chapter 1.
-
-Package natbib Warning: Citation `.2019' on page 1 undefined on input line 9.
-
-
-Package natbib Warning: Citation `.2020c' on page 1 undefined on input line 10.
-
-
-Package natbib Warning: Citation `.20183' on page 1 undefined on input line 11.
-
-
-Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 12.
-
-
-Package natbib Warning: Citation `.2018' on page 1 undefined on input line 12.
-
-
-Package natbib Warning: Citation `.2019d' on page 1 undefined on input line 13.
-
-
-Package natbib Warning: Citation `.2020h' on page 1 undefined on input line 19.
-
-
-Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 19.
-
-
-Package natbib Warning: Citation `.2019d' on page 1 undefined on input line 21.
-
-
-Package natbib Warning: Citation `.2019c' on page 1 undefined on input line 22.
-
 [1
 
 
 
-]
-
-Package natbib Warning: Citation `.2019d' on page 2 undefined on input line 23.
-
-
-Package natbib Warning: Citation `Setiyani.2020' on page 2 undefined on input line 24.
-
-
-Package natbib Warning: Citation `.2019d' on page 2 undefined on input line 25.
-
-) [2]
+]) [2]
 \openout2 = `body/系统相关技术.aux'.
 
  (./body/系统相关技术.tex
 Chapter 2.
-
-Package natbib Warning: Citation `.2019f' on page 3 undefined on input line 12.
-
 [3
 
 
@@ -1969,12 +1926,9 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [8]
-
-Package natbib Warning: Citation `.2020g' on page 9 undefined on input line 194.
-
 File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
 <out/uml/部署图/Two-way data binding/Two-way data binding.png>
-[9] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [9] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [10] [11]
 File: out/uml/部署图/vuex-one-way-data-flow/vuex-one-way-data-flow.png Graphic file (type bmp)
@@ -2086,11 +2040,7 @@ LaTeX Font Warning: Font shape `TU/SimSun(1)/m/it' undefined
 
 
 
-] [41] [42]
-
-Package natbib Warning: Citation `.SpringInAction' on page 43 undefined on input line 149.
-
-[43]
+] [41] [42] [43]
 Overfull \hbox (9.15262pt too wide) in paragraph at lines 179--180
 []\TU/SimSun(1)/m/n/12 函 数 的 第 一 个 参 数 为 \TU/TimesNewRoman(0)/m/n/12 String \TU/SimSun(1)/m/n/12 类 型，|  但 是 返 回 值 已 经 在 \TU/TimesNewRoman(0)/m/n/12 ResponseAdvice.beforeBodyWrite()
  []
@@ -2102,16 +2052,10 @@ File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.p
 [44]
 File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png Graphic file (type bmp)
 <out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png>
-
-
-Package natbib Warning: Citation `.2019h' on page 45 undefined on input line 230.
-
-[45]
-
-Package natbib Warning: Citation `.2019h' on page 46 undefined on input line 235.
-
+ [45]
 File: out/uml/时序图/时序图-authentication/时序图-authentication.png Graphic file (type bmp)
 <out/uml/时序图/时序图-authentication/时序图-authentication.png>
+
 
 LaTeX Warning: Float too large for page by 24.06517pt on input line 245.
 
@@ -2138,9 +2082,6 @@ Overfull \hbox (8.67413pt too wide) in paragraph at lines 624--628
  []
 
 [59] [60] [61] [62] [63] [64]
-
-Package natbib Warning: Citation `.software' on page 65 undefined on input line 880.
-
 File: out/figure/测试/login-test.png Graphic file (type bmp)
 <out/figure/测试/login-test.png>
 File: out/figure/测试/upload-test.png Graphic file (type bmp)
@@ -2151,7 +2092,7 @@ File: out/figure/测试/download-teacher-test.png Graphic file (type bmp)
 <out/figure/测试/download-teacher-test.png>
 File: out/figure/测试/file-refresh-test.png Graphic file (type bmp)
 <out/figure/测试/file-refresh-test.png>
-[65]
+ [65]
 
 LaTeX Warning: Text page 66 contains only floats.
 
@@ -2209,14 +2150,14 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 (fontspec)             <->"宋体/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
+ (./maintest.bbl)) [76
 
-No file maintest.bbl.
-)
+
+
+]
 \openout2 = `body/thank.aux'.
 
- (./body/thank.tex) [76
-
-
+ (./body/thank.tex) [77
 
 
 
@@ -2224,17 +2165,13 @@ No file maintest.bbl.
 \tf@thm=\write7
 \openout7 = `maintest.thm'.
 
-
-
-Package natbib Warning: There were undefined citations.
-
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 46.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 46.
-(./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
+ (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 943EB24F60C4A8C187452C01B179F773;5154.
+(rerunfilecheck)             Checksum: BF0F3C0C3E64B7633D8F7F42F6EA4D51;5154.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2242,12 +2179,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  ) 
 Here is how much of TeX's memory you used:
- 40947 strings out of 479819
- 811826 string characters out of 5895846
- 1315023 words of memory out of 5000000
- 57124 multiletter control sequences out of 15000+600000
- 549726 words of font info for 199 fonts, out of 8000000 for 9000
+ 40991 strings out of 479819
+ 812444 string characters out of 5895846
+ 1315537 words of memory out of 5000000
+ 57167 multiletter control sequences out of 15000+600000
+ 549718 words of font info for 198 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,13n,92p,2299b,2813s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on maintest.pdf (84 pages).
+Output written on maintest.pdf (85 pages).

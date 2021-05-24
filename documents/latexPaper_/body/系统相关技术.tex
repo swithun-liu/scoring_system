@@ -108,7 +108,7 @@ Spring Security特点：
         \end{enumerate}
 \end{enumerate}
 
-JSON Web Toen(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
+JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale = 0.4]{out/uml/部署图/JWT/JWT.png}
@@ -118,7 +118,7 @@ JSON Web Toen(JWT)是一种开放的、行业标准RFC 7519方法，用于在双
 
 \section{Spring Data Jpa \& Hibernate介绍}
 
-该介绍基于 Spirng Data Jpa 2.5.1，Hibernate 5.4。
+该介绍基于 Spring Data Jpa 2.5.1，Hibernate 5.4。
 
 目前主流的ORM(Object/Relation Mapping)工具有Hibernate和MyBatis。
 
@@ -267,7 +267,7 @@ export default {
                 在Vue2中filter主要用于普通文本的格式化，而在Vue3中被移除了。移除的主要原因是它的性能和普通的函数没有区别，而写成普通的函数则会有更大的复用空间。
           \item 多个v-model\\
                 一个组件可以处理多个v-model，这样在多值处理地情况下，Vue3能更简单地通过多个event将值从子组件传递到父组件。
-          \item 模块化
+          \item 模块化\\
                 可以将setup()中的内容分离到另一个composition function中并保存在一个js文件中以便重用。
           \item 声明周期钩子
                 \begin{enumerate}
@@ -289,7 +289,7 @@ export default {
 
 \section{Vuex介绍}
 
-Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所有组件的集中存储，其规则确保状态只能以可预测的方式变化。它还集成了Vue的官方devtools扩展(打开新窗口)，以提供诸如零配置 time-travel 调试和状态快照导出/导入等高级特性。
+Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所有组件的集中存储，其规则确保状态只能以可预测的方式变化。它还集成了Vue的官方devtools扩展，以提供诸如零配置 time-travel 调试和状态快照导出/导入等高级特性。
 
 \subsection{状态管理模式}
 
