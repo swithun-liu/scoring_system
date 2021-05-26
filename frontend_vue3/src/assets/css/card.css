@@ -15,12 +15,12 @@
 
 .card {
     /* 透明 */
-    background: rgba( 255, 255, 255, 0.05);
-    /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37); */
+    background: rgba(255, 255, 255, 0.179);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
     backdrop-filter: blur( 9.5px);
     -webkit-backdrop-filter: blur( 9.5px);
     border-radius: 30px;
-    border: 1px solid rgba( 255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.296);
     /* 格式 */
     /* 作为子 */
     flex-shrink: 0;
@@ -69,7 +69,8 @@
     border-radius: 20px;
     display: block;
     height: 40%;
-    background-color: rgba( 255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.124);
+    color: rgba(0, 0, 0, 0.72);
 }
 
 textarea:focus {
@@ -98,4 +99,8 @@ textarea:focus {
 
 .card-general-wrapper {
     padding: 20px 0;
+}
+
+.delete-info-wrapper {
+    padding: 20px;
 }

@@ -1,12 +1,77 @@
 .profile-container {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.profile-wrapper {
+    /* 样式 */
+    /* 结构 */
+    display: flex;
+    height: 100%;
+    width: 65%;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.profile-wrapper-style {
+    /* 样式 */
+    background: rgba( 255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    backdrop-filter: blur( 4px);
+    -webkit-backdrop-filter: blur( 4px);
+    border-radius: 20px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
 }
 
 .profile-name-wrapper {
-    padding: 20px;
+    /* 样式 */
     font-size: 70px;
     font-family: fantasy;
     color: #4b4b4b;
+    /* 结构 */
+    padding: 20px;
+}
+
+.info-card-wrapper {
+    /* 样式 */
+    /* 结构 */
+    width: 33%;
+    height: 100%;
+}
+
+.my-avatar-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.my-info-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.my-info-list {
+    display: block;
+    align-self: center;
+}
+
+.quote-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quote {
+    /* 样式 */
+    font-size: xx-large;
+    font-family: fantasy;
+    color: lightslategrey;
+    /* 结构 */
+    padding: 40px;
 }

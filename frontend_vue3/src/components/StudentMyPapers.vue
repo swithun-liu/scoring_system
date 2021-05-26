@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-23 09:48:38
+ * @LastEditTime: 2021-05-26 14:43:22
 -->
 
 <template>
@@ -34,6 +34,7 @@
           <el-button class="glass-btn-important card-btn" icon="el-icon-success" @click="handleEditInfo(file)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-download" size="small" @click="handleDownload(file.id, file.name)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-s-comment" size="small" @click="openCommentDialog(file.id)"></el-button>
+          <el-button class="glass-btn-important card-btn" icon="el-icon-delete-solid" size="small" @click="openDelteDialog(file.id)"></el-button>
           <input type="file" class="refresh-btn-input-file" value="" id="refreshFile" @change="handleRefreshFile($event, file.id)">
           <label for="refreshFile" class="glass-btn el-icon-refresh refresh-label"></label>
       </div>
@@ -41,6 +42,7 @@
   </div>
   <!-- 文件卡片 end-->
   <!-- 评分 Dialog begin -->
+  <teleport to="body">
   <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleClose">
     <template #footer>
       <el-slider v-model="fileScore" show-input></el-slider>
@@ -50,8 +52,10 @@
       </span>
     </template>
   </el-dialog>
+  </teleport>
   <!-- 评分 Dialog end -->
   <!-- 回复 Dialog begin -->
+  <teleport to="body">
   <el-dialog
     title="回复"
     v-model="commentDialogVisible"
@@ -68,12 +72,30 @@
           <el-input v-model="commentWatiForPush"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button @click="handleAddComment()">添加</el-button>
+          <el-button class="el-btn-2-glass-btn" @click="handleAddComment()">添加</el-button>
         </el-form-item>
       </el-form>
     </template>
   </el-dialog>
+  </teleport>
   <!-- 回复 Dialog end -->
+  <!-- 删除文件 Dialog begin -->
+  <el-dialog
+  title="警告"
+  v-model="deleteDialogVisible"
+  width="30%"
+  :before-close="handleClose">
+  <div class="delete-info-wrapper">
+    <span>删除后无法恢复，确定删除？</span>
+  </div>
+  <template #footer>
+    <span class="dialog-footer">
+      <el-button @click="deleteDialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleDeleteFile()">确 定</el-button>
+    </span>
+  </template>
+</el-dialog>
+  <!-- 删除文件 Dialog end -->
   <!-- </div> -->
 </template>
 
@@ -89,6 +111,7 @@ export default {
       tableData: [],
       dialogVisible: false,
       commentDialogVisible: false,
+      deleteDialogVisible: false,
       chosedFileId: 0,
       chosedCommentId: -1,
       replayWhichComment: '新建评论',
@@ -110,7 +133,8 @@ export default {
       'studentDownloadThisFile',
       'studentAddCommentForThisFile',
       'studentEditFileInfo',
-      'studentRefreshFile'
+      'studentRefreshFile',
+      'deleteFile'
     ]),
     ...mapActions('comment', ['getComments']),
     // 刷新
@@ -148,6 +172,10 @@ export default {
       this.chosedFileId = id
       this.commentDialogVisible = true
       this.flashComments()
+    },
+    openDelteDialog(id) {
+      this.chosedFileId = id
+      this.deleteDialogVisible = true
     },
     // 处理操作
     handleDownload(id, name) {
@@ -201,6 +229,13 @@ export default {
         console.log(res)
         _this.commentWatiForPush = ''
         _this.flashComments()
+      })
+    },
+    handleDeleteFile() {
+      console.log('删除文件', this.chosedFileId);
+      this.deleteFile(this.chosedFileId).then(() => {
+        this.deleteDialogVisible = false
+        this.flashAllFileOfMyStudents()
       })
     },
     handleEditInfo(file) {

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-23 11:57:22
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-23 20:41:17
+ * @LastEditTime: 2021-05-25 17:46:08
 -->
 <template>
   <div ref="chart" style="width: 100%; height: 100%;" />
@@ -32,8 +32,7 @@ export default {
       dataset: [
         {
           dimensions: ['tagName', 'num'],
-          source: [
-          ],
+          source: [],
         },
         {
           transform: {
@@ -49,6 +48,12 @@ export default {
       yAxis: {},
       series: {
         type: 'bar',
+        itemStyle: {
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2,
+          color: '#19351655',
+        },
         encode: { x: 'tagName', y: 'num' },
         datasetIndex: 1,
       },

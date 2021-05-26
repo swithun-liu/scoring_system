@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-09 12:26:21
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 19:57:21
+ * @LastEditTime: 2021-05-24 20:50:44
 -->
 <template>
   <!-- 学生列表 -->
@@ -35,25 +35,27 @@
   </el-table>
 
   <!-- 编辑学生信息 Dialog -->
-  <el-dialog title="编辑学生信息" v-model="editDialogVisible" :before-close="handleClose" width="50%">
-    <el-form :model="editForm" label-width="100px">
-      <el-form-item label="学生id" prop="id">
-        <el-input v-model="editForm.id"></el-input>
-      </el-form-item>
-      <el-form-item label="编号" prop="name">
-        <el-input v-model="editForm.name"></el-input>
-      </el-form-item>
-      <el-form-item label="昵称" prop="nickName">
-        <el-input v-model="editForm.nickName"></el-input>
-      </el-form-item>
-      <el-form-item label="新密码" prop="password">
-        <el-input v-model="editForm.password" placeholder="不更改"></el-input>
-      </el-form-item>
-      <el-from-item>
-        <el-button @click="handleEdit()">修改</el-button>
-      </el-from-item>
-    </el-form>
-  </el-dialog>
+  <teleport to="body">
+    <el-dialog title="编辑学生信息" v-model="editDialogVisible" :before-close="handleClose" width="50%">
+      <el-form :model="editForm" label-width="100px">
+        <el-form-item label="学生id" prop="id">
+          <el-input v-model="editForm.id"></el-input>
+        </el-form-item>
+        <el-form-item label="编号" prop="name">
+          <el-input v-model="editForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="昵称" prop="nickName">
+          <el-input v-model="editForm.nickName"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="password">
+          <el-input v-model="editForm.password" placeholder="不更改"></el-input>
+        </el-form-item>
+        <el-from-item>
+          <el-button @click="handleEdit()">修改</el-button>
+        </el-from-item>
+      </el-form>
+    </el-dialog>
+  </teleport>
 </template>
 
 <script>

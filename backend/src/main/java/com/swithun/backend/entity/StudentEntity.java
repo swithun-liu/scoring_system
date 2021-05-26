@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-08 14:28:10
+ * @LastEditTime: 2021-05-26 16:03:29
  */
 package com.swithun.backend.entity;
 
@@ -96,7 +96,7 @@ public class StudentEntity {
         this.teacherByTeacherId = teacherByTeacherId;
     }
 
-    @OneToMany(mappedBy = "studentByStudentId")
+    @OneToMany(mappedBy = "studentByStudentId", cascade = CascadeType.ALL)
     public Collection<StudentFileEntity> getStudentFilesById() {
         return studentFilesById;
     }
@@ -105,7 +105,7 @@ public class StudentEntity {
         this.studentFilesById = studentFilesById;
     }
 
-    @OneToMany(mappedBy = "studentByStudentId")
+    @OneToMany(mappedBy = "studentByStudentId", cascade = CascadeType.ALL)
     public Collection<CommentForFileEntity> getCommentForFilesById() {
         return commentForFilesById;
     }

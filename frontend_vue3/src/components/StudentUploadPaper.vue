@@ -5,33 +5,37 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-18 14:04:12
+ * @LastEditTime: 2021-05-25 20:22:13
 -->
 <template>
-  <div class="student_upload_paper_container0 container0">
-    <el-upload
-      class="upload-demo"
-      action="http://localhost:8089/student/studentuploadpaper/"
-      :on-success="handleSuccess"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      multiple
-      :on-exceed="handleExceed"
-      :file-list="fileList"
-      :data="{userName}"
-      :headers="myHeaders"
-      :auto-upload="true"
-      list-type="text"
-    >
-      <button class="custom-btn btn-12 uploadButton">
-        <span>Click!</span>
-        <span>UPLOAD</span>
-      </button>
-      <template #tip>
-        <div class="el-upload__tip"></div>
-      </template>
-    </el-upload>
+  <div class="container0">
+    <div class="upload-wrapper">
+      <el-upload
+        class="upload-demo"
+        action="http://localhost:8089/student/studentuploadpaper/"
+        :on-success="handleSuccess"
+        :on-preview="handlePreview"
+        :on-remove="handleRemove"
+        :before-remove="beforeRemove"
+        multiple
+        :on-exceed="handleExceed"
+        :file-list="fileList"
+        :data="{userName}"
+        :headers="myHeaders"
+        :auto-upload="true"
+        list-type="text"
+      >
+        <div class="upload-button-wrapper">
+          <button class="custom-btn btn-12 uploadButton">
+            <span>Click!</span>
+            <span>UPLOAD</span>
+          </button>
+        </div>
+        <template #tip>
+          <div class="el-upload__tip"></div>
+        </template>
+      </el-upload>
+    </div>
   </div>
 </template>
 
@@ -50,11 +54,11 @@ export default {
   data() {
     return {
       fileList: [
-        {
-          name: 'food.jpeg',
-          url:
-            'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-        },
+        // {
+        //   name: 'food.jpeg',
+        //   url:
+        //     'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        // },
       ],
       userName: 'username0001',
       myHeaders: {
@@ -99,6 +103,8 @@ export default {
 </script>
 
 <style>
+@import '../assets/css/el-upload.css';
+
 .uploadButton {
   font-family: fantasy !important;
   font-size: 25px !important;
@@ -106,10 +112,9 @@ export default {
   height: 50px;
   margin: 0px !important;
 }
-.el-upload__tip {
-  margin: 50px;
-}
-.el-upload-list {
-  height: 60px !important;
+.upload-wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 </style>

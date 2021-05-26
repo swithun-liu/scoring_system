@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-28 15:06:41
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-07 20:19:46
+ * @LastEditTime: 2021-05-25 17:25:40
  */
 import {
   createApp
@@ -24,7 +24,10 @@ import store from './store/index'
 
 axios.interceptors.request.use((config) => {
   const authData = store.getters['auth/getAuthData'];
-  config.headers.common.Authorization = `bearer ${authData.token}`;
+  console.log('axios全局过滤器', config.url);
+  if (config.url !== 'https://quotes.rest/qod') {
+    config.headers.common.Authorization = `bearer ${authData.token}`;
+  }
   return config;
 });
 

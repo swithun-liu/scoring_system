@@ -28,7 +28,7 @@
     backdrop-filter: blur( 9.5px) !important;
     -webkit-backdrop-filter: blur( 9.5px) !important;
     border-radius: 10px !important;
-    border: 1px solid rgba( 255, 255, 255, 0.18) !important;
+    border: 2px solid rgba( 255, 255, 255, 0.18) !important;
     /* 结构 */
     min-height: auto !important;
     font-size: smaller !important;
@@ -46,10 +46,20 @@
 .refresh-btn-input-file:focus+label, .refresh-btn-input-file+label:hover {
     cursor: pointer;
     /* 小手光标*/
-    color: #60ACFD;
+    color: #383b3f;
 }
 
 .refresh-label {
     display: flex !important;
     align-items: center !important;
+}
+
+.header-btn {
+    background: rgba( 255, 255, 255, 0.30) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37) !important;
+    backdrop-filter: blur( 8.0px) !important;
+    -webkit-backdrop-filter: blur( 8.0px) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18) !important;
+    color: azure !important;
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 20:21:26
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-23 18:52:35
+ * @LastEditTime: 2021-05-25 17:55:21
 -->
 <template>
   <div ref="chart" style="width: 100%; height: 100%;" />
@@ -83,7 +83,6 @@ export default {
 
     onMounted(() => {
       initChart()
-      // mountData()
       store.dispatch('admin/getAllFile').then((res) => {
         console.log('分数统计数据', res.data.data)
         option.dataset[0].source = res.data.data
@@ -92,9 +91,9 @@ export default {
 
     return {
       chart,
-      text
+      text,
     }
-  }
+  },
 }
 </script>
 

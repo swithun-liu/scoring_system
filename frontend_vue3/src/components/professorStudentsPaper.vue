@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-23 09:50:29
+ * @LastEditTime: 2021-05-24 20:49:16
 -->
 
 <template>
@@ -41,39 +41,53 @@
     </el-table-column>
   </el-table>
   <!-- 评分 Dialog begin -->
-  <el-dialog title="评分" v-model="dialogVisible" width="30%" :before-close="handleCommentDialogClose">
-    <template #footer>
-      <el-slider v-model="fileScore" show-input></el-slider>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="handleScore()">确 定</el-button>
-      </span>
-    </template>
-  </el-dialog>
+  <teleport to="body">
+    <el-dialog
+      title="评分"
+      v-model="dialogVisible"
+      width="30%"
+      :before-close="handleCommentDialogClose"
+    >
+      <template #footer>
+        <el-slider v-model="fileScore" show-input></el-slider>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleScore()">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  </teleport>
   <!-- 评分 Dialog end -->
   <!-- 文件列表 end-->
   <!-- 回复 Dialog begin -->
-  <el-dialog
-    title="回复"
-    v-model="commentDialogVisible"
-    width="80%"
-    :before-close="handleClose"
-    custom-class="replay-dialog"
-  >
-    <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)" @refresh-data="flashComments"></comment>
-    <template #footer>
-      <el-form>
-        <el-form-item>
-          <span>{{ replayWhichComment }}</span>
-          <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
-          <el-input v-model="commentWatiForPush"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button @click="handleAddComment()">添加</el-button>
-        </el-form-item>
-      </el-form>
-    </template>
-  </el-dialog>
+  <teleport to="body">
+    <el-dialog
+      title="回复"
+      v-model="commentDialogVisible"
+      width="80%"
+      :before-close="handleClose"
+      custom-class="replay-dialog"
+    >
+      <comment
+        :loading="loading"
+        :data="commentData"
+        @handleReplay="handleReplay($event)"
+        @refresh-data="flashComments"
+      ></comment>
+      <template #footer>
+        <el-form>
+          <el-form-item>
+            <span>{{ replayWhichComment }}</span>
+            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
+            <el-input v-model="commentWatiForPush"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="handleAddComment()">添加</el-button>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-dialog>
+  </teleport>
   <!-- 回复 Dialog end-->
   <button class="custom-btn btn-13">
     <span>Read More</span>

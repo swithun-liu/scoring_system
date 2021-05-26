@@ -119,7 +119,7 @@ public class CommentForFileEntity {
         this.commentForFileByParentCommentId = commentForFileByParentCommentId;
     }
 
-    @OneToMany(mappedBy = "commentForFileByParentCommentId")
+    @OneToMany(mappedBy = "commentForFileByParentCommentId", cascade = CascadeType.ALL)
     public Collection<CommentForFileEntity> getCommentForFilesById() {
         return commentForFilesById;
     }
@@ -128,7 +128,7 @@ public class CommentForFileEntity {
         this.commentForFilesById = commentForFilesById;
     }
 
-    @OneToMany(mappedBy = "commentForFileByCommentId")
+    @OneToMany(mappedBy = "commentForFileByCommentId", cascade = CascadeType.ALL)
     public Collection<TagCommentEntity> getTagCommentsById() {
         return tagCommentsById;
     }

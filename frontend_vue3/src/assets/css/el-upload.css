@@ -1,0 +1,32 @@
+.el-upload-list__item {
+    background: rgba(210, 235, 255, 0.138);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    backdrop-filter: blur( 8.0px);
+    -webkit-backdrop-filter: blur( 8.0px);
+    border-radius: 20px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    padding: 20px;
+    margin: 20px 0px;
+}
+
+.el-upload-list__item:hover {
+    background: rgba(255, 255, 255, 0.172) !important;
+}
+
+.el-upload {
+    width: 100%;
+}
+
+.upload-button-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.el-upload__tip {
+    margin: 50px;
+}
+
+.el-upload-list {
+    height: 60px !important;
+}

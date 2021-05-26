@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:38:13
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 10:58:33
+ * @LastEditTime: 2021-05-26 14:43:40
  */
 
 import axios from 'axios';
@@ -48,7 +48,7 @@ const actions = {
     const response = await axios.post('http://localhost:8089/student/addAbstract', payload)
     return response
   },
-  async studentRefreshFile ({
+  async studentRefreshFile({
     commit,
   }, payload) {
     console.log('studentRefreshFile')
@@ -57,8 +57,14 @@ const actions = {
     console.log(payload.config)
     const response = await axios.post('http://localhost:8089/student/refreshFile', payload.param, payload.config)
     return response
+  },
+  async deleteFile({
+    commit
+  }, payload) {
+    console.log('student.js', payload);
+    const response = await axios.delete('http://localhost:8089/student/deleteFile/' + payload)
+    return response
   }
-
 }
 
 export default {

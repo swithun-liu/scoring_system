@@ -5,12 +5,14 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:58:43
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-11 14:27:48
+ * @LastEditTime: 2021-05-26 16:15:28
  */
 package com.swithun.backend.service;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.swithun.backend.dao.StudentFileRepository;
@@ -19,6 +21,7 @@ import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
+import com.swithun.backend.entity.TagCommentEntity;
 import com.swithun.backend.entity.CommentForFileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,17 +69,20 @@ public class StudentService {
      * @param {Integer} fileId
      * @return {*}
      */
-    public List<CommentForFileEntity> getTeacherCommentOfMyFIle(Integer fileId) {
+    public List<CommentForFileEntity> getComments(Integer fileId) {
         List<CommentForFileEntity> origin_comments = commentR
                 .findAllByStudentFileByStudentFileIdAndCommentForFileByParentCommentId(new StudentFileEntity(fileId),
-                        new CommentForFileEntity(-1));
+                        null);
         return origin_comments;
     }
 
     public void addComment(Integer fileId, String str_comment, Integer parent_comment_id, String studentName) {
         StudentEntity student = studentR.findByName(studentName);
         StudentFileEntity file = new StudentFileEntity(fileId);
-        CommentForFileEntity parent = new CommentForFileEntity(parent_comment_id);
+        CommentForFileEntity parent = null;
+        if (parent_comment_id != -1) {
+            parent = new CommentForFileEntity(parent_comment_id);
+        }
         CommentForFileEntity comment = new CommentForFileEntity(str_comment, file, student, parent);
         commentR.save(comment);
     }
@@ -93,6 +99,15 @@ public class StudentService {
         original_file.setType(file.getContentType());
         original_file.setData(file.getBytes());
         fileR.save(original_file);
+    }
+
+    public boolean deleteFile(Integer id, Principal principal) {
+        StudentFileEntity file = fileR.findById(id).get();
+        if (file != null && file.getStudentByStudentId().getName().equals(principal.getName())) {
+            fileR.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

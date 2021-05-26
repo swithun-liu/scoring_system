@@ -9,14 +9,14 @@
       default-active="profile"
       :router="true"
     >
-      <el-button @click="isCollapse = !isCollapse" class="glass-btn-important el-icon-caret-right"></el-button>
+      <!-- <el-button @click="isCollapse = !isCollapse" class="glass-btn-important el-icon-caret-right"></el-button> -->
       <el-submenu index="1">
         <template #title>
-          <i class="el-icon-location"></i>
+          <i class="el-icon-more"></i>
           <span>论文管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="profile">profile</el-menu-item>
+          <el-menu-item index="profile">个人信息</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'student'">
           <el-menu-item index="student_upload_paper">上传论文</el-menu-item>
@@ -47,13 +47,18 @@
     <el-container>
       <el-header>
         <div class="header-rapper">
-          <el-button @click="handleSignOut()" class="el-btn-2-glass-btn">退出</el-button>
+          <el-button @click="isCollapse = !isCollapse" class="header-btn el-icon-menu"></el-button>
+          <el-button @click="handleSignOut()" class="header-btn el-icon-error"></el-button>
         </div>
       </el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>
+        <div class="footer-wrapper">
+          <span>论文评审评分系统</span>
+        </div>
+      </el-footer>
     </el-container>
   </el-container>
 </template>

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 11:50:33
+ * @LastEditTime: 2021-05-24 20:34:51
 -->
 <template>
   <!-- 学生列表 -->
@@ -29,7 +29,11 @@
     <el-table-column label="学生编号" prop="name"></el-table-column>
     <el-table-column label="操作" width="200">
       <template #default="scope">
-        <el-button icon="el-icon-edit" @click="openEditDialog(scope.row.id, scope.row.name)"></el-button>
+        <el-button
+          class="el-btn-2-glass-btn"
+          icon="el-icon-edit"
+          @click="openEditDialog(scope.row.id, scope.row.name)"
+        ></el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -50,7 +54,7 @@
         <el-input v-model="editForm.password" placeholder="不更改"></el-input>
       </el-form-item>
       <el-from-item>
-        <el-button @click="handleEdit()">修改</el-button>
+        <el-button @click="handleEdit()" class="el-btn-2-glass-btn">修改</el-button>
       </el-from-item>
     </el-form>
   </el-dialog>
@@ -113,7 +117,7 @@ export default {
     const handleEdit = () => {
       store.dispatch('admin/editStudent', editForm).then((res) => {
         console.log(res)
-        editDialogVisible.value = false;
+        editDialogVisible.value = false
         refreshInfo()
       })
     }

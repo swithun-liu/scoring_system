@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-07 17:16:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-17 19:07:42
+ * @LastEditTime: 2021-05-26 15:17:04
  */
 package com.swithun.backend.tools.secret.config;
 
@@ -148,7 +148,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.addAllowedOrigin("*"); // 应设置为前端服务器域名前缀 ， 暂时设置为 *
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTION", "HAHA"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE"));
     configuration.addAllowedHeader("*");// 这里很重要，起码需要允许 Access-Control-Allow-Origin
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);

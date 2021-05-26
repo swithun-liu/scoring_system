@@ -6,7 +6,8 @@ html, body, #app {
 }
 
 body {
-  background-image: linear-gradient(135deg,rgb(199, 255, 238) 20%, #75c3ff 40%,  rgb(170, 190, 232) 60%, #9face6 100%) !important;
+  /* background-image: linear-gradient(135deg,rgb(199, 255, 238) 20%, #75c3ff 40%,  rgb(170, 190, 232) 60%, #9face6 100%) !important; */
+  background-image: url(../figure/background.svg) !important;
 }
 
 #app, .el-menu, .el-header, .el-footer, .el-container, .container0, .container1, .el-menu-item-group {
@@ -30,4 +31,13 @@ body {
 .el-menu {
   /* 去掉 menu 和 main 之间的空隙 */
   border-right: 0px !important;
+}
+
+.is-opened {
+  background: transparent !important;
+}
+.footer-wrapper {
+  display: flex;
+  justify-content: center;
+  color: white;
 }

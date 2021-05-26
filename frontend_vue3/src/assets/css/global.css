@@ -709,8 +709,8 @@ button {
 }
 
 .btn-12 span {
-  background: rgb(0, 172, 238);
-  background: linear-gradient(0deg, rgba(0, 172, 238, 1) 0%, rgba(2, 126, 251, 1) 100%);
+  background: rgb(0, 171, 238, 0.5);
+  background: linear-gradient(0deg, rgb(0, 171, 238) 0%, rgb(2, 126, 251) 100%);
   display: block;
   position: absolute;
   width: 130px;

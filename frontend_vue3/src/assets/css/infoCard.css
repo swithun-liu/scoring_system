@@ -1,0 +1,52 @@
+.info-card {
+    /* 样式 */
+    background: rgba( 255, 255, 255, 0.20);
+    box-shadow: 0 3px 32px 0 rgba( 31, 38, 135, 0.37);
+    backdrop-filter: blur( 6.0px);
+    -webkit-backdrop-filter: blur( 6.0px);
+    border-radius: 20px;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    /* 结构 */
+    height: 4em;
+    margin: 1em 1em;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.info-card-icon {
+    font-size: 2em;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.info-card-value {
+    padding: 0 1em;
+    font-size: 2em;
+}
+
+.info-card-title {}
+
+.el-icon-sunny:before {
+    content: "";
+    vertical-align: middle;
+}
+
+.info-card-icon-wrapper {
+    /* 样式 */
+    background: rgba(197, 255, 239, 0.5);
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0.5), rgba(197, 255, 239, 0.5));
+    /* box-shadow: 0 3px 32px 0 rgba( 31, 38, 135, 0.37); */
+    backdrop-filter: blur( 6.0px);
+    -webkit-backdrop-filter: blur( 6.0px);
+    border-radius: 100px;
+    border: 1px solid rgba(62, 150, 0, 0.18);
+    /* 结构 */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0.2em;
+    width: 3em;
+    height: 3em;
+}

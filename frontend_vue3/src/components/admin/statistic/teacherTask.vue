@@ -5,10 +5,10 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 09:13:41
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-08 14:10:47
+ * @LastEditTime: 2021-05-25 18:48:22
 -->
 <template>
-  <div ref="chart" style="width: 100%; height: 100%;"/>
+  <div ref="chart" style="width: 100%; height: 100%;" />
 </template>
 
 <script>
@@ -24,10 +24,8 @@ export default {
     const option = reactive({
       dataset: [
         {
-          source: [
-            [220, 182]
-          ]
-        }
+          source: [[220, 182]],
+        },
       ],
       tooltip: {
         trigger: 'axis',
@@ -51,6 +49,33 @@ export default {
       yAxis: {
         type: 'category',
         data: ['老师1', '老师2', '老师3'],
+      },
+      color: [
+        '#37A2DA77',
+        '#32C5E977',
+        '#67E0E377',
+        '#9FE6B877',
+        '#FFDB5C77',
+        '#ff9f7f77',
+        '#fb729377',
+        '#E062AE77',
+        '#E690D177',
+        '#e7bcf377',
+        '#9d96f577',
+        '#8378EA77',
+        '#96BFFF77',
+      ],
+      itemStyle: {
+        normal: {
+          color: 'rgba(255, 204, 0,.3)',
+          borderColor: '#ffcc00',
+        },
+        borderRadius: 10,
+        borderColor: 'red',
+        borderWidth: 2,
+      },
+      label: {
+        color: 'black',
       },
       series: [
         {
@@ -114,7 +139,7 @@ export default {
 
     onMounted(() => {
       initChart()
-      mountData()
+      // mountData()
       renewOption()
     })
 
