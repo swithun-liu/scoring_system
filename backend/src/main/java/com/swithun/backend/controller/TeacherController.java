@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:44:19
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 16:51:45
+ * @LastEditTime: 2021-05-26 17:05:47
  */
 package com.swithun.backend.controller;
 
@@ -41,38 +41,27 @@ public class TeacherController {
     @Autowired
     private FileService fileservice;
 
-    @GetMapping(value = "/testprincipal")
-    public String testPrincipal(Principal principal) {
-        return principal.getName();
-    }
-
-    @PostMapping(value = "/testprincipal/post")
-    public String testPrincipalPost(Principal principal) {
-        return principal.getName();
-    }
-
+    // 获取论文列表
     @GetMapping(value = "/teacher/getAllFileOfstudentsOfMine")
     public List<TeacherGetFileListDTO> getMethodName(Principal principal) {
         return teacherS.findStudentFileOfThisTeacher(principal.getName());
     }
 
-    /**
-     * @description: 老师下载选中文件
-     * @param {*}
-     * @return {*}
-     */
+    // 下载文件
     @GetMapping(value = "/teacher/teacherGetThisFile", produces = "application/pdf")
     public byte[] teacherGetThisFile(@RequestParam Integer fileId, HttpServletResponse response) throws IOException {
         StudentFileEntity studentFileEntity = fileservice.downloadThisFile(fileId);
         return studentFileEntity.getData();
     }
 
+    // 论文评分
     @PostMapping(value = "/teacher/teacherScoreThisFile")
     public String score(@RequestBody Map<String, Object> mp) {
         teacherS.score(mp);
         return "修改成功";
     }
 
+    // 获取论文评论
     @PostMapping(value = "/teacher/getAllCommentsOfThisFileOfMine")
     public List<CommentForFileEntity> getComments(@RequestBody Map<String, Object> mp, Principal principal) {
         return teacherS.getComments(mp, principal);

@@ -1,38 +1,47 @@
 @import 'button.css';
 .el-table {
   background-color: transparent !important;
+  color: #272727 !important;
 }
+
 .hidden-columns {
   background-color: transparent !important;
 }
+
 .el-table__header-wrapper {
   background-color: transparent !important;
   border: 0px !important;
   border-radius: 20px !important;
 }
+
 .el-table__header {
   background-color: transparent !important;
 }
+
 .el-table__row {
   background-color: transparent !important;
 }
+
 table {
   background-color: transparent !important;
 }
+
 tr {
   background-color: transparent !important;
 }
+
 .has-gutter {
   background-color: transparent !important;
 }
+
 .is-leaf {
   background-color: transparent !important;
 }
+
 .el-table__expanded-cell {
   background-color: transparent !important;
 }
 
-.el-table--enable-row-hover .el-table__body tr:hover>td{
-background-color: #ffffff41 !important;
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+  background-color: #ffffff41 !important;
 }
-

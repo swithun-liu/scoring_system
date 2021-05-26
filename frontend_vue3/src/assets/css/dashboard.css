@@ -36,8 +36,18 @@ body {
 .is-opened {
   background: transparent !important;
 }
+
 .footer-wrapper {
   display: flex;
   justify-content: center;
   color: white;
+}
+
+.el-menu-item:hover{
+  background: rgba(255, 255, 255, 0.33) !important;
+  border-radius: 10px !important;
+}
+
+.is-active {
+  background: transparent !important;
 }

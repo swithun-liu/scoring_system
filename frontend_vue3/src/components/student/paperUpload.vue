@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-25 20:22:13
+ * @LastEditTime: 2021-05-26 19:25:28
 -->
 <template>
   <div class="container0">
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style>
-@import '../assets/css/el-upload.css';
+@import '../../assets/css/el-upload.css';
 
 .uploadButton {
   font-family: fantasy !important;

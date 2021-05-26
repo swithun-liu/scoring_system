@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-24 20:34:51
+ * @LastEditTime: 2021-05-26 21:39:36
 -->
 <template>
   <!-- 学生列表 -->
@@ -15,13 +15,19 @@
         <el-form label-position="left" inline class="demo-table-expand">
           <el-form-item label="所有论文">
             <div v-for="(file, index) in props.row.studentFilesById" :key="index">
-              <div>
-                <span>{{file.name}}</span>
-                <br />
-                <span>{{file.score}}</span>
+              <div class="file-wrapper">
+                <div style="display: flex; flex-direction: row; justify-content: flex-begin;">
+                  <div class="el-icon-document file-icon"></div>
+                  <div>{{file.name}}</div>
+                </div>
+                <div style="display: flex; flex-direction: row; width: 6em;">
+                  <el-divider direction="vertical" style="font-size: 3em;"></el-divider>
+                  <div class="score-wrapper">{{file.score == null ? '暂未评' : file.score}}分</div>
+                </div>
               </div>
             </div>
           </el-form-item>
+          <el-form-item label="指导教师">哈哈</el-form-item>
         </el-form>
       </template>
     </el-table-column>
@@ -137,7 +143,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less"  scoped>
 .demo-table-expand {
   font-size: 0;
 }
@@ -149,5 +155,34 @@ export default {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+.file-wrapper {
+  /* 样式 */
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 1px 6px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* 结构 */
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 5px;
+  width: 100%;
+}
+.file-icon {
+  align-self: center;
+  padding: 5px;
+  font-size: large;
+  cursor: pointer;
+}
+/deep/.el-form-item__content {
+  width: 76% !important  ;
+}
+.score-wrapper {
+  /* 样式 */
 }
 </style>

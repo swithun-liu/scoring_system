@@ -24,7 +24,6 @@ import com.swithun.backend.dao.TagRepository;
 import com.swithun.backend.dao.TeacherRepository;
 import com.swithun.backend.entity.AdminEntity;
 import com.swithun.backend.entity.StudentEntity;
-import com.swithun.backend.entity.TagCommentEntity;
 import com.swithun.backend.entity.TeacherEntity;
 import com.swithun.backend.tools.secret.tools.JwtTokenUtil;
 

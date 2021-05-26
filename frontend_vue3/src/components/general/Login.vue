@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-10 19:00:15
+ * @LastEditTime: 2021-05-26 19:59:14
 -->
 
 <template>
@@ -97,7 +97,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '../assets/css/radioStyle.css';
+@import '../../assets/css/radioStyle.css';
 .login-form-wrapper {
   // 样式
   background: rgba(255, 255, 255, 0.2);

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-24 20:49:16
+ * @LastEditTime: 2021-05-26 19:46:47
 -->
 
 <template>
@@ -97,7 +97,7 @@
 <script>
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
-import comment from './comment.vue'
+import comment from '../../components/general/comment.vue'
 
 export default {
   components: { comment },
@@ -221,8 +221,8 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/el-dialog.css';
-@import '../assets/css/el-table.css';
+@import '../../assets/css/el-dialog.css';
+@import '../../assets/css/el-table.css';
 .table-btn {
   margin: 0 4px !important;
 }

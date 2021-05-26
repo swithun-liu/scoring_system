@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-04 10:58:35
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-23 10:49:24
+ * @LastEditTime: 2021-05-26 19:56:56
 -->
 <template>
   <el-tree
@@ -177,7 +177,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/comment.css';
+@import '../../assets/css/comment.css';
 
 .el-tag + .el-tag {
   margin-left: 10px;

@@ -2,19 +2,18 @@ import {
   createRouter,
   createWebHashHistory
 } from 'vue-router'
-// import Home from '../views/Home.vue'
-import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
-import StudentUploadPaper from '../components/StudentUploadPaper.vue';
-import ProfessorStudentsPaper from '../components/professorStudentsPaper.vue';
-import FilePreview from '../components/FilePreview.vue';
-import StudentMyPapers from '../components/StudentMyPapers.vue';
+import StudentPaperUpload from '../components/student/paperUpload.vue';
+import StudentMyPapers from '../components/student/paperBoard.vue';
+import TeacherPaperBoard from '../components/teacher/paperBoard.vue';
 import ScoreStatistic from '../components/admin/statistic/scoreStatistic'
 import TeacherTask from '../components/admin/statistic/teacherTask';
 import Students from '../components/admin/manage/students'
 import Teachers from '../components/admin/manage/teachers'
 import Tag from '../components/admin/statistic/tagStatistic';
-import Profile from '../components/profile'
+import Profile from '../components/general/profile'
+import Login from '../components/general/Login.vue'
+import FilePreview from '../components/general/FilePreview.vue';
 import store from '../store/index';
 
 const routes = [{
@@ -51,7 +50,7 @@ const routes = [{
   children: [{
     path: '/student_upload_paper',
     name: 'StudentUploadPaper',
-    component: StudentUploadPaper,
+    component: StudentPaperUpload,
     meta: {
       requiredAuth: true
     }
@@ -67,7 +66,7 @@ const routes = [{
   {
     path: '/professor_students_paper',
     name: 'ProfessorStudentsPaper',
-    component: ProfessorStudentsPaper,
+    component: TeacherPaperBoard,
     meta: {
       requiredAuth: true
     }

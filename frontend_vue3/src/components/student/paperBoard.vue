@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 14:43:22
+ * @LastEditTime: 2021-05-26 19:47:32
 -->
 
 <template>
@@ -102,7 +102,7 @@
 <script>
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
-import comment from './comment.vue'
+import comment from '../../components/general/comment.vue'
 
 export default {
   components: { comment },
@@ -266,6 +266,6 @@ export default {
 </script>
 
 <style>
-@import '../assets/css/card.css';
-@import '../assets/css/el-dialog.css';
+@import '../../assets/css/card.css';
+@import '../../assets/css/el-dialog.css';
 </style>

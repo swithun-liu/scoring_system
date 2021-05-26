@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-11 19:25:50
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-25 17:31:25
+ * @LastEditTime: 2021-05-26 19:58:57
 -->
 <template>
   <div class="profile-container">
@@ -35,7 +35,7 @@
 <script>
 import { onMounted, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
-import infoCard from './profile/infoCard.vue'
+import infoCard from '../profile/infoCard.vue'
 export default {
   components: { infoCard },
   setup(props) {
@@ -64,5 +64,5 @@ export default {
 </script>
 
 <style scoped>
-@import '../assets/css/profile.css';
+@import '../../assets/css/profile.css';
 </style>
