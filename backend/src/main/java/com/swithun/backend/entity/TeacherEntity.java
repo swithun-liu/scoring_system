@@ -5,14 +5,13 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-08 14:28:21
+ * @LastEditTime: 2021-05-27 11:23:35
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -35,7 +34,6 @@ public class TeacherEntity {
     private String name;
     @JsonIgnore
     private String password;
-    @JsonManagedReference
     private Collection<StudentEntity> studentsById;
     @JsonIgnore
     private Collection<CommentForFileEntity> teacherCommentForFilesById;

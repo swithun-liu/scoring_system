@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 21:35:12
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 17:03:55
+ * @LastEditTime: 2021-05-27 21:28:56
  */
 package com.swithun.backend.controller;
 
@@ -30,43 +30,52 @@ public class AdminController {
     @Autowired
     private AdminService adminS;
 
-    // 统计
-
+    // 统计 论文得分
     @GetMapping(value = "/admin/statistic/allScore")
-    public List<List<Object>> statisticAllScore() {
+    public List<List<Object>> statisticScore() {
         return adminS.statisticAllScore();
     }
 
+    // 统计 教师任务
     @GetMapping(value = "/admin/statistic/teacherTask")
-    public List<List<Object>> statisticAllTeacherTasks() {
+    public List<List<Object>> statisticTeacherTasks() {
         return adminS.statisticTeacherTask();
     }
 
-    // 获取所有
-
-    @GetMapping(value="/admin/getAllStudent")
-    public List<StudentEntity> getAllStudent() {
-        return adminS.getAllStudent();
-    }
-    
-    @GetMapping(value="/admin/getAllTeachers")
-    public List<TeacherEntity> getAllTeachers() {
-        return adminS.getAllTeachers();
+    // 获取学生列表
+    @GetMapping(value = "/admin/getAllStudent")
+    public List<StudentEntity> getStudents() {
+        return adminS.getStudents();
     }
 
-    // 编辑
+    // 获取教师列表
+    @GetMapping(value = "/admin/getAllTeachers")
+    public List<TeacherEntity> getTeachers() {
+        return adminS.getTeachers();
+    }
 
-    @PostMapping(value="/admin/editStudent")
+    // 编辑学生
+    @PostMapping(value = "/admin/editStudent")
     public String editStudent(@RequestBody Map<String, Object> mp) {
         adminS.editStudent(mp);
         return "修改成功";
     }
 
-    @PostMapping(value="/admin/editTeacher")
+    // 编辑教师
+    @PostMapping(value = "/admin/editTeacher")
     public String editTeacher(@RequestBody Map<String, Object> mp) {
         adminS.editTeacher(mp);
         return "修改成功";
     }
-    
+
+    // 设置教师
+    @PostMapping(value = "/admin/setTeacher")
+    public String setTeacher(@RequestBody Map<String, Integer> mp) {
+        if (adminS.setTeacher(mp)) {
+            return "ok";
+        } else {
+            return "error";
+        }
+    }
 
 }

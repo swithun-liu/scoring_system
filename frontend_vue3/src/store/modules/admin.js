@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-07 14:32:43
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 14:08:45
+ * @LastEditTime: 2021-05-27 21:25:15
  */
 import axios from 'axios'
 
@@ -36,6 +36,12 @@ const actions = {
     commmit
   }, payload) {
     const response = await axios.post('http://localhost:8089/admin/editTeacher', payload)
+    return response
+  },
+  async setTeacher({
+    commmit
+  }, payload) {
+    const response = await axios.post('http://localhost:8089/admin/setTeacher', payload)
     return response
   }
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 21:39:36
+ * @LastEditTime: 2021-05-27 21:34:10
 -->
 <template>
   <!-- 学生列表 -->
@@ -27,7 +27,21 @@
               </div>
             </div>
           </el-form-item>
-          <el-form-item label="指导教师">哈哈</el-form-item>
+          <el-form-item label="指导教师">
+            <el-select
+              v-model="props.row.temperTeacher.name"
+              clearable
+              placeholder="请选择"
+              @change="handleSetTeacher($event, props.row.id)"
+            >
+              <el-option
+                v-for="item in teachers"
+                :key="item.value"
+                :label="item.name"
+                :value="item.id"
+              ></el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
       </template>
     </el-table-column>
@@ -69,6 +83,7 @@
 <script>
 import { onMounted, reactive, ref } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import { ElMessage } from 'element-plus'
 export default {
   setup(props) {
     const store = useStore()
@@ -83,32 +98,44 @@ export default {
     })
 
     const tableData = reactive([
-      {
-        id: 1,
-        name: 'student0001',
-        studentFilesById: [
-          {
-            id: 1,
-            name: '考虑安全的博士论文评审系统的研究和实现.pdf',
-            type: 'application/pdf',
-            score: 89,
-          },
-          {
-            id: 2,
-            name: '国内外高校教务管理系统的研究现状.pdf',
-            type: 'application/pdf',
-            score: 86,
-          },
-        ],
-      },
+      // {
+      //   id: 1,
+      //   name: 'student0001',
+      //   studentFilesById: [
+      //     {
+      //       id: 1,
+      //       name: '考虑安全的博士论文评审系统的研究和实现.pdf',
+      //       type: 'application/pdf',
+      //       score: 89,
+      //     },
+      //     {
+      //       id: 2,
+      //       name: '国内外高校教务管理系统的研究现状.pdf',
+      //       type: 'application/pdf',
+      //       score: 86,
+      //     },
+      //   ],
+      // },
     ])
 
-    const refreshInfo = () => {
+    const teachers = reactive([])
+
+    // get teacher list
+    const getTeachers = () => {
+      console.log('开始打印')
+      store.dispatch('admin/getAllTeachers').then((res) => {
+        console.log(res.data.data)
+        teachers.splice(0)
+        teachers.push(...res.data.data)
+      })
+    }
+    // get student list
+    const getStudents = () => {
       console.log('开始打印')
       store.dispatch('admin/getAllStudents').then((res) => {
-        console.log(res.data.data)
         tableData.splice(0)
         tableData.push(...res.data.data)
+        console.log(tableData)
       })
     }
 
@@ -124,12 +151,31 @@ export default {
       store.dispatch('admin/editStudent', editForm).then((res) => {
         console.log(res)
         editDialogVisible.value = false
-        refreshInfo()
+        getStudents()
       })
     }
 
+    const handleSetTeacher = (teacherId, studentId) => {
+      console.log('teacherId', teacherId, 'studentId', studentId)
+      store
+        .dispatch('admin/setTeacher', {
+          teacherId: teacherId,
+          studentId: studentId,
+        })
+        .then((res) => {
+          console.log(res)
+          if (res.data.data === 'ok') {
+            ElMessage.success({
+              message: '修改成功',
+              type: 'success',
+            })
+          }
+        })
+    }
+
     onMounted(() => {
-      refreshInfo()
+      getStudents()
+      getTeachers()
     })
 
     return {
@@ -138,6 +184,8 @@ export default {
       editForm,
       editDialogVisible,
       handleEdit,
+      handleSetTeacher,
+      teachers,
     }
   },
 }

@@ -15,12 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dao.TagCommentRepository;
 import com.swithun.backend.dao.TagRepository;
@@ -31,7 +25,6 @@ import com.swithun.backend.entity.TagEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 /**
@@ -77,23 +70,6 @@ public class TagService {
     }
 
     public List<List<Object>> statisticTag() {
-        // Map<String, Object> mp = new HashMap<String, Object>();
-        // List<TagCommentEntity> findAll = tagCommentR.findAll(new
-        // Specification<TagCommentEntity>(){
-
-        // @Override
-        // public Predicate toPredicate(Root<TagCommentEntity> root, CriteriaQuery<?>
-        // query,
-        // CriteriaBuilder criteriaBuilder) {
-        // Predicate predication = criteriaBuilder.conjunction();
-        // Path<Object> tagPath = root.get("tagByTagId");
-        // query.groupBy(tagPath);
-        // return predication;
-        // }
-        // });
-        // for (TagCommentEntity tagCommentEntity : findAll) {
-        // logger.info(tagCommentEntity.getTagByTagId().getName());
-        // }
 
         Map<String, Integer> mp = new HashMap<String, Integer>();
         List<TagCommentEntity> tagComments = tagCommentR.findAll();

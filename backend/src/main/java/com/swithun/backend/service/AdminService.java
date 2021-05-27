@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 21:38:54
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-09 14:06:57
+ * @LastEditTime: 2021-05-27 21:27:31
  */
 package com.swithun.backend.service;
 
@@ -110,17 +110,22 @@ public class AdminService {
         return res;
     }
 
-    // 获取所有
-    public List<StudentEntity> getAllStudent() {
-        return studentR.findAll();
+    // 获取学生列表
+    public List<StudentEntity> getStudents() {
+        List<StudentEntity> students = studentR.findAll();
+        for (StudentEntity student : students) {
+            student.setTemperTeacher(student.getTeacherByTeacherId());
+            student.getTemperTeacher().setStudentsById(null);
+        }
+        return students;
     }
 
-    public List<TeacherEntity> getAllTeachers() {
+    // 获取教师列表
+    public List<TeacherEntity> getTeachers() {
         return teacherR.findAll();
     }
 
-    // 编辑
-
+    // 编辑学生
     public void editStudent(Map<String, Object> mp) {
 
         Integer id = (Integer) mp.get("id");
@@ -157,6 +162,26 @@ public class AdminService {
             teacher.setPassword(encoder.encode(password));
         }
         teacherR.save(teacher);
+    }
+
+    public boolean setTeacher(Map<String, Integer> mp) {
+        Integer teacherId = mp.get("teacherId");
+        Integer studentId = mp.get("studentId");
+
+        logger.info("teacherId " + teacherId);
+        logger.info("studentId " + studentId);
+
+        StudentEntity student = studentR.findById(studentId).get();
+        TeacherEntity teacher = teacherR.findById(teacherId).get();
+
+        if (student == null || teacher == null) {
+            return false;
+        }
+        logger.info(student.getId() + " " + student.getName());
+        logger.info(teacher.getId() + " " + teacher.getName());
+        student.setTeacherByTeacherId(teacher);
+        studentR.save(student);
+        return true;
     }
 
 }

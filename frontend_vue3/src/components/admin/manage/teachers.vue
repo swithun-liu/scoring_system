@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-09 12:26:21
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-24 20:50:44
+ * @LastEditTime: 2021-05-27 16:01:17
 -->
 <template>
   <!-- 学生列表 -->
@@ -107,6 +107,7 @@ export default {
       },
     ])
 
+    // get teacher list
     const refreshInfo = () => {
       console.log('开始打印')
       store.dispatch('admin/getAllTeachers').then((res) => {

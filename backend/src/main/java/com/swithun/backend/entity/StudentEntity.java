@@ -5,15 +5,14 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 16:03:29
+ * @LastEditTime: 2021-05-27 20:37:32
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -21,6 +20,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "student", schema = "scoring_system", catalog = "")
 public class StudentEntity {
+
     public StudentEntity(Integer id) {
         this.id = id;
     }
@@ -32,9 +32,11 @@ public class StudentEntity {
     private String name;
     @JsonIgnore
     private String password;
-    @JsonBackReference
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private TeacherEntity teacherByTeacherId;
-    @JsonManagedReference
+    // 临时需要teacher信息
+    private TeacherEntity temperTeacher;
+
     private Collection<StudentFileEntity> studentFilesById;
     @JsonIgnore
     private Collection<CommentForFileEntity> commentForFilesById;
@@ -58,6 +60,15 @@ public class StudentEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Transient
+    public TeacherEntity getTemperTeacher() {
+        return temperTeacher;
+    }
+
+    public void setTemperTeacher(TeacherEntity temperTeacher) {
+        this.temperTeacher = temperTeacher;
     }
 
     @Basic

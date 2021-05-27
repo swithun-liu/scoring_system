@@ -12,7 +12,6 @@ package com.swithun.backend.service;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.swithun.backend.dao.StudentFileRepository;
@@ -21,7 +20,6 @@ import com.swithun.backend.dao.CommentForFileRepository;
 import com.swithun.backend.dto.AddFileFileListDTO;
 import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
-import com.swithun.backend.entity.TagCommentEntity;
 import com.swithun.backend.entity.CommentForFileEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;

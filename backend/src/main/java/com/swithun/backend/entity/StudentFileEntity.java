@@ -5,13 +5,12 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 15:38:32
+ * @LastEditTime: 2021-05-27 15:05:28
  */
 package com.swithun.backend.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class StudentFileEntity {
     private Integer score;
     private String fileAbstract;
 
-    @JsonBackReference
+    @JsonIgnore
     private StudentEntity studentByStudentId;
     @JsonIgnore
     private Collection<CommentForFileEntity> teacherCommentForFilesById;
