@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@pdftron/webviewer": "^7.3.2",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "echarts": "^5.1.1",
@@ -19,6 +20,7 @@
     "vue-axios": "^3.2.4",
     "vue-doc-preview": "^0.3.2",
     "vue-echarts": "^6.0.0-rc.5",
+    "vue-pdf": "^4.2.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

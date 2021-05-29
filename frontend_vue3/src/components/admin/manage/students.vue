@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 21:34:10
+ * @LastEditTime: 2021-05-27 21:46:59
 -->
 <template>
   <!-- 学生列表 -->
@@ -192,6 +192,7 @@ export default {
 </script>
 
 <style lang="less"  scoped>
+@import url('../../../assets/css/el-selector.css');
 .demo-table-expand {
   font-size: 0;
 }

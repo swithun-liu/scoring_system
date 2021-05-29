@@ -13,34 +13,61 @@
       <el-submenu index="1">
         <template #title>
           <i class="el-icon-more"></i>
-          <span>论文管理</span>
+          <span>  论文管理</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="profile">个人信息</el-menu-item>
+          <el-menu-item index="profile">
+            <span class="el-icon-user"></span>
+            <span>个人信息</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'student'">
-          <el-menu-item index="student_upload_paper">上传论文</el-menu-item>
+          <el-menu-item index="student_upload_paper">
+            <span class="el-icon-upload"></span>
+            <span>上传论文</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'student'">
-          <el-menu-item index="student_my_papers">我的论文</el-menu-item>
+          <el-menu-item index="student_my_papers">
+            <span class="el-icon-document"></span>
+            <span>我的论文</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'teacher'">
-          <el-menu-item index="professor_students_paper">学生论文</el-menu-item>
+          <el-menu-item index="professor_students_paper">
+            <span class="el-icon-document"></span>
+            <span>学生论文</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
-          <el-menu-item index="/admin/score_statistic">得分总览</el-menu-item>
+          <el-menu-item index="/admin/score_statistic">
+            <span class="el-icon-pie-chart"></span>
+            <span>得分总览</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
-          <el-menu-item index="/admin/teacher_task">教师任务</el-menu-item>
+          <el-menu-item index="/admin/teacher_task">
+            <span class="el-icon-s-claim"></span>
+            <span>教师任务</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
-          <el-menu-item index="/admin/tag_statistic">标签统计</el-menu-item>
+          <el-menu-item index="/admin/tag_statistic">
+            <span class="el-icon-price-tag"></span>
+            <span>标签统计</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
-          <el-menu-item index="/admin/manage/students">学生管理</el-menu-item>
+          <el-menu-item index="/admin/manage/students">
+            <span class="el-icon-lollipop"></span>
+            <span>学生管理</span>
+          </el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group v-if="type[0] === 'admin'">
-          <el-menu-item index="/admin/manage/teachers">教师管理</el-menu-item>
+          <el-menu-item index="/admin/manage/teachers">
+            <span class="el-icon-coffee-cup"></span>
+            <span>教师管理</span>
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>

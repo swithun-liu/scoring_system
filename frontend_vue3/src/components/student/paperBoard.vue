@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 19:47:32
+ * @LastEditTime: 2021-05-29 16:59:30
 -->
 
 <template>
@@ -33,12 +33,17 @@
       <div class="card-footer">
           <el-button class="glass-btn-important card-btn" icon="el-icon-success" @click="handleEditInfo(file)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-download" size="small" @click="handleDownload(file.id, file.name)"></el-button>
+          <el-button class="glass-btn-important card-btn" icon="el-icon-view" size="small" @click="handlePreview(file.id, file.name)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-s-comment" size="small" @click="openCommentDialog(file.id)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-delete-solid" size="small" @click="openDelteDialog(file.id)"></el-button>
           <input type="file" class="refresh-btn-input-file" value="" id="refreshFile" @change="handleRefreshFile($event, file.id)">
           <label for="refreshFile" class="glass-btn el-icon-refresh refresh-label"></label>
       </div>
     </div>
+  </div>
+  <div style="height: 100%; width: 100%; background: red;">
+    <!-- <web-viewer initialDoc='https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf' /> -->
+    <web-viewer ref=myWebViewer :initialDoc=fileSrcURL :myBlob=myBlob />
   </div>
   <!-- 文件卡片 end-->
   <!-- 评分 Dialog begin -->
@@ -72,7 +77,7 @@
           <el-input v-model="commentWatiForPush"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button class="el-btn-2-glass-btn" @click="handleAddComment()">添加</el-button>
+          <el-button icon="el-icon-position" class="el-btn-2-glass-btn" @click="handleAddComment()"></el-button>
         </el-form-item>
       </el-form>
     </template>
@@ -103,9 +108,10 @@
 import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import comment from '../../components/general/comment.vue'
+import WebViewer from '../general/WebViewer.vue'
 
 export default {
-  components: { comment },
+  components: { comment, WebViewer },
   data() {
     return {
       tableData: [],
@@ -120,11 +126,17 @@ export default {
       commentWatiForPush: '',
       vuexComponentStudent: 'student',
       loading: true,
+      fileSrcURL: '../../assets/pdf/test.pdf',
+      viewer: null,
+      testURL: '../../assets/pdf/test.pdf',
+      myBlob: { type: Blob },
+      myWebViewer: 'myWebViewer',
     }
   },
   mounted() {
     this.flashAllFileOfMyStudents()
     this.getComments()
+    this.tempHandlePreview(12)
   },
   methods: {
     ...mapActions('student', [
@@ -177,7 +189,7 @@ export default {
       this.chosedFileId = id
       this.deleteDialogVisible = true
     },
-    // 处理操作
+    // 文件下载
     handleDownload(id, name) {
       this.studentDownloadThisFile({
         fileId: id,
@@ -185,6 +197,36 @@ export default {
         fileDownload(res.data, name)
       })
     },
+    // 文件预览
+    handlePreview(id) {
+      const _this = this
+      this.studentDownloadThisFile({
+        fileId: id,
+      }).then((res) => {
+        const blob = res.data
+        _this.myBlob = res.data
+        const url = URL.createObjectURL(blob)
+        console.log('文件url为：', url);
+        _this.fileSrcURL = url
+        console.log('fileSrcURL', _this.fileSrcURL)
+      })
+    },
+    // 文件预览
+    tempHandlePreview(id) {
+      var _this = this
+      this.studentDownloadThisFile({
+        fileId: id,
+      }).then((res) => {
+        const blob = res.data
+        _this.myBlob = res.data
+        console.log('文件blob为', blob)
+        const url = URL.createObjectURL(blob)
+        console.log('onMounted 文件url为：', url);
+        _this.fileSrcURL = url
+        console.log('onMounted fileSrcURL', _this.fileSrcURL)
+      })
+    },
+    // 文件评分
     handleScore() {
       const _this = this
       const chosedFileId = this.chosedFileId

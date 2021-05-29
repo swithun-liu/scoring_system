@@ -1,0 +1,7 @@
+.el-select__popper {
+    background: rgba(255, 255, 255, 0.323) !important;
+}
+
+.el-select-dropdown__item:hover {
+    background: rgba(255, 255, 255, 0.412) !important;
+}

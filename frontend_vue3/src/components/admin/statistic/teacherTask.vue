@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 09:13:41
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-25 18:48:22
+ * @LastEditTime: 2021-05-28 17:01:16
 -->
 <template>
   <div ref="chart" style="width: 100%; height: 100%;" />
@@ -130,6 +130,7 @@ export default {
         option.series[0].data = info[1]
         option.series[1].data = info[2]
         option.series[2].data = info[3]
+        console.log(option);
       })
     }
 
@@ -139,7 +140,6 @@ export default {
 
     onMounted(() => {
       initChart()
-      // mountData()
       renewOption()
     })
 

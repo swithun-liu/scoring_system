@@ -8,19 +8,22 @@
 .teacher-tag {
     color: #ffffff;
     font-weight: bolder;
-    background-color: #40a0ff77;
+    background: linear-gradient(to right, #40a0ff88, #40a0ff33);
+    border: 1px solid #40a0ff;
     /* box-shadow: 0 0 4px #409EFF, 0 0 4px #409EFF; */
     display: block;
     margin: 5px;
+    padding: 3px;
 }
 
 .student-tag {
     color: #ffffff;
     font-weight: bolder;
-    background-color: #67c23a90;
-    /* box-shadow: 0 0 4px #67C23A, 0 0 4px #67C23A; */
+    background: linear-gradient(to right, #67C23A88, #67C23A33);
+    border: 1px solid #67C23A;
     display: block;
     margin: 5px;
+    padding: 3px;
 }
 
 .replay-button {
@@ -54,7 +57,7 @@
 
 .el-tree-node {
     background: rgba( 255, 255, 255, 0.20);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    box-shadow: 0 2px 5px 0 rgba( 31, 38, 135, 0.37);
     backdrop-filter: blur( 15.0px);
     -webkit-backdrop-filter: blur( 15.0px);
     border-radius: 10px;
@@ -64,7 +67,9 @@
     margin: 10px;
     white-space: normal !important;
 }
+
 /* 问题标签wrapper */
+
 .tags-wrapper {
     display: flex;
     flex-direction: row;
@@ -73,8 +78,8 @@
 }
 
 /*  问题标签样式 */
-.el-tag {
-}
+
+.el-tag {}
 
 .tag {
     /* 样式 */

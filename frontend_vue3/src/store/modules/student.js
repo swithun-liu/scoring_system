@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:38:13
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 14:43:40
+ * @LastEditTime: 2021-05-29 10:09:12
  */
 
 import axios from 'axios';
@@ -32,7 +32,7 @@ const actions = {
   }, payload) {
     const response = await axios.get('http://localhost:8089/student/downloadThisFile', {
       params: payload,
-      responseType: 'arraybuffer'
+      responseType: 'blob'
     });
     return response;
   },

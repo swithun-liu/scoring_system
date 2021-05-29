@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-09 12:26:21
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 16:01:17
+ * @LastEditTime: 2021-05-28 10:41:29
 -->
 <template>
   <!-- 学生列表 -->
@@ -17,8 +17,6 @@
             <div v-for="(student, index) in props.row.studentsById" :key="index">
               <div>
                 <span>{{student.name}}</span>
-                <br />
-                <span>{{student.score}}</span>
               </div>
             </div>
           </el-form-item>
@@ -29,7 +27,11 @@
     <el-table-column label="教师编号" prop="name"></el-table-column>
     <el-table-column label="操作" width="200">
       <template #default="scope">
-        <el-button icon="el-icon-edit" @click="openEditDialog(scope.row.id, scope.row.name)"></el-button>
+        <el-button
+          class="el-btn-2-glass-btn"
+          icon="el-icon-edit"
+          @click="openEditDialog(scope.row.id, scope.row.name)"
+        ></el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -38,15 +40,15 @@
   <teleport to="body">
     <el-dialog title="编辑学生信息" v-model="editDialogVisible" :before-close="handleClose" width="50%">
       <el-form :model="editForm" label-width="100px">
-        <el-form-item label="学生id" prop="id">
+        <el-form-item label="教师id" prop="id">
           <el-input v-model="editForm.id"></el-input>
         </el-form-item>
         <el-form-item label="编号" prop="name">
           <el-input v-model="editForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="昵称" prop="nickName">
+        <!-- <el-form-item label="昵称" prop="nickName">
           <el-input v-model="editForm.nickName"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="新密码" prop="password">
           <el-input v-model="editForm.password" placeholder="不更改"></el-input>
         </el-form-item>
@@ -75,36 +77,36 @@ export default {
     })
 
     const tableData = reactive([
-      {
-        id: 1,
-        name: 'teacher0001',
-        studentsById: [
-          {
-            id: 1,
-            name: 'student0001',
-            studentFilesById: [
-              {
-                id: 1,
-                name: '考虑安全的博士论文评审系统的研究和实现.pdf',
-                type: 'application/pdf',
-                score: 89,
-              },
-              {
-                id: 2,
-                name: '国内外高校教务管理系统的研究现状.pdf',
-                type: 'application/pdf',
-                score: 86,
-              },
-              {
-                id: 3,
-                name: '考虑安全的博士论文评审系统的研究和实现.pdf',
-                type: 'application/pdf',
-                score: 56,
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   id: 1,
+      //   name: 'teacher0001',
+      //   studentsById: [
+      //     {
+      //       id: 1,
+      //       name: 'student0001',
+      //       studentFilesById: [
+      //         {
+      //           id: 1,
+      //           name: '考虑安全的博士论文评审系统的研究和实现.pdf',
+      //           type: 'application/pdf',
+      //           score: 89,
+      //         },
+      //         {
+      //           id: 2,
+      //           name: '国内外高校教务管理系统的研究现状.pdf',
+      //           type: 'application/pdf',
+      //           score: 86,
+      //         },
+      //         {
+      //           id: 3,
+      //           name: '考虑安全的博士论文评审系统的研究和实现.pdf',
+      //           type: 'application/pdf',
+      //           score: 56,
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ])
 
     // get teacher list

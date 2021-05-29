@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 19:46:47
+ * @LastEditTime: 2021-05-29 09:58:11
 -->
 
 <template>
@@ -82,7 +82,7 @@
             <el-input v-model="commentWatiForPush"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button @click="handleAddComment()">添加</el-button>
+            <el-button class="el-icon-position" @click="handleAddComment()"></el-button>
           </el-form-item>
         </el-form>
       </template>

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-04 10:58:35
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 19:56:56
+ * @LastEditTime: 2021-05-28 10:48:24
 -->
 <template>
   <el-tree
@@ -38,7 +38,7 @@
             v-model="inputValue"
             :fetch-suggestions="querySearchAsync"
             placeholder="请输入内容"
-            @select="handleSelect"
+            @select="handleInputConfirm(node.data)"
             @keyup.enter="handleInputConfirm(node.data)"
           ></el-autocomplete>
           <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
@@ -90,21 +90,22 @@ export default {
     }
     // 输入tag点击回车
     const handleInputConfirm = (data) => {
-      // 自己的逻辑
       console.log(
         '输入tag点击回车',
         '评论id ' + data.id,
         '标签名' + inputValue.value
       )
-      store.dispatch('tag/commentAddTag', {
-        tagName: inputValue.value,
-        commentId: data.id,
-      })
-      // 结构控制
-      inputVisible.value = false
-      inputValue.value = ''
-
-      InnerRefreshData()
+      store
+        .dispatch('tag/commentAddTag', {
+          tagName: inputValue.value,
+          commentId: data.id,
+        })
+        .then(() => {
+          InnerRefreshData()
+          // 结构控制
+          inputVisible.value = false
+          inputValue.value = ''
+        })
     }
     // 输入框相关
     const tags = ref([
