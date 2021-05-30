@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{16}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
@@ -71,6 +71,23 @@ SETIYANI~L, SYAMSUDIN~A, GINTINGS~A, et~al.
 \newblock
   基于Vue+SpringBoot的分类学科竞赛管理系统设计\allowbreak[J].
 \newblock 无线互联科技, 2020, 17\penalty0 (17):\penalty0 74-77.
+
+\bibitem[Dhingra et~al.(2017)Dhingra, Abdelmoghith, and
+  Mouftah]{Dhingra2017ReviewOJ}
+DHINGRA~N, ABDELMOGHITH~E~M, MOUFTAH~H.
+\newblock Review on jpa based orm data persistence framework\allowbreak[J].
+\newblock International Journal of Computer Theory and Engineering, 2017,
+  9:\penalty0 318-328.
+
+\bibitem[Silva et~al.(2019)Silva, Serey, Figueiredo, and
+  Brunet]{10.1145/3350768.3351796}
+SILVA~T~M, SEREY~D, FIGUEIREDO~J, et~al.
+\newblock Automated design tests to check hibernate design
+  recommendations\allowbreak[C]//\allowbreak
+SBES 2019: Proceedings of the XXXIII Brazilian Symposium on Software
+  Engineering.
+\newblock New York, NY, USA: Association for Computing Machinery, 2019:
+  94–103.
 
 \bibitem[Walls.\ 等(2016)Walls. and Zhang]{.SpringInAction}
 WALLS.~C, ZHANG.

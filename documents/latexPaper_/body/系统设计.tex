@@ -22,7 +22,7 @@
     \item 模块化。\\如果您的前端与后端分离，那么在一个模块上工作而不影响另一个模块就变得更容易了。模块化还使两个团队或两个人同时在前端和后端工作变得更容易，而不必担心覆盖或搞乱其他人的工作。他们也可以用不同的节奏工作。
 \end{enumerate}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.5]{out/uml/部署图/系统架构/系统架构.png}
     \caption{\song\wuhao 系统架构设计}
@@ -33,7 +33,7 @@
 
 系统整体模块设计如图\ref{system-wbs}所示，总体可以分为学生模块，教师模块，管理员模块。在学生模块中可以进一步将功能细分为论文上传功能，论文下载功能，成绩查看功能，回复评论功能，论文更新功能。教师模块可以进一步分为查看所管理的学生论文信息功能，论文下载功能，论文评论功能，论文添加问题标签功能，论文评分功能。管理模块可以进一步分为系统管理和论文管理，系统管理可以进一步分为用户管理，上传通道管理，论文管理可以进一步分为评审情况统计，教师评审情况统计。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/WBS/系统WBS/系统WBS.png}
     \caption{\song\wuhao 系统整体模块}
@@ -42,7 +42,7 @@
 
 \subsection{文件上传模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/file-upload-sequence/file-upload-sequence.png}
     \caption{\song\wuhao 文件上传时序图}
@@ -53,7 +53,7 @@
 
 \subsection{文件下载模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/file-download-sequence/file-download-sequence.png}
     \caption{\song\wuhao 文件下载时序图}
@@ -64,7 +64,7 @@
 
 \subsection{文件更新模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/file-refresh-sequence/file-refresh-sequence.png}
     \caption{\song\wuhao 文件更新时序图}
@@ -77,7 +77,7 @@
 
 学生和教师都可以针对一个文件进行评论，用户双方的沟通，教师可以使用评论功能提出文章的问题，学生可以根据教师的回复进行对文章的更改，更改之后更新文章。如图\ref{file-comment-sequence}所示，用户首先选择要评论的文件并填入评论内容，前端发起请求，请求体中带有文件id，父级评论id和评论内容，Controller接收到请求之后，将二者转交给Service处理，Service需要创建一个评论实体，需要填入评论内容，为哪个文件评论（文件id），由谁评论（从principal中可以取出发送请求的用户信息），回复那一条评论（父级评论id），这些信息便可以确定唯一一条评论，之后使用CommentRepository保存，将信息持久化。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/file-comment-sequence/file-comment-sequence.png}
     \caption{\song\wuhao 文件评论时序图}
@@ -86,7 +86,7 @@
 
 \subsection{问题标签模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.45]{out/uml/时序图/file-tag-sequence/file-tag-sequence.png}
     \caption{\song\wuhao 问题标签时序图}
@@ -97,7 +97,7 @@
 
 \subsection{论文评分模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/file-score-sequence/file-score-sequence.png}
     \caption{\song\wuhao 论文评分时序图}
@@ -108,7 +108,7 @@
 
 \subsection{论文得分情况统计模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/statistic-score-sequence/statistic-score-sequence.png}
     \caption{\song\wuhao 统计分数时序图}
@@ -119,7 +119,7 @@
 
 \subsection{教师任务完成请求统计模块}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/时序图/statistic-teacher-task-sequence/statistic-teacher-task-sequence.png}
     \caption{\song\wuhao 统计教师任务完成情况时序图}
@@ -151,9 +151,12 @@
 如图\ref{manage-teacher-sequence}所示，当管理员切换到学生管理页面，前端想后端发起请求，Controller收到请求之后使用Service获取所有教师信息，其中Service会调用Repository查询数据库并将教师信息映射为实体对象，Controller将获得的所有教师信息放入response中返还给前端，用户可以点击教师条目，在对话框中修改教师信息，点击确认之后前端将发起修改请求，Controller接收到请求之后可以从请求中解析出教师实体，之后使用Repository使用这个新的教师实体对象更新旧的教师数据。
 
 \section{数据库设计}
+
+在数据库设计的过程中除了需要考虑范式的问题，也需要考虑系统所选用的ORM框架的特点，Hibernate不同于半自动的MyBatis框架，作为一个全自动的框架，它对于表设计的要求更高，因为面向对象的编程（oops）基于实体，而关系数据库管理系统（RDBMS）侧态关系和字段存储数据\cite{Dhingra2017ReviewOJ}，在设计过程中需要在两者之间做出权衡。Hibernate用户必须实现特定的方法和注释特定的类，以正确地存储和检索数据库中的元素。如果应用程序的代码没有遵循这些建议，在极端情况下，不符合体系结构规则甚至可能导致数据丢失\cite{10.1145/3350768.3351796}。
+
 \subsection{概念结构设计}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.5]{out/uml/数据库/conceptual-model.png}
     \caption{\song\wuhao 概念模型}
@@ -182,7 +185,7 @@
           该表用于记录某一条评论引用了哪一个标签，为多对多。id字段作为引用记录的id，该字段自增且为主键，不能为空，使用Integer类型；comment\_id指示为哪一条评论添加标签，该字段为外键，引用评论表的主键id字段；tag\_id字段指示为这条评论添加哪一个标签，该字段为外键，引用标签表的主键id字段。
 \end{enumerate}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/数据库/logical-model.png}
     \caption{\song\wuhao 逻辑模型}
@@ -211,7 +214,7 @@
           \end{table}
     \item 教师表\\
           如图\ref{db-teacher}所示，共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
-          \begin{table}[htbp]
+          \begin{table}[H]
               \centering
               \song\wuhao
               \caption{教师表}
@@ -226,7 +229,7 @@
           \end{table}
     \item 管理员表\\
           如图\ref{db-admin}所示，共有三个字段，id，name和password，详细介绍类似学生表这三个字段。
-          \begin{table}[htbp]
+          \begin{table}[H]
               \centering
               \song\wuhao
               \caption{管理员表}
@@ -241,7 +244,7 @@
           \end{table}
     \item 论文表\\
           如图\ref{db-file}所示，论文表id（论文编号）字段使用int类型；论文表data（论文二进制数据）字段使用longblob类型；论文表name（论文题目）字段使用varchar(255)类型；论文表score（论文得分）字段使用int类型；论文表type（论文文件的类型）字段使用varchar(255)类型；论文表student\_id（论文所属学生编号）字段使用int类型；论文表file\_abstract（论文摘要内容）字段使用varchar(255)类型。
-          \begin{table}[htbp]
+          \begin{table}[H]
               \centering
               \song\wuhao
               \caption{论文表}
@@ -260,7 +263,7 @@
           \end{table}
     \item 评论表\\
           如图\ref{db-comment}所示，评论表id（评论编号）字段使用int类型；评论表comments（评论内容字段）使用varchar(255)类型；评论表parent\_comment\_id（指明该评论是回复哪一条评论的）使用int类型；评论表student\_id（指明是哪一名学生写的此条评论）使用int类型；评论表teacher\_id（指明这条评论是哪一名教师写的）使用int类型；评论表student\_file\_id（指明该条评论是回复那一条论文的）。
-          \begin{table}[htbp]
+          \begin{table}[H]
               \centering
               \song\wuhao
               \caption{评论表}
@@ -278,7 +281,7 @@
           \end{table}
     \item 标签表\\
           如图\ref{db-tag}所示，标签表id（标签编号）字段使用int类型；标签表name（标签名字）字段使用varchar(255)类型。
-          \begin{table}[htbp]
+          \begin{table}[H]
               \centering
               \song\wuhao
               \caption{标签表}
@@ -307,7 +310,7 @@
           \end{table}
 \end{enumerate}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6]{out/uml/数据库/physical-model.png}
     \caption{\song\wuhao 物理模型}

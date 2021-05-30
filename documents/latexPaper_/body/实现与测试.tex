@@ -178,14 +178,14 @@ AOP（面向切面编程）可以使我们在一个地方定义通用功能，�
 
 函数的第一个参数为 String 类型，但是返回值已经在ResponseAdvice.beforeBodyWrite()方法中已经被处理为UnifiedResponsor对象，造成参数类型不匹配，抛出ClassCastException。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-Code.png}
   \caption{\song\wuhao WebMvcConfigurer}
   \label{WebMvcConfigurer}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.8]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.png}
   \caption{\song\wuhao MessageConverter序列}
@@ -194,7 +194,7 @@ AOP（面向切面编程）可以使我们在一个地方定义通用功能，�
 
 之后运行到16行，添加MappingJackson2HttpMessageConverter，添加后如图\ref{MessageConverter-list-after-add}所示，该类继承AbstractJackson2HttpMessageConverter，其中的getContentLength()方法的实现为：
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.8]{out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png}
   \caption{\song\wuhao 处理后的MessageConverter序列}
@@ -238,9 +238,9 @@ JWT(JSON Web Token)的优势在于
 
 \subsection{使用JWT\&Spring Security 实现验证和授权}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  \includegraphics[scale = 0.3, angle = 90]{out/uml/时序图/时序图-authentication/时序图-authentication.png}
+  \includegraphics[scale = 0.27, angle = 90]{out/uml/时序图/时序图-authentication/时序图-authentication.png}
   \caption{\song\wuhao 登陆验证授权时序图}
 \end{figure}
 
@@ -248,7 +248,7 @@ JWT(JSON Web Token)的优势在于
 \begin{enumerate}
   \item 后端配置多用户表使用Spring Security\\
         验证授权涉及到的关键类（图\ref{SpringSecurity}）：
-        \begin{figure}[htbp]
+        \begin{figure}[H]
           \centering
           \includegraphics[scale = 0.5]{out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png}
           \caption{\song\wuhao Spring Security 验证授权关键类}
@@ -385,7 +385,7 @@ JWT(JSON Web Token)的优势在于
                 \end{lstlisting}
           \item 当前端接收到后端的response之后，则可以从返还的Token中获取用户信息存储到localStore。之后的每个请求也都需要在Header中放入Token用于身份验证。
         \end{enumerate}
-        \begin{figure}[htbp]
+        \begin{figure}[H]
           \centering
           \includegraphics[scale = 0.35]{out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png}
           \caption{\song\wuhao SpringSecurity多用户表验证}
@@ -439,7 +439,7 @@ JWT(JSON Web Token)的优势在于
                 \end{enumerate}
         \end{enumerate}
         CORS流程（图\ref{CORS-flow}）：
-        \begin{figure}[htbp]
+        \begin{figure}[H]
           \centering
           \includegraphics[scale = 0.6]{out/uml/时序图/CORS-flow/CORS-flow.png}
           \caption{\song\wuhao CORS流程}
@@ -587,7 +587,7 @@ public class B {
 
 例子（省略其他相关性不大代码）：
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \song\wuhao
   \caption{jackson-A}
@@ -599,7 +599,7 @@ public class B {
   \end{tabular}
 \end{table}
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \song\wuhao
   \caption{jackson-B}
@@ -824,7 +824,7 @@ public class B {
     const response = await axios.get(
       'http://localhost:8089/student/downloadThisFile', {
       params: payload,
-      responseType: 'arraybuffer'
+      responseType: 'blob'
     });
     return response;
   },
@@ -871,6 +871,12 @@ public class CustomResponseBodyAdvice implements
 
 至于最后一个属性——评论人，在后台Controller接收到请求后利用Principal便可以获得发送请求的用户信息，至此四个属性全部获得便可以存储到数据库。
 
+\section{文件预览模块}
+
+前端部分：使用文件下载模块的前端请求函数从后台获取文件的blob对象，将对象传入WebViewer实现pdf预览和操作。
+
+后端部分：同文件下载模块后端处理。
+
 \section{统计模块模块}
 
 统计数据由后台生成，传递给前台使用JavaScript可视化工具——Echarts展示。
@@ -883,7 +889,7 @@ public class CustomResponseBodyAdvice implements
 
 如表\ref{test-usecase-table}所示。
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \song\wuhao
   \caption{系统配置表}
@@ -909,7 +915,7 @@ public class CustomResponseBodyAdvice implements
 
 \subsection{测试用例与测试过程}
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \song\wuhao
   \caption{ 测试用例表 }
@@ -933,7 +939,7 @@ public class CustomResponseBodyAdvice implements
 
 用户登陆测试如图\ref{login-test}，需要测试不同用户的登陆能够成功，一点是用户只有输入正确的用户名和密码才能正确登陆，另一点是用户只有选择正确的用户类型才能正确登陆。每类用户都需要进行多次测试，使用正确用户名，错误用户名，正确密码，错误密码，正确类型，错误类型，各自组合测试。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.57]{out/figure/测试/login-test.png}
   \caption{\song\wuhao 登陆测试图}
@@ -942,7 +948,7 @@ public class CustomResponseBodyAdvice implements
 
 论文上传测试如图\ref{upload-test}所示，需要测试学生上传的论文能否正确的使用后台保存到后台的数据库，论文的所属学生是否是登陆用户。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.8]{out/figure/测试/upload-test.png}
   \caption{\song\wuhao 论文上传测试图}
@@ -951,14 +957,14 @@ public class CustomResponseBodyAdvice implements
 
 论文下载测试如图\ref{download-student-test}和图\ref{download-teacher-test}所示，需要在学生页面和教师页面都测试，需要测试点击下载按钮能否下载文件，下载的文件能否正常打开，文件的内容是否正确。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/download-student-test.png}
   \caption{\song\wuhao 学生论文下载测试图}
   \label{download-student-test}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/download-teacher-test.png}
   \caption{\song\wuhao 教师论文下载测试图}
@@ -967,7 +973,7 @@ public class CustomResponseBodyAdvice implements
 
 论文更新模块测试如图\ref{file-refresh-test}所示，学生点击更新论文按钮，选择新的文件，点击确定，文件上传。需要测试文件是否更新成功，数据库中的文件附加信息（文件名，文件类型，所属学生等）是否正确，更新的文件能否下载，下载的文件及其附加信息是否正确。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/file-refresh-test.png}
   \caption{\song\wuhao 更新文件测试图}
@@ -992,14 +998,14 @@ public class CustomResponseBodyAdvice implements
 
 论文评分模块测试如图\ref{score-student}和图\ref{score-teacher}所示，教师可以点击评分按钮，弹出评分对话框，滑动分数滑动条可以选择分数，点解确定为学生评分。该部分需要测试是否可以评分，是否为正确的论文评分，分数是否正确，评分人是否正确记录，学生端是否正确显示分数。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/score-student.png}
   \caption{\song\wuhao 学生查看得分测试图}
   \label{score-student}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/score-teacher.png}
   \caption{\song\wuhao 教师评分测试图}
@@ -1008,7 +1014,7 @@ public class CustomResponseBodyAdvice implements
 
 论文得分统计模块测试如图\ref{statistic-score-student-test}所示，管理员可以切换论文得分统计页面，页面将展示学生的得分情况，需要测试各个分数段的人数是否正确，多次增删论文并评分，测试得分统计是否一致。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.48]{out/figure/测试/statistic-score-student-test.png}
   \caption{\song\wuhao 论文得分统计测试图}
@@ -1017,7 +1023,7 @@ public class CustomResponseBodyAdvice implements
 
 教师评审任务完成情况统计模块测试如图\ref{statistic-teacher-task-test}所示，管理员可以切换到教师评审任务统计完成情况统计页面，需要测试各个教师管理的学生数是否正确，需要管理的所有论文数量是否正确，已经评分的论文数量是否正确，尚未评分的论文数量是否正确。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.48]{out/figure/测试/statistic-teacher-task-test.png}
   \caption{\song\wuhao 教师任务统计测试图}
@@ -1033,7 +1039,7 @@ public class CustomResponseBodyAdvice implements
   \label{manage-students}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[scale = 0.6]{out/figure/测试/manage-edit-student-test.png}
   \caption{\song\wuhao 编辑学生功能测试}
