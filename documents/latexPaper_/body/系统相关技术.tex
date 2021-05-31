@@ -139,8 +139,7 @@ JPA \& Spring Data JPA \& Hibernate三者之间的关系：
           \includegraphics[scale = 0.6]{out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png}
           \caption{\song\wuhao Jpa和Hibernate}
           \label{JpaAndHibernate}
-        \end{figure}
-        Hibernate与MyBatis的对比在一定程度上和Spring Security和Shiro的对比很相似，刚上手Hibernate的感觉，会觉得非常的好用，几乎不用配置就可以使用了，但是随着功能的复杂，需要深入了解复杂的框架本身，对于数据库模型设计的要求也更高，所以Hibernate的学习成本相较于MyBatis更高一些，这是它的缺点，但同时Hibernate的功能更加强大，这是它的优势。\\
+        \end{figure} Hibernate与MyBatis之间的对比和Spring Security与Shiro的对比很相似，使用Hibernate可以在完全不写SQL语句的情况下实现数据库操作，在写好配置之后，基于面向对象的查询方式让代码更简洁，易移植，易复用，减少了许多工作量，避免了许多因查询语句造成的差错，但是随着需求的增多即查询变得更加复杂，需要对框架有更好的理解才能才能编写出无差错的查询。\\
         Hibernate特点：
         \begin{enumerate}
           \item 支持自己的“原生”API，同时是JAP的实现，这样，它可以轻松地在支持JPA的任何环境中使用，包括Java SE应用程序，Java EE应用程序服务器，Enterprise OSGi容器等。
@@ -209,7 +208,7 @@ html
 
 Vue3变化：
 \begin{enumerate}
-  \item 创建app
+  \item 创建app的变化
         \begin{lstlisting} [language = Java]
 // Vue2
 import Vue from 'vue'
@@ -229,7 +228,7 @@ import './index.css'
 
 createApp(App).mount('#app')
     \end{lstlisting}
-        改变化解决了Vue2全局配置在单元测试中产生的问题（测试用户会因全局配置而互相影响）
+        该改变解决了Vue2全局配置在单元测试中产生的问题（测试用户会因全局配置而互相影响）
   \item 多Root
         \begin{lstlisting} [language = HTML]
 <template>
@@ -349,4 +348,4 @@ Echarts特点：
 
 \section{本章小结}
 
-本章主要介绍了系统使用的相关技术，以及和其他系统并未使用的技术，介绍了选择这些技术的原因，在选择上都需要考虑功能是否较为强大，社区是否较为活跃，扩展性是否较强等等，综合多方面进行考虑，为之后顺序实现一个稳定易扩展的系统。
+本章主要介绍了系统使用的相关技术，描述了其他类似的技术，介绍了选择这些技术的原因，在技术的选择上都考虑到了功能是否较为强大，社区是否较为活跃，扩展性是否较强等等，综合多方面进行考虑，为之后顺利实现一个稳定易扩展的系统打下基础。

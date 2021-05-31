@@ -1,4 +1,4 @@
-\begin{thebibliography}{16}
+\begin{thebibliography}{17}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
@@ -39,6 +39,11 @@
 \newblock
   {\textquotedbl}双一流{\textquotedbl}建设下的高校研究生学位论文评审办法改革探讨\allowbreak[J].
 \newblock 高教论坛, 2019\penalty0 (11):\penalty0 83-85.
+
+\bibitem[张磊(2020)]{张磊2020数字校园下高职院校教务管理系统设计}
+张磊.
+\newblock 数字校园下高职院校教务管理系统设计\allowbreak[D].
+\newblock [出版地不详]: 青岛科技大学, 2020.
 
 \bibitem[王晓杰\ 等(2020)王晓杰 and 王欢欢]{.2020h}
 王晓杰, 王欢欢.

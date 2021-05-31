@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-29 18:38:28
+ * @LastEditTime: 2021-05-30 08:13:34
 -->
 
 <template>
@@ -68,6 +68,7 @@
     width="40%"
     :before-close="handleCommentDialogClose"
   >
+
       <comment :loading="loading" :data="commentData" @handleReplay="handleReplay($event)" @refresh-data="flashComments" @test="test()"></comment>
     <template #footer>
       <el-form>
@@ -105,16 +106,16 @@
 </template>
 
 <script>
-import { mapActions, useStore } from 'vuex'
+import { useStore } from 'vuex'
 import fileDownload from 'js-file-download'
-import comment from '../../components/general/comment.vue'
-import WebViewer from '../general/WebViewer.vue'
 import { ref } from '@vue/reactivity'
 import { onMounted } from '@vue/runtime-core'
+import comment from '../general/comment.vue'
+import WebViewer from '../general/WebViewer.vue'
 
 export default {
+  components: { comment, WebViewer },
   setup(props) {
-
     const store = useStore()
     const chosedFileId = ref(0)
     const chosedCommentId = ref(-1)
@@ -124,7 +125,7 @@ export default {
     const dialogVisibleScore = ref(false)
     const dialogVisibleComment = ref(false)
     const dialogVisibleDelete = ref(false)
-    const myBlob = ref({type: Blob})
+    const myBlob = ref({ type: Blob })
     const replayWhichComment = ref('')
     const commentWaitForPush = ref('')
 
@@ -169,6 +170,15 @@ export default {
       dialogVisibleDelete.value = true
     }
 
+    // 处理文件下载
+    const handleDownload = (id, name) => {
+      store.dispatch('student/studentDownloadThisFile', {
+        fileId: id,
+      }).then((res) => {
+        fileDownload(res.data, name);
+      })
+    }
+
     // 处理预览文件
     const handlePreivew = (id) => {
       store.dispatch('student/studentDownloadThisFile', {
@@ -208,11 +218,17 @@ export default {
       })
     }
 
+    // 处理文件删除
     const handleFileDelete = () => {
       console.log('删除文件', chosedFileId.value);
       store.dispatch('student/deleteFile', chosedFileId.value).then(() => {
         dialogVisibleDelete.value = false
       })
+    }
+
+    // 处理文件编辑
+    const handleFileEdit = (file) => {
+      store.dispatch('student/studentFileInfo', file)
     }
 
     // 关闭评论对话框
@@ -222,13 +238,22 @@ export default {
       commentData.value = []
     }
 
-    const handleFileEdit = (file) => {
-
-    }
-
     onMounted(() => {
       getFiles()
     })
+
+    return {
+      openDialogScore,
+      openDialogComment,
+      openDialogDelete,
+      handlePreivew,
+      handleReplay,
+      handleCommentAdd,
+      handleFileDelete,
+      handleFileEdit,
+      handleDownload,
+      closeCommentDialog,
+    }
   }
 }
 
@@ -236,7 +261,7 @@ export default {
 //   components: { comment, WebViewer },
 //   data() {
 //     return {
-      // tableData: [],
+// tableData: [],
 //       dialogVisible: false,
 //       commentDialogVisible: false,
 //       deleteDialogVisible: false,
