@@ -39,12 +39,12 @@
 \begin{enumerate}
   \item 多对一，一对多关系实现\\
         这种关系一共有四种实现方式
-        \begin{enumerate}
+        \begin{itemize}
           \item 单向\lstinline[language = Java]| @OneToMany |绑定
           \item 带有\lstinline[language = Java]| @JoinColumn |的单向\lstinline[language = Java]| @OneToMany |绑定
           \item 双向\lstinline[language = Java]| @OneToMany , @ManyToOne|绑定
           \item 不带有\lstinline[language = Java]| ManyToOne |的双向绑定
-        \end{enumerate}
+        \end{itemize}
         本系统采用第三种方式
         \begin{lstlisting} [language = Java]
     public class A { //  一方
@@ -60,15 +60,15 @@
     }
 \end{lstlisting}
   \item 级联更新
-        \begin{enumerate}
+        \begin{itemize}
           \item 在“一方”（A）中 \lstinline[language = Java]| @OneToMany(cascade = CascadeType.ALL) |
           \item "深拷贝"A中的 \lstinline[language = Java]| BCopy = List<B> |
           \item 清空A中的 \lstinline[language = Java]| List<B> |
           \item \lstinline[language = Java]| BRepository.deleteAll(BCopy) |
           \item \lstinline[language = Java]| ARepository.save(A) |
-        \end{enumerate}
+        \end{itemize}
   \item 级联查询
-        \begin{enumerate}
+        \begin{itemize}
           \item Dao层：继承JpaSpecificationExecutor
                 \begin{lstlisting} [language = Java]
     public interface ARepository extends 
@@ -89,17 +89,19 @@
     })             
 \end{lstlisting}
                 涉及的重要的类：
-                \begin{enumerate}
+                \begin{itemize}
                   \item \lstinline[language = Java]| javax.persistence.criteria.Path |：通过实体类属性名获取字段值
                   \item \lstinline[language = Java]| javax.persistence.criteria.Join |：通过实体类属性名级联
                   \item \lstinline[language = Java]| javax.persistence.criteria.CriteriaBuilder |：拼接生成过滤
-                \end{enumerate}
-        \end{enumerate}
+                \end{itemize}
+        \end{itemize}
 \end{enumerate}
 
 \section{统一返回对象}
 
 使用统一的返回格式不仅可以让接口更漂亮，也可以让前端更方便地处理数据。
+
+\subsection{实现方式}
 
 为了实现自动格式化，需要：
 \begin{enumerate}
@@ -155,6 +157,8 @@ AOP（面向切面编程）可以使我们在一个地方定义通用功能，�
   \item 引入（Introduction）：向现有的类添加新方法或属性。
   \item 织入（Weaving）：切面应用到目标对象同时生成代理对象。
 \end{enumerate}
+
+\subsection{重要问题}
 
 需要注意的一点是，如果返回对象为String类型时会出现错误： \\java.lang.ClassCastException :  your response class can not cast to java.lang.String
 
@@ -221,7 +225,7 @@ AOP（面向切面编程）可以使我们在一个地方定义通用功能，�
 \subsection{JWT优势}
 
 随着Web应用规模的逐渐扩大，传统的基于Session和cookie的身份验证技术逐渐显现出它的弊端。
-随着服务器的不断增加，由于多个请求可以被分发给不同的服务器，那么此时，服务器该如何那些请求来自同一个用户，对此有两种解决方式
+随着服务器的不断增加，由于多个请求可以被分发给不同的服务器，那么此时，服务器该如何确认那些请求来自同一个用户，对此有两种解决方式
 \begin{enumerate}
   \item 多个服务器之间同步用户状态，这样无论用户的请求分发到哪一个服务器，都可以操作用户状态
   \item 判断来自同一个用户的请求，将同一个用户的请求一直分发到同一个服务器
@@ -245,6 +249,7 @@ JWT(JSON Web Token)的优势在于
 \end{figure}
 
 关键问题如下：
+
 \begin{enumerate}
   \item 后端配置多用户表使用Spring Security\\
         验证授权涉及到的关键类（图\ref{SpringSecurity}）：
@@ -254,14 +259,14 @@ JWT(JSON Web Token)的优势在于
           \caption{\song\wuhao Spring Security 验证授权关键类}
           \label{SpringSecurity}
         \end{figure}
-        \begin{enumerate}
+        \begin{itemize}
           \item \lstinline[language = Java]| Authentication |：用户认证信息。
           \item \lstinline[language = Java]| UsernamePasswordAuthenticationToken |：\lstinline[language = Java]| Authentication |的实现类，用于登陆验证，最为常用。
           \item \lstinline[language = Java]| AuthenticationProvider |：认证器，不同的\lstinline[language = Java]| AuthenticationProvider | 处理不同的 \lstinline[language = Java]| Authentication |
           \item \lstinline[language = Java]| DaoAuthenticationProvider |：\lstinline[language = Java]| AuthenticationProvider |的实现类，用于处理\lstinline[language = Java]| UsernamePasswordAuthenticationToken |
           \item \lstinline[language = Java]| ProviderManager |：用于管理\lstinline[language = Java]| AuthenticationProvider |
           \item \lstinline[language = Java]| UserDetailService |：为\lstinline[language = Java]| DaoAuthenticationProvider |提供从数据库查询用户的功能，用于做密码对比。
-        \end{enumerate}
+        \end{itemize}
         多用户表配置Spring Security（图\ref{SpringSecurityMultiUser}）：
         \begin{enumerate}
           \item 为不同用户建立各自的\lstinline[language = Java]| UserDetailService |
@@ -285,14 +290,15 @@ JWT(JSON Web Token)的优势在于
     public class MySecurityConfig 
                 extends WebSecurityConfigurerAdapter 
               \end{lstlisting}
-                需要的关键配置：\begin{enumerate}
+                需要的关键配置：
+                \begin{itemize}
                   \item 注入\lstinline[language = Java]| XXXAuthProvider |
                   \item 向\lstinline[language = Java]| AuthenticationManager |添加\lstinline[language = Java]| XXXAuthProvider |
                   \item 注入\lstinline[language = Java]| AuthenticationManager |
-                \end{enumerate}
+                \end{itemize}
         \end{enumerate}
         总体流程：
-        \begin{enumerate}
+        \begin{itemize}
           \item 前端发起身份验证请求，由于尚未登陆，所以前端没有Token信息，因而无法通过Spring Security的验证，这需要在 MySecurityConfig 中配置——放过访问"/authentication"的请求，以便进行身份验证和授权。\begin{lstlisting} [language = Java]
   @Override
   protected void configure(HttpSecurity httpSecurity)
@@ -384,7 +390,7 @@ JWT(JSON Web Token)的优势在于
   }
                 \end{lstlisting}
           \item 当前端接收到后端的response之后，则可以从返还的Token中获取用户信息存储到localStore。之后的每个请求也都需要在Header中放入Token用于身份验证。
-        \end{enumerate}
+        \end{itemize}
         \begin{figure}[H]
           \centering
           \includegraphics[scale = 0.35]{out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png}
@@ -397,7 +403,7 @@ JWT(JSON Web Token)的优势在于
         CORS-preflight request——预检请求，对于可能会对服务器造成副作用的请求（非简单请求），浏览器会先使用OPTIONS方法发送预检请求
         询问服务器是否允许此次跨域请求。\\
         简单请求需满足：
-        \begin{enumerate}
+        \begin{itemize}
           \item 请求方法：\lstinline[language = xml]| GET、POST、HEAD |
           \item 只使用了如下的安全首部字段，不得人为设置其他首部字段\begin{lstlisting} [language = Java]
     Accept
@@ -412,9 +418,9 @@ JWT(JSON Web Token)的优势在于
               \end{lstlisting}
           \item 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问
           \item 请求中没有使用 ReadableStream 对象
-        \end{enumerate}
+        \end{itemize}
         总的来说，在CORS问题中涉及两种请求：
-        \begin{enumerate}
+        \begin{itemize}
           \item CORS请求：CORS请求是一个包含“Origin”报头的HTTP请求。它不能被可靠地识别为参与了CORS协议，因为所有的方法既不是' GET '也不是' HEAD '的请求都包含了' Origin '头。
           \item CORS preflight请求：也就是所谓的预检请求，是检查CORS协议是否被理解的CORS请求。它使用' OPTIONS '作为方法，包括以下 header:
                 \begin{enumerate}
@@ -422,9 +428,9 @@ JWT(JSON Web Token)的优势在于
                   \item \lstinline[language = Java]| Access-Control-Request-Headers |：指示将来对同一资源的CORS请求可能使用的头。
                 \end{enumerate}
                 OPTIONS方法：用于描述对于目标资源的通信选项。客户端可以放松HTTP OPTIONS 请求来询问 web 服务器支持的 HTTP 方法和其他的选项。如果请求 URL 是一个 '*'，那么 HTTP OPTIONS 请求应用于一般的服务器而不是特定的资源。使用HTTP OPTIONS方法的请求应该只检索数据(服务器不能更改其状态)。如果需要更改服务器上的数据，需要使用POST、PUT、PATCH或DELETE方法。
-        \end{enumerate}
+        \end{itemize}
         在CORS问题中涉及的响应：
-        \begin{enumerate}
+        \begin{itemize}
           \item 对于CORS请求的响应可以包含下面的header：
                 \begin{enumerate}
                   \item \lstinline[language = Java]| Access-Control-Allow-Origin |：通过在相应的header中添加被允许的Origin（可以为null也可以为'*'）可以指示那些响应是否可以被分享。
@@ -437,7 +443,7 @@ JWT(JSON Web Token)的优势在于
                   \item \lstinline[language = Java]| Access-Control-Allow-Headers |：指示当请求的目的为CORS协议时相应的饿URL支持那些header。
                   \item \lstinline[language = Java]| Access-Control-Max-Age |：表示' Access-Control-Allow-Methods '和' Access-Control-Allow-Headers '头提供的信息可以被缓存的秒数(默认为5)
                 \end{enumerate}
-        \end{enumerate}
+        \end{itemize}
         CORS流程（图\ref{CORS-flow}）：
         \begin{figure}[H]
           \centering
@@ -446,7 +452,7 @@ JWT(JSON Web Token)的优势在于
           \label{CORS-flow}
         \end{figure}
         Spring Security 配置配置CORS：
-        \begin{enumerate}
+        \begin{itemize}
           \item 打开CORS \begin{lstlisting} [language = Java]
 // MySecurityConfig.java
   protected void configure(HttpSecurity httpSecurity) 
@@ -471,7 +477,7 @@ CorsConfigurationSource corsConfigurationSource() {
   return source;
 }
           \end{lstlisting}
-        \end{enumerate}
+        \end{itemize}
   \item 前端对Token的处理\\
         这里使用Vuex进行管理，为身份验证单独创建一个 auth 模块。
         \begin{lstlisting} [language = Java]
@@ -519,16 +525,16 @@ const routes = [
 ]
     \end{lstlisting}
         导航守卫流程：
-        \begin{enumerate}
+        \begin{itemize}
           \item 检查 store 中是否保存了 token，如果没有保存则需要从 localStorage 中获取并保存在 store 中。
           \item 调用 auth 模块 中的 isTokenActive getter，从而获知该 Token 是否过期。
           \item 如果 Token 尚未过期并且想要导航到的目标路由需要验证\\meta.requiredAuth === true）则跳转到系统首页，如果并不满足上述条件则需要跳转到 login 页面。
-        \end{enumerate}
+        \end{itemize}
   \item 为每个请求附带 Token\\
         思路为进行全局配置，在 axios 发送每个请求之前在 Header 中添加 authenticate 字段，其值为登陆时从后端获取的 Token。
 
         使用 axios 的 interceptors（拦截器）实现。interceptors 主要可以分成两种：
-        \begin{enumerate}
+        \begin{itemize}
           \item 处理 request
                 \begin{lstlisting} [language = Java]
 // 添加一个请求拦截器
@@ -554,7 +560,7 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 \end{lstlisting}
-        \end{enumerate}
+        \end{itemize}
         系统需要为请求添加拦截器：
         \begin{lstlisting} [language = Java]
 // main.js
@@ -650,7 +656,7 @@ public class B {
 
 \subsection{文件上传模块}
 
-\begin{enumerate}
+\begin{itemize}
   \item 前端配置\\
         前端使用 Elment Plus 的上传组件
         \begin{lstlisting} [language = Html]
@@ -698,7 +704,7 @@ public class B {
         file-list：文件列表数据。
 
   \item 后端配置
-        \begin{enumerate}
+        \begin{itemize}
           \item Controller：
                 \begin{lstlisting} [language = Java]
     @PostMapping("/student/studentuploadpaper")
@@ -734,8 +740,8 @@ public class B {
                 文件类型：file.getContentType()
 
                 至此，存储一个文件的所有信息已经获得，通过这些信息新建一个文件实体对象，使用文件Repository存储文件。
-        \end{enumerate}
-\end{enumerate}
+        \end{itemize}
+\end{itemize}
 
 \subsection{文件更新模块}
 

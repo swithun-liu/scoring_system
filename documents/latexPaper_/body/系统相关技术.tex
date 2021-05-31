@@ -76,37 +76,37 @@ Spring Security特点：
 
 \subsection{Spring Security 5.5 新特性}
 
-\begin{enumerate}
+\begin{itemize}
   \item OAuth 2.0 客户端
-        \begin{enumerate}
+        \begin{itemize}
           \item 添加了对 Jwt客户端认证中的 private-key-jwt 和 client-secret-jwt 的支持。
           \item 添加了 Jwt Bearer Authorization Grant的支持。
           \item 增加了 ReactiveOAuth2AuthorizedClientService 的 R2DBC 实现。
-        \end{enumerate}
+        \end{itemize}
   \item OAuth 2.0 资源服务
-        \begin{enumerate}
+        \begin{itemize}
           \item 增强的JWT译码器派生的签名算法
           \item 改进的内容协商
           \item 改进的 mult-tenancy 支持
-        \end{enumerate}
+        \end{itemize}
   \item SAML 2.0服务提供者
-        \begin{enumerate}
+        \begin{itemize}
           \item 增加了OpenSAML 4的支持
           \item 增强的SAML 2.0断言解密
           \item 增加了基于文件的配置，用于断言当事人元数据
           \item 增强的依赖方元数据支持
           \item 增加了对ap-specified签名方法的支持
-        \end{enumerate}
+        \end{itemize}
   \item 配置
-        \begin{enumerate}
+        \begin{itemize}
           \item 引入了DispatcherType请求匹配器
           \item 为过滤器安全性引入了AuthorizationManager
-        \end{enumerate}
+        \end{itemize}
   \item Kotlin DSL
-        \begin{enumerate}
+        \begin{itemize}
           \item 添加rememberMe支持
-        \end{enumerate}
-\end{enumerate}
+        \end{itemize}
+\end{itemize}
 
 JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
 \begin{figure}[H]
@@ -191,7 +191,7 @@ html
         \end{enumerate}
         虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大的提高了应用程序的性能。
   \item 响应式的双向数据绑定（图\ref{tow-way-date-binding}）\\
-  Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯,通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
+        Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯,通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
 
         \begin{figure}[H]
           \centering

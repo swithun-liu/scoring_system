@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  30 MAY 2021 16:06
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  30 MAY 2021 20:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1821,52 +1821,52 @@ Overfull \hbox (12.0pt too wide) detected at line 56
 
 
 Overfull \hbox (12.0pt too wide) detected at line 57
- \TU/TimesNewRoman(0)/m/n/12 47
+ \TU/TimesNewRoman(0)/m/n/12 44
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 58
- \TU/TimesNewRoman(0)/m/n/12 47
+ \TU/TimesNewRoman(0)/m/n/12 45
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 59
- \TU/TimesNewRoman(0)/m/n/12 49
+ \TU/TimesNewRoman(0)/m/n/12 48
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 60
- \TU/TimesNewRoman(0)/m/n/12 61
+ \TU/TimesNewRoman(0)/m/n/12 48
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 61
- \TU/TimesNewRoman(0)/m/n/12 62
+ \TU/TimesNewRoman(0)/m/n/12 49
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 62
- \TU/TimesNewRoman(0)/m/n/12 62
+ \TU/TimesNewRoman(0)/m/n/12 61
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 63
- \TU/TimesNewRoman(0)/m/n/12 64
+ \TU/TimesNewRoman(0)/m/n/12 62
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 64
- \TU/TimesNewRoman(0)/m/n/12 66
+ \TU/TimesNewRoman(0)/m/n/12 62
  []
 
 [4]
 Overfull \hbox (12.0pt too wide) detected at line 65
- \TU/TimesNewRoman(0)/m/n/12 67
+ \TU/TimesNewRoman(0)/m/n/12 64
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 66
- \TU/TimesNewRoman(0)/m/n/12 68
+ \TU/TimesNewRoman(0)/m/n/12 66
  []
 
 
@@ -1886,21 +1886,31 @@ Overfull \hbox (12.0pt too wide) detected at line 69
 
 
 Overfull \hbox (12.0pt too wide) detected at line 70
- \TU/TimesNewRoman(0)/m/n/12 70
+ \TU/TimesNewRoman(0)/m/n/12 68
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 71
- \TU/TimesNewRoman(0)/m/n/12 77
+ \TU/TimesNewRoman(0)/m/n/12 68
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 72
- \TU/TimesNewRoman(0)/m/n/12 78
+ \TU/TimesNewRoman(0)/m/n/12 70
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 73
+ \TU/TimesNewRoman(0)/m/n/12 77
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 74
+ \TU/TimesNewRoman(0)/m/n/12 78
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 75
  \TU/TimesNewRoman(0)/m/n/12 80
  []
 
@@ -1936,9 +1946,9 @@ File: out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png Graphic file (type b
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+) [8] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [8]
+)
 File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
 <out/uml/部署图/Two-way data binding/Two-way data binding.png>
  [9] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -2050,7 +2060,7 @@ LaTeX Font Warning: Font shape `TU/SimSun(1)/m/it' undefined
 
 
 ] [43] [44] [45]
-Overfull \hbox (9.15262pt too wide) in paragraph at lines 179--180
+Overfull \hbox (9.15262pt too wide) in paragraph at lines 183--184
 []\TU/SimSun(1)/m/n/12 函 数 的 第 一 个 参 数 为 \TU/TimesNewRoman(0)/m/n/12 String \TU/SimSun(1)/m/n/12 类 型，|  但 是 返 回 值 已 经 在 \TU/TimesNewRoman(0)/m/n/12 ResponseAdvice.beforeBodyWrite()
  []
 
@@ -2067,23 +2077,23 @@ File: out/uml/时序图/时序图-authentication/时序图-authentication.png Gr
  [48] [49]
 File: out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png>
-
-Overfull \hbox (4.12967pt too wide) in paragraph at lines 260--261
-[][][][][][]\TU/SimSun(1)/m/n/12 ：|  认 证 器，|  不 同 的[][][][][]
+ [50] [51]
+Overfull \hbox (4.08656pt too wide) in paragraph at lines 324--325
+\TU/TimesNewRoman(0)/m/n/12 DaoAuthenticationProvider \TU/SimSun(1)/m/n/12 是 继 承 \TU/TimesNewRoman(0)/m/n/12 AbstractUserDetailsAuthenticationProvider
  []
 
-[50] [51] [52] [53] [54]
+[52] [53] [54]
 File: out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png>
  [55] [56]
-Overfull \hbox (7.24205pt too wide) in paragraph at lines 436--437
-[][][][][][][][][][][][]\TU/SimSun(1)/m/n/12 ：|  指 示 当 请 求 目 的 为 \TU/TimesNewRoman(0)/m/n/12 CORS
+Overfull \hbox (1.23624pt too wide) in paragraph at lines 444--445
+[][][][][][][][][][][][]\TU/SimSun(1)/m/n/12 ：|  表 示\TU/TimesNewRoman(0)/m/n/12 ’ Access-Control-Allow-Methods
  []
 
 File: out/uml/时序图/CORS-flow/CORS-flow.png Graphic file (type bmp)
 <out/uml/时序图/CORS-flow/CORS-flow.png>
 [57] [58] [59] [60] [61]
-Overfull \hbox (8.67413pt too wide) in paragraph at lines 624--628
+Overfull \hbox (8.67413pt too wide) in paragraph at lines 630--634
 \TU/TimesNewRoman(0)/m/n/12 @JsonManagedReference(com.fasterxml.jackson.annotation.JsonManagedReference) 
  []
 
@@ -2178,20 +2188,23 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 46.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 6A573EA4B4553F6A92D6D789305FD80D;5230.
+(rerunfilecheck)             Checksum: 9A26BD23EB6A508478D0B23EB4CA0711;5372.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  ) 
 Here is how much of TeX's memory you used:
- 41056 strings out of 479819
- 813946 string characters out of 5895846
- 1306257 words of memory out of 5000000
- 57228 multiletter control sequences out of 15000+600000
+ 41058 strings out of 479819
+ 813982 string characters out of 5895846
+ 1304496 words of memory out of 5000000
+ 57230 multiletter control sequences out of 15000+600000
  549718 words of font info for 198 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 63i,13n,92p,2315b,2813s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,13n,92p,2315b,2968s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on maintest.pdf (88 pages).
