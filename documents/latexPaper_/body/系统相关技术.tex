@@ -32,14 +32,6 @@ Spring Boot 2的一个亮点是几乎自动可用的HTTP/2支持：Tomcat、Jett
 
 \subsection{Spring 5: Spring Boot 2及其模块的基础}
 
-第五代Spring框架于2017年9月底发布。Spring 5是Spring Boot中的大多数框架的基础，并为“响应式编程”主题创建了基础。
-
-Spring使创建Java企业应用程序变得很容易。它提供了在企业环境中使用Java语言所需的一切，支持Groovy和Kotlin作为JVM上的替代语言，以及根据应用程序的需要创建多种体系结构的灵活性。从Spring Framework 5.1开始，Spring需要JDK 8+ (Java SE 8+)，并提供对JDK 11 LTS的开箱即用支持。
-
-Spring支持广泛的应用程序场景。在大型企业中，应用程序往往存在很长时间，必须运行在JDK和应用服务器上，而JDK和应用服务器的升级周期超出了开发人员的控制范围。其他的可能作为一个内置服务器的jar运行，可能在云环境中。还有一些可能是不需要服务器的独立应用程序(如批处理或集成工作负载)。
-
-Spring是开源的。它有一个庞大而活跃的社区，基于各种不同的现实世界用例提供持续的反馈。这帮助Spring在很长一段时间内成功地发展。
-
 Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有些人认为Java EE和Spring是竞争对手，但Spring实际上是Java EE的补充。Spring编程模型不包含Java EE平台规范；相反，它与EE中精心挑选的各个规范集成在一起：
 
 \begin{enumerate}
@@ -55,7 +47,19 @@ Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有
 
 Spring框架还支持依赖注入(JSR 330)和公共注释(JSR 250)规范，应用程序开发人员可以选择使用这些规范来代替Spring框架提供的特定于Spring的机制。
 
-随着时间的推移，Java EE在应用程序开发中的角色已经演变。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器上。今天，在Spring Boot的帮助下，应用程序以一种对devops和云友好的方式创建，其中嵌入了Servlet容器，更改起来很简单。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，可以运行在不是Servlet容器的服务器上(比如Netty)。
+随着时间的推移，Java EE在应用程序开发中的角色已经演变。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器上。如今，在Spring Boot的帮助下，应用程序以一种对devops和云友好的方式创建，其中嵌入了Servlet容器，更改起来很简单。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，可以运行在不是Servlet容器的服务器上(比如Netty)。
+
+随着Spring框架的不断发展，第五代Spring框架于2017年9月底发布。Spring 5是Spring Boot 2 中的大多数框架的基础，并为“响应式编程”主题创建了基础。
+
+Spring特点：
+
+\begin{enumerate}
+  \item Spring使创建Java企业应用程序变得很容易。它提供了在企业环境中使用Java语言所需的一切，支持Groovy和Kotlin作为JVM上的替代语言，以及根据应用程序的需要创建多种体系结构的灵活性。从Spring Framework 5.1开始，Spring需要JDK 8+ (Java SE 8+)，并提供对JDK 11 LTS的开箱即用支持。
+  \item Spring支持广泛的应用程序场景。在大型企业中，应用程序往往存在很长时间，必须运行在JDK和应用服务器上，而JDK和应用服务器的升级周期超出了开发人员的控制范围。其他的可能作为一个内置服务器的jar运行，可能在云环境中。还有一些可能是不需要服务器的独立应用程序(如批处理或集成工作负载)。
+  \item Spring是开源的。它有一个庞大而活跃的社区，基于各种不同的现实世界用例提供持续的反馈。这帮助Spring在很长一段时间内成功地发展。
+\end{enumerate}
+
+
 
 
 \section{Spring Security介绍}
@@ -125,7 +129,7 @@ JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在�
 JPA \& Spring Data JPA \& Hibernate三者之间的关系：
 \begin{enumerate}
   \item JPA(Java Persistence API)为对象-关系(ORM)映射提供了POJO持久性模型。JPA是一种规范，仅定义了接口，但是并没有实现。
-  \item Spring Data Jpa 是 Spring Data家族的一员，使得基于JPA的存储库的实现变得更容易。该模块着力于增强对基于JPA的数据访问层的支持，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很麻烦，为了执行简单的查询以及分页和审计，必须编写太多的模板代码。Spring Date Jpa做的事情就是尽量的减少开发人员需要编写的代码量，开发人员要做的事情是编写Repository接口，由框架实现复杂的工作。\\
+  \item Spring Data Jpa 是 Spring Data 的一部分，该模块着力于对基于JPA的数据访问层进行增强，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很麻烦，为了执行简单的查询以及分页和审计，必须编写太多的模板代码，而Spring Data Jpa可以通过编写接口自动生成sql，由框架完成复杂且重复的工作，减少了开发人员许多不必要的工作量。同时该框架可以使用面向对象的查询方式取代直接编写SQL语句也使代码更容易调试和查找bug。
         Spring Data Jpa特点：
         \begin{enumerate}
           \item 很好的构建基于Spring和Jpa的存储库。
@@ -142,10 +146,10 @@ JPA \& Spring Data JPA \& Hibernate三者之间的关系：
         \end{figure} Hibernate与MyBatis之间的对比和Spring Security与Shiro的对比很相似，使用Hibernate可以在完全不写SQL语句的情况下实现数据库操作，在写好配置之后，基于面向对象的查询方式让代码更简洁，易移植，易复用，减少了许多工作量，避免了许多因查询语句造成的差错，但是随着需求的增多即查询变得更加复杂，需要对框架有更好的理解才能才能编写出无差错的查询。\\
         Hibernate特点：
         \begin{enumerate}
-          \item 支持自己的“原生”API，同时是JAP的实现，这样，它可以轻松地在支持JPA的任何环境中使用，包括Java SE应用程序，Java EE应用程序服务器，Enterprise OSGi容器等。
+          \item Hibernate有自己的原生API，但最为JPA标准的实现，它可以在任何支持JPA的环境中使用，包括括Java SE应用程序，Java EE应用程序服务器，Enterprise OSGi容器等。
           \item 允许按照自然的面向对象的方式进行持久化开发。Hibernate不需要持久化的接口或基类，并且允许任何类或数据持久化。
           \item Hibernate具有较高的性能，它支持延迟初始化，大量的抓取策略和带有自动版本控制和时间戳的乐观锁。无论是开发人员生产方面还是在运行时性能方面，它始终拥有优于直接使用JDBC代码的性能。
-          \item Hibernate被设计为在应用服务器集群中工作，并提供高度可伸缩的体系结构。它在任何环境中都可以很好地扩展：使用它来驱动服务于数百个用户地内部网，或者用于服务于数十万用户的关键任务应用程序。
+          \item Hibernate被设计为在应用服务器集群中工作，并提供高度可伸缩的体系结构。它在任何环境中都可以很好地扩展：不论是运行在内部网的低并发应用程序（只服务于几百个用户）还是运行在互联网上的高并发应用程序（服务于数十万用户），Hibernate都可以很好的驱动。
           \item Hibernate拥有卓越的稳定性和质量。
         \end{enumerate}
         总的来说，Hibernate是一个很强大的ORM工具，但是如果想要使用好它，是需要较多的经验的。
