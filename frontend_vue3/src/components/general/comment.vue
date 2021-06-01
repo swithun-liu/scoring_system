@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-04 10:58:35
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-28 10:48:24
+ * @LastEditTime: 2021-06-01 17:20:44
 -->
 <template>
   <el-tree
@@ -88,7 +88,7 @@ export default {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     }
-    // 输入tag点击回车
+    // 添加tag
     const handleInputConfirm = (data) => {
       console.log(
         '输入tag点击回车',
@@ -177,7 +177,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 @import '../../assets/css/comment.css';
 
 .el-tag + .el-tag {
@@ -194,5 +194,14 @@ export default {
   width: 90px;
   margin-left: 10px;
   vertical-align: bottom;
+}
+/deep/.el-tag {
+  align-self: center;
+}
+/deep/.el-input__inner {
+  width: 100px;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>

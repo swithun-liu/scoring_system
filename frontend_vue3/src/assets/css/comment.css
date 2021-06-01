@@ -75,6 +75,7 @@
     flex-direction: row;
     justify-content: flex-end;
     flex-wrap: wrap;
+    padding: 10px;
 }
 
 /*  问题标签样式 */
