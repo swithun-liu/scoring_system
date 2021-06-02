@@ -652,11 +652,9 @@ public class B {
     \end{lstlisting}
 \end{enumerate}
 
-\section{文件上传模块\&文件更新模块\&文件下载模块}
+\section{文件上传模块}
 
-\subsection{文件上传模块}
-
-\begin{itemize}
+\begin{enumerate}
   \item 前端配置\\
         前端使用 Element Plus 的上传组件
         \begin{lstlisting} [language = Html]
@@ -741,9 +739,9 @@ public class B {
 
                 至此，存储一个文件的所有信息已经获得，通过这些信息新建一个文件实体对象，使用文件Repository存储文件。
         \end{itemize}
-\end{itemize}
+\end{enumerate}
 
-\subsection{文件更新模块}
+\section{文件更新模块}
 
 由于页面的结构，该功能并不适合使用 Element Plus 的组件。
 
@@ -819,7 +817,7 @@ public class B {
         首先从数据库取出原文件，更新文件的名称，文件的类型，文件的数据，之后重新保存回数据库。
 \end{enumerate}
 
-\subsection{文件下载模块}
+\section{文件下载模块}
 
 \begin{enumerate}
   \item 前端请求函数：
@@ -879,9 +877,22 @@ public class CustomResponseBodyAdvice implements
 
 \section{文件预览模块}
 
-前端部分：使用文件下载模块的前端请求函数从后台获取文件的blob对象，将对象传入WebViewer实现pdf预览和操作。
+\begin{enumerate}
+  \item 前端部分
+  \begin{enumerate}
+    \item 实现PDF预览：编写WebViewer组件，放入一个弹窗，使用文件下载模块的前端请求函数从后台获取文件的blob对象，通过双向绑定的方式将对象传入WebViewer组件实现pdf预览和操作。
+    \item 实现点击不同文件按钮弹窗显示不同PDF：由于WebViewer组件每次mount的时候会再同一个element上再新建一个实例，会出现错误，所以选择每次点击按钮时获取不同的PDF blob对象，显示弹窗时重现渲染WebViewer组件。
+    \item 实现组件重新渲染：实现组件重新渲染的方式有三种
+    \begin{itemize}
+      \item 使用 this.\$forceUpdate() （适合vue2）
+      \item 使用 v-if （不符合目前逻辑）
+      \item 使用 :key （符合逻辑且可实现）
+    \end{itemize}
+    选择第三种方式，当使用key时，当key发生变化，组件会基于 key 的变化重新排列元素顺序，并且会移除/销毁 key 不存在的元素，即会完整地触发组件的生命周期钩子。
+  \end{enumerate}
+  \item 后端部分：同文件下载模块后端处理。
+\end{enumerate}
 
-后端部分：同文件下载模块后端处理。
 
 \section{统计模块模块}
 

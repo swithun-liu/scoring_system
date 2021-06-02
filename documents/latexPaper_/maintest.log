@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  1 JUN 2021 14:13
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  2 JUN 2021 10:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1851,17 +1851,17 @@ Overfull \hbox (12.0pt too wide) detected at line 63
 
 
 Overfull \hbox (12.0pt too wide) detected at line 64
- \TU/TimesNewRoman(0)/m/n/12 62
+ \TU/TimesNewRoman(0)/m/n/12 64
  []
 
 [4]
 Overfull \hbox (12.0pt too wide) detected at line 65
- \TU/TimesNewRoman(0)/m/n/12 64
+ \TU/TimesNewRoman(0)/m/n/12 66
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 66
- \TU/TimesNewRoman(0)/m/n/12 66
+ \TU/TimesNewRoman(0)/m/n/12 67
  []
 
 
@@ -1881,31 +1881,26 @@ Overfull \hbox (12.0pt too wide) detected at line 69
 
 
 Overfull \hbox (12.0pt too wide) detected at line 70
- \TU/TimesNewRoman(0)/m/n/12 68
+ \TU/TimesNewRoman(0)/m/n/12 69
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 71
- \TU/TimesNewRoman(0)/m/n/12 68
- []
-
-
-Overfull \hbox (12.0pt too wide) detected at line 72
  \TU/TimesNewRoman(0)/m/n/12 70
  []
 
 
-Overfull \hbox (12.0pt too wide) detected at line 73
+Overfull \hbox (12.0pt too wide) detected at line 72
  \TU/TimesNewRoman(0)/m/n/12 77
  []
 
 
-Overfull \hbox (12.0pt too wide) detected at line 74
+Overfull \hbox (12.0pt too wide) detected at line 73
  \TU/TimesNewRoman(0)/m/n/12 78
  []
 
 
-Overfull \hbox (12.0pt too wide) detected at line 75
+Overfull \hbox (12.0pt too wide) detected at line 74
  \TU/TimesNewRoman(0)/m/n/12 80
  []
 
@@ -2184,7 +2179,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 46.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 46.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 69C2DCF56DAD09879850A04CD13482AB;5372.
+(rerunfilecheck)             Checksum: D218942897065657ABEEA0340FABC29C;5243.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2192,10 +2187,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
  ) 
 Here is how much of TeX's memory you used:
- 41017 strings out of 479819
- 811413 string characters out of 5895846
- 1304305 words of memory out of 5000000
- 57189 multiletter control sequences out of 15000+600000
+ 41016 strings out of 479819
+ 811400 string characters out of 5895846
+ 1304302 words of memory out of 5000000
+ 57188 multiletter control sequences out of 15000+600000
  549718 words of font info for 198 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,13n,92p,2315b,2966s stack positions out of 5000i,500n,10000p,200000b,80000s
