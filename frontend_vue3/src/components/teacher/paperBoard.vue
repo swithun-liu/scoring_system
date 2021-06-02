@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-29 09:58:11
+ * @LastEditTime: 2021-06-02 21:40:06
 -->
 
 <template>
@@ -95,90 +95,81 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import fileDownload from 'js-file-download'
 import comment from '../../components/general/comment.vue'
+import { ref } from '@vue/reactivity'
+import { onMounted } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 
 export default {
-  components: { comment },
-  data() {
-    return {
-      tableData: [],
-      dialogVisible: false,
-      commentDialogVisible: false,
-      chosedFileId: 0,
-      chosedCommentId: -1,
-      replayWhichComment: '新建评论',
-      fileScore: 0,
-      commentData: [],
-      commentOriginData: [],
-      commentWatiForPush: '',
-      loading: true,
+  setup(props) {
+    const tableData = ref([])
+    const dialogVisible = ref(false)
+    const commentDialogVisible = ref(false)
+    const chosedFileId = ref(0)
+    const chosedCommentId = ref(-1)
+    const replayWhichComment = ref('新建评论')
+    const fileScore = 0
+    const commentData = ref([])
+    const commentOriginData = ref([])
+    const commentWatiForPush = ref('')
+    const loading = ref(true)
+
+    const store = useStore()
+
+    // 获取学生列表
+    const flashAllFileOfMyStudents = () => {
+      store.dispatch('teacher/getAllFileOfMyStudents').then((res) => {
+        console.log('学生列表', res.data.data)
+        tableData.value = res.data.data
+      })
     }
-  },
-  mounted() {
-    this.flashAllFileOfMyStudents()
-  },
-  methods: {
-    ...mapActions('teacher', [
-      'getAllFileOfMyStudents',
-      'teacherGetThisFile',
-      'teacherScoreThisFile',
-      'teacherGetAllCommentsOfThisFile',
-      'teacherAddCommentThisFile',
-    ]),
-    // 刷新
-    flashAllFileOfMyStudents() {
-      var _this = this
-      this.getAllFileOfMyStudents().then((result) => {
-        console.log(result.data.data)
-        _this.tableData = result.data.data
-        _this.$forceUpdate()
+
+    // 获取评论
+    const flashComments = () => {
+      store
+        .dispatch('teacher/teacherGetAllCommentsOfThisFile', {
+          chosedFileId: chosedFileId.value,
+        })
+        .then((res) => {
+          commentData.value = res.data.data
+          console.log('获取到评论 ', commentData.value)
+          loading.value = false
+        })
+    }
+
+    // 打开评分对话框
+    const openScoreDialog = (id) => {
+      chosedFileId.value = id
+      dialogVisible.value = true
+    }
+    // 打开评论对话框
+    const openCommentDialog = (id) => {
+      chosedCommentId.value = -1
+      chosedFileId.value = id
+      commentDialogVisible.value = true
+      flashComments()
+    }
+    // 处理下载文件
+    const handleDownload = (id, name) => {
+      store
+        .dispatch('teacher/teacherGetThisFile', {
+          fileId: id,
+        })
+        .then((res) => {
+          console.log('获取到文件', res.data)
+          fileDownload(res.data, name)
+        })
+    }
+    // 处理评分
+    const handleScore = () => {
+      store.dispatch('teacher/teacherScoreThisFile', {
+        chosedFileId: chosedFileId.value,
+        fileScore: fileScore.value,
       })
-    },
-    flashComments() {
-      const _this = this
-      var chosedFileId = _this.chosedFileId
-      this.teacherGetAllCommentsOfThisFile({ chosedFileId }).then((res) => {
-        _this.commentData = res.data.data
-        console.log(_this.commentData)
-        console.log(_this.testData)
-        _this.$forceUpdate()
-        _this.loading = false
-      })
-    },
-    // 打开对话框
-    openScoreDialog(id) {
-      this.chosedFileId = id
-      this.dialogVisible = true
-    },
-    openCommentDialog(id) {
-      this.chosedCommentId = -1
-      this.chosedFileId = id
-      this.commentDialogVisible = true
-      this.flashComments()
-    },
-    // 处理操作
-    handleDownload(id, name) {
-      // 下载文件
-      this.teacherGetThisFile({
-        fileId: id,
-      }).then((res) => {
-        console.log(res.data)
-        fileDownload(res.data, name)
-      })
-    },
-    handleScore() {
-      // 文章打分
-      const _this = this
-      const chosedFileId = this.chosedFileId
-      const fileScore = this.fileScore
-      this.teacherScoreThisFile({ chosedFileId, fileScore }).then(() => {
-        _this.flashAllFileOfMyStudents()
-      })
-    },
-    handleReplay(node) {
-      // 评论回复
+    }
+    // 处理评论
+    const handleReplay = (node) => {
       var student = node.data.studentByStudentId
       var teacher = node.data.teacherByTeacherId
       var username = null
@@ -188,36 +179,185 @@ export default {
       if (teacher != null) {
         username = teacher.name
       }
-      this.replayWhichComment = 'replay ' + username
-      this.chosedCommentId = node.data.id
-    },
-    handleCommentDialogClose() {
-      console.log('Dialog closed')
-      this.commentDialogVisible = false
-      this.loading = true
-      this.commentData = []
-    },
-    handleAddComment() {
-      var comment = this.commentWatiForPush
-      var chosedFileId = this.chosedFileId
-      var chosedCommentId = this.chosedCommentId
-      var _this = this
-      this.teacherAddCommentThisFile({
-        chosedFileId,
-        comment,
-        chosedCommentId,
-      }).then((res) => {
-        console.log(res)
-        _this.commentWatiForPush = ''
-        _this.flashComments()
-      })
-    },
-    cancleChooseComment() {
-      this.chosedCommentId = -1
-      this.replayWhichComment = '新建评论'
-    },
+      replayWhichComment.value = '回复 ' + username
+      chosedCommentId.value = node.data.id
+    }
+    // 关闭评论对话框
+    const handleCommentDialogClose = () => {
+      console.log('评论对话框关闭')
+      commentDialogVisible.value = false
+      loading.value = true
+      commentData.value = []
+    }
+    // 处理添加评论
+    const handleAddComment = () => {
+      store
+        .dispatch('teacher/teacherAddCommentThisFile', {
+          chosedFileId: chosedFileId.value,
+          comment: comment.value,
+          chosedCommentId: chosedCommentId.value,
+        })
+        .then((res) => {
+          console.log(res)
+          commentWatiForPush.value = ''
+          flashComments()
+        })
+    }
+    // 取消选择评论
+    const cancleChooseComment = () => {
+      chosedCommentId.value = -1
+      replayWhichComment.value = '新建评论'
+    }
+
+    onMounted(() => {
+      flashAllFileOfMyStudents()
+    })
+
+    return {
+      tableData,
+      dialogVisible,
+      commentDialogVisible,
+      chosedFileId,
+      chosedCommentId,
+      replayWhichComment,
+      fileScore,
+      commentData,
+      commentOriginData,
+      commentWatiForPush,
+      loading,
+      flashAllFileOfMyStudents,
+      flashComments,
+      openScoreDialog,
+      openCommentDialog,
+      handleDownload,
+      handleScore,
+      handleReplay,
+      handleCommentDialogClose,
+      handleAddComment,
+      cancleChooseComment,
+    }
   },
 }
+
+// export default {
+//   components: { comment },
+//   data() {
+//     return {
+//       tableData: [],
+//       dialogVisible: false,
+//       commentDialogVisible: false,
+//       chosedFileId: 0,
+//       chosedCommentId: -1,
+//       replayWhichComment: '新建评论',
+//       fileScore: 0,
+//       commentData: [],
+//       commentOriginData: [],
+//       commentWatiForPush: '',
+//       loading: true,
+//     }
+//   },
+//   mounted() {
+//     this.flashAllFileOfMyStudents()
+//   },
+//   methods: {
+//     ...mapActions('teacher', [
+//       'getAllFileOfMyStudents',
+//       'teacherGetThisFile',
+//       'teacherScoreThisFile',
+//       'teacherGetAllCommentsOfThisFile',
+//       'teacherAddCommentThisFile',
+//     ]),
+//     // 刷新
+//     flashAllFileOfMyStudents() {
+//       var _this = this
+//       this.getAllFileOfMyStudents().then((result) => {
+//         console.log(result.data.data)
+//         _this.tableData = result.data.data
+//         _this.$forceUpdate()
+//       })
+//     },
+//     flashComments() {
+//       const _this = this
+//       var chosedFileId = _this.chosedFileId
+//       this.teacherGetAllCommentsOfThisFile({ chosedFileId }).then((res) => {
+//         _this.commentData = res.data.data
+//         console.log(_this.commentData)
+//         console.log(_this.testData)
+//         _this.$forceUpdate()
+//         _this.loading = false
+//       })
+//     },
+//     // 打开对话框
+//     openScoreDialog(id) {
+//       this.chosedFileId = id
+//       this.dialogVisible = true
+//     },
+//     openCommentDialog(id) {
+//       this.chosedCommentId = -1
+//       this.chosedFileId = id
+//       this.commentDialogVisible = true
+//       this.flashComments()
+//     },
+//     // 处理操作
+//     handleDownload(id, name) {
+//       // 下载文件
+//       this.teacherGetThisFile({
+//         fileId: id,
+//       }).then((res) => {
+//         console.log(res.data)
+//         fileDownload(res.data, name)
+//       })
+//     },
+//     handleScore() {
+//       // 文章打分
+//       const _this = this
+//       const chosedFileId = this.chosedFileId
+//       const fileScore = this.fileScore
+//       this.teacherScoreThisFile({ chosedFileId, fileScore }).then(() => {
+//         _this.flashAllFileOfMyStudents()
+//       })
+//     },
+//     handleReplay(node) {
+//       // 评论回复
+//       var student = node.data.studentByStudentId
+//       var teacher = node.data.teacherByTeacherId
+//       var username = null
+//       if (student != null) {
+//         username = student.name
+//       }
+//       if (teacher != null) {
+//         username = teacher.name
+//       }
+//       this.replayWhichComment = 'replay ' + username
+//       this.chosedCommentId = node.data.id
+//     },
+//     handleCommentDialogClose() {
+//       console.log('Dialog closed')
+//       this.commentDialogVisible = false
+//       this.loading = true
+//       this.commentData = []
+//     },
+//     handleAddComment() {
+//       var comment = this.commentWatiForPush
+//       var chosedFileId = this.chosedFileId
+//       var chosedCommentId = this.chosedCommentId
+//       var _this = this
+//       this.teacherAddCommentThisFile({
+//         chosedFileId,
+//         comment,
+//         chosedCommentId,
+//       }).then((res) => {
+//         console.log(res)
+//         _this.commentWatiForPush = ''
+//         _this.flashComments()
+//       })
+//     },
+//     cancleChooseComment() {
+//       this.chosedCommentId = -1
+//       this.replayWhichComment = '新建评论'
+//     },
+//   },
+// }
 </script>
 
 <style scoped>

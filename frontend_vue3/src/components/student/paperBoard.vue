@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-02 20:39:20
+ * @LastEditTime: 2021-06-02 22:05:08
 -->
 
 <template>
@@ -36,8 +36,8 @@
           <el-button class="glass-btn-important card-btn" icon="el-icon-view" size="small" @click="openDialogPreview(file.id)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-s-comment" size="small" @click="openDialogComment(file.id)"></el-button>
           <el-button class="glass-btn-important card-btn" icon="el-icon-delete-solid" size="small" @click="openDialogDelete(file.id)"></el-button>
-          <input type="file" class="refresh-btn-input-file" value="" id="refreshFile" @change="handleFileRefresh($event, file.id)">
-          <label for="refreshFile" class="glass-btn el-icon-refresh refresh-label"></label>
+          <input type="file" class="refresh-btn-input-file" value="" :id=file.id @change="handleFileRefresh($event, file.id)">
+          <label :for=file.id class="glass-btn el-icon-refresh refresh-label"></label>
       </div>
     </div>
   </div>
@@ -271,6 +271,7 @@ export default {
 
     // 文件更新
     const handleFileRefresh = (event, id) => {
+      console.log('企图更新文件' + id);
       const file = event.target.files[0]
       const param = new FormData()
       param.append('file', file)
@@ -284,6 +285,7 @@ export default {
         config: config
       }).then((res) => {
         console.log('更新文件 ' + id)
+        getFiles()
       })
     }
 
