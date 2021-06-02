@@ -5,7 +5,7 @@ rectangle "论文下载" {
     actor aa as "管理员"
     actor sa as "学生"
     actor ta as "教师"
-    usecase login as "登陆系统"
+    usecase login as "登录系统"
     usecase download as "论文下载"
     aa --> login
     sa --> login

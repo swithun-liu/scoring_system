@@ -1,6 +1,6 @@
 @startuml
 前端 ->JwtAutenticationController : request
-note top: 第一次登陆返回token给前端保存 '/authenticate'
+note top: 第一次登录返回token给前端保存 '/authenticate'
 alt 是学生
     JwtAutenticationController -> StudentUserDetailService: loadByUsername
     StudentUserDetailService-> JwtAutenticationController: User(name, password, AuthorityList))

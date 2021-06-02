@@ -5,7 +5,7 @@ actor adimin as aa
 actor student as sa
 actor teacher as ta
 rectangle 论文评审评分系统 {
-    usecase login as "用户登陆"
+    usecase login as "用户登录"
     usecase upload as "论文上传"
     usecase reviweComment as "论文评审评分"
     usecase statistic as "统计评审情况"

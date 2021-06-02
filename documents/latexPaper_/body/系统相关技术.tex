@@ -15,18 +15,18 @@ Spring Boot特点
 
 \begin{enumerate}
   \item 创建独立的Spring应用程序。
-  \item 直接嵌入Tomcat、Jetty或Undertow(不需要部署WAR文件)。
+  \item 直接嵌入Tomcat、Jetty或Undertow（不需要部署WAR文件）。
   \item 提供可选择的“启动器”依赖项来简化构建配置。
   \item 尽可能地自动配置Spring和第三方库。
   \item 提供生产就绪特性，如度量、运行状况检查和外部化配置。
   \item 绝对不需要代码生成，也不需要XML配置。
 \end{enumerate}
 
-Spring Boot为Spring生态系统带来了一种"opinionated"的方法。首次发布于2014年中期。Spring Boot经过了很多的开发和改进。它的2.0版在2018年初发布。
+Spring Boot为Spring生态系统带来了一种“opinionated”的方法。首次发布于2014年中期。Spring Boot经过了很多的开发和改进。它的2.0版在2018年初发布。
 
 Spring 5和Spring Boot 2需要Java 8，这使得使用核心Java 8函数成为可能。这包括接口上的默认方法和一些abstractxxxconfiguration类、Nullable-Support等相关的弃用。
 
-Spring中使用的所有Java EE规范都升级到了Java EE 7。Spring Boot 1是支持Java 7的最后一个Spring Boot版本，而Spring Boot 2将是第一个运行在Java 9上的版本(预计也将运行在Java 10上)。这还伴随着一些基本依赖项的升级:例如Tomcat、Hibernate和Gradle。
+Spring中使用的所有Java EE规范都升级到了Java EE 7。Spring Boot 1是支持Java 7的最后一个Spring Boot版本，而Spring Boot 2将是第一个运行在Java 9上的版本（预计也将运行在Java 10上）。这还伴随着一些基本依赖项的升级：例如Tomcat、Hibernate和Gradle。
 
 Spring Boot 2的一个亮点是几乎自动可用的HTTP/2支持：Tomcat、Jetty、Undertow和Reactor Netty的使用版本支持HTTP/2开箱即用。配置非常简单：服务器证书必须配置server.ssl.*下的属性。那么HTTP/2可以通过server.http2.enabled激活。HTTP/2是快速网络的重要构建块。可以通过压缩头、服务器推送、请求管道和多路复用请求来大幅降低延迟。
 
@@ -45,17 +45,17 @@ Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有
   \item 以及JTA/JCA设置，以便在必要时进行事务协调。
 \end{enumerate}
 
-Spring框架还支持依赖注入(JSR 330)和公共注释(JSR 250)规范，应用程序开发人员可以选择使用这些规范来代替Spring框架提供的特定于Spring的机制。
+Spring框架还支持依赖注入（JSR 330）和公共注释（JSR 250）规范，应用程序开发人员可以选择使用这些规范来代替Spring框架提供的特定于Spring的机制。
 
-随着时间的推移，Java EE在应用程序开发中的角色已经演变。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器上。如今，在Spring Boot的帮助下，应用程序以一种对devops和云友好的方式创建，其中嵌入了Servlet容器，更改起来很简单。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，可以运行在不是Servlet容器的服务器上(比如Netty)。
+随着时间的推移，Java EE在应用程序开发中的角色已经演变。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器上。如今，在Spring Boot的帮助下，应用程序以一种对devops和云友好的方式创建，其中嵌入了Servlet容器，更改起来很简单。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，可以运行在不是Servlet容器的服务器上（比如Netty）。
 
 随着Spring框架的不断发展，第五代Spring框架于2017年9月底发布。Spring 5是Spring Boot 2 中的大多数框架的基础，并为“响应式编程”主题创建了基础。
 
 Spring特点：
 
 \begin{enumerate}
-  \item Spring使创建Java企业应用程序变得很容易。它提供了在企业环境中使用Java语言所需的一切，支持Groovy和Kotlin作为JVM上的替代语言，以及根据应用程序的需要创建多种体系结构的灵活性。从Spring Framework 5.1开始，Spring需要JDK 8+ (Java SE 8+)，并提供对JDK 11 LTS的开箱即用支持。
-  \item Spring支持广泛的应用程序场景。在大型企业中，应用程序往往存在很长时间，必须运行在JDK和应用服务器上，而JDK和应用服务器的升级周期超出了开发人员的控制范围。其他的可能作为一个内置服务器的jar运行，可能在云环境中。还有一些可能是不需要服务器的独立应用程序(如批处理或集成工作负载)。
+  \item Spring使创建Java企业应用程序变得很容易。它提供了在企业环境中使用Java语言所需的一切，支持Groovy和Kotlin作为JVM上的替代语言，以及根据应用程序的需要创建多种体系结构的灵活性。从Spring Framework 5.1开始，Spring需要JDK 8+（Java SE 8+），并提供对JDK 11 LTS的开箱即用支持。
+  \item Spring支持广泛的应用程序场景。在大型企业中，应用程序往往存在很长时间，必须运行在JDK和应用服务器上，而JDK和应用服务器的升级周期超出了开发人员的控制范围。其他的可能作为一个内置服务器的jar运行，可能在云环境中。还有一些可能是不需要服务器的独立应用程序（如批处理或集成工作负载）。
   \item Spring是开源的。它有一个庞大而活跃的社区，基于各种不同的现实世界用例提供持续的反馈。这帮助Spring在很长一段时间内成功地发展。
 \end{enumerate}
 
@@ -192,9 +192,9 @@ html
 \end{lstlisting}
           \item Render Tree：（DOM：element的表示 + CSSOM：element样式的表示）
         \end{enumerate}
-        虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大的提高了应用程序的性能。
+        虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大地提高了应用程序的性能。
   \item 响应式的双向数据绑定（图\ref{tow-way-date-binding}）\\
-        Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯,通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
+        Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯，通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
 
         \begin{figure}[H]
           \centering
@@ -205,7 +205,7 @@ html
   \item CBA\\ Vue是基于组件的体系结构（Component Based Architecture(CBA)），这种体系结构的好处主要有：
         \begin{enumerate}
           \item 代码的可读性：每个组件可以保存在同一个单独的文件，包括结构，样式和逻辑，可以通过代码看出这个组件的功能。
-          \item 组件复用：封装好的组件可以再多个地方使用。
+          \item 组件复用：封装好的组件可以在多个地方使用。
           \item 便于单元测试：每个组件刚好可以作为单元测试的一个单元。
         \end{enumerate}
 \end{enumerate}
@@ -261,7 +261,7 @@ export default {
 </script>
             \end{lstlisting}
           \item Reactive References\\
-                \lstinline[language = Java]| ref |即"Reactive References"，它包装了原始数据并且允许我们跟踪变化。（在Vue2中是使用\lstinline[language = Java]| data() |包装原始内部对象。
+                \lstinline[language = Java]| ref |即“Reactive References”，它包装了原始数据并且允许我们跟踪变化。（在Vue2中是使用\lstinline[language = Java]| data() |包装原始内部对象）
           \item Methods/Computed/Watch\\
                 Vue2中有一个单独的methods/Computed/Watch部分用来编写方法，在vue3中则在setup()中编写。
           \item Props\\
@@ -269,7 +269,7 @@ export default {
           \item 移除了Vue filter\\
                 在Vue2中filter主要用于普通文本的格式化，而在Vue3中被移除了。移除的主要原因是它的性能和普通的函数没有区别，而写成普通的函数则会有更大的复用空间。
           \item 多个v-model\\
-                一个组件可以处理多个v-model，这样在多值处理地情况下，Vue3能更简单地通过多个event将值从子组件传递到父组件。
+                一个组件可以处理多个v-model，这样在多值处理的情况下，Vue3能更简单地通过多个event将值从子组件传递到父组件。
           \item 模块化\\
                 可以将setup()中的内容分离到另一个composition function中并保存在一个js文件中以便重用。
           \item 声明周期钩子
@@ -286,7 +286,7 @@ export default {
                   \item (Vue3)onRenderTracked()
                   \item (Vue3)onRenderTriggered()
                 \end{enumerate}
-                并且beforeCreate()和create()不在需要，它们的工作放在setup()中完成。
+                并且beforeCreate()和create()不再需要，它们的工作放在setup()中完成。
         \end{enumerate}
 \end{enumerate}
 
@@ -329,7 +329,7 @@ Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所�
   \item Getters\\
         Vuex允许在存储中定义“getter”。可以将它们视为存储的computed属性。与computed属性一样，getter的结果是基于它的依赖关系进行缓存的，并且只有在它的一些依赖关系发生变化时才会重新计算。
   \item Mutations\\
-        在Vuex~store中实际更改状态的唯一方法是提交一个mutation。Vuex~mutation与事件非常相似:每个mutation都有一个字符串类型和一个处理程序。
+        在Vuex~store中实际更改状态的唯一方法是提交一个mutation。Vuex~mutation与事件非常相似：每个mutation都有一个字符串类型和一个处理程序。
   \item Actions\\
         Action和mutation相似，不同之处在于mutation操作state，action操作mutation，以及action可以使用异步操作。
   \item Modules\\
