@@ -24,13 +24,11 @@
 }
 
 .el-dialog__header {
-    /* padding: 0 30px !important; */
     font-size: smaller !important;
     background-color: #ffffff00 !important;
 }
 
 .el-dialog__body {
-    /* height: 70%; */
     overflow: scroll;
     padding: 0 0 0 0 !important;
 }

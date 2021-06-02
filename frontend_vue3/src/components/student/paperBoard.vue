@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-01 21:12:27
+ * @LastEditTime: 2021-06-02 20:39:20
 -->
 
 <template>
@@ -102,11 +102,14 @@
   <!-- 文件预览 Dialog begin -->
   <teleport to="body">
     <el-dialog
+      id="dialogPreivewId"
       title="文件预览"
       v-model="dialogVisiblePreview"
       width="50%"
-      :before-close="handleClose">
-      <div style="height: 100%; width: 100%; background: red;">
+      :before-close="handleClose"
+      custom-class="dialogPreivew"
+      >
+      <div style="height: 100%; width: 100%;">
         <web-viewer ref=myWebViewer :myBlob=myBlob :key=chosedFileId />
       </div>
     </el-dialog>
@@ -334,205 +337,21 @@ export default {
     }
   }
 }
-
-// export default {
-//   components: { comment, WebViewer },
-//   data() {
-//     return {
-//       tableData: [],
-//       dialogVisible: false,
-//       commentDialogVisible: false,
-//       deleteDialogVisible: false,
-//       chosedFileId: 0,
-//       chosedCommentId: -1,
-//       replayWhichComment: '新建评论',
-//       fileScore: 0,
-//       commentData: [],
-//       commentWatiForPush: '',
-//       vuexComponentStudent: 'student',
-//       loading: true,
-//       fileSrcURL: '../../assets/pdf/test.pdf',
-//       viewer: null,
-//       testURL: '../../assets/pdf/test.pdf',
-//       myBlob: { type: Blob },
-//       myWebViewer: 'myWebViewer',
-//     }
-//   },
-//   mounted() {
-//     this.flashAllFileOfMyStudents()
-//     this.getComments()
-//     this.tempHandlePreview(12)
-//   },
-//   methods: {
-//     ...mapActions('student', [
-//       'studentGetAllMyFileForMyFilePage',
-//       'studentGetAllComment',
-//       'studentDownloadThisFile',
-//       'studentAddCommentForThisFile',
-//       'studentEditFileInfo',
-//       'studentRefreshFile',
-//       'deleteFile'
-//     ]),
-//     ...mapActions('comment', ['getComments']),
-//     // 刷新
-//     flashAllFileOfMyStudents() {
-//       var _this = this
-//       this.studentGetAllMyFileForMyFilePage().then((result) => {
-//         console.log(result.data.data)
-//         _this.tableData = result.data.data
-//         _this.$forceUpdate()
-//       })
-//     },
-//     flashComments() {
-//       const _this = this
-//       console.log('刷新评论');
-//       var chosedFileId = _this.chosedFileId
-//       this.studentGetAllComment({ chosedFileId }).then((res) => {
-//         _this.commentData = res.data.data
-//         console.log('刷新评论', _this.commentData)
-//         _this.$forceUpdate()
-//         _this.loading = false
-//       })
-//     },
-//     test() {
-//       console.log('outter test');
-//       this.replayWhichComment = '新建评论hhhh'
-//     },
-//     // 打开对话框
-//     openScoreDialog(id) {
-//       console.log(id)
-//       this.chosedFileId = id
-//       this.dialogVisible = true
-//     },
-//     openCommentDialog(id) {
-//       this.chosedCommentId = -1
-//       this.chosedFileId = id
-//       this.commentDialogVisible = true
-//       this.flashComments()
-//     },
-//     openDelteDialog(id) {
-//       this.chosedFileId = id
-//       this.deleteDialogVisible = true
-//     },
-//     // 文件下载
-//     handleDownload(id, name) {
-//       this.studentDownloadThisFile({
-//         fileId: id,
-//       }).then((res) => {
-//         fileDownload(res.data, name)
-//       })
-//     },
-//     // 文件预览
-//     handlePreview(id) {
-//       const _this = this
-//       this.studentDownloadThisFile({
-//         fileId: id,
-//       }).then((res) => {
-//         const blob = res.data
-//         _this.myBlob = res.data
-//         const url = URL.createObjectURL(blob)
-//         console.log('文件url为：', url);
-//         _this.fileSrcURL = url
-//         console.log('fileSrcURL', _this.fileSrcURL)
-//       })
-//     },
-//     // 文件预览
-//     tempHandlePreview(id) {
-//       var _this = this
-//       this.studentDownloadThisFile({
-//         fileId: id,
-//       }).then((res) => {
-//         const blob = res.data
-//         _this.myBlob = res.data
-//         console.log('文件blob为', blob)
-//         const url = URL.createObjectURL(blob)
-//         console.log('onMounted 文件url为：', url);
-//         _this.fileSrcURL = url
-//         console.log('onMounted fileSrcURL', _this.fileSrcURL)
-//       })
-//     },
-//     // 文件评分
-//     handleScore() {
-//       const _this = this
-//       const chosedFileId = this.chosedFileId
-//       const fileScore = this.fileScore
-//       console.log('handleScore')
-//       this.teacherScoreThisFile({ chosedFileId, fileScore }).then(() => {
-//         _this.flashAllFileOfMyStudents()
-//       })
-//     },
-//     handleReplay(node) {
-//       console.log('回复评论', node);
-//       var student = node.data.studentByStudentId
-//       var teacher = node.data.teacherByTeacherId
-//       var username = null
-//       if (student != null) {
-//         username = student.name
-//       }
-//       if (teacher != null) {
-//         username = teacher.name
-//       }
-//       this.replayWhichComment = 'replay??? ' + username
-//       console.log('hahahahhaha');
-//       this.test()
-//       this.chosedCommentId = node.data.id
-//     },
-//     handleCommentDialogClose() {
-//       console.log('Dialog closed')
-//       this.commentDialogVisible = false
-//       this.loading = true
-//       this.commentData = []
-//     },
-//     handleAddComment() {
-//       var comment = this.commentWatiForPush
-//       var chosedFileId = this.chosedFileId
-//       var chosedCommentId = this.chosedCommentId
-//       var _this = this
-//       this.studentAddCommentForThisFile({
-//         chosedFileId,
-//         comment,
-//         chosedCommentId,
-//       }).then((res) => {
-//         console.log(res)
-//         _this.commentWatiForPush = ''
-//         _this.flashComments()
-//       })
-//     },
-//     handleDeleteFile() {
-//       console.log('删除文件', this.chosedFileId);
-//       this.deleteFile(this.chosedFileId).then(() => {
-//         this.deleteDialogVisible = false
-//         this.flashAllFileOfMyStudents()
-//       })
-//     },
-//     handleEditInfo(file) {
-//       this.studentEditFileInfo(file)
-//     },
-//     cancleChooseComment() {
-//       this.chosedCommentId = -1
-//       this.replayWhichComment = '新建评论'
-//     },
-//     handleRefreshFile(e, id) {
-//       const file = e.target.files[0]
-//       const param = new FormData()
-//       param.append('file', file)
-//       param.append('id', id)
-//       param.append('name', file.name)
-//       const config = {
-//         headers: { 'Content-Type': 'multipart/form-data' }
-//       }
-//       this.studentRefreshFile({ param: param, config: config }).then((res) => {
-//         console.log('refresh file : ' + id);
-//       })
-//     },
-//     format(percentage) {
-//       return `${percentage}分`
-//     },
-//   },
-// }
 </script>
 
-<style>
+<style lang="less" scoped>
 @import '../../assets/css/card.css';
 @import '../../assets/css/el-dialog.css';
+</style>
+
+<style lang="less">
+.dialogPreivew {
+  height: 95% !important;
+  .el-dialog__body {
+    height: 100% !important;
+  }
+}
+#dialogPreivewId {
+  background: red !important;
+}
 </style>
