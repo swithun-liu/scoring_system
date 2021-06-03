@@ -109,51 +109,92 @@ Spring Security特点：
 \end{enumerate}
 
 JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale = 0.5]{out/uml/部署图/JWT/JWT.png}
   \caption{\song\wuhao JWT示例}
   \label{jwt}
 \end{figure}
 
-\section{Spring Data Jpa \& Hibernate介绍}
+\section{Spring Data Jpa 与 Hibernate介绍}
 
 该介绍基于 Spring Data Jpa 2.5.1，Hibernate 5.4。
 
 目前主流的ORM(Object/Relation Mapping)工具有Hibernate和MyBatis。
 
-JPA \& Spring Data JPA \& Hibernate三者之间的关系：
+JPA、Spring Data JPA 和 Hibernate三者之间的关系：
+
+\noindent 1. JPA
+
+JPA(Java Persistence API)为对象-关系(ORM)映射提供了POJO持久性模型。JPA是一种规范，仅定义了接口，但是并没有实现。
+
+\noindent 2. Spring Data JPA
+
+Spring Data Jpa 是 Spring Data 的一部分，该模块着力于对基于JPA的数据访问层进行增强，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很麻烦，为了执行简单的查询以及分页和审计，必须编写太多的模板代码，而Spring Data Jpa可以通过编写接口自动生成sql，由框架完成复杂且重复的工作，减少了开发人员许多不必要的工作量。同时该框架可以使用面向对象的查询方式取代直接编写SQL语句也使代码更容易调试和查找bug。
+
+Spring Data Jpa特点：
 \begin{enumerate}
-  \item JPA(Java Persistence API)为对象-关系(ORM)映射提供了POJO持久性模型。JPA是一种规范，仅定义了接口，但是并没有实现。
-  \item Spring Data Jpa 是 Spring Data 的一部分，该模块着力于对基于JPA的数据访问层进行增强，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很麻烦，为了执行简单的查询以及分页和审计，必须编写太多的模板代码，而Spring Data Jpa可以通过编写接口自动生成sql，由框架完成复杂且重复的工作，减少了开发人员许多不必要的工作量。同时该框架可以使用面向对象的查询方式取代直接编写SQL语句也使代码更容易调试和查找bug。
-        Spring Data Jpa特点：
-        \begin{enumerate}
-          \item 很好的构建基于Spring和Jpa的存储库。
-          \item 支持Querydsl谓词，从而支持类型安全的JPA差选。
-          \item 对于领域类有选择的映射属性。
-          \item 分页支持，动态查询支持，集成自定义数据访问代码。
-        \end{enumerate}
-  \item Hibernate是实现了JPA规范的框架（图\ref{JpaAndHibernate}）。
-        \begin{figure}[H]
-          \centering
-          \includegraphics[scale = 0.6]{out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png}
-          \caption{\song\wuhao Jpa和Hibernate}
-          \label{JpaAndHibernate}
-        \end{figure} Hibernate与MyBatis之间的对比和Spring Security与Shiro的对比很相似，使用Hibernate可以在完全不写SQL语句的情况下实现数据库操作，在写好配置之后，基于面向对象的查询方式让代码更简洁，易移植，易复用，减少了许多工作量，避免了许多因查询语句造成的差错，但是随着需求的增多即查询变得更加复杂，需要对框架有更好的理解才能才能编写出无差错的查询。\\
-        Hibernate特点：
-        \begin{enumerate}
-          \item Hibernate有自己的原生API，但最为JPA标准的实现，它可以在任何支持JPA的环境中使用，包括括Java SE应用程序，Java EE应用程序服务器，Enterprise OSGi容器等。
-          \item 允许按照自然的面向对象的方式进行持久化开发。Hibernate不需要持久化的接口或基类，并且允许任何类或数据持久化。
-          \item Hibernate具有较高的性能，它支持延迟初始化，大量的抓取策略和带有自动版本控制和时间戳的乐观锁。无论是开发人员生产方面还是在运行时性能方面，它始终拥有优于直接使用JDBC代码的性能。
-          \item Hibernate被设计为在应用服务器集群中工作，并提供高度可伸缩的体系结构。它在任何环境中都可以很好地扩展：不论是运行在内部网的低并发应用程序（只服务于几百个用户）还是运行在互联网上的高并发应用程序（服务于数十万用户），Hibernate都可以很好的驱动。
-          \item Hibernate拥有卓越的稳定性和质量。
-        \end{enumerate}
-        总的来说，Hibernate是一个很强大的ORM工具，但是如果想要使用好它，是需要较多的经验的。
+  \item 很好的构建基于Spring和Jpa的存储库。
+  \item 支持Querydsl谓词，从而支持类型安全的JPA差选。
+  \item 对于领域类有选择的映射属性。
+  \item 分页支持，动态查询支持，集成自定义数据访问代码。
 \end{enumerate}
+
+\noindent 3. Hibernate
+
+Hibernate是实现了JPA规范的框架（图\ref{JpaAndHibernate}）。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale = 0.5]{out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png}
+  \caption{\song\wuhao Jpa和Hibernate}
+  \label{JpaAndHibernate}
+\end{figure} Hibernate与MyBatis之间的对比和Spring Security与Shiro的对比很相似，使用Hibernate可以在完全不写SQL语句的情况下实现数据库操作，在写好配置之后，基于面向对象的查询方式让代码更简洁，易移植，易复用，减少了许多工作量，避免了许多因查询语句造成的差错，但是随着需求的增多即查询变得更加复杂，需要对框架有更好的理解才能才能编写出无差错的查询。\\
+Hibernate特点：
+\begin{enumerate}
+  \item Hibernate有自己的原生API，但最为JPA标准的实现，它可以在任何支持JPA的环境中使用，包括括Java SE应用程序，Java EE应用程序服务器，Enterprise OSGi容器等。
+  \item 允许按照自然的面向对象的方式进行持久化开发。Hibernate不需要持久化的接口或基类，并且允许任何类或数据持久化。
+  \item Hibernate具有较高的性能，它支持延迟初始化，大量的抓取策略和带有自动版本控制和时间戳的乐观锁。无论是开发人员生产方面还是在运行时性能方面，它始终拥有优于直接使用JDBC代码的性能。
+  \item Hibernate被设计为在应用服务器集群中工作，并提供高度可伸缩的体系结构。它在任何环境中都可以很好地扩展：不论是运行在内部网的低并发应用程序（只服务于几百个用户）还是运行在互联网上的高并发应用程序（服务于数十万用户），Hibernate都可以很好的驱动。
+  \item Hibernate拥有卓越的稳定性和质量。
+\end{enumerate}
+总的来说，Hibernate是一个很强大的ORM工具，但是如果想要使用好它，是需要较多的经验的。
 
 \section{Vue.js介绍}
 
-Vue.js特点：
+\noindent 1. Vue.js是轻量级框架
+
+该框架可以快速下载和安装库。
+
+\noindent 2. 虚拟 DOM 渲染及其性能
+
+相关概念：
+\begin{enumerate}
+  \item DOM(The Document Object Model)：Web页面的API，允许读取和操作页面的内容，结构和样式。一种对HTML基于对象的表示（HTML文档 $\leftrightarrow$ 对象模型）
+  \item node tree：DOM的对象结构。
+  \item Render Tree：（DOM：element的表示 + CSSOM：element样式的表示）
+\end{enumerate}
+虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大地提高了应用程序的性能。
+
+\noindent 3. 响应式的双向数据绑定（图\ref{tow-way-date-binding}）
+
+Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯，通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale = 0.6]{out/uml/部署图/Two-way data binding/Two-way data binding.png}
+  \caption{\song\wuhao 双向数据绑定}
+  \label{tow-way-date-binding}
+\end{figure}
+
+\noindent 4. CBA
+
+Vue是基于组件的体系结构（Component Based Architecture(CBA)），这种体系结构的好处主要有：
+\begin{enumerate}
+  \item 代码的可读性：每个组件可以保存在同一个单独的文件，包括结构，样式和逻辑，可以通过代码看出这个组件的功能。
+  \item 组件复用：封装好的组件可以在多个地方使用。
+  \item 便于单元测试：每个组件刚好可以作为单元测试的一个单元。
+\end{enumerate}
+
 \begin{enumerate}
   \item 轻量级框架\\该框架可以快速下载和安装库。
   \item 虚拟 DOM 渲染及其性能\\
@@ -161,38 +202,13 @@ Vue.js特点：
         \begin{enumerate}
           \item DOM(The Document Object Model)：Web页面的API，允许读取和操作页面的内容，结构和样式。一种对HTML基于对象的表示（HTML文档 $\leftrightarrow$ 对象模型）
           \item node tree：DOM的对象结构。
-                \begin{lstlisting} [language = html]
-// html
-<!doctype html>
-<html lang="en">
- <head>
-   <title>My first web page</title>
-  </head>
- <body>
-    <h1>Hello, world!</h1>
-    <p>How are you?</p>
-  </body>
-</html>
-          \end{lstlisting}
-                \begin{lstlisting} [language = xml]
-// 对应的 node tree
-html
-|-head
-|   |-title
-|       |-My first web page
-|-body
-    |-h1
-    |   |-hello,world!
-    |-p
-        |-How are you?
-\end{lstlisting}
           \item Render Tree：（DOM：element的表示 + CSSOM：element样式的表示）
         \end{enumerate}
         虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大地提高了应用程序的性能。
   \item 响应式的双向数据绑定（图\ref{tow-way-date-binding}）\\
         Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯，通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
 
-        \begin{figure}[H]
+        \begin{figure}[htbp]
           \centering
           \includegraphics[scale = 0.6]{out/uml/部署图/Two-way data binding/Two-way data binding.png}
           \caption{\song\wuhao 双向数据绑定}
@@ -230,19 +246,10 @@ createApp(App).mount('#app')
     \end{lstlisting}
         该改变解决了Vue2全局配置在单元测试中产生的问题（测试用户会因全局配置而互相影响）
   \item 多Root
-        \begin{lstlisting} [language = HTML]
-<template>
-  <div> // 在Vue3中可以去掉
-    <h1>{{ msg }}</h1>
-    <button @click="count++">count is: {{ count }}</button>
-    <p>Edit 
-        <code>components/HelloWorld.vue</code> 
-      to test hot module replacement.</p>
-  </div> // 在Vue3中可以去掉
-</template>
-\end{lstlisting}
+  
+  即可以去掉template中最外层的div。
   \item 组合式API。这应该是Vue3最大的变化，该变化主要是为了解决Vue2大组件难以阅读和维护的问题以及管理和维护组件之间的逻辑的问题。主要变化有：
-        \begin{enumerate}
+        \begin{enumerate}[label=\circled{\arabic*}]
           \item Setup
                 \begin{lstlisting} [language = HTML]
 <template>
@@ -293,7 +300,7 @@ Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所�
 \subsection{状态管理模式}
 
 一个Vue app包括三个部分
-\begin{enumerate}
+\begin{enumerate}[label=\circled{\arabic*}]
   \item 状态（state），真正推动程序运行的源头。
   \item 视图（view），状态的声明性映射。
   \item 动作（actions），状态可能改变的方式，以响应用户从视图的输入。
@@ -301,7 +308,7 @@ Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所�
 
 如图\ref{vuex-one-way-data-flow}是一个单向数据流的例子。
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale = 0.6]{out/uml/部署图/vuex-one-way-data-flow/vuex-one-way-data-flow.png}
   \caption{\song\wuhao 单向数据流}
@@ -310,7 +317,7 @@ Vuex是Vue.js应用程序的状态管理模式库。它作为应用程序中所�
 
 当有多个共享同一个状态的组件时，不同组件之间需要传递装状态去同步状态，这个过程是复杂并且容易出错的。所以将状态从组件中提取出来统一管理，如图\ref{vuex-state-management-pattern}所示，任何组件都可以访问状态以及改变状态，从而免除了传递状态的过程。这种模式使代码更容易维护。
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[scale = 0.5]{out/uml/部署图/vuex-state-management-pattern/vuex-state-management-pattern.png}
   \caption{\song\wuhao 状态管理模式}

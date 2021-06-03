@@ -51,27 +51,32 @@
   language=TeX,
   defaultdialect=empty,
   basicstyle=\ttfamily\small,
-  backgroundcolor=\color{LightSteelBlue1},
+  % backgroundcolor=\color{LightSteelBlue1},
+  backgroundcolor=\color{red!0!green!0!blue!0},%代码块背景色为浅灰色
   keywordstyle=\color{blue},
   showspaces=false,
   showstringspaces=false,
   showtabs=false,
-  tabsize=2,breakatwhitespace=false,
-  columns=flexible}
+  tabsize=2,
+  breakatwhitespace=false,
+  frame=ltrb%用方框框住代码块
+  rulesepcolor= \color{gray}, %代码块边框颜色
+  columns=flexible
+}
 
 % 其他
 \usepackage{calc}   % 在 tex 文件中具有一些计算功能，主要用在页面控制。
 \usepackage[xetex,
-bookmarksnumbered=true,
-bookmarksopen=true,
-colorlinks=true,
-% pdfborder={0 0 1},
-citecolor=blue,
-linkcolor=black,
-anchorcolor=green,
-urlcolor=magenta,
-breaklinks=true,
-CJKbookmarks=true,
+  bookmarksnumbered=true,
+  bookmarksopen=true,
+  colorlinks=true,
+  % pdfborder={0 0 1},
+  citecolor=blue,
+  linkcolor=black,
+  anchorcolor=green,
+  urlcolor=magenta,
+  breaklinks=true,
+  CJKbookmarks=true,
 ]{hyperref}
 
 

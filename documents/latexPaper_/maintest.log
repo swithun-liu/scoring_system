@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  3 JUN 2021 15:42
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  3 JUN 2021 22:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1210,7 +1210,11 @@ File: xunicode-extra.def 2020/02/14 v3.8.1 extra definition for xunicode
 Package: xeCJK-listings 2020/02/14 v3.8.1 xeCJK patch file for listings
 \l__xeCJK_listings_max_char_int=\count472
 \l__xeCJK_listings_flag_int=\count473
-) (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
+) (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux
+
+LaTeX Warning: Label `tow-way-date-binding' multiply defined.
+
+) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
 \openout1 = `maintest.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
@@ -1688,7 +1692,7 @@ Overfull \hbox (12.0pt too wide) detected at line 31
 
 
 Overfull \hbox (12.0pt too wide) detected at line 32
- \TU/TimesNewRoman(0)/m/n/12 20
+ \TU/TimesNewRoman(0)/m/n/12 19
  []
 
 [3
@@ -1711,202 +1715,207 @@ Overfull \hbox (12.0pt too wide) detected at line 35
 
 
 Overfull \hbox (12.0pt too wide) detected at line 36
- \TU/TimesNewRoman(0)/m/n/12 25
+ \TU/TimesNewRoman(0)/m/n/12 23
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 37
- \TU/TimesNewRoman(0)/m/n/12 26
+ \TU/TimesNewRoman(0)/m/n/12 24
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 38
- \TU/TimesNewRoman(0)/m/n/12 27
+ \TU/TimesNewRoman(0)/m/n/12 24
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 39
- \TU/TimesNewRoman(0)/m/n/12 27
+ \TU/TimesNewRoman(0)/m/n/12 25
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 40
- \TU/TimesNewRoman(0)/m/n/12 29
+ \TU/TimesNewRoman(0)/m/n/12 25
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 41
- \TU/TimesNewRoman(0)/m/n/12 30
+ \TU/TimesNewRoman(0)/m/n/12 26
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 42
- \TU/TimesNewRoman(0)/m/n/12 31
+ \TU/TimesNewRoman(0)/m/n/12 26
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 43
- \TU/TimesNewRoman(0)/m/n/12 32
+ \TU/TimesNewRoman(0)/m/n/12 28
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 44
- \TU/TimesNewRoman(0)/m/n/12 32
+ \TU/TimesNewRoman(0)/m/n/12 28
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 45
- \TU/TimesNewRoman(0)/m/n/12 33
+ \TU/TimesNewRoman(0)/m/n/12 30
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 46
- \TU/TimesNewRoman(0)/m/n/12 34
+ \TU/TimesNewRoman(0)/m/n/12 31
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 47
- \TU/TimesNewRoman(0)/m/n/12 35
+ \TU/TimesNewRoman(0)/m/n/12 32
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 48
- \TU/TimesNewRoman(0)/m/n/12 35
+ \TU/TimesNewRoman(0)/m/n/12 32
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 49
- \TU/TimesNewRoman(0)/m/n/12 37
+ \TU/TimesNewRoman(0)/m/n/12 34
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 50
- \TU/TimesNewRoman(0)/m/n/12 41
+ \TU/TimesNewRoman(0)/m/n/12 37
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 51
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 52
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 53
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 54
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 55
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 56
- \TU/TimesNewRoman(0)/m/n/12 42
+ \TU/TimesNewRoman(0)/m/n/12 39
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 57
- \TU/TimesNewRoman(0)/m/n/12 44
+ \TU/TimesNewRoman(0)/m/n/12 40
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 58
- \TU/TimesNewRoman(0)/m/n/12 44
+ \TU/TimesNewRoman(0)/m/n/12 40
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 59
- \TU/TimesNewRoman(0)/m/n/12 45
+ \TU/TimesNewRoman(0)/m/n/12 41
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 60
- \TU/TimesNewRoman(0)/m/n/12 48
+ \TU/TimesNewRoman(0)/m/n/12 42
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 61
- \TU/TimesNewRoman(0)/m/n/12 48
+ \TU/TimesNewRoman(0)/m/n/12 42
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 62
- \TU/TimesNewRoman(0)/m/n/12 49
+ \TU/TimesNewRoman(0)/m/n/12 43
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 63
- \TU/TimesNewRoman(0)/m/n/12 61
+ \TU/TimesNewRoman(0)/m/n/12 51
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 64
- \TU/TimesNewRoman(0)/m/n/12 62
+ \TU/TimesNewRoman(0)/m/n/12 53
  []
 
 [4]
 Overfull \hbox (12.0pt too wide) detected at line 65
- \TU/TimesNewRoman(0)/m/n/12 64
+ \TU/TimesNewRoman(0)/m/n/12 54
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 66
- \TU/TimesNewRoman(0)/m/n/12 66
+ \TU/TimesNewRoman(0)/m/n/12 54
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 67
- \TU/TimesNewRoman(0)/m/n/12 67
+ \TU/TimesNewRoman(0)/m/n/12 55
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 68
- \TU/TimesNewRoman(0)/m/n/12 68
+ \TU/TimesNewRoman(0)/m/n/12 55
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 69
- \TU/TimesNewRoman(0)/m/n/12 68
+ \TU/TimesNewRoman(0)/m/n/12 56
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 70
- \TU/TimesNewRoman(0)/m/n/12 68
+ \TU/TimesNewRoman(0)/m/n/12 56
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 71
- \TU/TimesNewRoman(0)/m/n/12 69
+ \TU/TimesNewRoman(0)/m/n/12 57
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 72
- \TU/TimesNewRoman(0)/m/n/12 70
+ \TU/TimesNewRoman(0)/m/n/12 57
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 73
- \TU/TimesNewRoman(0)/m/n/12 77
+ \TU/TimesNewRoman(0)/m/n/12 57
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 74
- \TU/TimesNewRoman(0)/m/n/12 78
+ \TU/TimesNewRoman(0)/m/n/12 61
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 75
- \TU/TimesNewRoman(0)/m/n/12 80
+ \TU/TimesNewRoman(0)/m/n/12 67
+ []
+
+
+Overfull \hbox (12.0pt too wide) detected at line 76
+ \TU/TimesNewRoman(0)/m/n/12 68
  []
 
 )
@@ -1918,15 +1927,55 @@ Overfull \hbox (12.0pt too wide) detected at line 75
 
  (./body/绪论.tex
 Chapter 1.
+
+Package natbib Warning: Citation `.2019' on page 1 undefined on input line 9.
+
+
+Package natbib Warning: Citation `.2020c' on page 1 undefined on input line 10.
+
+
+Package natbib Warning: Citation `.20183' on page 1 undefined on input line 11.
+
+
+Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `.2018' on page 1 undefined on input line 12.
+
+
+Package natbib Warning: Citation `.2019d' on page 1 undefined on input line 13.
+
+
+Package natbib Warning: Citation `张磊2020数字校园下高职院校教务管理系统设计' on page 1 undefined on input line 17.
+
+
+Package natbib Warning: Citation `.2020h' on page 1 undefined on input line 18.
+
+
+Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 18.
+
+
+Package natbib Warning: Citation `.2019c' on page 1 undefined on input line 22.
+
 [1
 
 
 
-]) [2]
+]
+
+Package natbib Warning: Citation `Setiyani.2020' on page 2 undefined on input line 26.
+
+
+Package natbib Warning: Citation `.2019d' on page 2 undefined on input line 28.
+
+) [2]
 \openout2 = `body/系统相关技术.aux'.
 
  (./body/系统相关技术.tex
 Chapter 2.
+
+Package natbib Warning: Citation `.2019f' on page 3 undefined on input line 12.
+
 [3
 
 
@@ -1937,18 +1986,25 @@ File: out/uml/部署图/JWT/JWT.png Graphic file (type bmp)
  [6]
 File: out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png Graphic file (type bmp)
 <out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png>
- [7] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [7] [8]
+
+Package natbib Warning: Citation `.2020g' on page 9 undefined on input line 180.
+
+File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
+<out/uml/部署图/Two-way data binding/Two-way data binding.png>
+[9]
+
+Package natbib Warning: Citation `.2020g' on page 10 undefined on input line 209.
+
+File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
+<out/uml/部署图/Two-way data binding/Two-way data binding.png>
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+) [10] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
-) [8] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-)
-File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
-<out/uml/部署图/Two-way data binding/Two-way data binding.png>
- [9] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2019/09/10 1.8c listings language file
-) [10] [11]
+) [11]
 File: out/uml/部署图/vuex-one-way-data-flow/vuex-one-way-data-flow.png Graphic file (type bmp)
 <out/uml/部署图/vuex-one-way-data-flow/vuex-one-way-data-flow.png>
  [12]
@@ -1973,15 +2029,14 @@ File: out/uml/用例图/1-用户登录用例图/1-用户登录用例图.png Grap
 <out/uml/用例图/1-用户登录用例图/1-用户登录用例图.png>
 File: out/uml/用例图/2-论文上传/2-论文上传.png Graphic file (type bmp)
 <out/uml/用例图/2-论文上传/2-论文上传.png>
- [17]
 File: out/uml/用例图/5-论文下载/5-论文下载.png Graphic file (type bmp)
 <out/uml/用例图/5-论文下载/5-论文下载.png>
- [18]
+ [17] [18]
 File: out/uml/用例图/3-论文评审评分/3-论文评审评分.png Graphic file (type bmp)
 <out/uml/用例图/3-论文评审评分/3-论文评审评分.png>
 File: out/uml/用例图/4-统计评审情况/4-统计评审情况.png Graphic file (type bmp)
 <out/uml/用例图/4-统计评审情况/4-统计评审情况.png>
- [19]) [20]
+) [19] [20]
 \openout2 = `body/系统设计.aux'.
 
  (./body/系统设计.tex
@@ -1993,120 +2048,147 @@ Chapter 4.
 ]
 File: out/uml/部署图/系统架构/系统架构.png Graphic file (type bmp)
 <out/uml/部署图/系统架构/系统架构.png>
- [22] [23]
+ [22]
 File: out/uml/WBS/系统WBS/系统WBS.png Graphic file (type bmp)
 <out/uml/WBS/系统WBS/系统WBS.png>
 File: out/uml/时序图/file-upload-sequence/file-upload-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-upload-sequence/file-upload-sequence.png>
- [24]
 File: out/uml/时序图/file-download-sequence/file-download-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-download-sequence/file-download-sequence.png>
- [25]
+ [23]
 File: out/uml/时序图/file-refresh-sequence/file-refresh-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-refresh-sequence/file-refresh-sequence.png>
- [26] [27]
+ [24]
 File: out/uml/时序图/file-comment-sequence/file-comment-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-comment-sequence/file-comment-sequence.png>
 File: out/uml/时序图/file-tag-sequence/file-tag-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-tag-sequence/file-tag-sequence.png>
- [28]
+ [25]
 File: out/uml/时序图/file-score-sequence/file-score-sequence.png Graphic file (type bmp)
 <out/uml/时序图/file-score-sequence/file-score-sequence.png>
- [29]
 File: out/uml/时序图/statistic-score-sequence/statistic-score-sequence.png Graphic file (type bmp)
 <out/uml/时序图/statistic-score-sequence/statistic-score-sequence.png>
- [30]
 File: out/uml/时序图/statistic-teacher-task-sequence/statistic-teacher-task-sequence.png Graphic file (type bmp)
 <out/uml/时序图/statistic-teacher-task-sequence/statistic-teacher-task-sequence.png>
- [31]
+ [26]
+
+LaTeX Warning: Text page 27 contains only floats.
+
+[27]
 File: out/uml/时序图/manage-student-sequence/manage-student-sequence.png Graphic file (type bmp)
 <out/uml/时序图/manage-student-sequence/manage-student-sequence.png>
+ [28]
+
+LaTeX Warning: Text page 29 contains only floats.
+
+[29]
 File: out/uml/时序图/manage-teacher-sequence/manage-teacher-sequence.png Graphic file (type bmp)
 <out/uml/时序图/manage-teacher-sequence/manage-teacher-sequence.png>
- [32] [33]
+ [30]
+
+Package natbib Warning: Citation `Dhingra2017ReviewOJ' on page 31 undefined on input line 155.
+
+
+Package natbib Warning: Citation `10.1145/3350768.3351796' on page 31 undefined on input line 155.
+
 File: out/uml/数据库/conceptual-model.png Graphic file (type bmp)
 <out/uml/数据库/conceptual-model.png>
- [34] [35] [36]
+[31] [32]
 File: out/uml/数据库/logical-model.png Graphic file (type bmp)
 <out/uml/数据库/logical-model.png>
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 201.
-
-LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 206.
-[37] [38] [39]
+ [33]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 298.
+               Default added (so using `tbp') on input line 214.
+
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 219.
+[34] [35] [36]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 323.
 
 File: out/uml/数据库/physical-model.png Graphic file (type bmp)
 <out/uml/数据库/physical-model.png>
-[40]) [41]
+) [37] [38]
 \openout2 = `body/实现与测试.aux'.
 
  (./body/实现与测试.tex
 Chapter 5.
-
-LaTeX Font Warning: Font shape `TU/SimSun(1)/m/it' undefined
-(Font)              using `TU/SimSun(1)/m/n' instead on input line 50.
-
-[42
+[39
 
 
 
-] [43] [44] [45]
-Overfull \hbox (9.15262pt too wide) in paragraph at lines 183--184
-[]\TU/SimSun(1)/m/n/12 函 数 的 第 一 个 参 数 为 \TU/TimesNewRoman(0)/m/n/12 String \TU/SimSun(1)/m/n/12 类 型，|  但 是 返 回 值 已 经 在 \TU/TimesNewRoman(0)/m/n/12 ResponseAdvice.beforeBodyWrite()
+]
+Overfull \hbox (1.4786pt too wide) in paragraph at lines 80--82
+[]\TU/SimSun(1)/m/n/12 为 了 实 现 自 动 格 式 化，|  需 要 一 个 重 要 的 接 口：| \TU/TimesNewRoman(0)/m/n/12 org.springframework.web.servlet.mvc.meth
+ []
+
+
+Package natbib Warning: Citation `.SpringInAction' on page 40 undefined on input line 85.
+
+[40]
+Overfull \hbox (27.39754pt too wide) in paragraph at lines 104--105
+[]\TU/SimSun(1)/m/n/12 需 要 注 意 的 一 点 是，|  如 果 返 回 对 象 为 \TU/TimesNewRoman(0)/m/n/12 String \TU/SimSun(1)/m/n/12 类 型 时 会 出 现 错 误：| \TU/TimesNewRoman(0)/m/n/12 java.lang.ClassCastException
  []
 
 File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-Code.png Graphic file (type bmp)
 <out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-Code.png>
+[41]
 File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.png Graphic file (type bmp)
 <out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.png>
-[46]
 File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png Graphic file (type bmp)
 <out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png>
- [47]
-File: out/uml/时序图/时序图-authentication/时序图-authentication.png Graphic file (type bmp)
-<out/uml/时序图/时序图-authentication/时序图-authentication.png>
- [48] [49]
+ [42]
+
+Package natbib Warning: Citation `.2019h' on page 43 undefined on input line 151.
+
+
+Package natbib Warning: Citation `.2019h' on page 43 undefined on input line 156.
+
 File: out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png>
- [50] [51]
-Overfull \hbox (4.08656pt too wide) in paragraph at lines 324--325
-\TU/TimesNewRoman(0)/m/n/12 DaoAuthenticationProvider \TU/SimSun(1)/m/n/12 是 继 承 \TU/TimesNewRoman(0)/m/n/12 AbstractUserDetailsAuthenticationProvider
- []
+[43] [44]
 
-[52] [53] [54]
+LaTeX Font Warning: Font shape `TU/SimSun(1)/m/it' undefined
+(Font)              using `TU/SimSun(1)/m/n' instead on input line 203.
+
+[45] [46]
 File: out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png>
- [55] [56]
-Overfull \hbox (1.23624pt too wide) in paragraph at lines 444--445
-[][][][][][][][][][][][]\TU/SimSun(1)/m/n/12 ：|  表 示\TU/TimesNewRoman(0)/m/n/12 ’ Access-Control-Allow-Methods
- []
-
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+) [47] [48]
 File: out/uml/时序图/CORS-flow/CORS-flow.png Graphic file (type bmp)
 <out/uml/时序图/CORS-flow/CORS-flow.png>
-[57] [58] [59] [60] [61]
-Overfull \hbox (8.67413pt too wide) in paragraph at lines 630--634
+ [49] [50] [51]
+Overfull \hbox (8.67413pt too wide) in paragraph at lines 781--785
 \TU/TimesNewRoman(0)/m/n/12 @JsonManagedReference(com.fasterxml.jackson.annotation.JsonManagedReference) 
  []
 
-[62] [63] [64] [65] [66] [67] [68] [69]
+[52] [53] [54] [55]) [56]
+\openout2 = `body/测试.aux'.
+
+ (./body/测试.tex
+Chapter 6.
+
+Package natbib Warning: Citation `.software' on page 57 undefined on input line 5.
+
 File: out/figure/测试/login-test.png Graphic file (type bmp)
 <out/figure/测试/login-test.png>
- [70]
+[57
+
+
+
+]
 File: out/figure/测试/upload-test.png Graphic file (type bmp)
 <out/figure/测试/upload-test.png>
+ [58]
 File: out/figure/测试/download-student-test.png Graphic file (type bmp)
 <out/figure/测试/download-student-test.png>
- [71]
 File: out/figure/测试/download-teacher-test.png Graphic file (type bmp)
 <out/figure/测试/download-teacher-test.png>
 File: out/figure/测试/file-refresh-test.png Graphic file (type bmp)
 <out/figure/测试/file-refresh-test.png>
- [72]
 File: out/figure/测试/comment-add.png Graphic file (type bmp)
 <out/figure/测试/comment-add.png>
 File: out/figure/测试/comment-replay.png Graphic file (type bmp)
@@ -2115,23 +2197,19 @@ File: out/figure/测试/score-student.png Graphic file (type bmp)
 <out/figure/测试/score-student.png>
 File: out/figure/测试/score-teacher.png Graphic file (type bmp)
 <out/figure/测试/score-teacher.png>
- [73]
 File: out/figure/测试/statistic-score-student-test.png Graphic file (type bmp)
 <out/figure/测试/statistic-score-student-test.png>
- [74]
-Overfull \vbox (74.94086pt too high) has occurred while \output is active []
-
- [75]
 File: out/figure/测试/statistic-teacher-task-test.png Graphic file (type bmp)
 <out/figure/测试/statistic-teacher-task-test.png>
+ [59]
 File: out/figure/测试/manage-students.png Graphic file (type bmp)
 <out/figure/测试/manage-students.png>
 File: out/figure/测试/manage-edit-student-test.png Graphic file (type bmp)
 <out/figure/测试/manage-edit-student-test.png>
- [76]) [77]
+) [60] [61] [62] [63] [64] [65] [66]
 \openout2 = `body/conclusion.aux'.
 
- (./body/conclusion.tex) [78
+ (./body/conclusion.tex) [67
 
 
 
@@ -2163,14 +2241,14 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 (fontspec)             <->"宋体/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- (./maintest.bbl)) [79
 
-
-
-]
+No file maintest.bbl.
+)
 \openout2 = `body/thank.aux'.
 
- (./body/thank.tex) [80
+ (./body/thank.tex) [68
+
+
 
 
 
@@ -2178,26 +2256,33 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 \tf@thm=\write7
 \openout7 = `maintest.thm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 46.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 46.
- (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 46.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 46.
+
+
+Package natbib Warning: There were undefined citations.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
+(./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/thank.aux))
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 47.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 47.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 742BAA7E87F1B97BD1CCB68069EB5CEE;5311.
+(rerunfilecheck)             Checksum: D852AD5DB2B52E30D8B4171B69A376E8;5324.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 46.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
  ) 
 Here is how much of TeX's memory you used:
- 41016 strings out of 479819
- 811444 string characters out of 5895846
- 1303453 words of memory out of 5000000
- 57188 multiletter control sequences out of 15000+600000
- 549718 words of font info for 198 fonts, out of 8000000 for 9000
+ 40414 strings out of 479819
+ 802101 string characters out of 5895846
+ 1306218 words of memory out of 5000000
+ 56582 multiletter control sequences out of 15000+600000
+ 549726 words of font info for 199 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 63i,13n,92p,2315b,2966s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,13n,92p,2315b,2679s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on maintest.pdf (88 pages).
+Output written on maintest.pdf (76 pages).

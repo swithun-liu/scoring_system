@@ -10,7 +10,7 @@
 \BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Spring 5: Spring Boot 2及其模块的基础}{section.2.1}% 10
 \BOOKMARK [1][]{section.2.2}{2.2 Spring Security介绍}{chapter.2}% 11
 \BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Spring Security 5.5 新特性}{section.2.2}% 12
-\BOOKMARK [1][]{section.2.3}{2.3 Spring Data Jpa & Hibernate介绍}{chapter.2}% 13
+\BOOKMARK [1][]{section.2.3}{2.3 Spring Data Jpa 与 Hibernate介绍}{chapter.2}% 13
 \BOOKMARK [1][]{section.2.4}{2.4 Vue.js介绍}{chapter.2}% 14
 \BOOKMARK [1][]{section.2.5}{2.5 Vuex介绍}{chapter.2}% 15
 \BOOKMARK [2][]{subsection.2.5.1}{2.5.1 状态管理模式}{section.2.5}% 16
@@ -48,18 +48,18 @@
 \BOOKMARK [2][]{subsection.4.3.2}{4.3.2 逻辑结构设计}{section.4.3}% 48
 \BOOKMARK [2][]{subsection.4.3.3}{4.3.3 物理结构设计}{section.4.3}% 49
 \BOOKMARK [1][]{section.4.4}{4.4 本章小结}{chapter.4}% 50
-\BOOKMARK [0][]{chapter.5}{5 实现与测试}{}% 51
+\BOOKMARK [0][]{chapter.5}{5 系统实现}{}% 51
 \BOOKMARK [1][]{section.5.1}{5.1 系统环境}{chapter.5}% 52
 \BOOKMARK [2][]{subsection.5.1.1}{5.1.1 硬件环境}{section.5.1}% 53
 \BOOKMARK [2][]{subsection.5.1.2}{5.1.2 软件环境}{section.5.1}% 54
 \BOOKMARK [1][]{section.5.2}{5.2 持久化}{chapter.5}% 55
-\BOOKMARK [2][]{subsection.5.2.1}{5.2.1\040Spring\040Date\040&\040JPA\040Hibernate}{section.5.2}% 56
+\BOOKMARK [2][]{subsection.5.2.1}{5.2.1 Spring Date 和 JPA Hibernate}{section.5.2}% 56
 \BOOKMARK [1][]{section.5.3}{5.3 统一返回对象}{chapter.5}% 57
 \BOOKMARK [2][]{subsection.5.3.1}{5.3.1 实现方式}{section.5.3}% 58
 \BOOKMARK [2][]{subsection.5.3.2}{5.3.2 重要问题}{section.5.3}% 59
-\BOOKMARK [1][]{section.5.4}{5.4 登录&验证授权模块}{chapter.5}% 60
+\BOOKMARK [1][]{section.5.4}{5.4 登录与验证授权模块}{chapter.5}% 60
 \BOOKMARK [2][]{subsection.5.4.1}{5.4.1 JWT优势}{section.5.4}% 61
-\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 使用JWT&Spring Security 实现验证和授权}{section.5.4}% 62
+\BOOKMARK [2][]{subsection.5.4.2}{5.4.2 使用JWT与Spring Security 实现验证和授权}{section.5.4}% 62
 \BOOKMARK [1][]{section.5.5}{5.5 Jackson序列化时无限递归问题}{chapter.5}% 63
 \BOOKMARK [1][]{section.5.6}{5.6 文件上传模块}{chapter.5}% 64
 \BOOKMARK [1][]{section.5.7}{5.7 文件更新模块}{chapter.5}% 65
@@ -67,9 +67,10 @@
 \BOOKMARK [1][]{section.5.9}{5.9 文件评论模块}{chapter.5}% 67
 \BOOKMARK [1][]{section.5.10}{5.10 文件预览模块}{chapter.5}% 68
 \BOOKMARK [1][]{section.5.11}{5.11 统计模块模块}{chapter.5}% 69
-\BOOKMARK [1][]{section.5.12}{5.12 测试}{chapter.5}% 70
-\BOOKMARK [2][]{subsection.5.12.1}{5.12.1 系统测试环境}{section.5.12}% 71
-\BOOKMARK [2][]{subsection.5.12.2}{5.12.2 测试用例与测试过程}{section.5.12}% 72
-\BOOKMARK [1][]{section.5.13}{5.13 本章小结}{chapter.5}% 73
-\BOOKMARK [0][]{chapter*.62}{设计总结}{}% 74
-\BOOKMARK [0][]{chapter*.64}{致　　谢}{}% 75
+\BOOKMARK [1][]{section.5.12}{5.12 本章小结}{chapter.5}% 70
+\BOOKMARK [0][]{chapter.6}{6 测试}{}% 71
+\BOOKMARK [1][]{section.6.1}{6.1 系统测试环境}{chapter.6}% 72
+\BOOKMARK [1][]{section.6.2}{6.2 测试用例与测试过程}{chapter.6}% 73
+\BOOKMARK [1][]{section.6.3}{6.3 本章小结}{chapter.6}% 74
+\BOOKMARK [0][]{chapter*.62}{设计总结}{}% 75
+\BOOKMARK [0][]{chapter*.63}{致　　谢}{}% 76
