@@ -9,7 +9,7 @@
 
 该介绍基于 Spring Boot 2.4.5。
 
-Spring Boot可以更快创建独立的、基于Spring的生产级应用。该框架解决了Spring框架配置非常繁琐的问题，简化了项目开发流程\cite{.2019f}。
+Spring Boot可以更快创建独立的、基于Spring的生产级应用。该框架解决了Spring框架配置非常繁琐的问题（Spring框架是轻量级的，但是它的配置却是重量级的），简化了项目开发流程\cite{.2019f}。
 
 Spring Boot特点
 
@@ -22,17 +22,13 @@ Spring Boot特点
   \item 绝对不需要代码生成，也不需要XML配置。
 \end{enumerate}
 
-Spring Boot为Spring生态系统带来了一种“opinionated”的方法。首次发布于2014年中期。Spring Boot经过了很多的开发和改进。它的2.0版在2018年初发布。
-
-Spring 5和Spring Boot 2需要Java 8，这使得使用核心Java 8函数成为可能。这包括接口上的默认方法和一些abstractxxxconfiguration类、Nullable-Support等相关的弃用。
-
-Spring中使用的所有Java EE规范都升级到了Java EE 7。Spring Boot 1是支持Java 7的最后一个Spring Boot版本，而Spring Boot 2将是第一个运行在Java 9上的版本（预计也将运行在Java 10上）。这还伴随着一些基本依赖项的升级：例如Tomcat、Hibernate和Gradle。
+Spring Boot首次发布于2014年中期，为Spring生态系统带来了一种“opinionated”的方法，经过了很多的开发和改进。它的2.0版在2018年初发布。 在语言方面，Spring 5和Spring Boot 2需要Java 8，这使得使用核心Java 8函数成为可能。这包括接口上的默认方法和一些abstractxxxconfiguration类、Nullable-Support等相关的弃用。同时，Spring中使用的所有Java EE规范都升级到了Java EE 7。Spring Boot 1是支持Java 7的最后一个Spring Boot版本，而Spring Boot 2将是第一个运行在Java 9上的版本（预计也将运行在Java 10上），其中这还伴随着一些基本依赖项的升级：例如Tomcat、Hibernate和Gradle。
 
 Spring Boot 2的一个亮点是几乎自动可用的HTTP/2支持：Tomcat、Jetty、Undertow和Reactor Netty的使用版本支持HTTP/2开箱即用。配置非常简单：服务器证书必须配置server.ssl.*下的属性。那么HTTP/2可以通过server.http2.enabled激活。HTTP/2是快速网络的重要构建块。可以通过压缩头、服务器推送、请求管道和多路复用请求来大幅降低延迟。
 
 \subsection{Spring 5: Spring Boot 2及其模块的基础}
 
-Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有些人认为Java EE和Spring是竞争对手，但Spring实际上是Java EE的补充。Spring编程模型不包含Java EE平台规范；相反，它与EE中精心挑选的各个规范集成在一起：
+Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有些人认为Java EE和Spring是竞争对手，但Spring实际上是Java EE的补充。Spring编程模型不包含Java EE平台规范，相反，它与EE中精心挑选的各个规范集成在一起：
 
 \begin{enumerate}
   \item Servlet API (JSR 340)
@@ -80,7 +76,7 @@ Spring Security特点：
 
 \subsection{Spring Security 5.5 新特性}
 
-\begin{itemize}
+\begin{enumerate}
   \item OAuth 2.0 客户端
         \begin{itemize}
           \item 添加了对 Jwt客户端认证中的 private-key-jwt 和 client-secret-jwt 的支持。
@@ -110,12 +106,12 @@ Spring Security特点：
         \begin{itemize}
           \item 添加rememberMe支持
         \end{itemize}
-\end{itemize}
+\end{enumerate}
 
 JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
 \begin{figure}[H]
   \centering
-  \includegraphics[scale = 0.4]{out/uml/部署图/JWT/JWT.png}
+  \includegraphics[scale = 0.5]{out/uml/部署图/JWT/JWT.png}
   \caption{\song\wuhao JWT示例}
   \label{jwt}
 \end{figure}

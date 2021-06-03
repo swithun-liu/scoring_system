@@ -6,7 +6,7 @@ frame Encoded {
         card "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
     }
     frame Payload {
-        card "eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ."
+        card "eyJzdWIiOiIxMjM0N......"
     }
 
     frame vs as "verify signaturek" {
