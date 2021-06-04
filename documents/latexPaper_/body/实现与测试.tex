@@ -95,7 +95,7 @@ AOP（面向切面编程）可以使我们在一个地方定义通用功能，�
 \noindent 2. 具体实现
 
 实现ResponseBodyAdvice接口，重写beforeBodyAdvice方法，在该方法中处理封装逻辑。再添加@RestCont rollerAdvice注解（org.springframework.web.bind.annotation.RestCont rollerAdvice，
-这是一个方便的注释，它本身由@ControllerAdvice和@ResponseBody注释组成。携带该注释的类型被视为controller advice，其中@ExceptionHandler方法默认使用@ResponseBody语义)。
+这是一个方便的注释，它本身由@ControllerAdvice和@ResponseBody注释组成。携带该注释的类型被视为controller advice，其中@ExceptionHandler方法默认使用@ResponseBody语义）。
 
 \subsection{重要问题}
 
@@ -194,52 +194,10 @@ JWT(JSON Web Token)的优势在于
 \end{enumerate}
 总体流程：
 \begin{enumerate}
-  \item 前端发起身份验证请求，由于尚未登录，所以前端没有Token信息，因而无法通过Spring Security的验证，这需要在 MySecurityConfig 中配置——放过访问"/authentication"的请求，以便进行身份验证和授权。\begin{lstlisting} [language = Java]
-  @Override
-  protected void configure(HttpSecurity httpSecurity)
-                                    throws Exception {
-    httpSecurity.authorizeRequests()
-        .antMatchers("/authenticate", "/register")
-        .permitAll()// 身份验证和注册不需要拦截
-        ...
-  }
-              \end{lstlisting}
+  \item 前端发起身份验证请求，由于尚未登录，所以前端没有Token信息，因而无法通过Spring Security的验证，这需要在 MySecurityConfig 中配置——放过访问"/authentication"的请求，其他例如注册等不需要验证的 URL 都可以在这里配置，以便进行身份验证和授权。
   \item 请求到达 MyAuthenticationController，此时可以从请求中获取到登录用户身份类型，如果是学生则需要使用 StudentUserDetailService 获取UserDetails，如果是教师则需要使用 TeacherDetailsService 获取UserDetails，同理，如果是管理员则需要使用 AdminDetailsService 获取UserDetials。
   \item 此时进入到 XXXUserDetialsService 中，这里需要重写方法 loadUserByUsername(String username)，如果是为学生用户服务的，则需要根据传入的username从学生表中取出用户，如果是为教师服务的，则需要查询教师表并从中找到用户。如果没有找到用户则抛出异常，如果找到了建立 org.springframework.\\security.core.userdetails.User（为UserDetials的实现类）其中包含用户名，用户密码，用户权限和用户身份。
-  \item 当获得了 XXXUserDetialsService 返还的 UserDetials，则可以开始进行身份验证。该验证需要 AuthenticationProvider 来完成，因此需要传递需要验证的东西（Authentication）给管理 AuthenticationProvider 的 AuthenticationManager 进行身份验证。由于这里有不同种类的用户且不同种类用户需要查询不同的表，所以需要建立不同 AuthenticationProvider （使用不同的 XXXUserDetialsService（从不同的数据库查询用户））去处理不同的 Authentication，而用来处理用户名用户密码的 AuthenticationProvider 是 DaoAuthenticationProvider，用来处理用户名用户密码的 Authentication 是 UsernamePasswordAuthenticationToken，所以需要为不同用户建立不同的 XXXUsernamePasswordAuthenticationToken 和不同的 XXXAuthProvider。为了绑定 XXXAuthProvider 和 XXXUsernamePasswordAuthenticationToken 则需要重写 XXXAuthProvider 的 supports 方法。
-        \begin{lstlisting} [language = Java]
-    // XXXDaoAuthProvider
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return XXXUsernamePasswordAutenticationToken
-                .class
-                .isAssignableFrom(authentication);
-    }
-              \end{lstlisting}
-        DaoAuthenticationProvider 是继承 AbstractUserDetailsAuthenticationProvider 的，不同在于 DaoAuthenticationProvider 增加了验证密码的功能，这也正是我们需要的，但是验证密码需要查询数据库也就需要 UserDetailService，所以需要通过 MySecurityConfig 为 XXXAuthProvider 注入不同的 XXXUserDetialsService。这里选择setter注入：
-        \begin{lstlisting} [language = Java]
-  // XXXDaoAuthProvider
-  @Override
-  public void setUserDetailsService(
-      UserDetailsService userDetailsService) {
-      super.setUserDetailsService(userDetailsService);
-  }
-              \end{lstlisting}
-        \begin{lstlisting} [language = Java]
-  // MySecurityConfig
-  @Autowired
-  @Qualifier("XXXUserDetailsService")
-  private UserDetailsService XXXUserDetailsService;
-
-  // 注入
-  @Bean("XXXDaoAutenticationProvider")
-  DaoAuthenticationProvider daoXXXDaoAutenticationProvider() 
-  {
-    return new XXXDaoAutenticationProvider(
-                                passwordEncoder(), 
-                                XXXUserDetailsService);
-  }
-              \end{lstlisting}
+  \item 当获得了 XXXUserDetialsService 返还的 UserDetials，则可以开始进行身份验证。该验证需要 AuthenticationProvider 来完成，因此需要传递需要验证的数据（Authentication）给管理 AuthenticationProvider 的 AuthenticationManager 进行身份验证。由于这里有不同种类的用户且不同种类用户需要查询不同的表，所以需要建立不同 AuthenticationProvider （使用不同的 XXXUserDetialsService（从不同的数据库查询用户））去处理不同的 Authentication，而用来处理用户名用户密码的 AuthenticationProvider 是 DaoAuthenticationProvider，用来处理用户名用户密码的 Authentication 是 UsernamePasswordAuthenticationToken，所以需要为不同用户建立不同的 XXXUsernamePasswordAuthenticationToken 和不同的 XXXAuthProvider。为了绑定 XXXAuthProvider 和 XXXUsernamePasswordAuthenticationToken 则需要重写 XXXAuthProvider 的 supports 方法。
         这个过程中涉及的类比较多且关系比较复杂，可以参考图\ref{SpringSecurityMultiUser}（经过简化，略去了与该流程相关程度不大的类）。
   \item 之后流程又回到了 MyAuthenticationController，此时如果通过了之前的身份验证则可以为用户生成Token了，这里需要使用 JwTokenUtil 生成Token，将 之前获得的 userdetails 传递给 JwTokenUtil，需要注意的是要在 claims 中填入用户角色，这样前端拿到Token之后可以解析出用户角色（这部分信息对应图\ref{jwt}Payload部分）。
   \item 当前端接收到后端的response之后，则可以从返还的Token中获取用户信息存储到localStore。之后的每个请求也都需要在Header中放入Token用于身份验证。
@@ -275,28 +233,28 @@ CORS-preflight request——预检请求，对于可能会对服务器造成副�
 总的来说，在CORS问题中涉及两种请求：
 
 \begin{enumerate}
-  \item CORS请求：CORS请求是一个包含“Origin”报头的HTTP请求。它不能被可靠地识别为参与了CORS协议，因为所有的方法既不是' GET '也不是' HEAD '的请求都包含了' Origin '头。
-  \item CORS preflight请求：也就是所谓的预检请求，是检查CORS协议是否被理解的CORS请求。它使用' OPTIONS '作为方法，包括以下 header:
+  \item CORS请求：CORS请求是一个包含“Origin”报头的HTTP请求。它不能被可靠地识别为参与了CORS协议，因为所有的方法既不是“ GET ”也不是“ HEAD ”的请求都包含了“ Origin ”头。
+  \item CORS preflight请求：也就是所谓的预检请求，是检查CORS协议是否被理解的CORS请求。它使用“ OPTIONS ”作为方法，包括以下 header:
         \begin{enumerate}
           \item  Access-Control-Request-Method ：指示将来对同一资源的CORS请求可能使用的方法。
           \item  Access-Control-Request-Headers ：指示将来对同一资源的CORS请求可能使用的头。
         \end{enumerate}
 \end{enumerate}
 
-OPTIONS方法：用于描述对于目标资源的通信选项。客户端可以放松HTTP OPTIONS 请求来询问 web 服务器支持的 HTTP 方法和其他的选项。如果请求 URL 是一个 '*'，那么 HTTP OPTIONS 请求应用于一般的服务器而不是特定的资源。使用HTTP OPTIONS方法的请求应该只检索数据(服务器不能更改其状态)。如果需要更改服务器上的数据，需要使用POST、PUT、PATCH或DELETE方法。
+OPTIONS方法：用于描述对于目标资源的通信选项。客户端可以放松HTTP OPTIONS 请求来询问 web 服务器支持的 HTTP 方法和其他的选项。如果请求 URL 是一个 ‘*’，那么 HTTP OPTIONS 请求应用于一般的服务器而不是特定的资源。使用HTTP OPTIONS方法的请求应该只检索数据(服务器不能更改其状态)。如果需要更改服务器上的数据，需要使用POST、PUT、PATCH或DELETE方法。
 
 在CORS问题中涉及的响应有两种：\\
 第一种对于CORS请求的响应，这种请求可以包含下面的header：
 \begin{enumerate}
-  \item  Access-Control-Allow-Origin ：通过在相应的header中添加被允许的Origin（可以为null也可以为'*'）可以指示那些响应是否可以被分享。
+  \item  Access-Control-Allow-Origin ：通过在相应的header中添加被允许的Origin（可以为null也可以为 ‘*’）可以指示哪些响应是否可以被分享。
   \item  Access-Control-Allow-Credentials ：指示当请求的凭据模式为"include"时响应是否可以被分享。
   \item  Access-Control-Expose-Headers ：通过列出header的名称来指示哪些header可以作为响应的一部分公开。
 \end{enumerate}
 第二种是对于CORS preflight请求，这种请求可以包含下面的header：
 \begin{enumerate}
   \item  Access-Control-Allow-Methods ：指示当请求目的为CORS协议时响应的URL支持哪些请求方法。
-  \item  Access-Control-Allow-Headers ：指示当请求的目的为CORS协议时相应的饿URL支持那些header。
-  \item  Access-Control-Max-Age ：表示' Access-Control-Allow-Methods '和' Access-Control-Allow-Headers '头提供的信息可以被缓存的秒数(默认为5)
+  \item  Access-Control-Allow-Headers ：指示当请求的目的为CORS协议时相应的饿URL支持哪些header。
+  \item  Access-Control-Max-Age ：表示‘ Access-Control-Allow-Methods ’和  ‘ Access-Control-Allow-Headers ’头提供的信息可以被缓存的秒数（默认为5）。
 \end{enumerate}
 
 CORS流程（图\ref{CORS-flow}）：
@@ -308,7 +266,7 @@ CORS流程（图\ref{CORS-flow}）：
   \label{CORS-flow}
 \end{figure}
 
-Spring Security 配置配置CORS：
+Spring Security 配置CORS：
 
 \begin{enumerate}
   \item 打开CORS \begin{lstlisting} [language = Java]
@@ -317,17 +275,17 @@ Spring Security 配置配置CORS：
                             throws Exception {
     httpSecurity.cors()
               \end{lstlisting}
-  \item 配置配置CORS response：重点的设置有配置允许的请求源（至少需要允许前端服务器的域名前缀）；允许的请求方法（类如“GET”，“POST”，“OPTIONS”等）；允许的Header（可能涉及的Header都需要配置，至少要允许Access-Control-Allow-Origin）。
+  \item 配置CORS response：重点的设置有配置允许的请求源（至少需要允许前端服务器的域名前缀）；允许的请求方法（类如“GET”，“POST”，“OPTIONS”等）；允许的Header（可能涉及的Header都需要配置，至少要允许Access-Control-Allow-Origin）。
 \end{enumerate}
 
 \noindent 3. 前端对Token的处理
 
-这里使用Vuex进行管理，为身份验证单独创建一个 auth 模块用与管理身份验证相关的state，action等。
+这里使用Vuex进行管理，为身份验证单独创建一个 auth 模块用于管理身份验证相关的state，action等。
 \begin{enumerate}
   \item 在 auth.js 的 state 中： 创建一个 authDate 对象，其中保存用户的Token，refreshToken，tokenExp，userId，userName，userType，以及一个loginStatus。
   \item 在 auth.js 的 getter 中：创建 getLoginStatus() 用于获取用户的登录状态（是否登录），创建 getAuthDate() 用于获取用户的身份信息，创建 isTokenActive() 用于判断 Token 是否过期。
   \item 在 auth.js 的 mutations 中：创建 saveTokenDate() 用于更新 authDate 以及 将 token 保存在浏览器的 localStorage 中。创建 setLoginStatus() 用于更新登录状态。创建 signout() 用于登出 （清除localStorage中的Token，以及将登录状态更改为未登录） 。
-  \item 在 auth.js 的 actions 中：创建异步函数 login() 用于登录（使用 axios 发送请求，将 paylaod(username, password, usertype) 放在请求体中发送给后端，使用 mutations 中方法处理返回的结果，成功登录。
+  \item 在 auth.js 的 actions 中：创建异步函数 login() 用于登录（使用 axios 发送请求，将 paylaod(username, password, usertype) 放在请求体中发送给后端，使用 mutations 中方法处理返回的结果，成功登录）。
 \end{enumerate}
 
 \noindent 4. 前端配置导航守卫
@@ -335,7 +293,7 @@ Spring Security 配置配置CORS：
 本系统添加全局的前置守卫：使用  router.beforeEach ，该方法接收三个参数，to，from，next（其中第三个参数可选）
 \begin{enumerate}
   \item to：想要导航到的规范化格式的目标路由位置。
-  \item from：其格式为规范化，表示导航时当前的即正要离开的路由位置。
+  \item from：其格式为规范化，表示导航时当前的所在的、正要离开的路由位置。
   \item next：经过判断后应该导航到的路由位置。
 \end{enumerate}
 配置的导航守卫的大体思路是只要未登录都需要跳转到 login 界面，但是如果访问 login 界面，此时系统尚未登录，然后又会跳转到 login 界面，无限跳转，无法正常工作。所以这里为每个页面的路由设置一个参数 requiredAuth 用于指示该页面是否需要导航守卫。具体设置方法可以选择将 requiredAuth 参数放入路由记录中的路由元信息meta字段中。\\
@@ -350,379 +308,9 @@ Spring Security 配置配置CORS：
 
 思路为进行全局配置，在 axios 发送每个请求之前在 Header 中添加 authenticate 字段，其值为登录时从后端获取的 Token。
 
-使用 axios 的 interceptors（拦截器）实现。interceptors 主要可以分成两种：
-\begin{enumerate}
-  \item 处理 request
-        \begin{lstlisting} [language = Java]
-// 添加一个请求拦截器
-axios.interceptors.request.use(function (config) {
-    // 在请求发送前的一些处理
-    return config;
-  }, function (error) {
-    // 在请求错误前的一些处理
-    return Promise.reject(error);
-  });
+使用 axios 的 interceptors（拦截器）实现。interceptors 主要可以分成两种：用于处理 request 的 interceptors 和用于处理 response 的 interceptors。由于是需要在发送请求时添加 Header ，所以选择第一种，配置其config（config.headers.common.Authorization = `bearer \${authData.token}`），其中 token 可以从 store 中获取。
 
-                \end{lstlisting}
-  \item 处理 response
-        \begin{lstlisting} [language = Java]
-// 添加一个响应拦截器
-axios.interceptors.response.use(function (response) {
-    // 任何处于2xx范围内的状态代码都会触发此函数
-    // 处理返回的数据
-    return response;
-  }, function (error) {
-    // 任何超出2xx范围的状态码都会触发该函数
-    // 处理响应错误
-    return Promise.reject(error);
-  });
-\end{lstlisting}
-\end{enumerate}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% \begin{enumerate}
-%   \item 后端配置多用户表使用Spring Security\\
-%         验证授权涉及到的关键类（图\ref{SpringSecurity}）：
-%         \begin{figure}[htbp]
-%           \centering
-%           \includegraphics[scale = 0.5]{out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png}
-%           \caption{\song\wuhao Spring Security 验证授权关键类}
-%           \label{SpringSecurity}
-%         \end{figure}
-%         \begin{itemize}
-%           \item  Authentication ：用户认证信息。
-%           \item  UsernamePasswordAuthenticationToken ： Authentication 的实现类，用于登录验证，最为常用。
-%           \item  AuthenticationProvider ：认证器，不同的 AuthenticationProvider  处理不同的  Authentication 
-%           \item  DaoAuthenticationProvider ： AuthenticationProvider 的实现类，用于处理 UsernamePasswordAuthenticationToken 
-%           \item  ProviderManager ：用于管理 AuthenticationProvider 
-%           \item  UserDetailService ：为 DaoAuthenticationProvider 提供从数据库查询用户的功能，用于做密码对比。
-%         \end{itemize}
-%         多用户表配置Spring Security（图\ref{SpringSecurityMultiUser}）：
-%         \begin{enumerate}
-%           \item 为不同用户建立各自的 UserDetailService 
-%                 \begin{lstlisting} [language = Java]
-%     public class XXXUserDetialsService 
-%                 implements UserDetailService
-%                 \end{lstlisting}
-%                 ，各自的 UserDetailService 从各自的数据库表中查询密码，提供给各自的 DaoAuthenticationProvider 使用。
-%           \item 为不同用户建立各自的 UsernamePasswordAuthenticationToken  \begin{lstlisting} [language = Java]
-%     public class XXXUPAuthToken 
-%                 extends UsernamePasswordAuthenticationToken
-%               \end{lstlisting}
-%           \item 为不同用户建立各自的 DaoAuthenticationProvider  \begin{lstlisting} [language = Java]
-%     public class XXXDaoAuthProvider 
-%                 extends DaoAuthenticationProvider
-%               \end{lstlisting}
-%           \item 进行Security配置 \begin{lstlisting} [language = Java]
-%     @Configuration
-%     @EnableWebSecurity
-%     @EnableGlobalMethodSecurity(prePostEnabled = true)
-%     public class MySecurityConfig 
-%                 extends WebSecurityConfigurerAdapter 
-%               \end{lstlisting}
-%                 需要的关键配置：
-%                 \begin{itemize}
-%                   \item 注入 XXXAuthProvider 
-%                   \item 向 AuthenticationManager 添加 XXXAuthProvider 
-%                   \item 注入 AuthenticationManager 
-%                 \end{itemize}
-%         \end{enumerate}
-%         总体流程：
-%         \begin{itemize}
-%           \item 前端发起身份验证请求，由于尚未登录，所以前端没有Token信息，因而无法通过Spring Security的验证，这需要在 MySecurityConfig 中配置——放过访问"/authentication"的请求，以便进行身份验证和授权。\begin{lstlisting} [language = Java]
-%   @Override
-%   protected void configure(HttpSecurity httpSecurity)
-%                                     throws Exception {
-%     httpSecurity.authorizeRequests()
-%         .antMatchers("/authenticate", "/register")
-%         .permitAll()// 身份验证和注册不需要拦截
-%         ...
-%   }
-%               \end{lstlisting}
-%           \item 请求到达 MyAuthenticationController，此时可以从请求中获取到登录用户身份类型，如果是学生则需要使用 StudentUserDetailService 获取UserDetails，如果是教师则需要使用 TeacherDetailsService 获取UserDetails，同理，如果是管理员则需要使用 AdminDetailsService 获取UserDetials。
-%           \item 此时进入到 XXXUserDetialsService 中，这里需要重写方法 loadUserByUsername(String username)，如果是为学生用户服务的，则需要根据传入的username从学生表中取出用户，如果是为教师服务的，则需要查询教师表并从中找到用户。如果没有找到用户则抛出异常，如果找到了建立 org.springframework.security.core.userdetails.User（为UserDetials的实现类）其中包含用户名，用户密码，用户权限和用户身份。
-%           \item 当获得了 XXXUserDetialsService 返还的 UserDetials，则可以开始进行身份验证。该验证需要 AuthenticationProvider 来完成，因此需要传递需要验证的东西（Authentication）给管理 AuthenticationProvider 的 AuthenticationManager 进行身份验证。由于这里有不同种类的用户且不同种类用户需要查询不同的表，所以需要建立不同 AuthenticationProvider （使用不同的 XXXUserDetialsService（从不同的数据库查询用户））去处理不同的 Authentication，而用来处理用户名用户密码的 AuthenticationProvider 是 DaoAuthenticationProvider，用来处理用户名用户密码的 Authentication 是 UsernamePasswordAuthenticationToken，所以需要为不同用户建立不同的 XXXUsernamePasswordAuthenticationToken 和不同的 XXXAuthProvider。为了绑定 XXXAuthProvider 和 XXXUsernamePasswordAuthenticationToken 则需要重写 XXXAuthProvider 的 supports 方法。
-%                 \begin{lstlisting} [language = Java]
-%     // XXXDaoAuthProvider
-%     @Override
-%     public boolean supports(Class<?> authentication) {
-%         return XXXUsernamePasswordAutenticationToken
-%                 .class
-%                 .isAssignableFrom(authentication);
-%     }
-%               \end{lstlisting}
-%                 DaoAuthenticationProvider 是继承 AbstractUserDetailsAuthenticationProvider 的，不同在于 DaoAuthenticationProvider 增加了验证密码的功能，这也正是我们需要的，但是验证密码需要查询数据库也就需要 UserDetailService，所以需要通过 MySecurityConfig 为 XXXAuthProvider 注入不同的 XXXUserDetialsService。这里选择setter注入：
-%                 \begin{lstlisting} [language = Java]
-%   // XXXDaoAuthProvider
-%   @Override
-%   public void setUserDetailsService(
-%       UserDetailsService userDetailsService) {
-%       super.setUserDetailsService(userDetailsService);
-%   }
-%               \end{lstlisting}
-%                 \begin{lstlisting} [language = Java]
-%   // MySecurityConfig
-%   @Autowired
-%   @Qualifier("XXXUserDetailsService")
-%   private UserDetailsService XXXUserDetailsService;
-
-%   // 注入
-%   @Bean("XXXDaoAutenticationProvider")
-%   DaoAuthenticationProvider daoXXXDaoAutenticationProvider() 
-%   {
-%     return new XXXDaoAutenticationProvider(
-%                                 passwordEncoder(), 
-%                                 XXXUserDetailsService);
-%   }
-%               \end{lstlisting}
-%                 这个过程中涉及的类比较多且关系比较复杂，可以参考图\ref{SpringSecurityMultiUser}（经过简化，略去了与该流程相关程度不大的类）。
-%           \item 之后流程又回到了 MyAuthenticationController，此时如果通过了之前的身份验证则可以为用户生成Token了，这里需要使用 JwTokenUtil 生成Token，将 之前获得的 userdetails 传递给 JwTokenUtil，需要注意的是要在 claims 中填入用户角色，这样前端拿到Token之后可以解析出用户角色（这部分信息对应图\ref{jwt}Payload部分）。
-%                 \begin{lstlisting} [language = Java]
-%   // 后端生成Token
-%   public String generateToken(UserDetails userDetails) {
-%       Map<String, Object> claims = new HashMap<>();
-%       Collection<? extends GrantedAuthority> it = 
-%                           userDetails.getAuthorities();
-
-%       List<String> roles = new ArrayList<String>();
-%       for (GrantedAuthority grantedAuthority : it) {
-%           System.out.println(grantedAuthority.toString());
-%           if (grantedAuthority.toString()
-%                           .startsWith("ROLE_")) {
-%               roles.add(
-%                   grantedAuthority.toString().substring(5));
-%           }
-%       }
-
-%       claims.put("userType", roles); 
-%           // 在 JWT payload 中放入 自定义的角色信息
-
-%       return doGenerateToken(
-%               claims, userDetails.getUsername());
-%   }
-%               \end{lstlisting}
-%                 \begin{lstlisting} [language = Java]
-%   // 前端解析Token
-%   export function jwtDecrypt(token) {
-%     var base64Url = token.split('.')[1];
-%     var base64 = base64Url.replace(/-/g, '+')
-%                             .replace(/_/g, '/');
-%     var jsonPayload = decodeURIComponent(
-%       atob(base64)
-%       .split('')
-%         .map(function (c) {
-%           return '%' + ('00' + 
-%             c.charCodeAt(0).toString(16)).slice(-2);
-%         })
-%         .join('')
-%     );
-%     return JSON.parse(jsonPayload);
-%   }
-%                 \end{lstlisting}
-%           \item 当前端接收到后端的response之后，则可以从返还的Token中获取用户信息存储到localStore。之后的每个请求也都需要在Header中放入Token用于身份验证。
-%         \end{itemize}
-%         \begin{figure}[htbp]
-%           \centering
-%           \includegraphics[scale = 0.35]{out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png}
-%           \caption{\song\wuhao SpringSecurity多用户表验证}
-%           \label{SpringSecurityMultiUser}
-%         \end{figure}
-%   \item 后端处理CORS跨域问题\\
-%         CORS(Cross-origin resource sharing)——跨域资源共享，一种可以允许访问其他域名下的受限资源的机制。
-%         目前CORS的现行标准由WHATWG(Web Hypertext Application Technology Working Group)在网络浏览器中实现和测试。\\
-%         CORS-preflight request——预检请求，对于可能会对服务器造成副作用的请求（非简单请求），浏览器会先使用OPTIONS方法发送预检请求
-%         询问服务器是否允许此次跨域请求。\\
-%         简单请求需满足：
-%         \begin{itemize}
-%           \item 请求方法：\lstinline[language = xml]| GET、POST、HEAD |
-%           \item 只使用了如下的安全首部字段，不得人为设置其他首部字段\begin{lstlisting} [language = Java]
-%     Accept
-%     Accept-Language
-%     Content-Language
-%     Content-Type 仅限以下三种
-%             text/plain
-%             multipart/form-data
-%             application/x-www-form-urlencoded
-%     HTML头部header field字段：
-%                 DPR、Download、Save-Data、Viewport-Width、WIdth
-%               \end{lstlisting}
-%           \item 请求中的任意XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问
-%           \item 请求中没有使用 ReadableStream 对象
-%         \end{itemize}
-%         总的来说，在CORS问题中涉及两种请求：
-%         \begin{itemize}
-%           \item CORS请求：CORS请求是一个包含“Origin”报头的HTTP请求。它不能被可靠地识别为参与了CORS协议，因为所有的方法既不是' GET '也不是' HEAD '的请求都包含了' Origin '头。
-%           \item CORS preflight请求：也就是所谓的预检请求，是检查CORS协议是否被理解的CORS请求。它使用' OPTIONS '作为方法，包括以下 header:
-%                 \begin{enumerate}
-%                   \item  Access-Control-Request-Method ：指示将来对同一资源的CORS请求可能使用的方法。
-%                   \item  Access-Control-Request-Headers ：指示将来对同一资源的CORS请求可能使用的头。
-%                 \end{enumerate}
-%                 OPTIONS方法：用于描述对于目标资源的通信选项。客户端可以放松HTTP OPTIONS 请求来询问 web 服务器支持的 HTTP 方法和其他的选项。如果请求 URL 是一个 '*'，那么 HTTP OPTIONS 请求应用于一般的服务器而不是特定的资源。使用HTTP OPTIONS方法的请求应该只检索数据(服务器不能更改其状态)。如果需要更改服务器上的数据，需要使用POST、PUT、PATCH或DELETE方法。
-%         \end{itemize}
-%         在CORS问题中涉及的响应：
-%         \begin{itemize}
-%           \item 对于CORS请求的响应可以包含下面的header：
-%                 \begin{enumerate}
-%                   \item  Access-Control-Allow-Origin ：通过在相应的header中添加被允许的Origin（可以为null也可以为'*'）可以指示那些响应是否可以被分享。
-%                   \item  Access-Control-Allow-Credentials ：指示当请求的凭据模式为"include"时响应是否可以被分享。
-%                   \item  Access-Control-Expose-Headers ：通过列出header的名称来指示哪些header可以作为响应的一部分公开。
-%                 \end{enumerate}
-%           \item 对于CORS preflight请求可以包含下面的header：
-%                 \begin{enumerate}
-%                   \item  Access-Control-Allow-Methods ：指示当请求目的为CORS协议时响应的URL支持哪些请求方法。
-%                   \item  Access-Control-Allow-Headers ：指示当请求的目的为CORS协议时相应的饿URL支持那些header。
-%                   \item  Access-Control-Max-Age ：表示' Access-Control-Allow-Methods '和' Access-Control-Allow-Headers '头提供的信息可以被缓存的秒数(默认为5)
-%                 \end{enumerate}
-%         \end{itemize}
-%         CORS流程（图\ref{CORS-flow}）：
-%         \begin{figure}[htbp]
-%           \centering
-%           \includegraphics[scale = 0.6]{out/uml/时序图/CORS-flow/CORS-flow.png}
-%           \caption{\song\wuhao CORS流程}
-%           \label{CORS-flow}
-%         \end{figure}
-%         Spring Security 配置配置CORS：
-%         \begin{itemize}
-%           \item 打开CORS \begin{lstlisting} [language = Java]
-% // MySecurityConfig.java
-%   protected void configure(HttpSecurity httpSecurity) 
-%                             throws Exception {
-%     httpSecurity..cors()
-%               \end{lstlisting}
-%           \item 配置配置CORS response
-%                 \begin{lstlisting} [language = Java]
-% // MySecurityConfig.java
-% @Bean
-% CorsConfigurationSource corsConfigurationSource() {
-%   CorsConfiguration configuration = new CorsConfiguration();
-%   configuration.addAllowedOrigin("*"); 
-%                 // 应设置为前端服务器域名前缀
-%   configuration.setAllowedMethods(
-%               Arrays.asList("GET", "POST", "OPTION"));
-%   configuration.addAllowedHeader("*");
-%   // 允许的Header，起码需要允许 Access-Control-Allow-Origin
-%   UrlBasedCorsConfigurationSource source = 
-%                           new UrlBasedCorsConfigurationSource();
-%   source.registerCorsConfiguration("/**", configuration);
-%   return source;
-% }
-%           \end{lstlisting}
-%         \end{itemize}
-%   \item 前端对Token的处理\\
-%         这里使用Vuex进行管理，为身份验证单独创建一个 auth 模块。
-%         \begin{lstlisting} [language = Java]
-% // src/store/index.js
-% import {
-%   createStore
-% } from 'vuex'
-% import authModule from './modules/auth'
-
-% const store = createStore({
-%   modules: {
-%     auth: authModule,
-%   }
-% })
-
-% export default store;
-
-%     \end{lstlisting}
-%         \begin{enumerate}
-%           \item 在 auth.js 的 state 中： 创建一个 authDate 对象，其中保存用户的Token，refreshToken，tokenExp，userId，userName，userType，以及一个loginStatus。
-%           \item 在 auth.js 的 getter 中：创建 getLoginStatus() 用于获取用户的登录状态（是否登录），创建 getAuthDate() 用于获取用户的身份信息，创建 isTokenActive() 用于判断 Token 是否过期。
-%           \item 在 auth.js 的 mutations 中：创建 saveTokenDate() 用于更新 authDate 以及 将 token 保存在浏览器的 localStorage 中。创建 setLoginStatus() 用于更新登录状态。创建 signout() 用于登出 （清除localStorage中的Token，以及将登录状态更改为未登录） 。
-%           \item 在 auth.js 的 actions 中：创建异步函数 login() 用于登录（使用 axios 发送请求，将 paylaod(username, password, usertype) 放在请求体中发送给后端，使用 mutations 中方法处理返回的结果，成功登录。
-%         \end{enumerate}
-%   \item 前端配置导航守卫\\
-%         本系统添加全局的前置守卫：使用  router.beforeEach ，该方法接收三个参数，to，from，next（其中第三个参数可选）
-%         \begin{enumerate}
-%           \item to：想要导航到的规范化格式的目标路由位置。
-%           \item from：其格式为规范化，表示导航时当前的即正要离开的路由位置。
-%           \item next：经过判断后应该导航到的路由位置。
-%         \end{enumerate}
-%         配置的导航守卫的大体思路是只要未登录都需要跳转到 login 界面，但是如果访问 login 界面，此时系统尚未登录，然后又会跳转到 login 界面，无限跳转，无法正常工作。所以这里为每个页面的路由设置一个参数 requiredAuth 用于指示该页面是否需要导航守卫。设置方法如下：
-%         \begin{lstlisting} [language = Java]
-% // src/router/index.js
-% import Login from '../components/Login.vue'
-% const routes = [
-% {
-%   path: '/login',
-%   name: 'Login',
-%   component: Login,
-%   meta: {
-%     requiredAuth: false
-%   }
-% },
-% ]
-%     \end{lstlisting}
-%         导航守卫流程：
-%         \begin{itemize}
-%           \item 检查 store 中是否保存了 token，如果没有保存则需要从 localStorage 中获取并保存在 store 中。
-%           \item 调用 auth 模块 中的 isTokenActive getter，从而获知该 Token 是否过期。
-%           \item 如果 Token 尚未过期并且想要导航到的目标路由需要验证\\meta.requiredAuth === true）则跳转到系统首页，如果并不满足上述条件则需要跳转到 login 页面。
-%         \end{itemize}
-%   \item 为每个请求附带 Token\\
-%         思路为进行全局配置，在 axios 发送每个请求之前在 Header 中添加 authenticate 字段，其值为登录时从后端获取的 Token。
-
-%         使用 axios 的 interceptors（拦截器）实现。interceptors 主要可以分成两种：
-%         \begin{itemize}
-%           \item 处理 request
-%                 \begin{lstlisting} [language = Java]
-% // 添加一个请求拦截器
-% axios.interceptors.request.use(function (config) {
-%     // 在请求发送前的一些处理
-%     return config;
-%   }, function (error) {
-%     // 在请求错误前的一些处理
-%     return Promise.reject(error);
-%   });
-
-%                 \end{lstlisting}
-%           \item 处理 response
-%                 \begin{lstlisting} [language = Java]
-% // 添加一个响应拦截器
-% axios.interceptors.response.use(function (response) {
-%     // 任何处于2xx范围内的状态代码都会触发此函数
-%     // 处理返回的数据
-%     return response;
-%   }, function (error) {
-%     // 任何超出2xx范围的状态码都会触发该函数
-%     // 处理响应错误
-%     return Promise.reject(error);
-%   });
-% \end{lstlisting}
-%         \end{itemize}
-%         系统需要为请求添加拦截器：
-%         \begin{lstlisting} [language = Java]
-% // main.js
-% axios.interceptors.request.use((config) => {
-%   const authData = store.getters['auth/getAuthData'];
-%   config.headers.common.Authorization = 'bearer \${authData.token}';
-%   return config;
-% });
-%     \end{lstlisting}
-%         首先从 store 中获取用户身份信息，之后通过操作 config 对象在 header 中添加 Authorization 字段，值为用户身份信息当中保存的 token。在这样的处理之后所有的请求都会在 header 中自动加入 token。
-% \end{enumerate}
+这里需要注意的一点是，由于许多请求不是简单请求，会触发上文提到的 CORS 问题，对于 CORS preflight 请求的响应中，系统后端会配置允许 Authorization 字段，但是如果访问其他网站，该字段可能会不被允许，造成访问失败，所以可以在 interceptors 中根据访问的 url 选择是否需要添加 token（其中 url 可以从 config 中获取）。
 
 \section{Jackson序列化时无限递归问题}
 
@@ -745,27 +333,28 @@ public class B {
 对应的数据库表\ref{jackson-A}和\ref{jackson-B}所示。
 
 \begin{table}[htbp]
-  \centering
-  \song\wuhao
-  \caption{jackson-A}
-  \label{jackson-A}
-  \begin{tabular}{l}
-    \hline
-    A的id \\ \hline
-    id    \\ \hline
-  \end{tabular}
-\end{table}
-
-\begin{table}[htbp]
-  \centering
-  \song\wuhao
-  \caption{jackson-B}
-  \label{jackson-B}
-  \begin{tabular}{ll}
-    \hline
-    B的id & A的id \\ \hline
-    id    & A\_id \\ \hline
-  \end{tabular}
+  \begin{minipage}{0.45\linewidth}
+    \centering
+    \song\wuhao
+    \caption{jackson-A}
+    \label{jackson-A}
+    \begin{tabular}{l}
+      \hline
+      A的id \\ \hline
+      id    \\ \hline
+    \end{tabular}
+  \end{minipage}
+  \begin{minipage}{0.45\linewidth}
+    \centering
+    \song\wuhao
+    \caption{jackson-B}
+    \label{jackson-B}
+    \begin{tabular}{ll}
+      \hline
+      B的id & A的id \\ \hline
+      id    & A\_id \\ \hline
+    \end{tabular}
+  \end{minipage}
 \end{table}
 
 关于Jackson需要知道的两个概念：
@@ -787,8 +376,8 @@ public class B {
         第一种方法的问题是，序列化时A会序列化List<B>，B不会序列化A，如果此时想要A不序列化List<B>，B序列化A就无法做到。可以将@JsonIgnore注解加载List<B>上从而实现。
   \item 使用 @JsonProperty(access = ...)\\
         @JsonProperty(com.fasterxml.jackson.annotation.JsonIgnore)\\
-        前两种方法在序列化和发序列化时的效果都相同，但是如果此时的需求是前端发过来的json对象映射为B时需要映射a属性，但是发送给前端json对象时不需要映射a属性（防止造成无限递归序列化）时可以设置JsonProperty.access()，序列化对应read，反序列化对应write，共有四种选择：
-        \begin{enumerate}
+        前两种方法在序列化和反序列化时的效果都相同，但是如果此时的需求是前端发过来的json对象映射为B时需要映射a属性，但是发送给前端json对象时不需要映射a属性（防止造成无限递归序列化）时可以设置JsonProperty.access()，序列化对应read，反序列化对应write，共有四种选择：
+        \begin{enumerate}[label=\circled{\arabic*}]
           \item AUTO
           \item READ\_ONLY
           \item READ\_WRITE
@@ -804,7 +393,7 @@ public class B {
 前端使用 Element Plus 的上传组件
 
 关键配置参数：
-\begin{enumerate}
+\begin{enumerate}[label=\circled{\arabic*}]
   \item action：上传的地址，即后端定义的接口。
   \item multiple：设置可以多选文件。
   \item on-suscess：文件上传成功时的钩子。
@@ -817,7 +406,7 @@ public class B {
 
 \noindent 2. 后端配置
 
-\begin{itemize}
+\begin{enumerate}
   \item Controller：\\
         文件上传函数使用 @PostMapping 注解，接受两个参数，其中 MultipartFile file 用来映射文件，Principal principal 用于从中取得发送请求的用户信息。
   \item Service：
@@ -827,7 +416,7 @@ public class B {
         文件数据：file.getBytes()；
         文件类型：file.getContentType()；
         至此，存储一个文件的所有信息已经获得，通过这些信息新建一个文件实体对象，使用文件Repository存储文件。
-\end{itemize}
+\end{enumerate}
 
 \section{文件更新模块}
 
@@ -864,13 +453,13 @@ public class B {
 
 使用 axios 发送 get 请求，参数为文件id，responseType 为 blob 类型。
 
-这里的重点是改变XMLHttpRequest对象的 responseType属性，将其设置为 “blob”，否则返回的数据会被解析为 Json 对象，无法正确的处理文件，导致文件乱码。
+这里的重点是改变XMLHttpRequest对象的 responseType属性，将其设置为 “blob”，否则返回的数据会被解析为 Json 对象，无法正确地处理文件，导致文件乱码。
 
 \noindent 2. 后端处理函数：
 
 处理函数接收一个参数即文件id, 这里需要注意两点，
 
-第一点是一定要设置 response 的 Content-Type为"application/pdf"，设置方法为在 @GetMapping注解中 将 produces 参数赋值为 "application/pdf"。
+第一点是一定要设置 response 的 Content-Type为“application/pdf”，设置方法为在 @GetMapping注解中 将 produces 参数赋值为“application/pdf”。
 
 第二点是因为本系统配置了统一返回对象，会对返回值在发送前进行封装，这次封装会导致返回的值不再是文件数据本身，所以需要设置不对 byte[] 类型进行重新封装。
 
@@ -901,11 +490,11 @@ public class B {
 \noindent 2. 后端部分：同文件下载模块后端处理。
 
 
-\section{统计模块模块}
+\section{统计模块}
 
 统计数据由后台生成，传递给前台使用JavaScript可视化工具——Echarts展示。
 
 
 \section{本章小结}
 
-本章主要介绍了在系统实现过程中的主要模块的实现，关键问题的解决，以及系统测试的过程。其中关键问题的解决对系统的稳定性，可维护性都有很大的提升。
+本章主要介绍了在系统实现过程中的主要模块的实现，关键问题的解决。其中关键问题的解决对系统的稳定性，可维护性的提升都有很大的帮助。

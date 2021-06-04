@@ -9,7 +9,7 @@
 
 该介绍基于 Spring Boot 2.4.5。
 
-Spring Boot可以更快创建独立的、基于Spring的生产级应用。该框架解决了Spring框架配置非常繁琐的问题（Spring框架是轻量级的，但是它的配置却是重量级的），简化了项目开发流程\cite{.2019f}。
+Spring Boot可以更快创建独立的、基于Spring的生产级应用。该框架解决了Spring框架配置非常烦琐的问题（Spring框架是轻量级的，但是它的配置却是重量级的），简化了项目开发流程\cite{.2019f}。
 
 Spring Boot特点
 
@@ -41,7 +41,7 @@ Spring出现于2003年，是为了应对早期J2EE规范的复杂性。虽然有
   \item 以及JTA/JCA设置，以便在必要时进行事务协调。
 \end{enumerate}
 
-Spring框架还支持依赖注入（JSR 330）和公共注释（JSR 250）规范，应用程序开发人员可以选择使用这些规范来代替Spring框架提供的特定于Spring的机制。
+Spring框架还支持依赖注入（JSR 330）和公共注解（JSR 250）规范，应用程序开发人员可以选择使用这些规范来代替Spring框架提供的特定于Spring的机制。
 
 随着时间的推移，Java EE在应用程序开发中的角色已经演变。在Java EE和Spring的早期，创建应用程序是为了部署到应用服务器上。如今，在Spring Boot的帮助下，应用程序以一种对devops和云友好的方式创建，其中嵌入了Servlet容器，更改起来很简单。从Spring Framework 5开始，WebFlux应用程序甚至不直接使用Servlet API，可以运行在不是Servlet容器的服务器上（比如Netty）。
 
@@ -111,7 +111,7 @@ Spring Security特点：
 JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在双方之间安全地表示声明。如图\ref{jwt}是一个编码和解码的例子。
 \begin{figure}[htbp]
   \centering
-  \includegraphics[scale = 0.5]{out/uml/部署图/JWT/JWT.png}
+  \includegraphics[scale = 0.6]{out/uml/部署图/JWT/JWT.png}
   \caption{\song\wuhao JWT示例}
   \label{jwt}
 \end{figure}
@@ -122,7 +122,7 @@ JSON Web Token(JWT)是一种开放的、行业标准RFC 7519方法，用于在�
 
 目前主流的ORM(Object/Relation Mapping)工具有Hibernate和MyBatis。
 
-JPA、Spring Data JPA 和 Hibernate三者之间的关系：
+\noindent JPA、Spring Data JPA 和 Hibernate三者之间的关系：
 
 \noindent 1. JPA
 
@@ -130,7 +130,7 @@ JPA(Java Persistence API)为对象-关系(ORM)映射提供了POJO持久性模型
 
 \noindent 2. Spring Data JPA
 
-Spring Data Jpa 是 Spring Data 的一部分，该模块着力于对基于JPA的数据访问层进行增强，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很麻烦，为了执行简单的查询以及分页和审计，必须编写太多的模板代码，而Spring Data Jpa可以通过编写接口自动生成sql，由框架完成复杂且重复的工作，减少了开发人员许多不必要的工作量。同时该框架可以使用面向对象的查询方式取代直接编写SQL语句也使代码更容易调试和查找bug。
+Spring Data Jpa 是 Spring Data 的一部分，该模块着力于对基于JPA的数据访问层进行增强，简单的说它是一个简化Jpa的框架。很长一段时间以来，实现应用程序的数据访问层一直很费事，为了执行简单的查询以及分页和审计，必须编写太多的模板代码，而Spring Data Jpa可以通过编写接口自动生成sql，由框架完成复杂且重复的工作，减少了开发人员许多不必要的工作量。同时该框架可以使用面向对象的查询方式取代直接编写SQL语句也使代码更容易调试和查找bug。
 
 Spring Data Jpa特点：
 \begin{enumerate}
@@ -157,6 +157,7 @@ Hibernate特点：
   \item Hibernate被设计为在应用服务器集群中工作，并提供高度可伸缩的体系结构。它在任何环境中都可以很好地扩展：不论是运行在内部网的低并发应用程序（只服务于几百个用户）还是运行在互联网上的高并发应用程序（服务于数十万用户），Hibernate都可以很好的驱动。
   \item Hibernate拥有卓越的稳定性和质量。
 \end{enumerate}
+
 总的来说，Hibernate是一个很强大的ORM工具，但是如果想要使用好它，是需要较多的经验的。
 
 \section{Vue.js介绍}
@@ -195,34 +196,7 @@ Vue是基于组件的体系结构（Component Based Architecture(CBA)），这�
   \item 便于单元测试：每个组件刚好可以作为单元测试的一个单元。
 \end{enumerate}
 
-\begin{enumerate}
-  \item 轻量级框架\\该框架可以快速下载和安装库。
-  \item 虚拟 DOM 渲染及其性能\\
-        相关概念：
-        \begin{enumerate}
-          \item DOM(The Document Object Model)：Web页面的API，允许读取和操作页面的内容，结构和样式。一种对HTML基于对象的表示（HTML文档 $\leftrightarrow$ 对象模型）
-          \item node tree：DOM的对象结构。
-          \item Render Tree：（DOM：element的表示 + CSSOM：element样式的表示）
-        \end{enumerate}
-        虚拟DOM：如果对象更改了它的状态，浏览器需要更新信息并且重新渲染到屏幕上，这个过程需要更新所有的DOM，开销是很大的。而Vue.js利用虚拟DOM解决了这个问题，可以将虚拟DOM理解为DOM的一个拷贝并且它可以找到需要更新的element而不是直接更新所有的element，这大大地提高了应用程序的性能。
-  \item 响应式的双向数据绑定（图\ref{tow-way-date-binding}）\\
-        Vue 改变了前端开 发者使用 jQuery 直接对页面上的 DOM 元素进行操作 的习惯，通过数据和模板双向绑定的形式更好地组织和 简化了 Web 开发。\cite{.2020g}
-
-        \begin{figure}[htbp]
-          \centering
-          \includegraphics[scale = 0.6]{out/uml/部署图/Two-way data binding/Two-way data binding.png}
-          \caption{\song\wuhao 双向数据绑定}
-          \label{tow-way-date-binding}
-        \end{figure}
-  \item CBA\\ Vue是基于组件的体系结构（Component Based Architecture(CBA)），这种体系结构的好处主要有：
-        \begin{enumerate}
-          \item 代码的可读性：每个组件可以保存在同一个单独的文件，包括结构，样式和逻辑，可以通过代码看出这个组件的功能。
-          \item 组件复用：封装好的组件可以在多个地方使用。
-          \item 便于单元测试：每个组件刚好可以作为单元测试的一个单元。
-        \end{enumerate}
-\end{enumerate}
-
-Vue3变化：
+\noindent 5. Vue3变化：
 \begin{enumerate}
   \item 创建app的变化
         \begin{lstlisting} [language = Java]
@@ -246,15 +220,12 @@ createApp(App).mount('#app')
     \end{lstlisting}
         该改变解决了Vue2全局配置在单元测试中产生的问题（测试用户会因全局配置而互相影响）
   \item 多Root
-  
-  即可以去掉template中最外层的div。
+
+        即可以去掉template中最外层的div。
   \item 组合式API。这应该是Vue3最大的变化，该变化主要是为了解决Vue2大组件难以阅读和维护的问题以及管理和维护组件之间的逻辑的问题。主要变化有：
         \begin{enumerate}[label=\circled{\arabic*}]
           \item Setup
                 \begin{lstlisting} [language = HTML]
-<template>
-  <!-- your template code -->
-</template>
 <script>
 export default {
   setup() {
