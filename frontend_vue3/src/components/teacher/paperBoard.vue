@@ -5,12 +5,12 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-02 21:40:06
+ * @LastEditTime: 2021-06-04 19:21:03
 -->
 
 <template>
   <!-- 文件列表 begin -->
-  <el-table :data="tableData" style="width: 100%">
+  <el-table :data="dTableDate" style="width: 100%">
     <el-table-column prop="id" label="文件id" width="90"></el-table-column>
     <el-table-column prop="name" label="文件名"></el-table-column>
     <el-table-column prop="studentId" label="学生id" width="90"></el-table-column>
@@ -23,6 +23,12 @@
           size="small"
           class="el-btn-2-glass-btn table-btn"
           @click="handleDownload(scope.row.id, scope.row.name)"
+        ></el-button>
+        <el-button
+          icon="el-icon-view"
+          size="small"
+          class="el-btn-2-glass-btn table-btn"
+          @click="openDialogPreview(scope.row.id)"
         ></el-button>
         <el-button size="small" icon="el-icon-refresh" class="el-btn-2-glass-btn table-btn"></el-button>
         <el-button
@@ -44,14 +50,14 @@
   <teleport to="body">
     <el-dialog
       title="评分"
-      v-model="dialogVisible"
+      v-model="dDialogVisibleScore"
       width="30%"
       :before-close="handleCommentDialogClose"
     >
       <template #footer>
-        <el-slider v-model="fileScore" show-input></el-slider>
+        <el-slider v-model="dFileScore" show-input></el-slider>
         <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button @click="dDialogVisibleScore = false">取 消</el-button>
           <el-button type="primary" @click="handleScore()">确 定</el-button>
         </span>
       </template>
@@ -63,23 +69,23 @@
   <teleport to="body">
     <el-dialog
       title="回复"
-      v-model="commentDialogVisible"
+      v-model="dDialogVisibleComment"
       width="80%"
       :before-close="handleClose"
       custom-class="replay-dialog"
     >
       <comment
-        :loading="loading"
-        :data="commentData"
+        :loading="dLoading"
+        :data="dCommentData"
         @handleReplay="handleReplay($event)"
         @refresh-data="flashComments"
       ></comment>
       <template #footer>
         <el-form>
           <el-form-item>
-            <span>{{ replayWhichComment }}</span>
-            <button v-if="replayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
-            <el-input v-model="commentWatiForPush"></el-input>
+            <span>{{ dReplayWhichComment }}</span>
+            <button v-if="dReplayWhichComment != '新建评论'" @click="cancleChooseComment()">取消</button>
+            <el-input v-model="dCommentWatiForPush"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button class="el-icon-position" @click="handleAddComment()"></el-button>
@@ -89,6 +95,22 @@
     </el-dialog>
   </teleport>
   <!-- 回复 Dialog end-->
+  <!-- 文件预览 Dialog begin -->
+  <teleport to="body">
+    <el-dialog
+      id="dialogPreivewId"
+      title="文件预览"
+      v-model="dDialogVisiblePreview"
+      width="50%"
+      :before-close="handleClose"
+      custom-class="dialogPreivew"
+    >
+      <div style="height: 100%; width: 100%;">
+        <web-viewer ref="dMyWebViewer" :myBlob="dMyBlob" :key="dChosedFileId" />
+      </div>
+    </el-dialog>
+  </teleport>
+  <!-- 文件预览 Dialog end -->
   <button class="custom-btn btn-13">
     <span>Read More</span>
   </button>
@@ -96,24 +118,30 @@
 
 <script>
 import fileDownload from 'js-file-download'
-import comment from '../../components/general/comment.vue'
+import { ElMessage } from 'element-plus'
 import { ref } from '@vue/reactivity'
 import { onMounted } from '@vue/runtime-core'
 import { useStore } from 'vuex'
+import comment from '../general/comment.vue'
+import WebViewer from '../general/WebViewer.vue'
 
 export default {
+  components: { comment, WebViewer },
   setup(props) {
-    const tableData = ref([])
-    const dialogVisible = ref(false)
-    const commentDialogVisible = ref(false)
-    const chosedFileId = ref(0)
-    const chosedCommentId = ref(-1)
-    const replayWhichComment = ref('新建评论')
-    const fileScore = 0
-    const commentData = ref([])
-    const commentOriginData = ref([])
-    const commentWatiForPush = ref('')
-    const loading = ref(true)
+    const dTableDate = ref([])
+    const dDialogVisibleScore = ref(false)
+    const dDialogVisibleComment = ref(false)
+    const dDialogVisiblePreview = ref(false)
+    const dChosedFileId = ref(0)
+    const dChosedCommentId = ref(-1)
+    const dReplayWhichComment = ref('新建评论')
+    const dFileScore = ref(0)
+    const dCommentData = ref([])
+    const dCommentOriginData = ref([])
+    const dCommentWatiForPush = ref('')
+    const dLoading = ref(true)
+    const dMyBlob = ref({ type: Blob })
+    const dMyWebViewer = ref('myWebViewer')
 
     const store = useStore()
 
@@ -121,7 +149,7 @@ export default {
     const flashAllFileOfMyStudents = () => {
       store.dispatch('teacher/getAllFileOfMyStudents').then((res) => {
         console.log('学生列表', res.data.data)
-        tableData.value = res.data.data
+        dTableDate.value = res.data.data
       })
     }
 
@@ -129,26 +157,44 @@ export default {
     const flashComments = () => {
       store
         .dispatch('teacher/teacherGetAllCommentsOfThisFile', {
-          chosedFileId: chosedFileId.value,
+          chosedFileId: dChosedFileId.value,
         })
         .then((res) => {
-          commentData.value = res.data.data
-          console.log('获取到评论 ', commentData.value)
-          loading.value = false
+          dCommentData.value = res.data.data
+          dLoading.value = false
+          console.log('获取到评论 ', dCommentData.value)
         })
     }
 
     // 打开评分对话框
     const openScoreDialog = (id) => {
-      chosedFileId.value = id
-      dialogVisible.value = true
+      dChosedFileId.value = id
+      dDialogVisibleScore.value = true
     }
     // 打开评论对话框
     const openCommentDialog = (id) => {
-      chosedCommentId.value = -1
-      chosedFileId.value = id
-      commentDialogVisible.value = true
+      dChosedCommentId.value = -1
+      dChosedFileId.value = id
+      dDialogVisibleComment.value = true
       flashComments()
+    }
+    // 打开预览对话框
+    const openDialogPreview = (id) => {
+      console.log('企图预览文件' + id)
+      dChosedFileId.value = id
+      handlePreview(id)
+      dDialogVisiblePreview.value = true
+    }
+    const handlePreview = (id) => {
+      store
+        .dispatch('teacher/teacherGetThisFile', {
+          fileId: id,
+        })
+        .then((res) => {
+          dMyBlob.value = res.data
+          console.log('获取到的pdf blob为', dMyBlob.value)
+          dMyWebViewer.value.renderFileItem()
+        })
     }
     // 处理下载文件
     const handleDownload = (id, name) => {
@@ -163,10 +209,29 @@ export default {
     }
     // 处理评分
     const handleScore = () => {
-      store.dispatch('teacher/teacherScoreThisFile', {
-        chosedFileId: chosedFileId.value,
-        fileScore: fileScore.value,
-      })
+      store
+        .dispatch('teacher/teacherScoreThisFile', {
+          chosedFileId: dChosedFileId.value,
+          fileScore: dFileScore.value,
+        })
+        .then((res) => {
+          console.log('评分结果', res.data.data)
+          flashAllFileOfMyStudents()
+          if (res.data.data === '修改成功') {
+            ElMessage({
+              showClose: true,
+              message: '修改成功',
+              type: 'success',
+            })
+          } else {
+            ElMessage({
+              showClose: true,
+              message: '修改失败',
+              type: 'error',
+            })
+          }
+          dDialogVisibleScore.value = false
+        })
     }
     // 处理评论
     const handleReplay = (node) => {
@@ -179,34 +244,34 @@ export default {
       if (teacher != null) {
         username = teacher.name
       }
-      replayWhichComment.value = '回复 ' + username
-      chosedCommentId.value = node.data.id
-    }
-    // 关闭评论对话框
-    const handleCommentDialogClose = () => {
-      console.log('评论对话框关闭')
-      commentDialogVisible.value = false
-      loading.value = true
-      commentData.value = []
+      dReplayWhichComment.value = '回复 ' + username
+      dChosedCommentId.value = node.data.id
     }
     // 处理添加评论
     const handleAddComment = () => {
       store
         .dispatch('teacher/teacherAddCommentThisFile', {
-          chosedFileId: chosedFileId.value,
-          comment: comment.value,
-          chosedCommentId: chosedCommentId.value,
+          chosedFileId: dChosedFileId.value,
+          comment: dCommentWatiForPush.value,
+          chosedCommentId: dChosedCommentId.value,
         })
         .then((res) => {
           console.log(res)
-          commentWatiForPush.value = ''
+          dCommentWatiForPush.value = ''
           flashComments()
         })
     }
     // 取消选择评论
     const cancleChooseComment = () => {
-      chosedCommentId.value = -1
-      replayWhichComment.value = '新建评论'
+      dChosedCommentId.value = -1
+      dReplayWhichComment.value = '新建评论'
+    }
+    // 关闭评论对话框
+    const handleCommentDialogClose = () => {
+      console.log('评论对话框关闭')
+      dDialogVisibleComment.value = false
+      dLoading.value = true
+      dCommentData.value = []
     }
 
     onMounted(() => {
@@ -214,17 +279,20 @@ export default {
     })
 
     return {
-      tableData,
-      dialogVisible,
-      commentDialogVisible,
-      chosedFileId,
-      chosedCommentId,
-      replayWhichComment,
-      fileScore,
-      commentData,
-      commentOriginData,
-      commentWatiForPush,
-      loading,
+      dTableDate,
+      dDialogVisibleScore,
+      dDialogVisibleComment,
+      dDialogVisiblePreview,
+      dChosedFileId,
+      dChosedCommentId,
+      dReplayWhichComment,
+      dFileScore,
+      dCommentData,
+      dCommentOriginData,
+      dCommentWatiForPush,
+      dLoading,
+      dMyBlob,
+      dMyWebViewer,
       flashAllFileOfMyStudents,
       flashComments,
       openScoreDialog,
@@ -232,6 +300,7 @@ export default {
       handleDownload,
       handleScore,
       handleReplay,
+      openDialogPreview,
       handleCommentDialogClose,
       handleAddComment,
       cancleChooseComment,

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  4 JUN 2021 13:43
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  4 JUN 2021 18:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1911,12 +1911,12 @@ Overfull \hbox (12.0pt too wide) detected at line 75
 
 
 Overfull \hbox (12.0pt too wide) detected at line 76
- \TU/TimesNewRoman(0)/m/n/12 65
+ \TU/TimesNewRoman(0)/m/n/12 66
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 77
- \TU/TimesNewRoman(0)/m/n/12 66
+ \TU/TimesNewRoman(0)/m/n/12 67
  []
 
 )
@@ -1928,55 +1928,15 @@ Overfull \hbox (12.0pt too wide) detected at line 77
 
  (./body/绪论.tex
 Chapter 1.
-
-Package natbib Warning: Citation `.2019' on page 1 undefined on input line 9.
-
-
-Package natbib Warning: Citation `.2020c' on page 1 undefined on input line 10.
-
-
-Package natbib Warning: Citation `.20183' on page 1 undefined on input line 11.
-
-
-Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 12.
-
-
-Package natbib Warning: Citation `.2018' on page 1 undefined on input line 12.
-
-
-Package natbib Warning: Citation `.2019d' on page 1 undefined on input line 13.
-
-
-Package natbib Warning: Citation `张磊2020数字校园下高职院校教务管理系统设计' on page 1 undefined on input line 17.
-
-
-Package natbib Warning: Citation `.2020h' on page 1 undefined on input line 18.
-
-
-Package natbib Warning: Citation `.2017e' on page 1 undefined on input line 18.
-
-
-Package natbib Warning: Citation `.2019c' on page 1 undefined on input line 22.
-
 [1
 
 
 
-]
-
-Package natbib Warning: Citation `Setiyani.2020' on page 2 undefined on input line 26.
-
-
-Package natbib Warning: Citation `.2019d' on page 2 undefined on input line 28.
-
-) [2]
+]) [2]
 \openout2 = `body/系统相关技术.aux'.
 
  (./body/系统相关技术.tex
 Chapter 2.
-
-Package natbib Warning: Citation `.2019f' on page 3 undefined on input line 12.
-
 [3
 
 
@@ -1988,12 +1948,9 @@ File: out/uml/部署图/JWT/JWT.png Graphic file (type bmp)
 File: out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png Graphic file (type bmp)
 <out/uml/部署图/Jpa和Hibernate/Jpa和Hibernate.png>
  [7] [8]
-
-Package natbib Warning: Citation `.2020g' on page 9 undefined on input line 181.
-
 File: out/uml/部署图/Two-way data binding/Two-way data binding.png Graphic file (type bmp)
 <out/uml/部署图/Two-way data binding/Two-way data binding.png>
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [9] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
@@ -2080,15 +2037,9 @@ LaTeX Warning: Text page 28 contains only floats.
 File: out/uml/时序图/manage-teacher-sequence/manage-teacher-sequence.png Graphic file (type bmp)
 <out/uml/时序图/manage-teacher-sequence/manage-teacher-sequence.png>
  [29]
-
-Package natbib Warning: Citation `Dhingra2017ReviewOJ' on page 30 undefined on input line 155.
-
-
-Package natbib Warning: Citation `10.1145/3350768.3351796' on page 30 undefined on input line 155.
-
 File: out/uml/数据库/conceptual-model.png Graphic file (type bmp)
 <out/uml/数据库/conceptual-model.png>
-[30] [31]
+ [30] [31]
 File: out/uml/数据库/logical-model.png Graphic file (type bmp)
 <out/uml/数据库/logical-model.png>
  [32]
@@ -2118,9 +2069,6 @@ Overfull \hbox (1.4786pt too wide) in paragraph at lines 80--82
 []\TU/SimSun(1)/m/n/12 为 了 实 现 自 动 格 式 化，|  需 要 一 个 重 要 的 接 口：| \TU/TimesNewRoman(0)/m/n/12 org.springframework.web.servlet.mvc.meth
  []
 
-
-Package natbib Warning: Citation `.SpringInAction' on page 39 undefined on input line 85.
-
 [39]
 Overfull \hbox (27.39754pt too wide) in paragraph at lines 104--105
 []\TU/SimSun(1)/m/n/12 需 要 注 意 的 一 点 是，|  如 果 返 回 对 象 为 \TU/TimesNewRoman(0)/m/n/12 String \TU/SimSun(1)/m/n/12 类 型 时 会 出 现 错 误：| \TU/TimesNewRoman(0)/m/n/12 java.lang.ClassCastException
@@ -2134,15 +2082,9 @@ File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug.p
 File: out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png Graphic file (type bmp)
 <out/figure/统一返回对象/WebMvcConfiguration-MessageConverter-debug-after-add.png>
  [41]
-
-Package natbib Warning: Citation `.2019h' on page 42 undefined on input line 151.
-
-
-Package natbib Warning: Citation `.2019h' on page 42 undefined on input line 156.
-
 File: out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity验证/SpringSecurity验证.png>
-[42] [43] [44]
+ [42] [43] [44]
 File: out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png Graphic file (type bmp)
 <out/uml/类图/Spring Security/SpringSecurity多用户表验证/SpringSecurity多用户表验证.png>
  (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -2160,9 +2102,6 @@ Overfull \hbox (8.67413pt too wide) in paragraph at lines 370--374
 
  (./body/测试.tex
 Chapter 6.
-
-Package natbib Warning: Citation `.software' on page 54 undefined on input line 5.
-
 File: out/figure/测试/login-test.png Graphic file (type bmp)
 <out/figure/测试/login-test.png>
 [54
@@ -2231,21 +2170,21 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 (fontspec)             <->"宋体/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
+ (./maintest.bbl)) [65
 
-No file maintest.bbl.
-)
+
+
+]
 \openout2 = `body/modify.aux'.
 
- (./body/modify.tex) [65
-
-
+ (./body/modify.tex) [66
 
 
 
 ]
 \openout2 = `body/thank.aux'.
 
- (./body/thank.tex) [66
+ (./body/thank.tex) [67
 
 
 
@@ -2253,26 +2192,22 @@ No file maintest.bbl.
 \tf@thm=\write7
 \openout7 = `maintest.thm'.
 
-
-
-Package natbib Warning: There were undefined citations.
-
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
-(./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/modify.aux) (./body/thank.aux))
+ (./maintest.aux (./body/original.aux) (./body/grant.aux) (./body/绪论.aux) (./body/系统相关技术.aux) (./body/需求分析.aux) (./body/系统设计.aux) (./body/实现与测试.aux) (./body/测试.aux) (./body/conclusion.aux) (./body/reference.aux) (./body/modify.aux) (./body/thank.aux))
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 47.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 47.
 Package rerunfilecheck Info: File `maintest.out' has not changed.
-(rerunfilecheck)             Checksum: 9C46571606A1FC82BF071F4409E6986F;5367.
+(rerunfilecheck)             Checksum: 9B1CB26ECA358C75F25319B4945B4B3C;5367.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
  ) 
 Here is how much of TeX's memory you used:
- 40419 strings out of 479819
- 804785 string characters out of 5895846
- 1307212 words of memory out of 5000000
- 56579 multiletter control sequences out of 15000+600000
- 549734 words of font info for 200 fonts, out of 8000000 for 9000
+ 40483 strings out of 479819
+ 806361 string characters out of 5895846
+ 1307870 words of memory out of 5000000
+ 56642 multiletter control sequences out of 15000+600000
+ 549726 words of font info for 199 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,13n,92p,2315b,2673s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on maintest.pdf (74 pages).
+Output written on maintest.pdf (75 pages).

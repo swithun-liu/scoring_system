@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 15:05:28
+ * @LastEditTime: 2021-06-04 16:36:33
  */
 package com.swithun.backend.entity;
 
@@ -54,7 +54,7 @@ public class StudentFileEntity {
     }
 
     @Basic
-    @Column(name = "file_abstract")
+    @Column(name = "file_abstract", length = 1000)
     public String getFileAbstract() {
         return fileAbstract;
     }

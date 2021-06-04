@@ -73,6 +73,6 @@
 \contentsline {section}{\numberline {6.2}测试用例与测试过程}{54}{section.6.2}%
 \contentsline {section}{\numberline {6.3}本章小结}{58}{section.6.3}%
 \contentsline {chapter}{设计总结}{64}{chapter*.60}%
-\contentsline {chapter}{修改记录}{65}{chapter*.61}%
-\contentsline {chapter}{致　　谢}{66}{chapter*.62}%
+\contentsline {chapter}{修改记录}{66}{chapter*.62}%
+\contentsline {chapter}{致　　谢}{67}{chapter*.63}%
 \contentsfinish 

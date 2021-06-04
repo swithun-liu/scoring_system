@@ -43,10 +43,15 @@
   border: 1px solid rgba( 255, 255, 255, 0.18);
 }
 
+.el-table thead {
+  color: #000 !important;
+}
+
 /*  */
 
 body {
   background: #e0e5ec;
+  color: #313131;
 }
 
 h1 {

@@ -68,15 +68,6 @@
     white-space: normal !important;
 }
 
-/* 问题标签wrapper */
-
-.tags-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    padding: 10px;
-}
 
 /*  问题标签样式 */
 

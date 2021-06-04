@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-04 10:58:35
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-01 17:20:44
+ * @LastEditTime: 2021-06-04 18:03:31
 -->
 <template>
   <el-tree
@@ -195,13 +195,33 @@ export default {
   margin-left: 10px;
   vertical-align: bottom;
 }
-/deep/.el-tag {
-  align-self: center;
-}
-/deep/.el-input__inner {
-  width: 100px;
-  height: 35px;
-  margin-left: 10px;
-  margin-right: 10px;
+/* 问题标签wrapper */
+
+.tags-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  /deep/.el-tag {
+    align-self: center;
+  }
+
+  /deep/.el-input__inner {
+    width: 130px;
+    height: 32px;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+  }
+
+  /deep/.el-autocomplete {
+    height: 32px;
+  }
+
+  /deep/.el-input {
+    display: flex;
+  }
 }
 </style>

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 10:15:56
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-03 16:36:47
+ * @LastEditTime: 2021-06-04 19:21:49
  */
 
 import axios from 'axios';
@@ -16,7 +16,7 @@ const actions = {
     return response;
   },
   async teacherGetThisFile({ commit }, payload) {
-    const response = await axios.get('http://localhost:8089/teacher/teacherGetThisFile', { params: payload, responseType: 'arraybuffer' });
+    const response = await axios.get('http://localhost:8089/teacher/teacherGetThisFile', { params: payload, responseType: 'blob' });
     return response;
   },
   async teacherScoreThisFile({ commit }, payload) {

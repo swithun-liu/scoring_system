@@ -19,7 +19,7 @@ body {
 }
 
 .el-main {
-  background: rgba( 255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.426);
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
   backdrop-filter: blur( 11.0px);
   -webkit-backdrop-filter: blur( 11.0px);
@@ -31,6 +31,17 @@ body {
 .el-menu {
   /* 去掉 menu 和 main 之间的空隙 */
   border-right: 0px !important;
+  /* 毛玻璃 */
+}
+
+.el-menu-vertical-demo {
+  background: rgba( 255, 255, 255, 0.25) !important;
+  /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37); */
+  box-shadow: 2px 3px 3px rgba( 31, 38, 135, 0.37), -28px -28px 35px rgba( 31, 38, 135, 0.37);
+  backdrop-filter: blur( 4px);
+  -webkit-backdrop-filter: blur( 4px);
+  border-radius: 0px;
+  border-right: 1px solid rgba(255, 255, 255, 0.303) !important;
 }
 
 .is-opened {
@@ -43,7 +54,7 @@ body {
   color: white;
 }
 
-.el-menu-item:hover{
+.el-menu-item:hover {
   background: rgba(255, 255, 255, 0.33) !important;
   border-radius: 10px !important;
 }
