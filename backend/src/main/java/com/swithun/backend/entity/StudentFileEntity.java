@@ -36,6 +36,7 @@ public class StudentFileEntity {
     private StudentEntity studentByStudentId;
     @JsonIgnore
     private Collection<CommentForFileEntity> teacherCommentForFilesById;
+    private DirectionEntity directionByDirection;
 
     public StudentFileEntity() {
     }
@@ -143,5 +144,15 @@ public class StudentFileEntity {
 
     public void setTeacherCommentForFilesById(Collection<CommentForFileEntity> teacherCommentForFilesById) {
         this.teacherCommentForFilesById = teacherCommentForFilesById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "direction", referencedColumnName = "id")
+    public DirectionEntity getDirectionByDirection() {
+        return directionByDirection;
+    }
+
+    public void setDirectionByDirection(DirectionEntity directionByDirection) {
+        this.directionByDirection = directionByDirection;
     }
 }

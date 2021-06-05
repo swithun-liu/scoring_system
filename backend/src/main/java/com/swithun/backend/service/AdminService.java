@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 21:38:54
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 21:27:31
+ * @LastEditTime: 2021-06-05 19:38:32
  */
 package com.swithun.backend.service;
 
@@ -115,7 +115,10 @@ public class AdminService {
         List<StudentEntity> students = studentR.findAll();
         for (StudentEntity student : students) {
             student.setTemperTeacher(student.getTeacherByTeacherId());
-            student.getTemperTeacher().setStudentsById(null);
+            TeacherEntity temperTeacher = student.getTemperTeacher();
+            if (temperTeacher != null) {
+                student.getTemperTeacher().setStudentsById(null);
+            }
         }
         return students;
     }

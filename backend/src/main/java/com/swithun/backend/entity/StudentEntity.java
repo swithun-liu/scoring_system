@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 20:37:32
+ * @LastEditTime: 2021-06-04 21:14:03
  */
 package com.swithun.backend.entity;
 
@@ -30,6 +30,7 @@ public class StudentEntity {
 
     private Integer id;
     private String name;
+    private String nickname;
     @JsonIgnore
     private String password;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -40,6 +41,7 @@ public class StudentEntity {
     private Collection<StudentFileEntity> studentFilesById;
     @JsonIgnore
     private Collection<CommentForFileEntity> commentForFilesById;
+    private DirectionEntity directionByDirection;
 
     @Id
     @Column(name = "id")
@@ -60,6 +62,16 @@ public class StudentEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Basic
+    @Column(name = "nickname")
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Transient
@@ -88,13 +100,13 @@ public class StudentEntity {
         if (o == null || getClass() != o.getClass())
             return false;
         StudentEntity that = (StudentEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name)
-                && Objects.equals(password, that.password);
+        return Objects.equals(id, that.id) && Objects.equals(password, that.password)
+                && Objects.equals(nickname, that.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password);
+        return Objects.hash(id, password, nickname);
     }
 
     @ManyToOne
@@ -123,5 +135,15 @@ public class StudentEntity {
 
     public void setCommentForFilesById(Collection<CommentForFileEntity> commentForFilesById) {
         this.commentForFilesById = commentForFilesById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "direction", referencedColumnName = "id")
+    public DirectionEntity getDirectionByDirection() {
+        return directionByDirection;
+    }
+
+    public void setDirectionByDirection(DirectionEntity directionByDirection) {
+        this.directionByDirection = directionByDirection;
     }
 }
