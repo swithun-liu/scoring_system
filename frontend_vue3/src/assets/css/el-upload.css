@@ -1,12 +1,14 @@
 .el-upload-list__item {
     background: rgba(210, 235, 255, 0.138);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    box-shadow: 0 3px 10px 0 rgba( 31, 38, 135, 0.37);
     backdrop-filter: blur( 8.0px);
     -webkit-backdrop-filter: blur( 8.0px);
     border-radius: 20px !important;
     border: 1px solid rgba( 255, 255, 255, 0.18);
     padding: 20px;
-    margin: 20px 0px;
+    margin: 10px 0px !important;
+    width: 90% !important;
+    align-self: center;
 }
 
 .el-upload-list__item:hover {
@@ -17,16 +19,19 @@
     width: 100%;
 }
 
+.upload-demo {
+    width: 80%;
+}
+
 .upload-button-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
 }
 
-.el-upload__tip {
-    margin: 50px;
-}
-
 .el-upload-list {
-    height: 60px !important;
+    height: 90%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column
 }

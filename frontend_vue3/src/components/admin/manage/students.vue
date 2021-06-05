@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-27 21:46:59
+ * @LastEditTime: 2021-06-05 19:48:08
 -->
 <template>
   <!-- 学生列表 -->
@@ -29,14 +29,14 @@
           </el-form-item>
           <el-form-item label="指导教师">
             <el-select
-              v-model="props.row.temperTeacher.name"
+              v-model="props.row.temperTeacher.id"
               clearable
               placeholder="请选择"
               @change="handleSetTeacher($event, props.row.id)"
             >
               <el-option
                 v-for="item in teachers"
-                :key="item.value"
+                :key="item.id"
                 :label="item.name"
                 :value="item.id"
               ></el-option>
@@ -118,21 +118,28 @@ export default {
       // },
     ])
 
-    const teachers = reactive([])
+    const teachers = ref([])
 
     // get teacher list
     const getTeachers = () => {
       console.log('开始打印')
       store.dispatch('admin/getAllTeachers').then((res) => {
-        console.log(res.data.data)
-        teachers.splice(0)
-        teachers.push(...res.data.data)
+        teachers.value = res.data.data
+        console.log('所有教师', teachers)
       })
     }
     // get student list
     const getStudents = () => {
       console.log('开始打印')
       store.dispatch('admin/getAllStudents').then((res) => {
+        res.data.data.forEach((element) => {
+          console.log(element)
+          if (element.temperTeacher == null) {
+            element.temperTeacher = {
+              id: null,
+            }
+          }
+        })
         tableData.splice(0)
         tableData.push(...res.data.data)
         console.log(tableData)

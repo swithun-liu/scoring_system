@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 19:25:28
+ * @LastEditTime: 2021-06-05 20:05:25
 -->
 <template>
   <div class="container0">
@@ -113,6 +113,7 @@ export default {
   margin: 0px !important;
 }
 .upload-wrapper {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
