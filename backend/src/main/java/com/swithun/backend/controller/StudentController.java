@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 16:05:10
+ * @LastEditTime: 2021-06-05 21:27:59
  */
 package com.swithun.backend.controller;
 
@@ -107,11 +107,12 @@ public class StudentController {
         return "添加成功";
     }
 
+    // 刷新文件
     @PostMapping(value = "/student/refreshFile")
-    public String refreshFile(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
+    public String refreshFile(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id, @RequestParam("name") String name) {
         logger.info("使用 " + file.getOriginalFilename() + " 更新 " + id);
         try {
-            studentS.refreshFile(file, id);
+            studentS.refreshFile(file, id, name);
         } catch (IOException e) {
             return "更新失败";
         }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-04 19:19:38
+ * @LastEditTime: 2021-06-05 21:59:03
 -->
 
 <template>
@@ -58,7 +58,7 @@
           class="glass-btn-important card-btn"
           icon="el-icon-view"
           size="small"
-          @click="openDialogPreview(file.id)"
+          @click="openDialogPreview(file)"
         ></el-button>
         <el-button
           class="glass-btn-important card-btn"
@@ -157,7 +157,14 @@
       custom-class="dialogPreivew"
     >
       <div style="height: 100%; width: 100%;">
-        <web-viewer ref="myWebViewer" :myBlob="myBlob" :key="chosedFileId" />
+        <web-viewer
+          ref="myWebViewer"
+          :myBlob="myBlob"
+          :fileId="chosedFileId"
+          :refreshURL="refreshFileURL"
+          :key="chosedFileId"
+          :file="chosedFile"
+        />
       </div>
     </el-dialog>
   </teleport>
@@ -190,6 +197,8 @@ export default {
     const myBlob = ref({ type: Blob })
     const replayWhichComment = ref('新建评论')
     const commentWaitForPush = ref('')
+    const refreshFileURL = ref('student/studentRefreshFile')
+    const chosedFile = ref({ type: Object })
 
     // 获取文件列表
     const getFiles = () => {
@@ -235,10 +244,11 @@ export default {
     }
 
     // 打开预览对话框
-    const openDialogPreview = (id) => {
-      console.log('企图预览文件' + id)
-      chosedFileId.value = id
-      handlePreview(id)
+    const openDialogPreview = (file) => {
+      console.log('企图预览文件' + file.id)
+      chosedFileId.value = file.id
+      chosedFile.value = file
+      handlePreview(file.id)
       dialogVisiblePreview.value = true
     }
 
@@ -255,6 +265,7 @@ export default {
 
     // 处理文件预览
     const handlePreview = (id) => {
+      console.log('处理文件预览', id)
       store
         .dispatch('student/studentDownloadThisFile', {
           fileId: id,
@@ -328,6 +339,7 @@ export default {
     const handleFileRefresh = (event, id) => {
       console.log('企图更新文件' + id)
       const file = event.target.files[0]
+      console.log('文件类型', typeof file)
       const param = new FormData()
       param.append('file', file)
       param.append('id', id)
@@ -336,7 +348,7 @@ export default {
         headers: { 'Content-Type': 'multipart/form-data' },
       }
       store
-        .dispatch('student/studentRefreshFile', {
+        .dispatch(refreshFileURL.value, {
           param: param,
           config: config,
         })
@@ -380,6 +392,7 @@ export default {
       replayWhichComment,
       commentWaitForPush,
       chosedFileId,
+      chosedFile,
       openDialogScore,
       openDialogComment,
       openDialogDelete,
@@ -388,6 +401,7 @@ export default {
       dialogVisibleComment,
       dialogVisibleDelete,
       dialogVisiblePreview,
+      refreshFileURL,
       handlePreview,
       handleReplay,
       handleCommentAdd,

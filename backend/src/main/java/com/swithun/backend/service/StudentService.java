@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:58:43
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 16:15:28
+ * @LastEditTime: 2021-06-05 21:59:27
  */
 package com.swithun.backend.service;
 
@@ -22,6 +22,8 @@ import com.swithun.backend.entity.StudentEntity;
 import com.swithun.backend.entity.StudentFileEntity;
 import com.swithun.backend.entity.CommentForFileEntity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +37,8 @@ public class StudentService {
     private StudentFileRepository fileR;
     @Autowired
     private CommentForFileRepository commentR;
+
+    Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     /**
      * @description: 为 添加论文 页面 获取 文件列表
@@ -91,10 +95,11 @@ public class StudentService {
         fileR.save(oldFile);
     }
 
-    public void refreshFile(MultipartFile file, Integer id) throws IOException {
+    public void refreshFile(MultipartFile file, Integer id, String name) throws IOException {
         StudentFileEntity original_file = fileR.findById(id).get();
-        original_file.setName(file.getOriginalFilename());
+        original_file.setName(name);
         original_file.setType(file.getContentType());
+        logger.info(file.getContentType());
         original_file.setData(file.getBytes());
         fileR.save(original_file);
     }
