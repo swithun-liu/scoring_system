@@ -149,7 +149,7 @@
 \makeatletter
 \renewcommand{\headrule}{%
   {\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
-    \makeheadrule}}
+      \makeheadrule}}
 
 \pagestyle{fancyplain}
 
@@ -161,10 +161,10 @@
 % Clear Header Style on the Last Empty Odd pages
 \makeatletter
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
-  \hbox{}%
-  \thispagestyle{empty}%              % Empty header styles
-  \newpage%
-  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+      \hbox{}%
+      \thispagestyle{empty}%              % Empty header styles
+      \newpage%
+      \if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 
 
@@ -179,7 +179,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 国际单位，以点连接。
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\sisetup{inter-unit-product = { }\cdot{ }} 
+\sisetup{inter-unit-product = { }\cdot{ }}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % 参考文献的处理
@@ -238,7 +238,7 @@
 {\vspace{0.5cm}\begin{sloppypar} \slshape
     \sbox{\AphorismAuthor}{#1}
     \begin{quote}\small\itshape }
-    {\\ \hspace*{\fill}------\hspace{0.2cm} \usebox{\AphorismAuthor}
+      {\\ \hspace*{\fill}------\hspace{0.2cm} \usebox{\AphorismAuthor}
     \end{quote}
   \end{sloppypar}\vspace{0.5cm}}
 
@@ -269,14 +269,14 @@
 \def\etitle#1{\def\@etitle{#1}}\def\@etitle{}
 \long\def\eabstract#1{\long\def\@eabstract{#1}}\long\def\@eabstract{}
 \def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
-\def\department#1{\def\@department{#1}}\def\@department{} 
+\def\department#1{\def\@department{#1}}\def\@department{}
 \def\teacher#1{\def\@teacher{#1}}\def\@teacher{}
 % 封面
 \def\makecover{
   \begin{titlepage}
     \newpage
     \thispagestyle{empty}
-    　%在这里有一个日语空格
+    %在这里有一个日语空格
     \begin{center}
       \parbox[t][2.80cm][c]{\textwidth}
       {
@@ -297,55 +297,55 @@
             \xiaosi\song
             \renewcommand\arraystretch{1.2}
             \begin{tabular}
-            {p{0cm}p{70pt}   @{\extracolsep{0.5em}}lc}
-            
-              ~ & 学 \hfill 部 \hfill（院）：& \fixedunderlineleft[5.07cm] {\@department} & \\
-              ~ & 专 \hfill 业：& \fixedunderlineleft[5.07cm]{\@csubject} & \\
-              ~ & 学 \hfill 生 \hfill 姓 \hfill 名：& \fixedunderlineleft[5.07cm]{\@cauthor} & \\ 
-              ~ & 学 \hfill 号：& \fixedunderlineleft[5.07cm]{\@cauthorno} & \\
-              ~ & 指 \hfill 导 \hfill 教 \hfill 师：& \fixedunderlineleft[5.07cm]{\@csupervisor} & \\
-              ~ & 完 \hfill 成 \hfill 日 \hfill 期：& \fixedunderlineleft[5.07cm]{\@cdate} & \\
+              {p{0cm}p{70pt}   @{\extracolsep{0.5em}}lc}
+
+              ~ & 学 \hfill 部 \hfill（院）：        & \fixedunderlineleft[5.07cm] {\@department} & \\
+              ~ & 专 \hfill 业：                     & \fixedunderlineleft[5.07cm]{\@csubject}    & \\
+              ~ & 学 \hfill 生 \hfill 姓 \hfill 名： & \fixedunderlineleft[5.07cm]{\@cauthor}     & \\
+              ~ & 学 \hfill 号：                     & \fixedunderlineleft[5.07cm]{\@cauthorno}   & \\
+              ~ & 指 \hfill 导 \hfill 教 \hfill 师： & \fixedunderlineleft[5.07cm]{\@csupervisor} & \\
+              ~ & 完 \hfill 成 \hfill 日 \hfill 期： & \fixedunderlineleft[5.07cm]{\@cdate}       & \\
             \end{tabular}
           }
         \end{center}
       }
-        \parbox[b][3cm][c]{\textwidth}
+      \parbox[b][3cm][c]{\textwidth}
       {
-      \centering
-      \vspace{3.7cm}
-      {
-     		\song\xiaosi
-        大连理工大学\\
-      }
+        \centering
+        \vspace{3.7cm}
+        {
+          \song\xiaosi
+          大连理工大学\\
+        }
       }
     \end{center}
-%    \cleardoublepage
+    %    \cleardoublepage
   \end{titlepage}
 }
 
 
 
 \def\makeabstract{
-  \defaultfont
-  \addcontentsline{toc}{chapter}{摘　　要}
-  \setcounter{page}{1}
-  \defaultfont
+\defaultfont
+\addcontentsline{toc}{chapter}{摘　　要}
+\setcounter{page}{1}
+\defaultfont
 \linespread{1.25}
 \begin{center}
-	{\song\sanhao\textbf {\@ctitle （宋体、三号、加粗）}}\\
-	{\xiaosan auther（外文、不翻译、小三）}\\
-	{\song\sihao 工作单位（中文、宋体、四号）}
+  {\song\sanhao\textbf {\@ctitle }}\\
+  {\xiaosan Lila Setiyani, Abin Syamsudin, Abdorrakhman Gintings, Daeng Arifin}\\
+  {\song\sihao 印度尼西亚STMIIK ROSMA信息系统部，印度尼西亚努桑塔拉伊斯兰大学教育管理系}
 \end{center}
 
-  \@cabstract
-  \vspace{0.53cm}
+\@cabstract
+\vspace{0.53cm}
 
-  \noindent {\hei\textbf{{关键词：{\@ckeywords}}}}
+\noindent {\hei\textbf{{关键词：{\@ckeywords}}}}
 }
 
 \makeatletter
 \def\hlinewd#1{%
-  \noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet
+\noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet
   \reserved@a\@xhline}
 \makeatother
 
@@ -357,4 +357,4 @@
   \cleardoublepage
 }
 
-\raggedbottom 
+\raggedbottom
