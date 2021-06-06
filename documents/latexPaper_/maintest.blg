@@ -17,47 +17,44 @@ A level-1 auxiliary file: body/thank.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: reference.bib
-Warning--empty author in .20183
-Warning--empty journal in .20183
 You've used 17 entries,
             4066 wiz_defined-function locations,
-            965 strings with 8798 characters,
-and the built_in function-call counts, 53270 in all, are:
-= -- 1627
-> -- 5288
-< -- 6995
-+ -- 2344
-- -- 725
+            967 strings with 8802 characters,
+and the built_in function-call counts, 53519 in all, are:
+= -- 1639
+> -- 5295
+< -- 7024
++ -- 2363
+- -- 727
 * -- 530
-:= -- 7847
-add.period$ -- 50
+:= -- 7918
+add.period$ -- 51
 call.type$ -- 17
 change.case$ -- 34
-chr.to.int$ -- 2018
-cite$ -- 20
-duplicate$ -- 344
-empty$ -- 870
-format.name$ -- 200
-if$ -- 13528
+chr.to.int$ -- 2034
+cite$ -- 17
+duplicate$ -- 343
+empty$ -- 887
+format.name$ -- 206
+if$ -- 13580
 int.to.chr$ -- 1
 int.to.str$ -- 18
 missing$ -- 0
-newline$ -- 94
-num.names$ -- 48
-pop$ -- 1829
+newline$ -- 95
+num.names$ -- 51
+pop$ -- 1823
 preamble$ -- 1
 purify$ -- 17
 quote$ -- 0
-skip$ -- 4964
+skip$ -- 4946
 stack$ -- 0
-substring$ -- 3036
+substring$ -- 3064
 swap$ -- 40
-text.length$ -- 148
+text.length$ -- 152
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 201
-warning$ -- 2
-while$ -- 199
+type$ -- 199
+warning$ -- 0
+while$ -- 208
 width$ -- 0
-write$ -- 235
-(There were 2 warnings)
+write$ -- 239

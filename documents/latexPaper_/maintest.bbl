@@ -19,20 +19,22 @@
   试析``互联网+''时代下计算机科学技术发展趋势\allowbreak[J].
 \newblock 轻纺工业与技术, 2020, 49\penalty0 (1):\penalty0 147-148.
 
-\bibitem[.20(2018年3月)]{.20183}
-基于Java+EE的项目评审文档管理信息系统的研究与实现\allowbreak[J].
-\newblock 2018年3月.
+\bibitem[王小红(2018)]{.20183}
+王小红.
+\newblock
+  基于Java+EE的项目评审文档管理信息系统的研究与实现\allowbreak[D].
+\newblock 北京: 华北电力大学, 2018.
 
 \bibitem[方辉(2017)]{.2017e}
 方辉.
 \newblock
   基于ASP.NET的在线学位论文评审系统设计与实现\allowbreak[D].
-\newblock [出版地不详]: 广西师范大学, 2017.
+\newblock 广西壮族自治区: 广西师范大学, 2017.
 
 \bibitem[周逸雅(2018)]{.2018}
 周逸雅.
 \newblock 硕士毕业论文管理系统的设计与实现\allowbreak[D].
-\newblock [出版地不详]: 电子科技大学, 2018.
+\newblock 四川: 电子科技大学, 2018.
 
 \bibitem[刘辉\ 等(2019)刘辉, 于程名, and 吴海平]{.2019d}
 刘辉, 于程名, 吴海平.
@@ -43,7 +45,7 @@
 \bibitem[张磊(2020)]{张磊2020数字校园下高职院校教务管理系统设计}
 张磊.
 \newblock 数字校园下高职院校教务管理系统设计\allowbreak[D].
-\newblock [出版地不详]: 青岛科技大学, 2020.
+\newblock 山东: 青岛科技大学, 2020.
 
 \bibitem[王晓杰\ 等(2020)王晓杰 and 王欢欢]{.2020h}
 王晓杰, 王欢欢.
@@ -55,7 +57,7 @@
 郭煜, 刘文胜.
 \newblock
   高校本科毕业设计(论文)的现状分析和改进措施\allowbreak[J].
-\newblock 科教导刊, 2019\penalty0 (31):\penalty0 42-43.
+\newblock 科教导刊 (上旬刊), 2019\penalty0 (31):\penalty0 42-43.
 
 \bibitem[Setiyani et~al.(2020)Setiyani, Syamsudin, Gintings, and
   Arifin]{Setiyani.2020}
@@ -63,7 +65,7 @@ SETIYANI~L, SYAMSUDIN~A, GINTINGS~A, et~al.
 \newblock The analysis of functional needs on undergraduate thesis information
   system management\allowbreak[J].
 \newblock International Journal of Advances in Data and Information Systems,
-  2020, 1\penalty0 (2).
+  2020, 1\penalty0 (2):\penalty0 50-59.
 
 \bibitem[王悦\ 等(2019)王悦, 张雷, and 钱英军]{.2019f}
 王悦, 张雷, 钱英军.
@@ -89,10 +91,8 @@ DHINGRA~N, ABDELMOGHITH~E~M, MOUFTAH~H.
 SILVA~T~M, SEREY~D, FIGUEIREDO~J, et~al.
 \newblock Automated design tests to check hibernate design
   recommendations\allowbreak[C]//\allowbreak
-SBES 2019: Proceedings of the XXXIII Brazilian Symposium on Software
-  Engineering.
-\newblock New York, NY, USA: Association for Computing Machinery, 2019:
-  94–103.
+Proceedings of the XXXIII Brazilian Symposium on Software Engineering.
+\newblock [S.l.: s.n.], 2019: 94-103.
 
 \bibitem[Walls.\ 等(2016)Walls. and Zhang]{.SpringInAction}
 WALLS.~C, ZHANG.
@@ -107,6 +107,6 @@ WALLS.~C, ZHANG.
 \bibitem[Tsui\ 等(2018)Tsui, Karam, and Bernal]{.software}
 TSUI~F, KARAM~O, BERNAL~B.
 \newblock 软件工程导论\allowbreak[M].
-\newblock [出版地不详]: 机械工业出版社, 2018.
+\newblock 北京: 机械工业出版社, 2018.
 
 \end{thebibliography}
