@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-06 21:38:54
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-05 19:38:32
+ * @LastEditTime: 2021-06-06 17:20:01
  */
 package com.swithun.backend.service;
 
@@ -131,9 +131,10 @@ public class AdminService {
     // 编辑学生
     public void editStudent(Map<String, Object> mp) {
 
-        Integer id = (Integer) mp.get("id");
-        String name = (String) mp.get("name");
-        String password = (String) mp.get("password");
+        Integer id = Integer.valueOf(String.valueOf(mp.get("id")));
+        String name = String.valueOf(mp.get("name"));
+        String password = String.valueOf(mp.get("password"));
+        String nickname = String.valueOf(mp.get("nickname"));
 
         StudentEntity student = studentR.findById(id).get();
 
@@ -143,16 +144,21 @@ public class AdminService {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             student.setPassword(encoder.encode(password));
         }
+
+        student.setNickname(nickname);
+
         studentR.save(student);
     }
 
+    // 编辑教师
     public void editTeacher(Map<String, Object> mp) {
 
         logger.info("教师修改信息");
 
-        Integer id = (Integer) mp.get("id");
-        String name = (String) mp.get("name");
-        String password = (String) mp.get("password");
+        Integer id = Integer.valueOf(String.valueOf(mp.get("id")));
+        String name = String.valueOf(mp.get("name"));
+        String password = String.valueOf(mp.get("password"));
+        String nickname = String.valueOf(mp.get("nickname"));
 
         logger.info("id " + id + "   name " + name + "   password " + password);
 
@@ -164,6 +170,9 @@ public class AdminService {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             teacher.setPassword(encoder.encode(password));
         }
+
+        teacher.setNickname(nickname);
+
         teacherR.save(teacher);
     }
 

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  6 JUN 2021 11:41
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.5.12)  6 JUN 2021 15:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1428,7 +1428,7 @@ Package fontspec Info: Font family '华文细黑(0)' created for font '华文细
 (fontspec)             <->"华文细黑/OT:script=hani;language=dflt;embolden=2.17;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
-LaTeX Font Info:    Calculating math sizes for size <15> on input line 49.
+LaTeX Font Info:    Calculating math sizes for size <15> on input line 50.
 
 Package fontspec Info: Could not resolve font "华文行楷/I" (it probably doesn't
 (fontspec)             exist).
@@ -1901,22 +1901,22 @@ Overfull \hbox (12.0pt too wide) detected at line 73
 
 
 Overfull \hbox (12.0pt too wide) detected at line 74
- \TU/TimesNewRoman(0)/m/n/12 58
+ \TU/TimesNewRoman(0)/m/n/12 57
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 75
- \TU/TimesNewRoman(0)/m/n/12 64
+ \TU/TimesNewRoman(0)/m/n/12 62
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 76
- \TU/TimesNewRoman(0)/m/n/12 66
+ \TU/TimesNewRoman(0)/m/n/12 64
  []
 
 
 Overfull \hbox (12.0pt too wide) detected at line 77
- \TU/TimesNewRoman(0)/m/n/12 67
+ \TU/TimesNewRoman(0)/m/n/12 65
  []
 
 )
@@ -2111,11 +2111,16 @@ File: out/figure/测试/login-test.png Graphic file (type bmp)
 ]
 File: out/figure/测试/upload-test.png Graphic file (type bmp)
 <out/figure/测试/upload-test.png>
- [55]
+
+Overfull \hbox (22.57372pt too wide) in paragraph at lines 71--72
+ [][] 
+ []
+
 File: out/figure/测试/download-student-test.png Graphic file (type bmp)
 <out/figure/测试/download-student-test.png>
 File: out/figure/测试/download-teacher-test.png Graphic file (type bmp)
 <out/figure/测试/download-teacher-test.png>
+[55]
 File: out/figure/测试/file-refresh-test.png Graphic file (type bmp)
 <out/figure/测试/file-refresh-test.png>
 File: out/figure/测试/comment-add.png Graphic file (type bmp)
@@ -2126,19 +2131,24 @@ File: out/figure/测试/score-student.png Graphic file (type bmp)
 <out/figure/测试/score-student.png>
 File: out/figure/测试/score-teacher.png Graphic file (type bmp)
 <out/figure/测试/score-teacher.png>
+ [56]
 File: out/figure/测试/statistic-score-student-test.png Graphic file (type bmp)
 <out/figure/测试/statistic-score-student-test.png>
 File: out/figure/测试/statistic-teacher-task-test.png Graphic file (type bmp)
 <out/figure/测试/statistic-teacher-task-test.png>
- [56]
 File: out/figure/测试/manage-students.png Graphic file (type bmp)
 <out/figure/测试/manage-students.png>
+
+Overfull \hbox (7.21713pt too wide) in paragraph at lines 155--156
+ [][] 
+ []
+
 File: out/figure/测试/manage-edit-student-test.png Graphic file (type bmp)
 <out/figure/测试/manage-edit-student-test.png>
-) [57] [58] [59] [60] [61] [62] [63]
+) [57] [58] [59] [60] [61]
 \openout2 = `body/conclusion.aux'.
 
- (./body/conclusion.tex) [64
+ (./body/conclusion.tex) [62
 
 
 
@@ -2170,21 +2180,21 @@ Package fontspec Info: Font family '宋体(0)' created for font '宋体' with op
 (fontspec)             <->"宋体/OT:script=latn;language=dflt;mapping=tex-text;"
 (fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
 
- (./maintest.bbl)) [65
+ (./maintest.bbl)) [63
 
 
 
 ]
 \openout2 = `body/modify.aux'.
 
- (./body/modify.tex) [66
+ (./body/modify.tex) [64
 
 
 
 ]
 \openout2 = `body/thank.aux'.
 
- (./body/thank.tex) [67
+ (./body/thank.tex) [65
 
 
 
@@ -2204,10 +2214,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 47.
 Here is how much of TeX's memory you used:
  40472 strings out of 479819
  805670 string characters out of 5895846
- 1307873 words of memory out of 5000000
+ 1308299 words of memory out of 5000000
  56631 multiletter control sequences out of 15000+600000
  549726 words of font info for 199 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  63i,13n,92p,2315b,2673s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on maintest.pdf (75 pages).
+Output written on maintest.pdf (73 pages).

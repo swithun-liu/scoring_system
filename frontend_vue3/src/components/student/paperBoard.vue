@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-27 10:35:15
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-05 21:59:03
+ * @LastEditTime: 2021-06-06 17:27:03
 -->
 
 <template>
@@ -160,10 +160,10 @@
         <web-viewer
           ref="myWebViewer"
           :myBlob="myBlob"
+          :file="chosedFile"
           :fileId="chosedFileId"
           :refreshURL="refreshFileURL"
           :key="chosedFileId"
-          :file="chosedFile"
         />
       </div>
     </el-dialog>
@@ -184,6 +184,7 @@ export default {
   components: { comment, WebViewer },
   setup(props) {
     const store = useStore()
+    const chosedFile = ref({ type: Object })
     const chosedFileId = ref(0)
     const chosedCommentId = ref(-1)
     const myWebViewer = ref('myWebViewer')
@@ -198,7 +199,6 @@ export default {
     const replayWhichComment = ref('新建评论')
     const commentWaitForPush = ref('')
     const refreshFileURL = ref('student/studentRefreshFile')
-    const chosedFile = ref({ type: Object })
 
     // 获取文件列表
     const getFiles = () => {
@@ -273,7 +273,6 @@ export default {
         .then((res) => {
           myBlob.value = res.data
           console.log('获取到的pdf blob为', myBlob.value)
-          myWebViewer.value.renderFileItem()
         })
     }
 

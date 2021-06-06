@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-29 14:22:45
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-05 21:53:11
+ * @LastEditTime: 2021-06-06 17:35:29
 -->
 <template>
   <div id="webviewer" ref="viewer"></div>
@@ -33,6 +33,7 @@ export default defineComponent({
     const renderFile = () => {
       const path = `${process.env.BASE_URL}webviewer`
       WebViewer({ path: path }, viewer.value).then((instance) => {
+        console.log('传入的文件为', props.file)
         instance.loadDocument(props.myBlob, { filename: props.file.name })
 
         var annotManager = instance.docViewer.getAnnotationManager()
@@ -79,19 +80,6 @@ export default defineComponent({
                     .then((res) => {
                       console.log('文件刷新结果', res)
                     })
-
-                  // // FormData is used to send blob data through fetch
-                  // var formData = new FormData()
-                  // formData.append('blob', blob)
-                  // console.log(blob);
-                  // fetch(`/server/annotationHandler.js?filename=${filename}`, {
-                  //   method: 'POST',
-                  //   body: formData,
-                  // }).then(function (res) {
-                  //   if (res.status === 200) {
-                  //     resolve()
-                  //   }
-                  // })
                 })
             })
           })

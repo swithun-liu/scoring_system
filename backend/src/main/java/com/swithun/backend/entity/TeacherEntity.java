@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-04 21:16:50
+ * @LastEditTime: 2021-06-06 17:23:04
  */
 package com.swithun.backend.entity;
 
@@ -34,7 +34,7 @@ public class TeacherEntity {
     private String name;
     @JsonIgnore
     private String password;
-    private String nickName;
+    private String nickname;
     private Collection<StudentEntity> studentsById;
     @JsonIgnore
     private Collection<CommentForFileEntity> teacherCommentForFilesById;
@@ -72,13 +72,13 @@ public class TeacherEntity {
     }
 
     @Basic
-    @Column(name = "nick_name")
-    public String getNickName() {
-        return nickName;
+    @Column(name = "nickname")
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     @Override
@@ -89,12 +89,12 @@ public class TeacherEntity {
             return false;
         TeacherEntity that = (TeacherEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(password, that.password)
-                && Objects.equals(nickName, that.nickName);
+                && Objects.equals(nickname, that.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, password, nickName);
+        return Objects.hash(id, password, nickname);
     }
 
     @OneToMany(mappedBy = "teacherByTeacherId")

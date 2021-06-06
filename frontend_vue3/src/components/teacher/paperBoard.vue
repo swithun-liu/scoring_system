@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-04 19:21:03
+ * @LastEditTime: 2021-06-06 17:42:13
 -->
 
 <template>
@@ -28,7 +28,7 @@
           icon="el-icon-view"
           size="small"
           class="el-btn-2-glass-btn table-btn"
-          @click="openDialogPreview(scope.row.id)"
+          @click="openDialogPreview(scope.row)"
         ></el-button>
         <el-button size="small" icon="el-icon-refresh" class="el-btn-2-glass-btn table-btn"></el-button>
         <el-button
@@ -106,7 +106,13 @@
       custom-class="dialogPreivew"
     >
       <div style="height: 100%; width: 100%;">
-        <web-viewer ref="dMyWebViewer" :myBlob="dMyBlob" :key="dChosedFileId" />
+        <web-viewer
+          ref="dMyWebViewer"
+          :myBlob="dMyBlob"
+          :file="dChosedFile"
+          :fileId="dChosedFileId"
+          :key="dChosedFileId"
+        />
       </div>
     </el-dialog>
   </teleport>
@@ -133,6 +139,7 @@ export default {
     const dDialogVisibleComment = ref(false)
     const dDialogVisiblePreview = ref(false)
     const dChosedFileId = ref(0)
+    const dChosedFile = ref({ type: Object })
     const dChosedCommentId = ref(-1)
     const dReplayWhichComment = ref('新建评论')
     const dFileScore = ref(0)
@@ -179,10 +186,11 @@ export default {
       flashComments()
     }
     // 打开预览对话框
-    const openDialogPreview = (id) => {
-      console.log('企图预览文件' + id)
-      dChosedFileId.value = id
-      handlePreview(id)
+    const openDialogPreview = (file) => {
+      console.log('企图预览文件', file)
+      dChosedFileId.value = file.id
+      dChosedFile.value = file
+      handlePreview(file.id)
       dDialogVisiblePreview.value = true
     }
     const handlePreview = (id) => {
@@ -193,7 +201,6 @@ export default {
         .then((res) => {
           dMyBlob.value = res.data
           console.log('获取到的pdf blob为', dMyBlob.value)
-          dMyWebViewer.value.renderFileItem()
         })
     }
     // 处理下载文件
@@ -284,6 +291,7 @@ export default {
       dDialogVisibleComment,
       dDialogVisiblePreview,
       dChosedFileId,
+      dChosedFile,
       dChosedCommentId,
       dReplayWhichComment,
       dFileScore,

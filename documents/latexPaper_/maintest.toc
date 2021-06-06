@@ -71,8 +71,8 @@
 \contentsline {chapter}{\numberline {6}测试}{54}{chapter.6}%
 \contentsline {section}{\numberline {6.1}系统测试环境}{54}{section.6.1}%
 \contentsline {section}{\numberline {6.2}测试用例与测试过程}{54}{section.6.2}%
-\contentsline {section}{\numberline {6.3}本章小结}{58}{section.6.3}%
-\contentsline {chapter}{设计总结}{64}{chapter*.60}%
-\contentsline {chapter}{修改记录}{66}{chapter*.62}%
-\contentsline {chapter}{致　　谢}{67}{chapter*.63}%
+\contentsline {section}{\numberline {6.3}本章小结}{57}{section.6.3}%
+\contentsline {chapter}{设计总结}{62}{chapter*.60}%
+\contentsline {chapter}{修改记录}{64}{chapter*.62}%
+\contentsline {chapter}{致　　谢}{65}{chapter*.63}%
 \contentsfinish 

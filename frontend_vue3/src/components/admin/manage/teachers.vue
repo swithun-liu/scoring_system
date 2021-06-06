@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-09 12:26:21
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-28 10:41:29
+ * @LastEditTime: 2021-06-06 17:18:01
 -->
 <template>
   <!-- 学生列表 -->
@@ -30,7 +30,7 @@
         <el-button
           class="el-btn-2-glass-btn"
           icon="el-icon-edit"
-          @click="openEditDialog(scope.row.id, scope.row.name)"
+          @click="openEditDialog(scope.row.id, scope.row.name, scope.row.nickname)"
         ></el-button>
       </template>
     </el-table-column>
@@ -46,14 +46,18 @@
         <el-form-item label="编号" prop="name">
           <el-input v-model="editForm.name"></el-input>
         </el-form-item>
-        <!-- <el-form-item label="昵称" prop="nickName">
-          <el-input v-model="editForm.nickName"></el-input>
-        </el-form-item> -->
+        <el-form-item label="昵称" prop="nickname">
+          <el-input v-model="editForm.nickname"></el-input>
+        </el-form-item>
         <el-form-item label="新密码" prop="password">
           <el-input v-model="editForm.password" placeholder="不更改"></el-input>
         </el-form-item>
-        <el-from-item>
-          <el-button @click="handleEdit()">修改</el-button>
+        <el-from-item style="display: flex; justify-content: flex-end;">
+          <el-button
+            @click="handleEdit()"
+            class="el-btn-2-glass-btn"
+            style="margin: 2px !important;"
+          >修改</el-button>
         </el-from-item>
       </el-form>
     </el-dialog>
@@ -72,7 +76,7 @@ export default {
     const editForm = reactive({
       id: 100,
       name: 'student',
-      nickName: 'nickNamehahah',
+      nickname: 'nickNamehahah',
       password: '',
     })
 
@@ -119,12 +123,12 @@ export default {
       })
     }
 
-    const openEditDialog = (id, name) => {
+    const openEditDialog = (id, name, nickname) => {
       console.log('编辑学生 ' + id)
       editDialogVisible.value = true
       editForm.id = id
       editForm.name = name
-      // editForm.nickName = nickName
+      editForm.nickname = nickname
     }
 
     const handleEdit = () => {
@@ -150,7 +154,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+@import url('../../../assets/css/el-selector.css');
 .demo-table-expand {
   font-size: 0;
 }

@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-03-06 17:40:49
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-05 21:27:59
+ * @LastEditTime: 2021-06-06 17:12:05
  */
 package com.swithun.backend.controller;
 
@@ -119,6 +119,7 @@ public class StudentController {
         return "更新成功";
     }
 
+    // 删除文件
     @DeleteMapping(value = "/student/deleteFile/{id}")
     public String deleteFile(@PathVariable("id") Integer id, Principal principal) {
         logger.info("请求删除文件 " + id);

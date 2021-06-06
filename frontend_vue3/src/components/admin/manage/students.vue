@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-08 14:32:00
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-05 19:48:08
+ * @LastEditTime: 2021-06-06 17:10:02
 -->
 <template>
   <!-- 学生列表 -->
@@ -52,32 +52,38 @@
         <el-button
           class="el-btn-2-glass-btn"
           icon="el-icon-edit"
-          @click="openEditDialog(scope.row.id, scope.row.name)"
+          @click="openEditDialog(scope.row.id, scope.row.name, scope.row.nickname)"
         ></el-button>
       </template>
     </el-table-column>
   </el-table>
 
   <!-- 编辑学生信息 Dialog -->
-  <el-dialog title="编辑学生信息" v-model="editDialogVisible" :before-close="handleClose" width="50%">
-    <el-form :model="editForm" label-width="100px">
-      <el-form-item label="学生id" prop="id">
-        <el-input v-model="editForm.id"></el-input>
-      </el-form-item>
-      <el-form-item label="编号" prop="name">
-        <el-input v-model="editForm.name"></el-input>
-      </el-form-item>
-      <el-form-item label="昵称" prop="nickName">
-        <el-input v-model="editForm.nickName"></el-input>
-      </el-form-item>
-      <el-form-item label="新密码" prop="password">
-        <el-input v-model="editForm.password" placeholder="不更改"></el-input>
-      </el-form-item>
-      <el-from-item>
-        <el-button @click="handleEdit()" class="el-btn-2-glass-btn">修改</el-button>
-      </el-from-item>
-    </el-form>
-  </el-dialog>
+  <teleport to="body">
+    <el-dialog title="编辑学生信息" v-model="editDialogVisible" :before-close="handleClose" width="50% !important">
+      <el-form :model="editForm" label-width="100px">
+        <el-form-item label="学生id" prop="id">
+          <el-input v-model="editForm.id"></el-input>
+        </el-form-item>
+        <el-form-item label="编号" prop="name">
+          <el-input v-model="editForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="昵称" prop="nickname">
+          <el-input v-model="editForm.nickname"></el-input>
+        </el-form-item>
+        <el-form-item label="新密码" prop="password">
+          <el-input v-model="editForm.password" placeholder="不更改"></el-input>
+        </el-form-item>
+        <el-from-item style="display: flex; justify-content: flex-end;">
+          <el-button
+            @click="handleEdit()"
+            class="el-btn-2-glass-btn"
+            style="margin: 2px !important;"
+          >修改</el-button>
+        </el-from-item>
+      </el-form>
+    </el-dialog>
+  </teleport>
 </template>
 
 <script>
@@ -93,7 +99,7 @@ export default {
     const editForm = reactive({
       id: 100,
       name: 'student',
-      nickName: 'nickNamehahah',
+      nickname: 'nickNamehahah',
       password: '',
     })
 
@@ -146,14 +152,16 @@ export default {
       })
     }
 
-    const openEditDialog = (id, name) => {
+    // 打开编辑学生信息对话框
+    const openEditDialog = (id, name, nickname) => {
       console.log('编辑学生 ' + id)
       editDialogVisible.value = true
       editForm.id = id
       editForm.name = name
-      // editForm.nickName = nickName
+      editForm.nickname = nickname
     }
 
+    // 确认修改
     const handleEdit = () => {
       store.dispatch('admin/editStudent', editForm).then((res) => {
         console.log(res)
