@@ -1,0 +1,12 @@
+\contentsline {chapter}{摘　　要}{I}{Doc-Start}%
+\contentsline {chapter}{绪　　论}{1}{chapter*.2}%
+\contentsline {chapter}{\numberline {1}相关工作}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}基于多直方图的人脸识别}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}图像直方图的理论定义}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}基于多重直方图距离的人脸识别}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}人脸识别技术}{5}{section.2.3}%
+\contentsline {chapter}{\numberline {3}稳定性与gamma方法}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}伽马强度转换}{7}{section.3.1}%
+\contentsline {section}{\numberline {3.2}环境光照改变对该方法的影响评价}{7}{section.3.2}%
+\contentsline {chapter}{\numberline {4}基于FPGA加速算法}{9}{chapter.4}%
+\contentsfinish 

@@ -1,0 +1,39 @@
+\documentclass{book}
+% 字体配置文件
+\input{setup/fonts}
+
+% 宏包配置文件
+\input{setup/packages}
+
+% 格式文件
+\input{setup/format}
+\usepackage{indentfirst}
+\bibliographystyle{unsrt}
+\setlength{\bibhang}{2em}
+\usepackage{etoolbox}
+
+\makeatletter
+\special{papersize=\the\paperwidth,\the\paperheight}
+\providecommand{\tabularnewline}{\\}
+\newcommand\mycite[1]{% with Numbers 
+\citeauthor{#1}~(\citeyear{#1})\@
+}
+\renewcommand\@biblabel[1]{\hspace*{\labelwidth}}
+\apptocmd{\NAT@thebibliography}{\setlength\itemindent{-25pt}}{}{}
+\makeatother
+\begin{document}
+\frontmatter
+
+\mainmatter
+\defaultfont
+大连理工大学\cite{master1}
+
+大连理工大学\cite{master2}
+
+大连理工大学\cite{master3}
+
+\backmatter
+\defaultfont
+\bibliography{reference}
+\end{document}
+

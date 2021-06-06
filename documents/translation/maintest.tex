@@ -1,0 +1,23 @@
+\documentclass[a4paper,12pt,openany,oneside]{book}
+
+% 字体配置文件
+\input{setup/fonts}
+
+% 宏包配置文件
+\input{setup/packages}
+
+% 格式文件
+\input{setup/format}
+
+\begin{document}
+\frontmatter
+\pagenumbering{Roman}
+\input{preface/cover}
+\include{body/chap00}
+
+
+\mainmatter
+\makeabstract
+\input{body/chap01}
+
+\end{document}
