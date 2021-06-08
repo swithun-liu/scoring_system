@@ -107,16 +107,16 @@ public class StudentController {
         return "添加成功";
     }
 
-    // 刷新文件
+    // 更新文件
     @PostMapping(value = "/student/refreshFile")
     public String refreshFile(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id, @RequestParam("name") String name) {
-        logger.info("使用 " + file.getOriginalFilename() + " 更新 " + id);
+        logger.info("使用 " + name + " 更新 " + id);
         try {
             studentS.refreshFile(file, id, name);
         } catch (IOException e) {
-            return "更新失败";
+            return "error";
         }
-        return "更新成功";
+        return "ok";
     }
 
     // 删除文件

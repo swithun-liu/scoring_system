@@ -6,8 +6,7 @@ html, body, #app {
 }
 
 body {
-  /* background-image: linear-gradient(135deg,rgb(199, 255, 238) 20%, #75c3ff 40%,  rgb(170, 190, 232) 60%, #9face6 100%) !important; */
-  background-image: url(../figure/background.svg) !important;
+  /* background-image: url(../figure/background.svg) !important; */
 }
 
 #app, .el-menu, .el-header, .el-footer, .el-container, .container0, .container1, .el-menu-item-group {
@@ -19,7 +18,7 @@ body {
 }
 
 .el-main {
-  background: rgba(255, 255, 255, 0.426);
+  background: rgba(255, 255, 255, 0.22);
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
   backdrop-filter: blur( 11.0px);
   -webkit-backdrop-filter: blur( 11.0px);

@@ -11,14 +11,17 @@
 import axios from 'axios';
 
 const actions = {
+  // get file list -> for upload page
   async studentGetAllMyFile() {
     const response = await axios.get('http://localhost:8089/teacher/studentGetAllMyFile');
     return response;
   },
+  // get file list -> for my papers page
   async studentGetAllMyFileForMyFilePage() {
     const response = await axios.get('http://localhost:8089/student/studentGetMyPaperForMyPaper');
     return response;
   },
+  // get all comments of this file
   async studentGetAllComment({
     commit
   }, payload) {
@@ -27,6 +30,7 @@ const actions = {
     });
     return response;
   },
+  // download file by file id
   async studentDownloadThisFile({
     commit
   }, payload) {
@@ -36,18 +40,21 @@ const actions = {
     });
     return response;
   },
+  // add comment for a file
   async studentAddCommentForThisFile({
     commit
   }, payload) {
     const reponse = await axios.post('http://localhost:8089/student/addCommentForThisFile', payload)
     return reponse
   },
+  // edit file info
   async studentEditFileInfo({
     commit
   }, payload) {
     const response = await axios.post('http://localhost:8089/student/addAbstract', payload)
     return response
   },
+  // update file
   async studentRefreshFile({
     commit,
   }, payload) {
@@ -58,6 +65,7 @@ const actions = {
     const response = await axios.post('http://localhost:8089/student/refreshFile', payload.param, payload.config)
     return response
   },
+  // delete a file
   async deleteFile({
     commit
   }, payload) {

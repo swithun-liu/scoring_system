@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-17 14:26:03
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-06 17:42:13
+ * @LastEditTime: 2021-06-07 15:48:33
 -->
 
 <template>
@@ -30,7 +30,6 @@
           class="el-btn-2-glass-btn table-btn"
           @click="openDialogPreview(scope.row)"
         ></el-button>
-        <el-button size="small" icon="el-icon-refresh" class="el-btn-2-glass-btn table-btn"></el-button>
         <el-button
           size="small"
           icon="el-icon-s-comment"
@@ -111,15 +110,13 @@
           :myBlob="dMyBlob"
           :file="dChosedFile"
           :fileId="dChosedFileId"
+          :refreshURL="refreshFileURL"
           :key="dChosedFileId"
         />
       </div>
     </el-dialog>
   </teleport>
   <!-- 文件预览 Dialog end -->
-  <button class="custom-btn btn-13">
-    <span>Read More</span>
-  </button>
 </template>
 
 <script>
@@ -149,6 +146,7 @@ export default {
     const dLoading = ref(true)
     const dMyBlob = ref({ type: Blob })
     const dMyWebViewer = ref('myWebViewer')
+    const refreshFileURL = ref('teacher/updateFile')
 
     const store = useStore()
 
@@ -301,6 +299,7 @@ export default {
       dLoading,
       dMyBlob,
       dMyWebViewer,
+      refreshFileURL,
       flashAllFileOfMyStudents,
       flashComments,
       openScoreDialog,

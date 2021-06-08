@@ -9,11 +9,10 @@
       default-active="profile"
       :router="true"
     >
-      <!-- <el-button @click="isCollapse = !isCollapse" class="glass-btn-important el-icon-caret-right"></el-button> -->
       <el-submenu index="1">
         <template #title>
           <i class="el-icon-more"></i>
-          <span>  论文管理</span>
+          <span>论文管理</span>
         </template>
         <el-menu-item-group>
           <el-menu-item index="profile">

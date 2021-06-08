@@ -5,10 +5,11 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:48:58
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 17:26:38
+ * @LastEditTime: 2021-06-07 15:14:24
  */
 package com.swithun.backend.service;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class TeacherService {
@@ -122,6 +124,14 @@ public class TeacherService {
         }
         CommentForFileEntity comment = new CommentForFileEntity(str_comment, file, teacher, parent);
         commentR.save(comment);
+    }
+
+    public void updateFile(MultipartFile file, Integer id, String name) throws IOException {
+        StudentFileEntity f_file = fileR.findById(id).get();
+        f_file.setName(name);
+        f_file.setType(file.getContentType());
+        f_file.setData(file.getBytes());
+        fileR.save(f_file);
     }
 
 }

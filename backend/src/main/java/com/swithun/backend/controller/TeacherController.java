@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-04-23 08:44:19
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-05-26 17:05:47
+ * @LastEditTime: 2021-06-07 15:36:03
  */
 package com.swithun.backend.controller;
 
@@ -22,10 +22,12 @@ import com.swithun.backend.entity.CommentForFileEntity;
 import com.swithun.backend.service.FileService;
 import com.swithun.backend.service.TeacherService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +42,8 @@ public class TeacherController {
 
     @Autowired
     private FileService fileservice;
+
+    Logger logger = LoggerFactory.getLogger(TeacherController.class);
 
     // 获取论文列表
     @GetMapping(value = "/teacher/getAllFileOfstudentsOfMine")
@@ -72,6 +76,20 @@ public class TeacherController {
     public String addComment(@RequestBody Map<String, Object> mp, Principal principal) {
         teacherS.addComment(mp, principal);
         return "评论成功";
+    }
+
+    // 更新文件
+    @PostMapping(value = "/teacher/updateFile")
+    public String postMethodName(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id,
+            @RequestParam("name") String name) {
+        logger.info("使用 " + name + " 更新 " + id);
+        try {
+            teacherS.updateFile(file, id, name);
+            return "ok";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
 
 }

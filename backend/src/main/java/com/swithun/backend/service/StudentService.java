@@ -99,7 +99,6 @@ public class StudentService {
         StudentFileEntity original_file = fileR.findById(id).get();
         original_file.setName(name);
         original_file.setType(file.getContentType());
-        logger.info(file.getContentType());
         original_file.setData(file.getBytes());
         fileR.save(original_file);
     }

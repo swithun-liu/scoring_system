@@ -5,7 +5,7 @@
  * @Author: Swithun Liu
  * @Date: 2021-05-29 14:22:45
  * @LastEditors: Swithun Liu
- * @LastEditTime: 2021-06-06 17:35:29
+ * @LastEditTime: 2021-06-07 15:28:23
 -->
 <template>
   <div id="webviewer" ref="viewer"></div>
@@ -15,6 +15,7 @@
 import { ref, onMounted, defineComponent, onUnmounted } from 'vue'
 import WebViewer from '@pdftron/webviewer'
 import { useStore } from 'vuex'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'WebViewer',
@@ -73,12 +74,23 @@ export default defineComponent({
                     headers: { 'Content-Type': 'multipart/form-data' },
                   }
                   store
-                    .dispatch('student/studentRefreshFile', {
+                    .dispatch(props.refreshURL, {
                       param: param,
                       config: config,
                     })
                     .then((res) => {
                       console.log('文件刷新结果', res)
+                      if (res.data.data === 'ok') {
+                        ElMessage.success({
+                          message: '修改成功',
+                          type: 'success',
+                        })
+                      } else {
+                        ElMessage.success({
+                          message: '修改失败',
+                          type: 'error',
+                        })
+                      }
                     })
                 })
             })
