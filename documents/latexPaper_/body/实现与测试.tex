@@ -33,41 +33,73 @@
   \item 根据逻辑模型为实体类添加注解（实现级联关系）
 \end{enumerate}
 
-\noindent 关键问题如下：
+关键问题如下：
 
-\noindent 1.  多对一，一对多关系实现
-
-\begin{itemize}
-  \item 方法一：单向 @OneToMany 绑定
-  \item 方法二：带有 @JoinColumn 的单向 @OneToMany 绑定
-  \item 方法三：双向 @OneToMany , @ManyToOne绑定
-  \item 方法四：不带有 ManyToOne 的双向绑定
-\end{itemize}
-
-本系统采用第三种方式：在一方类中的多方list加上@OneToMany注解，在多方类中的一方加上@ManyToOne注解。
-
-\noindent 2.  级联更新
-
-\begin{itemize}
-  \item 在“一方”（A）中  @OneToMany(cascade = CascadeType.ALL)
-  \item “深拷贝”A中的  BCopy = List<B>
-  \item 清空A中的  List<B>
-  \item  BRepository.deleteAll(BCopy)
-  \item  ARepository.save(A)
-\end{itemize}
-
-\noindent 3.  级联查询
-
-\begin{itemize}
-  \item Dao层：继承JpaSpecificationExecutor，以及JpaSpecificationExecutor（配合Specification实现复杂查询）实现ARepository。
-  \item Service层使用：需要将一个Specification传入aRepository.findAll方法中并实现Specification中的toPredicate方法用于生成查询语句中的where字段，即判断逻辑。
-        涉及的重要的类：
+\begin{enumerate}
+  \item 多对一，一对多关系实现
+        \begin{enumerate}
+          \item 方法一：单向 @OneToMany 绑定
+          \item 方法二：带有 @JoinColumn 的单向 @OneToMany 绑定
+          \item 方法三：双向 @OneToMany , @ManyToOne绑定
+          \item 方法四：不带有 ManyToOne 的双向绑定
+        \end{enumerate}
+        本系统采用第三种方式：在一方类中的多方list加上@OneToMany注解，在多方类中的一方加上@ManyToOne注解。
+  \item   级联更新
         \begin{itemize}
-          \item  javax.persistence.criteria.Path ：通过实体类属性名获取字段值
-          \item  javax.persistence.criteria.Join ：通过实体类属性名级联
-          \item  javax.persistence.criteria.CriteriaBuilder ：拼接生成过滤
+          \item 在“一方”（A）中  @OneToMany(cascade = CascadeType.ALL)
+          \item “深拷贝”A中的  BCopy = List<B>
+          \item 清空A中的  List<B>
+          \item  BRepository.deleteAll(BCopy)
+          \item  ARepository.save(A)
         \end{itemize}
-\end{itemize}
+  \item   级联查询
+        \begin{itemize}
+          \item Dao层：继承JpaSpecificationExecutor，以及JpaSpecificationExecutor（配合Specification实现复杂查询）实现ARepository。
+          \item Service层使用：需要将一个Specification传入aRepository.findAll方法中并实现Specification中的toPredicate方法用于生成查询语句中的where字段，即判断逻辑。
+                涉及的重要的类：
+                \begin{itemize}
+                  \item  javax.persistence.criteria.Path ：通过实体类属性名获取字段值
+                  \item  javax.persistence.criteria.Join ：通过实体类属性名级联
+                  \item  javax.persistence.criteria.CriteriaBuilder ：拼接生成过滤
+                \end{itemize}
+        \end{itemize}
+\end{enumerate}
+
+% \noindent 关键问题如下：
+
+% \noindent 1.  多对一，一对多关系实现
+
+% \begin{itemize}
+%   \item 方法一：单向 @OneToMany 绑定
+%   \item 方法二：带有 @JoinColumn 的单向 @OneToMany 绑定
+%   \item 方法三：双向 @OneToMany , @ManyToOne绑定
+%   \item 方法四：不带有 ManyToOne 的双向绑定
+% \end{itemize}
+
+% 本系统采用第三种方式：在一方类中的多方list加上@OneToMany注解，在多方类中的一方加上@ManyToOne注解。
+
+% \noindent 2.  级联更新
+
+% \begin{itemize}
+%   \item 在“一方”（A）中  @OneToMany(cascade = CascadeType.ALL)
+%   \item “深拷贝”A中的  BCopy = List<B>
+%   \item 清空A中的  List<B>
+%   \item  BRepository.deleteAll(BCopy)
+%   \item  ARepository.save(A)
+% \end{itemize}
+
+% \noindent 3.  级联查询
+
+% \begin{itemize}
+%   \item Dao层：继承JpaSpecificationExecutor，以及JpaSpecificationExecutor（配合Specification实现复杂查询）实现ARepository。
+%   \item Service层使用：需要将一个Specification传入aRepository.findAll方法中并实现Specification中的toPredicate方法用于生成查询语句中的where字段，即判断逻辑。
+%         涉及的重要的类：
+%         \begin{itemize}
+%           \item  javax.persistence.criteria.Path ：通过实体类属性名获取字段值
+%           \item  javax.persistence.criteria.Join ：通过实体类属性名级联
+%           \item  javax.persistence.criteria.CriteriaBuilder ：拼接生成过滤
+%         \end{itemize}
+% \end{itemize}
 
 \section{统一返回对象}
 
@@ -313,6 +345,8 @@ Spring Security 配置CORS：
 这里需要注意的一点是，由于许多请求不是简单请求，会触发上文提到的 CORS 问题，对于 CORS preflight 请求的响应中，系统后端会配置允许 Authorization 字段，但是如果访问其他网站，该字段可能会不被允许，造成访问失败，所以可以在 interceptors 中根据访问的 url 选择是否需要添加 token（其中 url 可以从 config 中获取）。
 
 \section{Jackson序列化时无限递归问题}
+
+当实现级联关系时选择双向绑定会造成 Jackson 序列化时无限递归问题。
 
 例子（省略其他相关性不大的代码）：
 
