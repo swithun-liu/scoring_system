@@ -1,0 +1,18 @@
+@startuml
+actor user as "用户"
+participant f as "前端"
+participant c as "Contorller"
+participant s as "Service"
+participant r as "Repsotory"
+participant e as "Entity"
+user --> f: 选择文件
+f --> c: request
+c --> s: download
+s --> r: findById
+r --> e: new
+e --> r: 文件实体对象 file
+r --> s: 文件实体对象 file
+s --> c: file.data
+c --> f: response
+f --> user: data[]
+@enduml

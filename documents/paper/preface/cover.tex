@@ -1,0 +1,54 @@
+% !TEX TS-program = XeLaTeX
+% !TEX encoding = UTF-8 Unicode
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% 
+%	大连理工大学博士论文 XeLaTeX 模版 —— 格式文件 format.tex
+%	版本：0.1beta1
+%	最后更新：2018.5.23
+%	修改者：王天宇 (E-mail: heavenlykingwty@gmail.com)
+%	编译环境：macOS MacTex XeLatex (Texpad)
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+\cdegree{\makebox[13.25cm][s]{大连理工大学本科毕业设计（论文）}}
+\ctitle{论文评审评分系统}
+\etitle{Dissertation review and scoring system}
+
+% 根据需要添加字符间距
+\department{\makebox[6.1cm][c]{软件学院}}
+\csubject{\makebox[6.1cm][c]{软件工程}}
+\cauthor{\makebox[6.1cm][c]{刘树东}}
+\cauthorno{\makebox[6.1cm][c]{201792409}}
+\csupervisor{\makebox[6.1cm][c]{李明楚}}
+\teacher{\makebox[6.1cm][c]{郭成}}
+\cdate{\makebox[6.1cm][c]{2021~年~6~月~1~日}}
+
+% 这里默认使用最后编译的时间，也可自行给定日期，注意汉字和数字之间的空格。
+%\cdate{{\quad\;}\the\year~年~\the\month~月~\the\day~日}
+
+\cabstract{
+
+    随着互联网以及开发技术的不断发展，越来越多的传统的线下办公转为线上办公，极大的方便了用户和管理人员。但是，目前国内许多高校在论文评审方面仍然使用传统的纸质媒介，论文传递过程较慢，同时会造成纸张浪费。
+
+    本文针对上述问题对论文评审系统相关内容对国内外高校进行了广泛的调查，结合需求分析和现有系统的缺陷提出了一套基于网络的论文评审评分系统的解决方案。
+
+    本系统的建立旨在使用Web系统代替传统的纸质媒介对论文进行评审，使学生教师可以在网络上完成评审工作，免除了论文传递中的纸张浪费，减小了传递过程中论文丢失的可能性，方便教务统计论文评审情况，论文得分情况，常见错误出现情况。系统采用前后端分离架构，该架构允许前后端独立开发、部署和升级，前端使用 Vue.js 框架，后端使用Spring Boot框架，数据持久化方面使用 Spring Data Jpa 配合 ORM 工具 Hibernate。本系统界面友好，扩展性移植性强，当系统整合进教务管理系统时会最大程度地发挥价值。
+
+}
+
+\ckeywords{毕业论文；论文评审；自动化办公}
+
+\eabstract{
+
+    With the continuous development of the Internet and development technology, more and more traditional offline offices have been converted to online offices, which greatly facilitates users and managers.However, at present, many domestic universities still use traditional paper media in paper review, the paper delivery process is slow, at the same time will cause paper waste.
+
+    In view of the above problems, this paper has carried out a wide investigation on the paper review system related content to domestic and foreign universities. Combined with the demand analysis and the defects of the existing system, this paper proposes a solution of the paper review and scoring system based on the network.
+
+    The establishment of this system is designed to use the Web system instead of the traditional print media to review papers, teachers can make students review the work done on the Internet, from the papers in the waste of paper, reduce the possibility of a transfer paper in the process of lost, convenient educational statistics essay review, essay scoring, common errors occur.The system adopts the front-end separation architecture, which allows the front-end independent development, deployment and upgrade. The front-end uses Vue.js framework, the back-end uses Spring Boot framework, and the Data persistence uses Spring Data JPA with ORM tool Hibernate.This system has friendly interface, strong expansibility and portability. When the system is integrated into the educational administration management system, it will give full play to its value to the greatest extent.
+
+}
+
+\ekeywords{Graduation Thesis; Paper review; Automated office}
+\makecover

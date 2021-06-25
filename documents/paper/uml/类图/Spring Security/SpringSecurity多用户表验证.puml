@@ -1,0 +1,26 @@
+@startuml
+ProviderManager "1" o-- "n" AuthenticationProvider
+AuthenticationProvider --> Authentication
+UsernamePasswordAuthenticationToken --|> 略2
+略2 ..|> Authentication
+AuthenticationProvider <|.. 略1
+略1 <|-- DaoAuthenticationProvider
+DaoAuthenticationProvider --> UserDetailsService
+DaoAuthenticationProvider --> UsernamePasswordAuthenticationToken
+' 3Provider
+StudentDaoAuthProvider -[bold]--|> DaoAuthenticationProvider
+TeacherDaoAuthProvider -[bold]--|> DaoAuthenticationProvider
+' 3Authentication
+StudentUPAuthToken -[bold]--|> UsernamePasswordAuthenticationToken
+TeacherUPAuthToken -[bold]--|> UsernamePasswordAuthenticationToken
+' 3UserDetailService
+StudentUDService ..|> UserDetailsService
+TeacherUDService ..|> UserDetailsService
+' 
+StudentDaoAuthProvider -[bold]--> StudentUPAuthToken
+StudentDaoAuthProvider -[bold]--> StudentUDService
+' 
+TeacherDaoAuthProvider -[bold]--> TeacherUPAuthToken
+TeacherDaoAuthProvider -[bold]--> TeacherUDService
+
+@enduml

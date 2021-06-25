@@ -1,8 +1,0 @@
-@startuml
-node Model
-node View
-node Template
-Model -down-> View : 模型中的改变
-View -up-> Model : 视图中的改变
-Template -up-> View : 渲染
-@enduml

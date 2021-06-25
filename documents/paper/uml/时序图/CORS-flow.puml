@@ -1,0 +1,12 @@
+@startuml
+
+participant jscode as "JavaScript Code"
+jscode -> Browser: axios.request()
+alt 非简单请求
+    Browser -> Server : preflight request
+    Server --> Browser : preflight response
+end
+Browser -> Server : actual request
+Server -> Browser : actual response
+
+@enduml
